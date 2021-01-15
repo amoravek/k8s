@@ -1,0 +1,8 @@
+template: Hello, %s!
+
+defaultName: ${DW_DEFAULT_NAME:-Stranger}
+
+logging:
+  level: INFO
+  loggers:
+    k8s: DEBUG
