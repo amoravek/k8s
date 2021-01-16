@@ -26,7 +26,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Co to je Docker? [5 min]</title>
+    <title>Co to je Docker?</title>
     <!-- Styles -->
     
     <link rel="stylesheet" href="file:///usr/lib/python3/dist-packages/darkslide/themes/default/css/base.css">
@@ -56,10 +56,11 @@
         <div class="slide has_footer slide-1">
           <div class="inner">
             
-            <header><h1>Co to je Docker? [5 min]</h1></header>
+            <header><h1>Co to je Docker?</h1></header>
             
             
-            <section><h1>...je to nástroj, který umožňuje:</h1>
+            <section>
+<h1>...je to nástroj, který umožňuje:</h1>
 <ul>
 <li>vytvořit artefakt schopný běhu všude tam, kde je Docker</li>
 <li>zapouzdřit aplikaci včetně jejího prostředí</li>
@@ -91,7 +92,7 @@
             </aside>
             
             <aside class="page_number">
-              1/31
+              1/36
             </aside>
           </footer>
         </div>
@@ -102,10 +103,11 @@
         <div class="slide has_footer slide-2">
           <div class="inner">
             
-            <header><h1>Srovnání s VM [5 min]</h1></header>
+            <header><h1>Srovnání s VM</h1></header>
             
             
-            <section><p><img alt="docker-vs-vm" src="file:///home/amoravek/projects/trask/k8s-skoleni/git/k8s/presentation/docker-vs-vm.png" /></p>
+            <section>
+<p><img alt="docker-vs-vm" src="file:///home/amoravek/projects/trask/k8s-skoleni/presentation/docker-vs-vm.png" /></p>
 
 </section>
             
@@ -120,7 +122,7 @@
           </div>
           <footer>
             
-              Základy Docker a Kubernetes 01/2021
+              [5 min]
             
             
             <aside class="source">
@@ -128,7 +130,7 @@
             </aside>
             
             <aside class="page_number">
-              2/31
+              2/36
             </aside>
           </footer>
         </div>
@@ -139,10 +141,11 @@
         <div class="slide has_footer slide-3">
           <div class="inner">
             
-            <header><h1>Linux kernel [5 min]</h1></header>
+            <header><h1>Linux kernel</h1></header>
             
             
-            <section><ul>
+            <section>
+<ul>
 <li>Docker je produkt založený na vlastnostech a funkcích jádra <strong>Linuxu</strong></li>
 <li>nefunguje nativně např. na AIX, Windows ani macOS (jen s virtualizační mezivrstvou nebo s plnohodnotným Linuxem jako součástí OS)</li>
 <li>všechny kontejnery (viz dále) sdílí s host OS jeho linux kernel</li>
@@ -159,7 +162,7 @@
           </div>
           <footer>
             
-              Základy Docker a Kubernetes 01/2021
+              [5 min]
             
             
             <aside class="source">
@@ -167,7 +170,7 @@
             </aside>
             
             <aside class="page_number">
-              3/31
+              3/36
             </aside>
           </footer>
         </div>
@@ -178,10 +181,11 @@
         <div class="slide has_footer slide-4">
           <div class="inner">
             
-            <header><h1>Motivace [5 min]</h1></header>
+            <header><h1>Motivace</h1></header>
             
             
-            <section><ul>
+            <section>
+<ul>
 <li>distribuce neměnného balíčku (=docker image) k zákazníkovi</li>
 <li>image se nedají měnit, ale může se z nich <em>dědit</em></li>
 <li>docker image obsahuje vše potřebné pro spuštění aplikace</li>
@@ -199,7 +203,7 @@
           </div>
           <footer>
             
-              Základy Docker a Kubernetes 01/2021
+              [5 min]
             
             
             <aside class="source">
@@ -207,7 +211,7 @@
             </aside>
             
             <aside class="page_number">
-              4/31
+              4/36
             </aside>
           </footer>
         </div>
@@ -218,10 +222,11 @@
         <div class="slide has_code has_footer slide-5">
           <div class="inner">
             
-            <header><h1>Image [5 min]</h1></header>
+            <header><h1>Image</h1></header>
             
             
-            <section><h2>Co je vlastně image?</h2>
+            <section>
+<h2>Co je vlastně image?</h2>
 <ul>
 <li>lze si představit jako .tar.gz souborového systému OS + nějaká metadata</li>
 <li><em>image</em> je vždy read-only, vytváří se <em>buildem</em></li>
@@ -244,7 +249,7 @@
           </div>
           <footer>
             
-              Základy Docker a Kubernetes 01/2021
+              [5 min] 
             
             
             <aside class="source">
@@ -252,7 +257,7 @@
             </aside>
             
             <aside class="page_number">
-              5/31
+              5/36
             </aside>
           </footer>
         </div>
@@ -263,10 +268,11 @@
         <div class="slide has_code has_footer slide-6">
           <div class="inner">
             
-            <header><h1>Parent a base image [5 min]</h1></header>
+            <header><h1>Parent a base image</h1></header>
             
             
-            <section><ul>
+            <section>
+<ul>
 <li>parent image referencován instrukcí <code>FROM</code></li>
 <li>parent images dostupné např. na Docker HUB</li>
 <li>kde je ale root image? Je to image s <code>FROM scratch</code>, ale častěji se vytváří importem zazipovaného souborového systému:</li>
@@ -286,7 +292,9 @@
 <span class="lineno">10 </span><span class="nv">DISTRIB_CODENAME</span><span class="o">=</span>xenial
 <span class="lineno">11 </span><span class="nv">DISTRIB_DESCRIPTION</span><span class="o">=</span><span class="s2">&quot;Ubuntu 16.04 LTS&quot;</span>
 </pre></div>
-</section>
+
+<h1></h1>
+<h1></h1></section>
             
           </div>
           <div class="presenter_notes">
@@ -299,7 +307,7 @@
           </div>
           <footer>
             
-              Základy Docker a Kubernetes 01/2021
+              [5 min] 
             
             
             <aside class="source">
@@ -307,7 +315,7 @@
             </aside>
             
             <aside class="page_number">
-              6/31
+              6/36
             </aside>
           </footer>
         </div>
@@ -318,10 +326,11 @@
         <div class="slide has_footer slide-7">
           <div class="inner">
             
-            <header><h1>Kontejner [5 min]</h1></header>
+            <header><h1>Kontejner</h1></header>
             
             
-            <section><ul>
+            <section>
+<ul>
 <li><em>kontejner</em> je vlastní aktivní proces spuštěný nad souborovým systémem z image (lze si představit jako <em>instanci</em> image)</li>
 <li>spuštění kontejneru s aplikací = spuštění procesu aplikace na systému, kde běží Docker daemon, ale proces je izolován ve vlastním <em>namespace</em> a běží jako root proces (PID 1)</li>
 <li>root procesem host OS je zpravidla initd nebo systemd - kontejner init proces nemá, protože nebootuje, začíná přímo spuštěním procesu</li>
@@ -336,7 +345,7 @@
           </div>
           <footer>
             
-              Základy Docker a Kubernetes 01/2021
+              [5 min] 
             
             
             <aside class="source">
@@ -344,7 +353,7 @@
             </aside>
             
             <aside class="page_number">
-              7/31
+              7/36
             </aside>
           </footer>
         </div>
@@ -352,10 +361,666 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-8">
+        <div class="slide has_footer slide-8">
           <div class="inner">
             
-            <header><h1>Docker daemon, OCI, Docker CLI [15 min]</h1></header>
+            <header><h1>Docker daemon</h1></header>
+            
+            
+            <section>
+<ul>
+<li>proces běžící na pozadí</li>
+<li>spravuje Docker objekty (image, kontejnery, síť, úložiště)</li>
+<li>občas je potřeba změnit konfiguraci: /etc/docker/daemon.json (typicky kvůli insecure registry)</li>
+<li>musí běžet jako root - často terčem kritiky (v kombinaci s root právy uživatele v kontejneru)</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [5 min] 
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/36
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-9">
+          <div class="inner">
+            
+            <header><h1>OCI</h1></header>
+            
+            
+            <section>
+<ul>
+<li>Open Container Initiative</li>
+<li>představuje otevřený standard rozhraní container runtime a formátu image</li>
+<li>díky OCI mohlo Kubernetes opustit docker daemon a přejít na containerd</li>
+<li>vzhledem k raketovému rozvoji kontejnerizace je OCI nutnost</li>
+<li>mezi OCI-compliant runtime patří např. docker, cri-o a containerd (docker již ale interně používá containderd)</li>
+</ul>
+<h1></h1></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [5 min] 
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/36
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-10">
+          <div class="inner">
+            
+            <header><h1>Docker CLI</h1></header>
+            
+            
+            <section>
+<ul>
+<li>základní (a naprosto dostačující) utilita pro vytváření, správu a manipulaci s docker objekty</li>
+<li>build image: <code>docker build -t myimage:1.0</code> .</li>
+<li>spuštění kontejneru: <code>docker run -d -name mycont1 -p 8088:8080 myimage:1.0</code></li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [5 min] 
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              10/36
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-11">
+          <div class="inner">
+            
+            <header><h1>Dockerfile</h1></header>
+            
+            
+            <section>
+<ul>
+<li>textový soubor obsahující instrukce pro build image</li>
+<li>proprietární formát</li>
+<li>pokud není určeno jinak, předpokládá se název <code>Dockerfile</code></li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [5 min] 
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              11/36
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code has_footer slide-12">
+          <div class="inner">
+            
+            <header><h1>Příklad (1)</h1></header>
+            
+            
+            <section>
+<p>(examples/docker-simple)</p>
+<div class="highlight"><pre><span></span><span class="lineno">1 </span><span class="k">FROM</span><span class="s"> nginx:alpine</span>
+<span class="lineno">2 </span><span class="k">COPY</span> . /usr/share/nginx/html
+</pre></div>
+
+
+<p>Vytvoříme image: <code>docker build -t docker-simple:0.1 .</code>
+Spustíme: <code>docker run -ti --rm -p 8881:8080 docker-simple:0.1</code></p>
+<p><code>docker &lt;group&gt; [options] &lt;image&gt; [command]</code></p>
+<p>http://localhost:8881</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>objasnit nginx:alpine</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [5 min]
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              12/36
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-13">
+          <div class="inner">
+            
+            <header><h1>Příklad (2)</h1></header>
+            
+            
+            <section><p>Zastavíme kontejner (běží na popředí): Ctrl+C (pošle SIGINT, ne SIGKILL)</p>
+<p>Spustíme na pozadí: <code>docker run -d --name docker-simple -p 8881:8080 docker-simple:0.1</code></p>
+<p>Ověříme, že běží:</p>
+<ul>
+<li>docker ps</li>
+<li>docker logs -f docker-simple</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [5 min]
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              13/36
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code has_footer slide-14">
+          <div class="inner">
+            
+            <header><h1>Příklad (3)</h1></header>
+            
+            
+            <section><p>Prozkoumáme kontejner (pocitově jsme už <em>jako kdyby</em> ve VM):</p>
+<ul>
+<li><code>docker exec -ti docker-simple sh</code></li>
+<li><code>cd /usr/share/nginx/html</code></li>
+<li><code>ls -l</code>:<div class="highlight"><pre><span></span><span class="lineno">1 </span>50x.html    Dockerfile  build.sh    index.html
+</pre></div>
+
+</li>
+</ul>
+<p>Pokusy:</p>
+<ul>
+<li><code>hostname</code></li>
+<li><code>ps</code></li>
+<li><code>ls -la /</code></li>
+<li><code>uname -a</code></li>
+<li><code>cat /etc/*release</code></li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [5 min]
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              14/36
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-15">
+          <div class="inner">
+            
+            <header><h1>Příklad (4)</h1></header>
+            
+            
+            <section><p>Uklidíme:</p>
+<ul>
+<li><code>exit</code></li>
+<li><code>docker ps</code></li>
+<li><code>docker stop/kill docker-simple</code></li>
+<li><code>docker ps -a</code></li>
+<li><code>docker rm/rm -f docker-simple</code></li>
+<li><code>docker ps -a</code></li>
+</ul>
+<p>...a nikde nic...EPHEMERAL! :-)</p>
+<p>(pozor, spolu s kontejnerem zmizí i vše, co vyprodukoval, pokud neprodukoval na VOLUME)</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [5 min]
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              15/36
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code has_footer slide-16">
+          <div class="inner">
+            
+            <header><h1>docker kontext</h1></header>
+            
+            
+            <section>
+<p>...vraťme se ještě na slide <strong><a href="#slide:14">Příklad (3)</a></strong>: co tam dělá Dockerfile a build.sh???</p>
+<p>Chtěli jsme to přece: <code>COPY . /usr/share/nginx/html</code></p>
+<p>Řešení je snadné - filtrace kontextu pomocí <code>.dockerignore</code> (obdoba .gitignore) - např.:</p>
+<div class="highlight"><pre><span></span><span class="lineno">1 </span>.git
+<span class="lineno">2 </span>.cache
+<span class="lineno">3 </span>target
+<span class="lineno">4 </span>**/*.class
+<span class="lineno">5 </span>*.md
+<span class="lineno">6 </span>!README.md
+</pre></div>
+
+<p>...a pro náš příklad:</p>
+<div class="highlight"><pre><span></span><span class="lineno">1 </span>*.sh
+<span class="lineno">2 </span>Dockerfile*
+</pre></div>
+
+<p>Zkusme tedy nový build...   </p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [5 min] 
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              16/36
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-17">
+          <div class="inner">
+            
+            <header><h1>Přestávka</h1></header>
+            
+            
+            <section>
+<p><img alt="docker-vs-vm" src="file:///home/amoravek/projects/trask/k8s-skoleni/presentation/coffee.jpg" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [15 min]
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              17/36
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-18">
+          <div class="inner">
+            
+            <header><h1>Dockerfile - příkazy (1)</h1></header>
+            
+            
+            <section>
+<p>Inspirace: <a href="https://repogit.trask.cz/git/BI_Docker">https://repogit.trask.cz/git/BI_Docker</a></p>
+<p>Vybrané příkazy:</p>
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/builder/#from"><code>FROM</code></a></li>
+<li><a href="https://docs.docker.com/engine/reference/builder/#add"><code>ADD</code></a></li>
+<li><a href="https://docs.docker.com/engine/reference/builder/#copy"><code>COPY</code></a></li>
+<li><a href="https://docs.docker.com/engine/reference/builder/#run"><code>RUN</code></a></li>
+<li><a href="https://docs.docker.com/engine/reference/builder/#user"><code>USER</code></a></li>
+<li><a href="https://docs.docker.com/engine/reference/builder/#workdir"><code>WORKDIR</code></a></li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [15 min] 
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              18/36
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-19">
+          <div class="inner">
+            
+            <header><h1>Dockerfile - příkazy (2)</h1></header>
+            
+            
+            <section><ul>
+<li><a href="https://docs.docker.com/engine/reference/builder/#expose"><code>EXPOSE</code></a></li>
+<li><a href="https://docs.docker.com/engine/reference/builder/#volume"><code>VOLUME</code></a></li>
+<li><a href="https://docs.docker.com/engine/reference/builder/#entrypoint"><code>ENTRYPOINT</code></a></li>
+<li><a href="https://docs.docker.com/engine/reference/builder/#cmd"><code>CMD</code></a></li>
+<li><a href="https://docs.docker.com/engine/reference/builder/#env"><code>ENV</code></a></li>
+<li><a href="https://docs.docker.com/engine/reference/builder/#arg"><code>ARG</code></a></li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [15 min] 
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              19/36
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-20">
+          <div class="inner">
+            
+            <header><h1>PID 1, exec vs shell formy</h1></header>
+            
+            
+            <section>
+<p>Existence kontejneru je přímo spojena s životem procesu s PID 1.</p>
+<p>Rozdíl mezi:</p>
+<ul>
+<li>ENTRYPOINT "/app/bin/your-app arg1 arg2" (shell-form)</li>
+<li>ENTRYPOINT ["/app/bin/your-app", "arg1", "arg2"] (exec-form)</li>
+</ul>
+<p>Pěkně vysvětleno: <a href="https://hynek.me/articles/docker-signals/">https://hynek.me/articles/docker-signals/</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [25 min] 
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              20/36
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-21">
+          <div class="inner">
+            
+            <header><h1>Build, Vrstvy, multi-stage build</h1></header>
+            
+            
+            <section>
+<ul>
+<li>Každý příkaz v rámci Dockerfile = vrstva v souborovém systému</li>
+<li>vrstvy jsou read-only, zápisová je jen ta "vrchní"</li>
+<li>copy-on-write</li>
+<li>vhodná organizace vrstev tak, aby je nebylo nutné zbytečně buildovat/stahovat</li>
+</ul>
+<p>Příklad buildu + push, pull (docker-images/mdr)</p>
+<p>Dokumentace: <a href="https://docs.docker.com/storage/storagedriver/">https://docs.docker.com/storage/storagedriver/</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [30 min] 
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              21/36
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-22">
+          <div class="inner">
+            
+            <header><h1>Názvy images, Docker repository</h1></header>
+            
+            
+            <section>
+<p>Název image: <code>[host:port/]&lt;repository1&gt;/&lt;repository2&gt;/.../&lt;image-name&gt;[:&lt;image-version&gt;]</code></p>
+<p>Např.:</p>
+<ul>
+<li>trask/tif/mdr:3.1.21</li>
+<li>harbor.trask.cz/arm64/keycloak:12.0.1</li>
+<li>localhost:5000/redis</li>
+</ul>
+<p>Pokud chybí verze image, použije se <code>latest</code> (má nevýhody)</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [5 min] 
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              22/36
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-23">
+          <div class="inner">
+            
+            <header><h1>Docker registry - secure/insecure, harbor.trask.cz</h1></header>
+            
+            
+            <section>
+<p><code>[host:port]</code> z předchozího slidu = docker registry (pozor, registry vs repository)</p>
+<p>.....</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [5 min] 
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              23/36
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-24">
+          <div class="inner">
+            
+            <header><h1>pull, push, tag, login/logout</h1></header>
             
             
           </div>
@@ -367,7 +1032,7 @@
           </div>
           <footer>
             
-              Základy Docker a Kubernetes 01/2021
+              [10 min] 
             
             
             <aside class="source">
@@ -375,7 +1040,7 @@
             </aside>
             
             <aside class="page_number">
-              8/31
+              24/36
             </aside>
           </footer>
         </div>
@@ -383,10 +1048,10 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-9">
+        <div class="slide has_footer slide-25">
           <div class="inner">
             
-            <header><h1>Dockerfile, docker kontext, .dockerignore [45 min]</h1></header>
+            <header><h1>Přestávka na oběd</h1></header>
             
             
           </div>
@@ -398,7 +1063,7 @@
           </div>
           <footer>
             
-              Základy Docker a Kubernetes 01/2021
+              [30 min - 1 h] 
             
             
             <aside class="source">
@@ -406,7 +1071,7 @@
             </aside>
             
             <aside class="page_number">
-              9/31
+              25/36
             </aside>
           </footer>
         </div>
@@ -414,10 +1079,10 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-10">
+        <div class="slide has_footer slide-26">
           <div class="inner">
             
-            <header><h1>Přestávka [15 min]</h1></header>
+            <header><h1>PID 1 podrobněji</h1></header>
             
             
           </div>
@@ -429,7 +1094,7 @@
           </div>
           <footer>
             
-              Základy Docker a Kubernetes 01/2021
+              [30 min] 
             
             
             <aside class="source">
@@ -437,7 +1102,7 @@
             </aside>
             
             <aside class="page_number">
-              10/31
+              26/36
             </aside>
           </footer>
         </div>
@@ -445,10 +1110,10 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-11">
+        <div class="slide has_footer slide-27">
           <div class="inner">
             
-            <header><h1>Dockerfile - příkazy [15 min]</h1></header>
+            <header><h1>Uživatelské účty a oprávnění uvnitř kontejneru, USER</h1></header>
             
             
           </div>
@@ -460,7 +1125,7 @@
           </div>
           <footer>
             
-              Základy Docker a Kubernetes 01/2021
+              [15 min] 
             
             
             <aside class="source">
@@ -468,7 +1133,7 @@
             </aside>
             
             <aside class="page_number">
-              11/31
+              27/36
             </aside>
           </footer>
         </div>
@@ -476,10 +1141,10 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-12">
+        <div class="slide has_footer slide-28">
           <div class="inner">
             
-            <header><h1>CMD a ENTRYPOINT - exec vs shell formy, PID 1 [25 min]</h1></header>
+            <header><h1>Publikace portů, EXPOSE</h1></header>
             
             
           </div>
@@ -491,7 +1156,7 @@
           </div>
           <footer>
             
-              Základy Docker a Kubernetes 01/2021
+              [15 min] 
             
             
             <aside class="source">
@@ -499,7 +1164,7 @@
             </aside>
             
             <aside class="page_number">
-              12/31
+              28/36
             </aside>
           </footer>
         </div>
@@ -507,10 +1172,10 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-13">
+        <div class="slide has_footer slide-29">
           <div class="inner">
             
-            <header><h1>Build, Vrstvy, multi-stage build [30 min]</h1></header>
+            <header><h1>Volumes, mount, VOLUME</h1></header>
             
             
           </div>
@@ -522,7 +1187,7 @@
           </div>
           <footer>
             
-              Základy Docker a Kubernetes 01/2021
+              [15 min] 
             
             
             <aside class="source">
@@ -530,7 +1195,7 @@
             </aside>
             
             <aside class="page_number">
-              13/31
+              29/36
             </aside>
           </footer>
         </div>
@@ -538,10 +1203,10 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-14">
+        <div class="slide has_footer slide-30">
           <div class="inner">
             
-            <header><h1>Pojmenovávání images, Docker repository [5 min]</h1></header>
+            <header><h1>Networking, komunikace mezi kontejnery</h1></header>
             
             
           </div>
@@ -553,7 +1218,7 @@
           </div>
           <footer>
             
-              Základy Docker a Kubernetes 01/2021
+              [15 min] 
             
             
             <aside class="source">
@@ -561,7 +1226,7 @@
             </aside>
             
             <aside class="page_number">
-              14/31
+              30/36
             </aside>
           </footer>
         </div>
@@ -569,10 +1234,44 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-15">
+        <div class="slide has_footer slide-31">
           <div class="inner">
             
-            <header><h1>Docker registry - secure/insecure, harbor.trask.cz [5 min]</h1></header>
+            <header><h1>Přestávka</h1></header>
+            
+            
+            <section>
+<p><img alt="docker-vs-vm" src="file:///home/amoravek/projects/trask/k8s-skoleni/presentation/coffee.jpg" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [15 min]
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              31/36
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-32">
+          <div class="inner">
+            
+            <header><h1>Docker best practices</h1></header>
             
             
           </div>
@@ -584,7 +1283,7 @@
           </div>
           <footer>
             
-              Základy Docker a Kubernetes 01/2021
+              [25 min] 
             
             
             <aside class="source">
@@ -592,7 +1291,7 @@
             </aside>
             
             <aside class="page_number">
-              15/31
+              32/36
             </aside>
           </footer>
         </div>
@@ -600,10 +1299,10 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-16">
+        <div class="slide has_footer slide-33">
           <div class="inner">
             
-            <header><h1>pull, push, tag, login/logout [10 min]</h1></header>
+            <header><h1>Orchestrace – Docker Compose, Docker Swarm</h1></header>
             
             
           </div>
@@ -615,7 +1314,7 @@
           </div>
           <footer>
             
-              Základy Docker a Kubernetes 01/2021
+              [5 min] 
             
             
             <aside class="source">
@@ -623,7 +1322,7 @@
             </aside>
             
             <aside class="page_number">
-              16/31
+              33/36
             </aside>
           </footer>
         </div>
@@ -631,10 +1330,10 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-17">
+        <div class="slide has_footer slide-34">
           <div class="inner">
             
-            <header><h1>Přestávka na oběd [30 min - 1 h]</h1></header>
+            <header><h1>Přidělování CPU a paměti</h1></header>
             
             
           </div>
@@ -646,7 +1345,7 @@
           </div>
           <footer>
             
-              Základy Docker a Kubernetes 01/2021
+              [5 min] 
             
             
             <aside class="source">
@@ -654,7 +1353,7 @@
             </aside>
             
             <aside class="page_number">
-              17/31
+              34/36
             </aside>
           </footer>
         </div>
@@ -662,10 +1361,10 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-18">
+        <div class="slide has_footer slide-35">
           <div class="inner">
             
-            <header><h1>PID 1 podrobněji [30 min]</h1></header>
+            <header><h1>Kontejnerizace Java aplikace, JIB</h1></header>
             
             
           </div>
@@ -677,7 +1376,7 @@
           </div>
           <footer>
             
-              Základy Docker a Kubernetes 01/2021
+              [55 min] 
             
             
             <aside class="source">
@@ -685,7 +1384,7 @@
             </aside>
             
             <aside class="page_number">
-              18/31
+              35/36
             </aside>
           </footer>
         </div>
@@ -693,286 +1392,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-19">
-          <div class="inner">
-            
-            <header><h1>Uživatelské účty a oprávnění uvnitř kontejneru, USER [15 min]</h1></header>
-            
-            
-          </div>
-          <div class="presenter_notes">
-            <header><h1>Presenter Notes</h1></header>
-            <section>
-            
-            </section>
-          </div>
-          <footer>
-            
-              Základy Docker a Kubernetes 01/2021
-            
-            
-            <aside class="source">
-              Source: <a href="presentation.md">presentation.md</a>
-            </aside>
-            
-            <aside class="page_number">
-              19/31
-            </aside>
-          </footer>
-        </div>
-      </div>
-      
-      <!-- slide source: presentation.md -->
-      <div class="slide-wrapper">
-        <div class="slide slide-20">
-          <div class="inner">
-            
-            <header><h1>Publikace portů, EXPOSE [15 min]</h1></header>
-            
-            
-          </div>
-          <div class="presenter_notes">
-            <header><h1>Presenter Notes</h1></header>
-            <section>
-            
-            </section>
-          </div>
-          <footer>
-            
-              Základy Docker a Kubernetes 01/2021
-            
-            
-            <aside class="source">
-              Source: <a href="presentation.md">presentation.md</a>
-            </aside>
-            
-            <aside class="page_number">
-              20/31
-            </aside>
-          </footer>
-        </div>
-      </div>
-      
-      <!-- slide source: presentation.md -->
-      <div class="slide-wrapper">
-        <div class="slide slide-21">
-          <div class="inner">
-            
-            <header><h1>Volumes, mount, VOLUME [15 min]</h1></header>
-            
-            
-          </div>
-          <div class="presenter_notes">
-            <header><h1>Presenter Notes</h1></header>
-            <section>
-            
-            </section>
-          </div>
-          <footer>
-            
-              Základy Docker a Kubernetes 01/2021
-            
-            
-            <aside class="source">
-              Source: <a href="presentation.md">presentation.md</a>
-            </aside>
-            
-            <aside class="page_number">
-              21/31
-            </aside>
-          </footer>
-        </div>
-      </div>
-      
-      <!-- slide source: presentation.md -->
-      <div class="slide-wrapper">
-        <div class="slide slide-22">
-          <div class="inner">
-            
-            <header><h1>Networking, komunikace mezi kontejnery [15 min]</h1></header>
-            
-            
-          </div>
-          <div class="presenter_notes">
-            <header><h1>Presenter Notes</h1></header>
-            <section>
-            
-            </section>
-          </div>
-          <footer>
-            
-              Základy Docker a Kubernetes 01/2021
-            
-            
-            <aside class="source">
-              Source: <a href="presentation.md">presentation.md</a>
-            </aside>
-            
-            <aside class="page_number">
-              22/31
-            </aside>
-          </footer>
-        </div>
-      </div>
-      
-      <!-- slide source: presentation.md -->
-      <div class="slide-wrapper">
-        <div class="slide slide-23">
-          <div class="inner">
-            
-            <header><h1>Přestávka [15 min]</h1></header>
-            
-            
-          </div>
-          <div class="presenter_notes">
-            <header><h1>Presenter Notes</h1></header>
-            <section>
-            
-            </section>
-          </div>
-          <footer>
-            
-              Základy Docker a Kubernetes 01/2021
-            
-            
-            <aside class="source">
-              Source: <a href="presentation.md">presentation.md</a>
-            </aside>
-            
-            <aside class="page_number">
-              23/31
-            </aside>
-          </footer>
-        </div>
-      </div>
-      
-      <!-- slide source: presentation.md -->
-      <div class="slide-wrapper">
-        <div class="slide slide-24">
-          <div class="inner">
-            
-            <header><h1>Docker best practices [25 min]</h1></header>
-            
-            
-          </div>
-          <div class="presenter_notes">
-            <header><h1>Presenter Notes</h1></header>
-            <section>
-            
-            </section>
-          </div>
-          <footer>
-            
-              Základy Docker a Kubernetes 01/2021
-            
-            
-            <aside class="source">
-              Source: <a href="presentation.md">presentation.md</a>
-            </aside>
-            
-            <aside class="page_number">
-              24/31
-            </aside>
-          </footer>
-        </div>
-      </div>
-      
-      <!-- slide source: presentation.md -->
-      <div class="slide-wrapper">
-        <div class="slide slide-25">
-          <div class="inner">
-            
-            <header><h1>Orchestrace – Docker Compose, Docker Swarm [5 min]</h1></header>
-            
-            
-          </div>
-          <div class="presenter_notes">
-            <header><h1>Presenter Notes</h1></header>
-            <section>
-            
-            </section>
-          </div>
-          <footer>
-            
-              Základy Docker a Kubernetes 01/2021
-            
-            
-            <aside class="source">
-              Source: <a href="presentation.md">presentation.md</a>
-            </aside>
-            
-            <aside class="page_number">
-              25/31
-            </aside>
-          </footer>
-        </div>
-      </div>
-      
-      <!-- slide source: presentation.md -->
-      <div class="slide-wrapper">
-        <div class="slide slide-26">
-          <div class="inner">
-            
-            <header><h1>Přidělování CPU a paměti [5 min]</h1></header>
-            
-            
-          </div>
-          <div class="presenter_notes">
-            <header><h1>Presenter Notes</h1></header>
-            <section>
-            
-            </section>
-          </div>
-          <footer>
-            
-              Základy Docker a Kubernetes 01/2021
-            
-            
-            <aside class="source">
-              Source: <a href="presentation.md">presentation.md</a>
-            </aside>
-            
-            <aside class="page_number">
-              26/31
-            </aside>
-          </footer>
-        </div>
-      </div>
-      
-      <!-- slide source: presentation.md -->
-      <div class="slide-wrapper">
-        <div class="slide slide-27">
-          <div class="inner">
-            
-            <header><h1>Kontejnerizace Java aplikace, JIB [55 min]</h1></header>
-            
-            
-          </div>
-          <div class="presenter_notes">
-            <header><h1>Presenter Notes</h1></header>
-            <section>
-            
-            </section>
-          </div>
-          <footer>
-            
-              Základy Docker a Kubernetes 01/2021
-            
-            
-            <aside class="source">
-              Source: <a href="presentation.md">presentation.md</a>
-            </aside>
-            
-            <aside class="page_number">
-              27/31
-            </aside>
-          </footer>
-        </div>
-      </div>
-      
-      <!-- slide source: presentation.md -->
-      <div class="slide-wrapper">
-        <div class="slide slide-28">
+        <div class="slide slide-36">
           <div class="inner">
             
             <header><h1>Diskuse</h1></header>
@@ -987,7 +1407,7 @@
           </div>
           <footer>
             
-              Základy Docker a Kubernetes 01/2021
+              [55 min] 
             
             
             <aside class="source">
@@ -995,126 +1415,7 @@
             </aside>
             
             <aside class="page_number">
-              28/31
-            </aside>
-          </footer>
-        </div>
-      </div>
-      
-      <!-- slide source: presentation.md -->
-      <div class="slide-wrapper">
-        <div class="slide has_qr has_footer slide-29">
-          <div class="inner">
-            
-            <header><h1>Landslide</h1></header>
-            
-            
-            <section>
-<p class="qr"><?xml version='1.0' encoding='UTF-8'?>
-<svg width="148mm" height="148mm" version="1.1" viewBox="0 0 148 148" xmlns="http://www.w3.org/2000/svg"><path style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none" d="M 88 84 L 88 88 L 92 88 L 92 84 z M 92 16 L 92 20 L 96 20 L 96 16 z M 48 52 L 48 56 L 52 56 L 52 52 z M 92 52 L 92 56 L 96 56 L 96 52 z M 16 36 L 16 40 L 20 40 L 20 36 z M 48 88 L 48 92 L 52 92 L 52 88 z M 16 72 L 16 76 L 20 76 L 20 72 z M 16 108 L 16 112 L 20 112 L 20 108 z M 56 124 L 56 128 L 60 128 L 60 124 z M 32 24 L 32 28 L 36 28 L 36 24 z M 28 40 L 28 44 L 32 44 L 32 40 z M 72 76 L 72 80 L 76 80 L 76 76 z M 28 112 L 28 116 L 32 116 L 32 112 z M 72 112 L 72 116 L 76 116 L 76 112 z M 76 44 L 76 48 L 80 48 L 80 44 z M 120 80 L 120 84 L 124 84 L 124 80 z M 88 100 L 88 104 L 92 104 L 92 100 z M 124 48 L 124 52 L 128 52 L 128 48 z M 92 32 L 92 36 L 96 36 L 96 32 z M 16 16 L 16 20 L 20 20 L 20 16 z M 16 52 L 16 56 L 20 56 L 20 52 z M 116 60 L 116 64 L 120 64 L 120 60 z M 116 96 L 116 100 L 120 100 L 120 96 z M 104 36 L 104 40 L 108 40 L 108 36 z M 72 20 L 72 24 L 76 24 L 76 20 z M 104 72 L 104 76 L 108 76 L 108 72 z M 72 56 L 72 60 L 76 60 L 76 56 z M 28 92 L 28 96 L 32 96 L 32 92 z M 28 128 L 28 132 L 32 132 L 32 128 z M 72 128 L 72 132 L 76 132 L 76 128 z M 120 24 L 120 28 L 124 28 L 124 24 z M 76 60 L 76 64 L 80 64 L 80 60 z M 120 96 L 120 100 L 124 100 L 124 96 z M 100 124 L 100 128 L 104 128 L 104 124 z M 56 48 L 56 52 L 60 52 L 60 48 z M 116 40 L 116 44 L 120 44 L 120 40 z M 24 68 L 24 72 L 28 72 L 28 68 z M 116 76 L 116 80 L 120 80 L 120 76 z M 24 104 L 24 108 L 28 108 L 28 104 z M 116 112 L 116 116 L 120 116 L 120 112 z M 104 16 L 104 20 L 108 20 L 108 16 z M 104 52 L 104 56 L 108 56 L 108 52 z M 72 36 L 72 40 L 76 40 L 76 36 z M 104 124 L 104 128 L 108 128 L 108 124 z M 72 108 L 72 112 L 76 112 L 76 108 z M 120 40 L 120 44 L 124 44 L 124 40 z M 84 116 L 84 120 L 88 120 L 88 116 z M 128 116 L 128 120 L 132 120 L 132 116 z M 44 60 L 44 64 L 48 64 L 48 60 z M 100 68 L 100 72 L 104 72 L 104 68 z M 40 112 L 40 116 L 44 116 L 44 112 z M 24 48 L 24 52 L 28 52 L 28 48 z M 56 100 L 56 104 L 60 104 L 60 100 z M 116 92 L 116 96 L 120 96 L 120 92 z M 24 120 L 24 124 L 28 124 L 28 120 z M 116 128 L 116 132 L 120 132 L 120 128 z M 104 32 L 104 36 L 108 36 L 108 32 z M 28 16 L 28 20 L 32 20 L 32 16 z M 104 68 L 104 72 L 108 72 L 108 68 z M 28 88 L 28 92 L 32 92 L 32 88 z M 84 96 L 84 100 L 88 100 L 88 96 z M 40 56 L 40 60 L 44 60 L 44 56 z M 100 48 L 100 52 L 104 52 L 104 48 z M 40 128 L 40 132 L 44 132 L 44 128 z M 100 120 L 100 124 L 104 124 L 104 120 z M 24 28 L 24 32 L 28 32 L 28 28 z M 56 80 L 56 84 L 60 84 L 60 80 z M 28 32 L 28 36 L 32 36 L 32 32 z M 128 40 L 128 44 L 132 44 L 132 40 z M 52 60 L 52 64 L 56 64 L 56 60 z M 36 104 L 36 108 L 40 108 L 40 104 z M 84 112 L 84 116 L 88 116 L 88 112 z M 128 112 L 128 116 L 132 116 L 132 112 z M 40 36 L 40 40 L 44 40 L 44 36 z M 40 72 L 40 76 L 44 76 L 44 72 z M 40 108 L 40 112 L 44 112 L 44 108 z M 56 24 L 56 28 L 60 28 L 60 24 z M 116 16 L 116 20 L 120 20 L 120 16 z M 56 60 L 56 64 L 60 64 L 60 60 z M 116 52 L 116 56 L 120 56 L 120 52 z M 24 80 L 24 84 L 28 84 L 28 80 z M 112 68 L 112 72 L 116 72 L 116 68 z M 68 104 L 68 108 L 72 108 L 72 104 z M 112 104 L 112 108 L 116 108 L 116 104 z M 84 20 L 84 24 L 88 24 L 88 20 z M 128 20 L 128 24 L 132 24 L 132 20 z M 84 56 L 84 60 L 88 60 L 88 56 z M 36 84 L 36 88 L 40 88 L 40 84 z M 84 128 L 84 132 L 88 132 L 88 128 z M 52 112 L 52 116 L 56 116 L 56 112 z M 40 16 L 40 20 L 44 20 L 44 16 z M 40 88 L 40 92 L 44 92 L 44 88 z M 96 96 L 96 100 L 100 100 L 100 96 z M 56 40 L 56 44 L 60 44 L 60 40 z M 108 116 L 108 120 L 112 120 L 112 116 z M 24 24 L 24 28 L 28 28 L 28 24 z M 68 48 L 68 52 L 72 52 L 72 48 z M 20 76 L 20 80 L 24 80 L 24 76 z M 112 84 L 112 88 L 116 88 L 116 84 z M 80 68 L 80 72 L 84 72 L 84 68 z M 68 120 L 68 124 L 72 124 L 72 120 z M 112 120 L 112 124 L 116 124 L 116 120 z M 80 104 L 80 108 L 84 108 L 84 104 z M 128 36 L 128 40 L 132 40 L 132 36 z M 52 20 L 52 24 L 56 24 L 56 20 z M 84 72 L 84 76 L 88 76 L 88 72 z M 52 56 L 52 60 L 56 60 L 56 56 z M 128 108 L 128 112 L 132 112 L 132 108 z M 52 92 L 52 96 L 56 96 L 56 92 z M 40 32 L 40 36 L 44 36 L 44 32 z M 96 76 L 96 80 L 100 80 L 100 76 z M 96 112 L 96 116 L 100 116 L 100 112 z M 64 96 L 64 100 L 68 100 L 68 96 z M 108 96 L 108 100 L 112 100 L 112 96 z M 32 116 L 32 120 L 36 120 L 36 116 z M 68 28 L 68 32 L 72 32 L 72 28 z M 112 28 L 112 32 L 116 32 L 116 28 z M 68 64 L 68 68 L 72 68 L 72 64 z M 68 100 L 68 104 L 72 104 L 72 100 z M 112 100 L 112 104 L 116 104 L 116 100 z M 80 84 L 80 88 L 84 88 L 84 84 z M 20 128 L 20 132 L 24 132 L 24 128 z M 80 120 L 80 124 L 84 124 L 84 120 z M 84 16 L 84 20 L 88 20 L 88 16 z M 128 16 L 128 20 L 132 20 L 132 16 z M 84 52 L 84 56 L 88 56 L 88 52 z M 128 52 L 128 56 L 132 56 L 132 52 z M 124 104 L 124 108 L 128 108 L 128 104 z M 48 124 L 48 128 L 52 128 L 52 124 z M 92 124 L 92 128 L 96 128 L 96 124 z M 96 20 L 96 24 L 100 24 L 100 20 z M 96 56 L 96 60 L 100 60 L 100 56 z M 64 40 L 64 44 L 68 44 L 68 40 z M 108 40 L 108 44 L 112 44 L 112 40 z M 108 76 L 108 80 L 112 80 L 112 76 z M 32 60 L 32 64 L 36 64 L 36 60 z M 64 112 L 64 116 L 68 116 L 68 112 z M 108 112 L 108 116 L 112 116 L 112 112 z M 32 96 L 32 100 L 36 100 L 36 96 z M 20 72 L 20 76 L 24 76 L 24 72 z M 68 80 L 68 84 L 72 84 L 72 80 z M 80 64 L 80 68 L 84 68 L 84 64 z M 80 100 L 80 104 L 84 104 L 84 100 z M 84 32 L 84 36 L 88 36 L 88 32 z M 128 32 L 128 36 L 132 36 L 132 32 z M 52 16 L 52 20 L 56 20 L 56 16 z M 52 52 L 52 56 L 56 56 L 56 52 z M 48 68 L 48 72 L 52 72 L 52 68 z M 92 68 L 92 72 L 96 72 L 96 68 z M 124 120 L 124 124 L 128 124 L 128 120 z M 48 104 L 48 108 L 52 108 L 52 104 z M 92 104 L 92 108 L 96 108 L 96 104 z M 16 88 L 16 92 L 20 92 L 20 88 z M 16 124 L 16 128 L 20 128 L 20 124 z M 96 36 L 96 40 L 100 40 L 100 36 z M 64 20 L 64 24 L 68 24 L 68 20 z M 64 56 L 64 60 L 68 60 L 68 56 z M 108 56 L 108 60 L 112 60 L 112 56 z M 96 108 L 96 112 L 100 112 L 100 108 z M 32 40 L 32 44 L 36 44 L 36 40 z M 64 128 L 64 132 L 68 132 L 68 128 z M 32 112 L 32 116 L 36 116 L 36 112 z M 20 16 L 20 20 L 24 20 L 24 16 z M 112 24 L 112 28 L 116 28 L 116 24 z M 80 80 L 80 84 L 84 84 L 84 80 z M 76 96 L 76 100 L 80 100 L 80 96 z M 36 40 L 36 44 L 40 44 L 40 40 z M 88 116 L 88 120 L 92 120 L 92 116 z M 124 64 L 124 68 L 128 68 L 128 64 z M 48 48 L 48 52 L 52 52 L 52 48 z M 92 48 L 92 52 L 96 52 L 96 48 z M 16 32 L 16 36 L 20 36 L 20 32 z M 92 84 L 92 88 L 96 88 L 96 84 z M 48 120 L 48 124 L 52 124 L 52 120 z M 92 120 L 92 124 L 96 124 L 96 120 z M 16 104 L 16 108 L 20 108 L 20 104 z M 96 52 L 96 56 L 100 56 L 100 52 z M 108 72 L 108 76 L 112 76 L 112 72 z M 32 56 L 32 60 L 36 60 L 36 56 z M 64 108 L 64 112 L 68 112 L 68 108 z M 32 92 L 32 96 L 36 96 L 36 92 z M 32 128 L 32 132 L 36 132 L 36 128 z M 112 40 L 112 44 L 116 44 L 116 40 z M 80 24 L 80 28 L 84 28 L 84 24 z M 20 68 L 20 72 L 24 72 L 24 68 z M 76 76 L 76 80 L 80 80 L 80 76 z M 120 112 L 120 116 L 124 116 L 124 112 z M 48 28 L 48 32 L 52 32 L 52 28 z M 92 28 L 92 32 L 96 32 L 96 28 z M 48 64 L 48 68 L 52 68 L 52 64 z M 124 116 L 124 120 L 128 120 L 128 116 z M 16 48 L 16 52 L 20 52 L 20 48 z M 48 100 L 48 104 L 52 104 L 52 100 z M 16 84 L 16 88 L 20 88 L 20 84 z M 60 84 L 60 88 L 64 88 L 64 84 z M 16 120 L 16 124 L 20 124 L 20 120 z M 96 32 L 96 36 L 100 36 L 100 32 z M 108 16 L 108 20 L 112 20 L 112 16 z M 96 68 L 96 72 L 100 72 L 100 68 z M 108 52 L 108 56 L 112 56 L 112 52 z M 104 104 L 104 108 L 108 108 L 108 104 z M 72 124 L 72 128 L 76 128 L 76 124 z M 76 20 L 76 24 L 80 24 L 80 20 z M 76 56 L 76 60 L 80 60 L 80 56 z M 88 40 L 88 44 L 92 44 L 92 40 z M 76 92 L 76 96 L 80 96 L 80 92 z M 44 76 L 44 80 L 48 80 L 48 76 z M 88 76 L 88 80 L 92 80 L 92 76 z M 76 128 L 76 132 L 80 132 L 80 128 z M 120 128 L 120 132 L 124 132 L 124 128 z M 124 60 L 124 64 L 128 64 L 128 60 z M 92 44 L 92 48 L 96 48 L 96 44 z M 16 28 L 16 32 L 20 32 L 20 28 z M 60 28 L 60 32 L 64 32 L 64 28 z M 92 80 L 92 84 L 96 84 L 96 80 z M 60 64 L 60 68 L 64 68 L 64 64 z M 92 116 L 92 120 L 96 120 L 96 116 z M 60 100 L 60 104 L 64 104 L 64 100 z M 64 32 L 64 36 L 68 36 L 68 32 z M 116 108 L 116 112 L 120 112 L 120 108 z M 32 16 L 32 20 L 36 20 L 36 16 z M 32 52 L 32 56 L 36 56 L 36 52 z M 104 84 L 104 88 L 108 88 L 108 84 z M 28 68 L 28 72 L 32 72 L 32 68 z M 104 120 L 104 124 L 108 124 L 108 120 z M 28 104 L 28 108 L 32 108 L 32 104 z M 76 36 L 76 40 L 80 40 L 80 36 z M 76 72 L 76 76 L 80 76 L 80 72 z M 44 56 L 44 60 L 48 60 L 48 56 z M 44 92 L 44 96 L 48 96 L 48 92 z M 124 40 L 124 44 L 128 44 L 128 40 z M 92 60 L 92 64 L 96 64 L 96 60 z M 16 80 L 16 84 L 20 84 L 20 80 z M 56 96 L 56 100 L 60 100 L 60 96 z M 24 116 L 24 120 L 28 120 L 28 116 z M 116 124 L 116 128 L 120 128 L 120 124 z M 104 28 L 104 32 L 108 32 L 108 28 z M 28 48 L 28 52 L 32 52 L 32 48 z M 72 48 L 72 52 L 76 52 L 76 48 z M 72 84 L 72 88 L 76 88 L 76 84 z M 28 120 L 28 124 L 32 124 L 32 120 z M 120 16 L 120 20 L 124 20 L 124 16 z M 120 52 L 120 56 L 124 56 L 124 52 z M 88 36 L 88 40 L 92 40 L 92 36 z M 76 88 L 76 92 L 80 92 L 80 88 z M 88 108 L 88 112 L 92 112 L 92 108 z M 40 124 L 40 128 L 44 128 L 44 124 z M 16 24 L 16 28 L 20 28 L 20 24 z M 60 24 L 60 28 L 64 28 L 64 24 z M 116 32 L 116 36 L 120 36 L 120 32 z M 56 112 L 56 116 L 60 116 L 60 112 z M 24 96 L 24 100 L 28 100 L 28 96 z M 28 28 L 28 32 L 32 32 L 32 28 z M 28 64 L 28 68 L 32 68 L 32 64 z M 72 64 L 72 68 L 76 68 L 76 64 z M 120 32 L 120 36 L 124 36 L 124 32 z M 88 16 L 88 20 L 92 20 L 92 16 z M 120 68 L 120 72 L 124 72 L 124 68 z M 88 52 L 88 56 L 92 56 L 92 52 z M 40 104 L 40 108 L 44 108 L 44 104 z M 100 96 L 100 100 L 104 100 L 104 96 z M 24 40 L 24 44 L 28 44 L 28 40 z M 116 48 L 116 52 L 120 52 L 120 48 z M 116 84 L 116 88 L 120 88 L 120 84 z M 56 128 L 56 132 L 60 132 L 60 128 z M 24 112 L 24 116 L 28 116 L 28 112 z M 104 24 L 104 28 L 108 28 L 108 24 z M 104 60 L 104 64 L 108 64 L 108 60 z M 72 44 L 72 48 L 76 48 L 76 44 z M 104 96 L 104 100 L 108 100 L 108 96 z M 28 80 L 28 84 L 32 84 L 32 80 z M 72 80 L 72 84 L 76 84 L 76 80 z M 28 116 L 28 120 L 32 120 L 32 116 z M 72 116 L 72 120 L 76 120 L 76 116 z M 88 32 L 88 36 L 92 36 L 92 32 z M 40 48 L 40 52 L 44 52 L 44 48 z M 40 120 L 40 124 L 44 124 L 44 120 z M 100 112 L 100 116 L 104 116 L 104 112 z M 56 36 L 56 40 L 60 40 L 60 36 z M 116 28 L 116 32 L 120 32 L 120 28 z M 24 56 L 24 60 L 28 60 L 28 56 z M 24 92 L 24 96 L 28 96 L 28 92 z M 116 100 L 116 104 L 120 104 L 120 100 z M 24 128 L 24 132 L 28 132 L 28 128 z M 104 40 L 104 44 L 108 44 L 108 40 z M 28 24 L 28 28 L 32 28 L 32 24 z M 28 60 L 28 64 L 32 64 L 32 60 z M 84 68 L 84 72 L 88 72 L 88 68 z M 128 68 L 128 72 L 132 72 L 132 68 z M 52 88 L 52 92 L 56 92 L 56 88 z M 52 124 L 52 128 L 56 128 L 56 124 z M 40 28 L 40 32 L 44 32 L 44 28 z M 40 64 L 40 68 L 44 68 L 44 64 z M 100 92 L 100 96 L 104 96 L 104 92 z M 100 128 L 100 132 L 104 132 L 104 128 z M 56 88 L 56 92 L 60 92 L 60 88 z M 24 72 L 24 76 L 28 76 L 28 72 z M 116 80 L 116 84 L 120 84 L 120 80 z M 104 20 L 104 24 L 108 24 L 108 20 z M 68 96 L 68 100 L 72 100 L 72 96 z M 112 96 L 112 100 L 116 100 L 116 96 z M 72 40 L 72 44 L 76 44 L 76 40 z M 84 48 L 84 52 L 88 52 L 88 48 z M 36 76 L 36 80 L 40 80 L 40 76 z M 128 84 L 128 88 L 132 88 L 132 84 z M 52 68 L 52 72 L 56 72 L 56 68 z M 52 104 L 52 108 L 56 108 L 56 104 z M 40 80 L 40 84 L 44 84 L 44 80 z M 100 72 L 100 76 L 104 76 L 104 72 z M 40 116 L 40 120 L 44 120 L 44 116 z M 96 124 L 96 128 L 100 128 L 100 124 z M 56 32 L 56 36 L 60 36 L 60 32 z M 24 16 L 24 20 L 28 20 L 28 16 z M 116 24 L 116 28 L 120 28 L 120 24 z M 56 68 L 56 72 L 60 72 L 60 68 z M 24 52 L 24 56 L 28 56 L 28 52 z M 24 88 L 24 92 L 28 92 L 28 88 z M 80 60 L 80 64 L 84 64 L 84 60 z M 20 104 L 20 108 L 24 108 L 24 104 z M 68 112 L 68 116 L 72 116 L 72 112 z M 112 112 L 112 116 L 116 116 L 116 112 z M 80 96 L 80 100 L 84 100 L 84 96 z M 84 28 L 84 32 L 88 32 L 88 28 z M 128 28 L 128 32 L 132 32 L 132 28 z M 36 56 L 36 60 L 40 60 L 40 56 z M 84 64 L 84 68 L 88 68 L 88 64 z M 52 48 L 52 52 L 56 52 L 56 48 z M 36 92 L 36 96 L 40 96 L 40 92 z M 84 100 L 84 104 L 88 104 L 88 100 z M 128 100 L 128 104 L 132 104 L 132 100 z M 52 84 L 52 88 L 56 88 L 56 84 z M 36 128 L 36 132 L 40 132 L 40 128 z M 40 24 L 40 28 L 44 28 L 44 24 z M 100 52 L 100 56 L 104 56 L 104 52 z M 40 96 L 40 100 L 44 100 L 44 96 z M 96 104 L 96 108 L 100 108 L 100 104 z M 64 88 L 64 92 L 68 92 L 68 88 z M 108 124 L 108 128 L 112 128 L 112 124 z M 24 32 L 24 36 L 28 36 L 28 32 z M 68 20 L 68 24 L 72 24 L 72 20 z M 20 48 L 20 52 L 24 52 L 24 48 z M 80 40 L 80 44 L 84 44 L 84 40 z M 68 128 L 68 132 L 72 132 L 72 128 z M 112 128 L 112 132 L 116 132 L 116 128 z M 52 28 L 52 32 L 56 32 L 56 28 z M 36 72 L 36 76 L 40 76 L 40 72 z M 84 80 L 84 84 L 88 84 L 88 80 z M 52 64 L 52 68 L 56 68 L 56 64 z M 40 40 L 40 44 L 44 44 L 44 40 z M 48 116 L 48 120 L 52 120 L 52 116 z M 64 68 L 64 72 L 68 72 L 68 68 z M 32 88 L 32 92 L 36 92 L 36 88 z M 80 20 L 80 24 L 84 24 L 84 20 z M 112 108 L 112 112 L 116 112 L 116 108 z M 36 16 L 36 20 L 40 20 L 40 16 z M 128 24 L 128 28 L 132 28 L 132 24 z M 40 20 L 40 24 L 44 24 L 44 20 z M 48 96 L 48 100 L 52 100 L 52 96 z M 16 116 L 16 120 L 20 120 L 20 116 z M 60 116 L 60 120 L 64 120 L 64 116 z M 64 48 L 64 52 L 68 52 L 68 48 z M 108 48 L 108 52 L 112 52 L 112 48 z M 96 100 L 96 104 L 100 104 L 100 100 z M 32 32 L 32 36 L 36 36 L 36 32 z M 32 68 L 32 72 L 36 72 L 36 68 z M 76 64 L 76 68 L 80 68 L 80 64 z M 64 120 L 64 124 L 68 124 L 68 120 z M 32 104 L 32 108 L 36 108 L 36 104 z M 68 16 L 68 20 L 72 20 L 72 16 z M 112 16 L 112 20 L 116 20 L 116 16 z M 112 52 L 112 56 L 116 56 L 116 52 z M 68 88 L 68 92 L 72 92 L 72 88 z M 80 72 L 80 76 L 84 76 L 84 72 z M 80 108 L 80 112 L 84 112 L 84 108 z M 52 24 L 52 28 L 56 28 L 56 24 z M 36 68 L 36 72 L 40 72 L 40 68 z M 48 40 L 48 44 L 52 44 L 52 40 z M 124 92 L 124 96 L 128 96 L 128 92 z M 92 76 L 92 80 L 96 80 L 96 76 z M 60 60 L 60 64 L 64 64 L 64 60 z M 48 112 L 48 116 L 52 116 L 52 112 z M 16 96 L 16 100 L 20 100 L 20 96 z M 96 44 L 96 48 L 100 48 L 100 44 z M 64 64 L 64 68 L 68 68 L 68 64 z M 32 48 L 32 52 L 36 52 L 36 48 z M 32 120 L 32 124 L 36 124 L 36 120 z M 68 32 L 68 36 L 72 36 L 72 32 z M 112 32 L 112 36 L 116 36 L 116 32 z M 80 16 L 80 20 L 84 20 L 84 16 z M 80 52 L 80 56 L 84 56 L 84 52 z M 76 104 L 76 108 L 80 108 L 80 104 z M 48 20 L 48 24 L 52 24 L 52 20 z M 124 72 L 124 76 L 128 76 L 128 72 z M 16 40 L 16 44 L 20 44 L 20 40 z M 92 92 L 92 96 L 96 96 L 96 92 z M 16 76 L 16 80 L 20 80 L 20 76 z M 48 128 L 48 132 L 52 132 L 52 128 z M 92 128 L 92 132 L 96 132 L 96 128 z M 16 112 L 16 116 L 20 116 L 20 112 z M 60 112 L 60 116 L 64 116 L 64 112 z M 96 24 L 96 28 L 100 28 L 100 24 z M 64 44 L 64 48 L 68 48 L 68 44 z M 32 28 L 32 32 L 36 32 L 36 28 z M 64 80 L 64 84 L 68 84 L 68 80 z M 20 40 L 20 44 L 24 44 L 24 40 z M 80 32 L 80 36 L 84 36 L 84 32 z M 88 68 L 88 72 L 92 72 L 92 68 z M 76 120 L 76 124 L 80 124 L 80 120 z M 124 16 L 124 20 L 128 20 L 128 16 z M 48 36 L 48 40 L 52 40 L 52 36 z M 124 88 L 124 92 L 128 92 L 128 88 z M 16 20 L 16 24 L 20 24 L 20 20 z M 60 20 L 60 24 L 64 24 L 64 20 z M 124 124 L 124 128 L 128 128 L 128 124 z M 60 56 L 60 60 L 64 60 L 64 56 z M 92 108 L 92 112 L 96 112 L 96 108 z M 16 92 L 16 96 L 20 96 L 20 92 z M 16 128 L 16 132 L 20 132 L 20 128 z M 60 128 L 60 132 L 64 132 L 64 128 z M 96 40 L 96 44 L 100 44 L 100 40 z M 108 60 L 108 64 L 112 64 L 112 60 z M 32 80 L 32 84 L 36 84 L 36 80 z M 104 112 L 104 116 L 108 116 L 108 112 z M 72 96 L 72 100 L 76 100 L 76 96 z M 120 28 L 120 32 L 124 32 L 124 28 z M 120 64 L 120 68 L 124 68 L 124 64 z M 44 48 L 44 52 L 48 52 L 48 48 z" id="qr-path" /></svg></p>
-<p>.footnote: Slides available at https://blog.ionelmc.ro/presentations/</p></section>
-            
-          </div>
-          <div class="presenter_notes">
-            <header><h1>Presenter Notes</h1></header>
-            <section>
-            
-              <p>These are my notes, hidden by default</p>
-            
-            </section>
-          </div>
-          <footer>
-            
-              Základy Docker a Kubernetes 01/2021
-            
-            
-            <aside class="source">
-              Source: <a href="presentation.md">presentation.md</a>
-            </aside>
-            
-            <aside class="page_number">
-              29/31
-            </aside>
-          </footer>
-        </div>
-      </div>
-      
-      <!-- slide source: presentation.md -->
-      <div class="slide-wrapper">
-        <div class="slide has_footer slide-30">
-          <div class="inner">
-            
-            <header><h1>Overview</h1></header>
-            
-            
-            <section><p>Generate HTML5 slideshows from markdown, ReST, or textile.</p>
-<p><img alt="python" src="http://i.imgur.com/bc2xk.png" /></p>
-<p>Landslide is primarily written in Python, but it's themes use:</p>
-<ul>
-<li>~~HTML5~~</li>
-<li><strong>Javascript</strong></li>
-<li>CSS</li>
-</ul></section>
-            
-          </div>
-          <div class="presenter_notes">
-            <header><h1>Presenter Notes</h1></header>
-            <section>
-            
-            </section>
-          </div>
-          <footer>
-            
-              Základy Docker a Kubernetes 01/2021
-            
-            
-            <aside class="source">
-              Source: <a href="presentation.md">presentation.md</a>
-            </aside>
-            
-            <aside class="page_number">
-              30/31
-            </aside>
-          </footer>
-        </div>
-      </div>
-      
-      <!-- slide source: presentation.md -->
-      <div class="slide-wrapper">
-        <div class="slide has_code has_footer slide-31">
-          <div class="inner">
-            
-            <header><h1>Code Sample</h1></header>
-            
-            
-            <section><p>Landslide supports code snippets</p>
-<div class="highlight"><pre><span></span><span class="lineno">1 </span><span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s1">&#39;notice&#39;</span><span class="p">):</span>
-<span class="lineno">2 </span>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">):</span>
-<span class="lineno">3 </span>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;Invalid logger set, must be a callable&quot;</span><span class="p">)</span>
-<span class="lineno">4 </span>
-<span class="lineno">5 </span>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">:</span>
-<span class="lineno">6 </span>        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">level</span><span class="p">)</span>
-</pre></div>
-</section>
-            
-          </div>
-          <div class="presenter_notes">
-            <header><h1>Presenter Notes</h1></header>
-            <section>
-            
-            </section>
-          </div>
-          <footer>
-            
-              Základy Docker a Kubernetes 01/2021
-            
-            
-            <aside class="source">
-              Source: <a href="presentation.md">presentation.md</a>
-            </aside>
-            
-            <aside class="page_number">
-              31/31
+              36/36
             </aside>
           </footer>
         </div>
@@ -1135,188 +1436,218 @@
       <!-- generating sections of TOC -->
       
       <tr id="toc-row-1">
-        <th><a href="#slide:1">Co to je Docker? [5 min]</a></th>
+        <th><a href="#slide:1">Co to je Docker?</a></th>
         <td><a href="#slide:1">1</a></td>
       </tr>
       
       
       <tr id="toc-row-2">
-        <th><a href="#slide:2">Srovnání s VM [5 min]</a></th>
+        <th><a href="#slide:2">Srovnání s VM</a></th>
         <td><a href="#slide:2">2</a></td>
       </tr>
       
       
       <tr id="toc-row-3">
-        <th><a href="#slide:3">Linux kernel [5 min]</a></th>
+        <th><a href="#slide:3">Linux kernel</a></th>
         <td><a href="#slide:3">3</a></td>
       </tr>
       
       
       <tr id="toc-row-4">
-        <th><a href="#slide:4">Motivace [5 min]</a></th>
+        <th><a href="#slide:4">Motivace</a></th>
         <td><a href="#slide:4">4</a></td>
       </tr>
       
       
       <tr id="toc-row-5">
-        <th><a href="#slide:5">Image [5 min]</a></th>
+        <th><a href="#slide:5">Image</a></th>
         <td><a href="#slide:5">5</a></td>
       </tr>
       
       
       <tr id="toc-row-6">
-        <th><a href="#slide:6">Parent a base image [5 min]</a></th>
+        <th><a href="#slide:6">Parent a base image</a></th>
         <td><a href="#slide:6">6</a></td>
       </tr>
       
       
       <tr id="toc-row-7">
-        <th><a href="#slide:7">Kontejner [5 min]</a></th>
+        <th><a href="#slide:7">Kontejner</a></th>
         <td><a href="#slide:7">7</a></td>
       </tr>
       
       
       <tr id="toc-row-8">
-        <th><a href="#slide:8">Docker daemon, OCI, Docker CLI [15 min]</a></th>
+        <th><a href="#slide:8">Docker daemon</a></th>
         <td><a href="#slide:8">8</a></td>
       </tr>
       
       
       <tr id="toc-row-9">
-        <th><a href="#slide:9">Dockerfile, docker kontext, .dockerignore [45 min]</a></th>
+        <th><a href="#slide:9">OCI</a></th>
         <td><a href="#slide:9">9</a></td>
       </tr>
       
       
       <tr id="toc-row-10">
-        <th><a href="#slide:10">Přestávka [15 min]</a></th>
+        <th><a href="#slide:10">Docker CLI</a></th>
         <td><a href="#slide:10">10</a></td>
       </tr>
       
       
       <tr id="toc-row-11">
-        <th><a href="#slide:11">Dockerfile - příkazy [15 min]</a></th>
+        <th><a href="#slide:11">Dockerfile</a></th>
         <td><a href="#slide:11">11</a></td>
       </tr>
       
       
       <tr id="toc-row-12">
-        <th><a href="#slide:12">CMD a ENTRYPOINT - exec vs shell formy, PID 1 [25 min]</a></th>
+        <th><a href="#slide:12">Příklad (1)</a></th>
         <td><a href="#slide:12">12</a></td>
       </tr>
       
       
       <tr id="toc-row-13">
-        <th><a href="#slide:13">Build, Vrstvy, multi-stage build [30 min]</a></th>
+        <th><a href="#slide:13">Příklad (2)</a></th>
         <td><a href="#slide:13">13</a></td>
       </tr>
       
       
       <tr id="toc-row-14">
-        <th><a href="#slide:14">Pojmenovávání images, Docker repository [5 min]</a></th>
+        <th><a href="#slide:14">Příklad (3)</a></th>
         <td><a href="#slide:14">14</a></td>
       </tr>
       
       
       <tr id="toc-row-15">
-        <th><a href="#slide:15">Docker registry - secure/insecure, harbor.trask.cz [5 min]</a></th>
+        <th><a href="#slide:15">Příklad (4)</a></th>
         <td><a href="#slide:15">15</a></td>
       </tr>
       
       
       <tr id="toc-row-16">
-        <th><a href="#slide:16">pull, push, tag, login/logout [10 min]</a></th>
+        <th><a href="#slide:16">docker kontext</a></th>
         <td><a href="#slide:16">16</a></td>
       </tr>
       
       
       <tr id="toc-row-17">
-        <th><a href="#slide:17">Přestávka na oběd [30 min - 1 h]</a></th>
+        <th><a href="#slide:17">Přestávka</a></th>
         <td><a href="#slide:17">17</a></td>
       </tr>
       
       
       <tr id="toc-row-18">
-        <th><a href="#slide:18">PID 1 podrobněji [30 min]</a></th>
+        <th><a href="#slide:18">Dockerfile - příkazy (1)</a></th>
         <td><a href="#slide:18">18</a></td>
       </tr>
       
       
       <tr id="toc-row-19">
-        <th><a href="#slide:19">Uživatelské účty a oprávnění uvnitř kontejneru, USER [15 min]</a></th>
+        <th><a href="#slide:19">Dockerfile - příkazy (2)</a></th>
         <td><a href="#slide:19">19</a></td>
       </tr>
       
       
       <tr id="toc-row-20">
-        <th><a href="#slide:20">Publikace portů, EXPOSE [15 min]</a></th>
+        <th><a href="#slide:20">PID 1, exec vs shell formy</a></th>
         <td><a href="#slide:20">20</a></td>
       </tr>
       
       
       <tr id="toc-row-21">
-        <th><a href="#slide:21">Volumes, mount, VOLUME [15 min]</a></th>
+        <th><a href="#slide:21">Build, Vrstvy, multi-stage build</a></th>
         <td><a href="#slide:21">21</a></td>
       </tr>
       
       
       <tr id="toc-row-22">
-        <th><a href="#slide:22">Networking, komunikace mezi kontejnery [15 min]</a></th>
+        <th><a href="#slide:22">Názvy images, Docker repository</a></th>
         <td><a href="#slide:22">22</a></td>
       </tr>
       
       
       <tr id="toc-row-23">
-        <th><a href="#slide:23">Přestávka [15 min]</a></th>
+        <th><a href="#slide:23">Docker registry - secure/insecure, harbor.trask.cz</a></th>
         <td><a href="#slide:23">23</a></td>
       </tr>
       
       
       <tr id="toc-row-24">
-        <th><a href="#slide:24">Docker best practices [25 min]</a></th>
+        <th><a href="#slide:24">pull, push, tag, login/logout</a></th>
         <td><a href="#slide:24">24</a></td>
       </tr>
       
       
       <tr id="toc-row-25">
-        <th><a href="#slide:25">Orchestrace – Docker Compose, Docker Swarm [5 min]</a></th>
+        <th><a href="#slide:25">Přestávka na oběd</a></th>
         <td><a href="#slide:25">25</a></td>
       </tr>
       
       
       <tr id="toc-row-26">
-        <th><a href="#slide:26">Přidělování CPU a paměti [5 min]</a></th>
+        <th><a href="#slide:26">PID 1 podrobněji</a></th>
         <td><a href="#slide:26">26</a></td>
       </tr>
       
       
       <tr id="toc-row-27">
-        <th><a href="#slide:27">Kontejnerizace Java aplikace, JIB [55 min]</a></th>
+        <th><a href="#slide:27">Uživatelské účty a oprávnění uvnitř kontejneru, USER</a></th>
         <td><a href="#slide:27">27</a></td>
       </tr>
       
       
       <tr id="toc-row-28">
-        <th><a href="#slide:28">Diskuse</a></th>
+        <th><a href="#slide:28">Publikace portů, EXPOSE</a></th>
         <td><a href="#slide:28">28</a></td>
       </tr>
       
       
       <tr id="toc-row-29">
-        <th><a href="#slide:29">Landslide</a></th>
+        <th><a href="#slide:29">Volumes, mount, VOLUME</a></th>
         <td><a href="#slide:29">29</a></td>
       </tr>
       
       
       <tr id="toc-row-30">
-        <th><a href="#slide:30">Overview</a></th>
+        <th><a href="#slide:30">Networking, komunikace mezi kontejnery</a></th>
         <td><a href="#slide:30">30</a></td>
       </tr>
       
       
       <tr id="toc-row-31">
-        <th><a href="#slide:31">Code Sample</a></th>
+        <th><a href="#slide:31">Přestávka</a></th>
         <td><a href="#slide:31">31</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-32">
+        <th><a href="#slide:32">Docker best practices</a></th>
+        <td><a href="#slide:32">32</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-33">
+        <th><a href="#slide:33">Orchestrace – Docker Compose, Docker Swarm</a></th>
+        <td><a href="#slide:33">33</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-34">
+        <th><a href="#slide:34">Přidělování CPU a paměti</a></th>
+        <td><a href="#slide:34">34</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-35">
+        <th><a href="#slide:35">Kontejnerizace Java aplikace, JIB</a></th>
+        <td><a href="#slide:35">35</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-36">
+        <th><a href="#slide:36">Diskuse</a></th>
+        <td><a href="#slide:36">36</a></td>
       </tr>
       
       
