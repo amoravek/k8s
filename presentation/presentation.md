@@ -477,7 +477,8 @@ Příklady obou typů volume
 
     docker network create mynet
     docker run -tid --name app1 --network mynet ubuntu (pak ubuntu-ping)
-    docker run -tid --name app2 --network mynet ubuntu (pak ubuntu-ping)
+    docker run -tid --name app2 ubuntu (pak ubuntu-ping)
+    docker network connect mynet app2
 
 ---
 # Přestávka
@@ -500,10 +501,19 @@ Ukážeme si reálný projekt: ta:1.1.10
 
 .footer: [5 min] 
 
+- s narůstající komplexitou Docker aplikací narůstá i potřeba orchestrace kontejnerů
+- na počátku Docker Compose a Docker Swarm
+    - ukázka Compose + network
+- v současnosti Kubernetes, ostatní ale má stále svoje místo
+
 ---
 # Přidělování CPU a paměti
 
 .footer: [5 min] 
+
+docker run -d --name app1 --cpus 2 --memory 512m ubuntu
+
+<https://docs.docker.com/config/containers/resource_constraints/>
 
 ---
 # Kontejnerizace Java aplikace, JIB

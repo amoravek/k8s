@@ -1433,7 +1433,8 @@ docker run -d --name nginx -v myvol:/app nginx
 <p>(ubuntu image, doinstalovat ping: <code>sudo apt install iputils-ping</code>, předvést oddědění image, kde je ping nainstalován)</p>
 <pre><code>docker network create mynet
 docker run -tid --name app1 --network mynet ubuntu (pak ubuntu-ping)
-docker run -tid --name app2 --network mynet ubuntu (pak ubuntu-ping)
+docker run -tid --name app2 ubuntu (pak ubuntu-ping)
+docker network connect mynet app2
 </code></pre></section>
             
           </div>
@@ -1536,6 +1537,16 @@ docker run -tid --name app2 --network mynet ubuntu (pak ubuntu-ping)
             <header><h1>Orchestrace – Docker Compose, Docker Swarm</h1></header>
             
             
+            <section>
+<ul>
+<li>s narůstající komplexitou Docker aplikací narůstá i potřeba orchestrace kontejnerů</li>
+<li>na počátku Docker Compose a Docker Swarm<ul>
+<li>ukázka Compose + network</li>
+</ul>
+</li>
+<li>v současnosti Kubernetes, ostatní ale má stále svoje místo</li>
+</ul></section>
+            
           </div>
           <div class="presenter_notes">
             <header><h1>Presenter Notes</h1></header>
@@ -1566,6 +1577,10 @@ docker run -tid --name app2 --network mynet ubuntu (pak ubuntu-ping)
             
             <header><h1>Přidělování CPU a paměti</h1></header>
             
+            
+            <section>
+<p>docker run -d --name app1 --cpus 2 --memory 512m ubuntu</p>
+<p><a href="https://docs.docker.com/config/containers/resource_constraints/">https://docs.docker.com/config/containers/resource_constraints/</a></p></section>
             
           </div>
           <div class="presenter_notes">
