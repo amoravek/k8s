@@ -292,41 +292,18 @@ Rozdíl mezi:
 Pěkně vysvětleno: <https://hynek.me/articles/docker-signals/>
 
 ---
-# Build a vrstvy
+# Build, Vrstvy, multi-stage build
 
-.footer: [10 min] 
+.footer: [30 min] 
 
 - Každý příkaz v rámci Dockerfile = vrstva v souborovém systému
 - vrstvy jsou read-only, zápisová je jen ta "vrchní"
 - copy-on-write
 - vhodná organizace vrstev tak, aby je nebylo nutné zbytečně buildovat/stahovat
 
-Příklad buildu + push, pull (docker-images/mdr) + porovnat rychlosti při změnách
+Příklad buildu + push, pull (docker-images/mdr)
 
 Dokumentace: <https://docs.docker.com/storage/storagedriver/>
-
----
-# Multi-stage build
-
-.footer: [20 min]
-
-- složitý build může zanechat spoustu nepotřebných dat (i když si dáme pozor)
-- jednodušší je provést např. maven build někde jinde (v nějakém jiném kontejneru) a pak jen zkopírovat výsledný artefakt:
-
-        !docker
-        FROM alpine AS builder
-        <nějaký build>
-        <artefakt uložen do /git/app/target/app.jar>
-        FROM centos:8
-        COPY --from builder /git/app/target/app.jar /deployments/
-        ...
-
-- builder image je po použití smazán (nevytvoří se image, ale zůstávají vrstvy)
-- je možné použít už existující image a jen zkopírovat data
-
-<https://docs.docker.com/develop/develop-images/multistage-build/>
-
-Příklad s ta:1.1.10 image - porovnat výslednou velikost
 
 ---
 # Názvy images, Docker repository
@@ -341,48 +318,16 @@ Např.:
 - harbor.trask.cz/arm64/keycloak:12.0.1
 - localhost:5000/redis
 
-
-
 Pokud chybí verze image, použije se `latest` (má nevýhody)
 
 ---
-# Docker registry
-
-- `[host:port/]` část z předchozího slidu = docker registry; pokud chybí je lokální
-
-- image je tedy možné ukládat kromě lokální registry i do remote registry, např:
-
-        docker push harbor.trask.cz/arm64/keycloak:12.0.1
-
-- hostname a port je součástí názvu (FQN) image...i když to je divné, je to praktické (viz např. Kubernetes)
-- i remote registry používá vrstvy, což VELMI urychluje
-
-Příklad: push do remote registry, malá změna, nový push
-
----
-# Secure/insecure
+# Docker registry - secure/insecure, harbor.trask.cz
 
 .footer: [5 min] 
 
-- registry by měla být zabezpečená ([m]TLS, login, ...)
-- insecure registry = registry nezabezpečená pomocí TLS
-- Pokud se nejedná o registry na localhostu (výjimka), Docker se s ní vůbec nebaví:
+`[host:port]` z předchozího slidu = docker registry (pozor, registry vs repository)
 
-        !shell
-        Error response from daemon: Get https://:5000/v1/_ping:
-        http: server gave HTTP response to HTTPS client
-
-- lze obejít úpravou `/etc/docker/daemon.json`:
-
-        !json
-        {
-        "insecure-registries" : ["myregistrydomain.com:5000"]
-        }
-
-Příklad externí insecure registry (proč je to užitečné a proč se často nezabezpečuje)
-
----
-# harbor.trask.cz
+.....
 
 ---
 # pull, push, tag, login/logout
