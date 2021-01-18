@@ -64,6 +64,8 @@
 - Kontejnery v Podu nejsou izolované, ale sdílí kontext (opět Linux namespaces a cgroups)
 - Kontextem rozumíme např. sdílené úlořiště (volumes) nebo sdílený síťový namespace (komunikace přes localhost, sdílený prostor pro porty)
 
+(Příklad: examples/k8s/k8s-shared-network-ns - při delete je tam znatelná prodleva - PID 1)
+
 <https://kubernetes.io/docs/concepts/workloads/pods/>
 
 ---
@@ -71,16 +73,30 @@
 
 .footer: [5min] 
 
+- Kubernetes namespace slouží k izolaci objektů a zdrojů
+- ale také k plošnému nastavení různých kvót, limitů a autorizací:
+
+    `kubectl describe namespace amo`
+
+---
+# Kubectl
+
+.footer: [20 min] 
+
+- CLI rozhraní pro komunikaci s clusterem (resp API-serverem)
+- vyžaduje přítomnost konfiguračniho souboru, tzv. *kubeconfig* (uložen typicky v $HOME/.kube/config) - viz váš osobní kubeconfig rozesílaný před kurzem
+- kubeconfig obsahuje sady clusterů a uživatelů propojených kontexty
+- Praktické ukázky
 
 ---
 # Příklad spuštění aplikace v podu – kubectl run + průzkum
 
 .footer: [20 min] 
 
----
-# Kubectl
-
-.footer: [20 min] 
+- nejjednodušší způsob nasazení aplikace do Kubernetes:
+    - `kubectl run app1 --image=nginx`
+    - `kubectl create deployment app1-deployment \
+        --image=nginx --replicas=2`
 
 ---
 # K9s, Kubernetes Web IU (Dashboard)

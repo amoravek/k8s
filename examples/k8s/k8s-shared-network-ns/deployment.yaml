@@ -23,5 +23,5 @@ spec:
       - image: harbor.trask.cz/arm64/ubuntu-netcat
         name: ubuntu-2
         command: ["sh"]
-        args: ["-c","while :; do echo \"Sending data ...\"; echo \"Echo from $(hostname)\" | nc -q 1 localhost 1234; done"]
+        args: ["-c", "while :; do echo \"Sending data ...\"; echo \"Echo from $(hostname)\" | nc -q 1 localhost 1234; done"]
         imagePullPolicy: IfNotPresent

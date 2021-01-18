@@ -294,6 +294,7 @@
 <li>Kontejnery v Podu nejsou izolované, ale sdílí kontext (opět Linux namespaces a cgroups)</li>
 <li>Kontextem rozumíme např. sdílené úlořiště (volumes) nebo sdílený síťový namespace (komunikace přes localhost, sdílený prostor pro porty)</li>
 </ul>
+<p>(Příklad: examples/k8s/k8s-shared-network-ns - při delete je tam znatelná prodleva - PID 1)</p>
 <p><a href="https://kubernetes.io/docs/concepts/workloads/pods/">https://kubernetes.io/docs/concepts/workloads/pods/</a></p></section>
             
           </div>
@@ -327,6 +328,15 @@
             <header><h1>Namespaces</h1></header>
             
             
+            <section>
+<ul>
+<li>Kubernetes namespace slouží k izolaci objektů a zdrojů</li>
+<li>
+<p>ale také k plošnému nastavení různých kvót, limitů a autorizací:</p>
+<p><code>kubectl describe namespace amo</code></p>
+</li>
+</ul></section>
+            
           </div>
           <div class="presenter_notes">
             <header><h1>Presenter Notes</h1></header>
@@ -355,8 +365,16 @@
         <div class="slide has_footer slide-9">
           <div class="inner">
             
-            <header><h1>Příklad spuštění aplikace v podu – kubectl run + průzkum</h1></header>
+            <header><h1>Kubectl</h1></header>
             
+            
+            <section>
+<ul>
+<li>CLI rozhraní pro komunikaci s clusterem (resp API-serverem)</li>
+<li>vyžaduje přítomnost konfiguračniho souboru, tzv. <em>kubeconfig</em> (uložen typicky v $HOME/.kube/config) - viz váš osobní kubeconfig rozesílaný před kurzem</li>
+<li>kubeconfig obsahuje sady clusterů a uživatelů propojených kontexty</li>
+<li>Praktické ukázky</li>
+</ul></section>
             
           </div>
           <div class="presenter_notes">
@@ -386,8 +404,18 @@
         <div class="slide has_footer slide-10">
           <div class="inner">
             
-            <header><h1>Kubectl</h1></header>
+            <header><h1>Příklad spuštění aplikace v podu – kubectl run + průzkum</h1></header>
             
+            
+            <section>
+<ul>
+<li>nejjednodušší způsob nasazení aplikace do Kubernetes:<ul>
+<li><code>kubectl run app1 --image=nginx</code></li>
+<li><code>kubectl create deployment app1-deployment \
+    --image=nginx --replicas=2</code></li>
+</ul>
+</li>
+</ul></section>
             
           </div>
           <div class="presenter_notes">
@@ -1033,13 +1061,13 @@
       
       
       <tr id="toc-row-9">
-        <th><a href="#slide:9">Příklad spuštění aplikace v podu – kubectl run + průzkum</a></th>
+        <th><a href="#slide:9">Kubectl</a></th>
         <td><a href="#slide:9">9</a></td>
       </tr>
       
       
       <tr id="toc-row-10">
-        <th><a href="#slide:10">Kubectl</a></th>
+        <th><a href="#slide:10">Příklad spuštění aplikace v podu – kubectl run + průzkum</a></th>
         <td><a href="#slide:10">10</a></td>
       </tr>
       
