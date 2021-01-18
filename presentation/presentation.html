@@ -107,7 +107,7 @@
             
             
             <section>
-<p><img alt="docker-vs-vm" src="file:///home/amoravek/projects/trask/k8s-skoleni/presentation/docker-vs-vm.png" /></p>
+<p><img alt="docker-vs-vm" src="file:///home/amoravek/projects/trask/k8s-skoleni/git/k8s/presentation/docker-vs-vm.png" /></p>
 
 </section>
             
@@ -750,7 +750,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:8080 docker-simple:0.1</code></p>
             
             
             <section>
-<p><img alt="docker-vs-vm" src="file:///home/amoravek/projects/trask/k8s-skoleni/presentation/coffee.jpg" /></p></section>
+<p><img alt="docker-vs-vm" src="file:///home/amoravek/projects/trask/k8s-skoleni/git/k8s/presentation/coffee.jpg" /></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -1172,6 +1172,20 @@ Spustíme: <code>docker run -ti --rm -p 8881:8080 docker-simple:0.1</code></p>
             <header><h1>pull, push, tag, login/logout</h1></header>
             
             
+            <section>
+<p>Image, jeho správa a přesun do- a z registry:</p>
+<ul>
+<li><code>docker tag</code></li>
+<li><code>docker push &lt;image spec&gt;</code></li>
+<li><code>docker pull &lt;image spec&gt;</code></li>
+<li><code>docker rmi</code></li>
+</ul>
+<p>Do registry je mnohdy nutný login:</p>
+<ul>
+<li>docker login</li>
+<li>docker logout</li>
+</ul></section>
+            
           </div>
           <div class="presenter_notes">
             <header><h1>Presenter Notes</h1></header>
@@ -1181,7 +1195,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:8080 docker-simple:0.1</code></p>
           </div>
           <footer>
             
-              [10 min] 
+              [10 min]
             
             
             <aside class="source">
@@ -1202,6 +1216,9 @@ Spustíme: <code>docker run -ti --rm -p 8881:8080 docker-simple:0.1</code></p>
             
             <header><h1>Přestávka na oběd</h1></header>
             
+            
+            <section>
+<p><img alt="docker-vs-vm" src="file:///home/amoravek/projects/trask/k8s-skoleni/git/k8s/presentation/open.knedliky.jpg" /></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -1234,6 +1251,9 @@ Spustíme: <code>docker run -ti --rm -p 8881:8080 docker-simple:0.1</code></p>
             <header><h1>PID 1 podrobněji</h1></header>
             
             
+            <section>
+<p>Příklad: git/examples/exec-shell/</p></section>
+            
           </div>
           <div class="presenter_notes">
             <header><h1>Presenter Notes</h1></header>
@@ -1264,6 +1284,17 @@ Spustíme: <code>docker run -ti --rm -p 8881:8080 docker-simple:0.1</code></p>
             
             <header><h1>Uživatelské účty a oprávnění uvnitř kontejneru, USER</h1></header>
             
+            
+            <section>
+<ul>
+<li>drtivá většina kontejnerů vytvořených z nějakého image na Docker HUBu používá <code>USER root</code></li>
+<li>není to bezpečné - za určitých okolností takto lze získat přístup k host OS</li>
+<li>v Dockerfile je možné použít libovolné množství <code>USER &lt;user&gt;[:&lt;group&gt;]</code> nebo <code>USER &lt;UID&gt;[:&lt;GID&gt;]</code></li>
+<li>to, pod jakým uživatelem poběží <code>ENTRYPOINT</code> nebo <code>CMD</code> proces určuje předchozí <code>USER</code></li>
+<li>uživatel nemusí předem existovat, pokud je použito UID</li>
+<li>pokud není specifikována skupina nebo GID, použije se skupina <code>root</code></li>
+<li>pokud není použito <code>USER</code>, znamená to root</li>
+</ul></section>
             
           </div>
           <div class="presenter_notes">
@@ -1296,6 +1327,17 @@ Spustíme: <code>docker run -ti --rm -p 8881:8080 docker-simple:0.1</code></p>
             <header><h1>Publikace portů, EXPOSE</h1></header>
             
             
+            <section>
+<ul>
+<li>kontejner po spuštění nepropaguje porty ven (jsou dostupné pouze interně)</li>
+<li>je potřeba explicitně určit, jaký port/rozsah bude publikován ven</li>
+<li>porty je třeba publikovat při vytváření kontejneru, pak už nejde (jednoduše) změnit</li>
+<li>pokud je port v Dockerfile explicitně označen pomocí <code>EXPOSE</code>, je možné použí automatiku:<pre><code>docker run -d --name nginx -P nginx
+</code></pre>
+</li>
+</ul>
+<p>Příklad: docker run -dit --name app1 -p 5678:5678 hashicorp/http-echo -text "Test OK"</p></section>
+            
           </div>
           <div class="presenter_notes">
             <header><h1>Presenter Notes</h1></header>
@@ -1324,8 +1366,33 @@ Spustíme: <code>docker run -ti --rm -p 8881:8080 docker-simple:0.1</code></p>
         <div class="slide has_footer slide-32">
           <div class="inner">
             
-            <header><h1>Volumes, mount, VOLUME</h1></header>
+            <header><h1>Volumes</h1></header>
             
+            
+            <section>
+<ul>
+<li>kontejner ukládá implicitně všechna data "do sebe"</li>
+<li>po sazání kontejneru (<code>docker rm</code>) přijdeme i o data</li>
+<li>řešením je <code>VOLUME</code> - můžeme provést mount externího adresáře, NFS, apod.</li>
+<li>
+<p>dvě možnosti použití:</p>
+<ul>
+<li>
+<p>named volume:</p>
+<pre><code>docker volume create myvol1
+docker run -d --name nginx -v myvol:/app nginx
+</code></pre>
+<p>data volume se ukládají do <code>/var/lib/docker/volumes</code></p>
+</li>
+<li>
+<p>mount specifického adresáře z host OS: <code>docker run -d --name nginx -v /data:/app nginx</code></p>
+</li>
+<li>modifikátor <code>:ro</code></li>
+</ul>
+</li>
+</ul>
+<p>Příklady obou typů volume</p>
+<p><a href="https://docs.docker.com/storage/volumes/">https://docs.docker.com/storage/volumes/</a></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -1336,7 +1403,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:8080 docker-simple:0.1</code></p>
           </div>
           <footer>
             
-              [15 min] 
+              [15 min]
             
             
             <aside class="source">
@@ -1357,6 +1424,17 @@ Spustíme: <code>docker run -ti --rm -p 8881:8080 docker-simple:0.1</code></p>
             
             <header><h1>Networking, komunikace mezi kontejnery</h1></header>
             
+            
+            <section>
+<ul>
+<li>kontejnery je možné připojovat do izolovaných sítí</li>
+<li>výhodou je izolace a možnost DNS</li>
+</ul>
+<p>(ubuntu image, doinstalovat ping: <code>sudo apt install iputils-ping</code>, předvést oddědění image, kde je ping nainstalován)</p>
+<pre><code>docker network create mynet
+docker run -tid --name app1 --network mynet ubuntu (pak ubuntu-ping)
+docker run -tid --name app2 --network mynet ubuntu (pak ubuntu-ping)
+</code></pre></section>
             
           </div>
           <div class="presenter_notes">
@@ -1390,7 +1468,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:8080 docker-simple:0.1</code></p>
             
             
             <section>
-<p><img alt="docker-vs-vm" src="file:///home/amoravek/projects/trask/k8s-skoleni/presentation/coffee.jpg" /></p></section>
+<p><img alt="docker-vs-vm" src="file:///home/amoravek/projects/trask/k8s-skoleni/git/k8s/presentation/coffee.jpg" /></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -1422,6 +1500,10 @@ Spustíme: <code>docker run -ti --rm -p 8881:8080 docker-simple:0.1</code></p>
             
             <header><h1>Docker best practices</h1></header>
             
+            
+            <section>
+<p>Projdeme <a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/">https://docs.docker.com/develop/develop-images/dockerfile_best-practices/</a></p>
+<p>Ukážeme si reálný projekt: ta:1.1.10</p></section>
             
           </div>
           <div class="presenter_notes">
@@ -1771,7 +1853,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:8080 docker-simple:0.1</code></p>
       
       
       <tr id="toc-row-32">
-        <th><a href="#slide:32">Volumes, mount, VOLUME</a></th>
+        <th><a href="#slide:32">Volumes</a></th>
         <td><a href="#slide:32">32</a></td>
       </tr>
       

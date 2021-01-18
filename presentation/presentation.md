@@ -387,37 +387,97 @@ Příklad externí insecure registry (proč je to užitečné a proč se často 
 ---
 # pull, push, tag, login/logout
 
-.footer: [10 min] 
+.footer: [10 min]
+
+Image, jeho správa a přesun do- a z registry:
+
+- `docker tag`
+- `docker push <image spec>`
+- `docker pull <image spec>`
+- `docker rmi`
+
+Do registry je mnohdy nutný login:
+
+- docker login
+- docker logout
 
 ---
 # Přestávka na oběd
 
 .footer: [30 min - 1 h] 
 
+![docker-vs-vm](open.knedliky.jpg)
+
 ---
 # PID 1 podrobněji
 
 .footer: [30 min] 
+
+Příklad: git/examples/exec-shell/
 
 ---
 # Uživatelské účty a oprávnění uvnitř kontejneru, USER
 
 .footer: [15 min] 
 
+- drtivá většina kontejnerů vytvořených z nějakého image na Docker HUBu používá `USER root`
+- není to bezpečné - za určitých okolností takto lze získat přístup k host OS
+- v Dockerfile je možné použít libovolné množství `USER <user>[:<group>]` nebo `USER <UID>[:<GID>]`
+- to, pod jakým uživatelem poběží `ENTRYPOINT` nebo `CMD` proces určuje předchozí `USER`
+- uživatel nemusí předem existovat, pokud je použito UID
+- pokud není specifikována skupina nebo GID, použije se skupina `root`
+- pokud není použito `USER`, znamená to root
+
 ---
 # Publikace portů, EXPOSE
 
 .footer: [15 min] 
 
----
-# Volumes, mount, VOLUME
+- kontejner po spuštění nepropaguje porty ven (jsou dostupné pouze interně)
+- je potřeba explicitně určit, jaký port/rozsah bude publikován ven
+- porty je třeba publikovat při vytváření kontejneru, pak už nejde (jednoduše) změnit
+- pokud je port v Dockerfile explicitně označen pomocí `EXPOSE`, je možné použí automatiku:
 
-.footer: [15 min] 
+        docker run -d --name nginx -P nginx
+
+Příklad: docker run -dit --name app1 -p 5678:5678 hashicorp/http-echo -text "Test OK"
+
+---
+# Volumes
+
+.footer: [15 min]
+
+- kontejner ukládá implicitně všechna data "do sebe"
+- po sazání kontejneru (`docker rm`) přijdeme i o data
+- řešením je `VOLUME` - můžeme provést mount externího adresáře, NFS, apod.
+- dvě možnosti použití:
+    - named volume:
+
+            docker volume create myvol1
+            docker run -d --name nginx -v myvol:/app nginx
+
+        data volume se ukládají do `/var/lib/docker/volumes`
+
+    - mount specifického adresáře z host OS: `docker run -d --name nginx -v /data:/app nginx`
+    - modifikátor `:ro`
+
+Příklady obou typů volume
+
+<https://docs.docker.com/storage/volumes/>
 
 ---
 # Networking, komunikace mezi kontejnery
 
 .footer: [15 min] 
+
+- kontejnery je možné připojovat do izolovaných sítí
+- výhodou je izolace a možnost DNS
+
+(ubuntu image, doinstalovat ping: `sudo apt install iputils-ping`, předvést oddědění image, kde je ping nainstalován)
+
+    docker network create mynet
+    docker run -tid --name app1 --network mynet ubuntu (pak ubuntu-ping)
+    docker run -tid --name app2 --network mynet ubuntu (pak ubuntu-ping)
 
 ---
 # Přestávka
@@ -430,6 +490,10 @@ Příklad externí insecure registry (proč je to užitečné a proč se často 
 # Docker best practices
 
 .footer: [25 min] 
+
+Projdeme <https://docs.docker.com/develop/develop-images/dockerfile_best-practices/>
+
+Ukážeme si reálný projekt: ta:1.1.10
 
 ---
 # Orchestrace – Docker Compose, Docker Swarm
