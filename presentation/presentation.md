@@ -520,5 +520,12 @@ docker run -d --name app1 --cpus 2 --memory 512m ubuntu
 
 .footer: [55 min] 
 
+- kontejnerizace existující aplikace vs nová aplikace
+- je dobré volit vhodný base image pro kontejnerizaci a snažit se o jeho minimalizaci (útočná plocha, velikost, ...)
+- z Docker HUBu brát VŽDY jen oficiální image !!!
+- pokud není jiná možnost provést build ze zdrojáků GitHubu, které alespoň nějak překontrolujeme (kukaččí kontejner)
+
+<https://github.com/GoogleContainerTools/jib/tree/master/jib-maven-plugin#quickstart>
+
 ---
 # Diskuse 

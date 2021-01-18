@@ -1613,6 +1613,15 @@ docker network connect mynet app2
             <header><h1>Kontejnerizace Java aplikace, JIB</h1></header>
             
             
+            <section>
+<ul>
+<li>kontejnerizace existující aplikace vs nová aplikace</li>
+<li>je dobré volit vhodný base image pro kontejnerizaci a snažit se o jeho minimalizaci (útočná plocha, velikost, ...)</li>
+<li>z Docker HUBu brát VŽDY jen oficiální image !!!</li>
+<li>pokud není jiná možnost provést build ze zdrojáků GitHubu, které alespoň nějak překontrolujeme (kukaččí kontejner)</li>
+</ul>
+<p><a href="https://github.com/GoogleContainerTools/jib/tree/master/jib-maven-plugin#quickstart">https://github.com/GoogleContainerTools/jib/tree/master/jib-maven-plugin#quickstart</a></p></section>
+            
           </div>
           <div class="presenter_notes">
             <header><h1>Presenter Notes</h1></header>
