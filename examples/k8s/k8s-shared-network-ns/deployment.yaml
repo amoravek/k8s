@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: interpod
+  name: interpod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: interpod
+  template:
+    metadata:
+      labels:
+        app: interpod
+    spec:
+      containers:
+      - image: harbor.trask.cz/arm64/ubuntu-netcat
+        name: ubuntu-1
+        command: ["nc"]
+        args: ["-kl", "1234"]
+        imagePullPolicy: IfNotPresent
+      - image: harbor.trask.cz/arm64/ubuntu-netcat
+        name: ubuntu-2
+        command: ["sh"]
+        args: ["-c","while :; do echo \"Sending data ...\"; echo \"Echo from $(hostname)\" | nc -q 1 localhost 1234; done"]
+        imagePullPolicy: IfNotPresent
