@@ -258,7 +258,7 @@ Zkusme tedy nový build...
 
 .footer: [15 min]
 
-![docker-vs-vm](coffee.jpg)
+![docker-vs-vm](../common/coffee.jpg)
 
 ---
 # Dockerfile - příkazy (1)
@@ -415,7 +415,7 @@ Do registry je mnohdy nutný login:
 
 .footer: [30 min - 1 h] 
 
-![docker-vs-vm](open.knedliky.jpg)
+![docker-vs-vm](../open.knedliky.jpg)
 
 ---
 # PID 1 podrobněji
@@ -494,7 +494,7 @@ Příklady obou typů volume
 
 .footer: [15 min]
 
-![docker-vs-vm](coffee.jpg)
+![docker-vs-vm](../common/coffee.jpg)
 
 ---
 # Docker best practices

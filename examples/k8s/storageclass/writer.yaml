@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: writer
+  name: writer
+spec:
+  selector:
+    matchLabels:
+      app: writer
+  template:
+    metadata:
+      labels:
+        app: writer
+    spec:
+      containers:
+      - args:
+        - -c
+        - while :; do echo "$(date)" > /data/d; sleep 5; done
+        command:
+        - sh
+        image: harbor.trask.cz/arm64/ubuntu-netcat
+        imagePullPolicy: IfNotPresent
+        name: ubuntu
+        volumeMounts:
+        - mountPath: /data
+          name: test-volume
+      terminationGracePeriodSeconds: 5
+      volumes:
+      - name: test-volume
+        persistentVolumeClaim:
+          claimName: storageclass-pvc
+

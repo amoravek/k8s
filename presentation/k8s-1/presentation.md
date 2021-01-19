@@ -156,32 +156,85 @@ Rollout nové verze:
     - `kubectl scale deployment interpod --replicas=4 --record`
     - `kubectl edit deployment interpod --record`
     - `kubectl rollout history deployment interpod`
+    - `kubectl rollout history deployment interpod --revision X`
 
-
-Ukázat rollbackyVysvětlit, proč nejde rollback změn replik
-
+Vysvětlit, proč nejde rollback změn replik
 
 ---
 # Deployment (4)
 
-- rollback
+Rollback
+
+    - `kubectl rollout undo deployment interpod`
+    - `kubectl rollout undo deployment interpod --to-revision X`
 
 <https://kubernetes.io/docs/concepts/workloads/controllers/deployment/>
 
 ---
 # Přestávka
 
-.footer: [15 min] 
+.footer: [15 min]
+
+![docker-vs-vm](../common/coffee.jpg)
 
 ---
-# Příklad deploymentu – kubectl run + průzkum
+# Perzistence (1)
 
 .footer: [20 min] 
+
+- aby bylo možné uchovávat data produkovaná kontejnery v Podu, je potřeba je někam uložit (jinak zaniknou spolu s Podem)
+- na úrovni Podu (ukázat) je možné definovat externí úložiště - např.:
+
+        !yaml
+        volumes:
+        - name: test-volume
+          hostPath:
+            path: /data-xxx
+            type: DirectoryOrCreate
+
+- aby bylo dostupné v *kontejneru*, je potřeba provést mount:
+
+        !yaml
+        volumeMounts:
+        - name: test-volume
+          mountPath: /data
+
+- každý kontejner může provést mount téhož volume do jiného adresáře
+
+<https://kubernetes.io/docs/concepts/storage/volumes/>
+
+---
+# Perzistence (2)
+
+- předchozí příklad sice funguje, ale takový přístup má řadu nedostatků:
+    - mixuje odpovědnost storage admina a vývojáře/devops inženýra
+    - nelze nastavit oprávnění na úrovni Kubernetes
+    - mnohdy je nutné zadat i přihlašovací údaje diktované volume pluginem
+    - pokud je potřeba použít volume i z jiného Podu, je nutné duplikovat konfiguraci
+
+Řešením je použíti PersistentVolume a PersistentVolumeClaim - příklady (examples/k8s/pv-pvc)
+
+---
+# StorageClass
+
+Jde to ale ještě snáze - pomocí StorageClass v kombinaci se storage autoprovisioningem
+(a admin se do celého procesu vůbec nemusí montovat).
+
+Příklad (examples/k8s/storageclass)
 
 ---
 # ConfigMap, Secret
 
 .footer: [15 min] 
+
+- i když se mechanismy perzistence dají použít k přístupu ke konfiguračním souborům, není to dobrá praxe
+- existují totiž ConfigMap a Secret objekty - uchovávají
+    - textové i binární soubory
+    - proměnné prostředí
+    - citlivá data
+    - PKI artefakty (certifikáty, klíče)
+
+Příklad (examples/k8s/configmap-secret)
 
 ---
 # Services – ClusterIP, NodePort, LoadBalancer
@@ -190,11 +243,6 @@ Ukázat rollbackyVysvětlit, proč nejde rollback změn replik
 
 ---
 # Ingress a ingress controller
-
-.footer: [20 min] 
-
----
-# Perzistence, StorageClass
 
 .footer: [20 min] 
 

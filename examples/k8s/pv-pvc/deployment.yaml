@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: pvc-test
+  name: pvc-test
+spec:
+  selector:
+    matchLabels:
+      app: pvc-test
+  template:
+    metadata:
+      labels:
+        app: pvc-test
+    spec:
+      containers:
+      - args:
+        - -c
+        - while :; do echo \"$(ls /data)\"; sleep 5; done
+        command:
+        - sh
+        image: harbor.trask.cz/arm64/ubuntu-netcat
+        imagePullPolicy: IfNotPresent
+        name: ubuntu
+        volumeMounts:
+        - mountPath: /data
+          name: test-volume
+      terminationGracePeriodSeconds: 5
+      volumes:
+      - name: test-volume
+        persistentVolumeClaim:
+          claimName: hostpath-pvc
+

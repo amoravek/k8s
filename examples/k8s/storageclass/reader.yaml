@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: reader
+  name: reader
+spec:
+  selector:
+    matchLabels:
+      app: reader
+  template:
+    metadata:
+      labels:
+        app: reader
+    spec:
+      containers:
+      - args:
+        - -c
+        - while :; do cat /data/d; sleep 5; done
+        command:
+        - sh
+        image: harbor.trask.cz/arm64/ubuntu-netcat
+        imagePullPolicy: IfNotPresent
+        name: ubuntu
+        volumeMounts:
+        - mountPath: /data
+          name: test-volume
+      terminationGracePeriodSeconds: 5
+      volumes:
+      - name: test-volume
+        persistentVolumeClaim:
+          claimName: storageclass-pvc
+

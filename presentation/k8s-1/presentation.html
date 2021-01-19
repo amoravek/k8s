@@ -78,7 +78,7 @@
             </aside>
             
             <aside class="page_number">
-              1/31
+              1/32
             </aside>
           </footer>
         </div>
@@ -124,7 +124,7 @@
             </aside>
             
             <aside class="page_number">
-              2/31
+              2/32
             </aside>
           </footer>
         </div>
@@ -167,7 +167,7 @@
             </aside>
             
             <aside class="page_number">
-              3/31
+              3/32
             </aside>
           </footer>
         </div>
@@ -200,7 +200,7 @@
             </aside>
             
             <aside class="page_number">
-              4/31
+              4/32
             </aside>
           </footer>
         </div>
@@ -234,7 +234,7 @@
             </aside>
             
             <aside class="page_number">
-              5/31
+              5/32
             </aside>
           </footer>
         </div>
@@ -275,7 +275,7 @@
             </aside>
             
             <aside class="page_number">
-              6/31
+              6/32
             </aside>
           </footer>
         </div>
@@ -318,7 +318,7 @@
             </aside>
             
             <aside class="page_number">
-              7/31
+              7/32
             </aside>
           </footer>
         </div>
@@ -358,7 +358,7 @@
             </aside>
             
             <aside class="page_number">
-              8/31
+              8/32
             </aside>
           </footer>
         </div>
@@ -397,7 +397,7 @@
             </aside>
             
             <aside class="page_number">
-              9/31
+              9/32
             </aside>
           </footer>
         </div>
@@ -447,7 +447,7 @@
             </aside>
             
             <aside class="page_number">
-              10/31
+              10/32
             </aside>
           </footer>
         </div>
@@ -478,7 +478,7 @@
             </aside>
             
             <aside class="page_number">
-              11/31
+              11/32
             </aside>
           </footer>
         </div>
@@ -524,7 +524,7 @@
             </aside>
             
             <aside class="page_number">
-              12/31
+              12/32
             </aside>
           </footer>
         </div>
@@ -568,7 +568,7 @@
             </aside>
             
             <aside class="page_number">
-              13/31
+              13/32
             </aside>
           </footer>
         </div>
@@ -589,8 +589,9 @@
 - `kubectl scale deployment interpod --replicas=4 --record`
 - `kubectl edit deployment interpod --record`
 - `kubectl rollout history deployment interpod`
+- `kubectl rollout history deployment interpod --revision X`
 </code></pre>
-<p>Ukázat rollbackyVysvětlit, proč nejde rollback změn replik</p></section>
+<p>Vysvětlit, proč nejde rollback změn replik</p></section>
             
           </div>
           <div class="presenter_notes">
@@ -609,7 +610,7 @@
             </aside>
             
             <aside class="page_number">
-              14/31
+              14/32
             </aside>
           </footer>
         </div>
@@ -623,9 +624,10 @@
             <header><h1>Deployment (4)</h1></header>
             
             
-            <section><ul>
-<li>rollback</li>
-</ul>
+            <section><p>Rollback</p>
+<pre><code>- `kubectl rollout undo deployment interpod`
+- `kubectl rollout undo deployment interpod --to-revision X`
+</code></pre>
 <p><a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">https://kubernetes.io/docs/concepts/workloads/controllers/deployment/</a></p></section>
             
           </div>
@@ -645,7 +647,7 @@
             </aside>
             
             <aside class="page_number">
-              15/31
+              15/32
             </aside>
           </footer>
         </div>
@@ -659,6 +661,9 @@
             <header><h1>Přestávka</h1></header>
             
             
+            <section>
+<p><img alt="docker-vs-vm" src="file:///home/amoravek/projects/trask/k8s-skoleni/git/k8s/presentation/k8s-1/../common/coffee.jpg" /></p></section>
+            
           </div>
           <div class="presenter_notes">
             <header><h1>Presenter Notes</h1></header>
@@ -668,7 +673,7 @@
           </div>
           <footer>
             
-              [15 min] 
+              [15 min]
             
             
             <aside class="source">
@@ -676,7 +681,7 @@
             </aside>
             
             <aside class="page_number">
-              16/31
+              16/32
             </aside>
           </footer>
         </div>
@@ -684,11 +689,38 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-17">
+        <div class="slide has_code has_footer slide-17">
           <div class="inner">
             
-            <header><h1>Příklad deploymentu – kubectl run + průzkum</h1></header>
+            <header><h1>Perzistence (1)</h1></header>
             
+            
+            <section>
+<ul>
+<li>aby bylo možné uchovávat data produkovaná kontejnery v Podu, je potřeba je někam uložit (jinak zaniknou spolu s Podem)</li>
+<li>
+<p>na úrovni Podu (ukázat) je možné definovat externí úložiště - např.:</p>
+<div class="highlight"><pre><span></span><span class="lineno">1 </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="lineno">2 </span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">test-volume</span>
+<span class="lineno">3 </span>  <span class="nt">hostPath</span><span class="p">:</span>
+<span class="lineno">4 </span>    <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/data-xxx</span>
+<span class="lineno">5 </span>    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">DirectoryOrCreate</span>
+</pre></div>
+
+</li>
+<li>
+<p>aby bylo dostupné v <em>kontejneru</em>, je potřeba provést mount:</p>
+<div class="highlight"><pre><span></span><span class="lineno">1 </span><span class="nt">volumeMounts</span><span class="p">:</span>
+<span class="lineno">2 </span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">test-volume</span>
+<span class="lineno">3 </span>  <span class="nt">mountPath</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/data</span>
+</pre></div>
+
+</li>
+<li>
+<p>každý kontejner může provést mount téhož volume do jiného adresáře</p>
+</li>
+</ul>
+<p><a href="https://kubernetes.io/docs/concepts/storage/volumes/">https://kubernetes.io/docs/concepts/storage/volumes/</a></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -707,7 +739,7 @@
             </aside>
             
             <aside class="page_number">
-              17/31
+              17/32
             </aside>
           </footer>
         </div>
@@ -718,8 +750,98 @@
         <div class="slide has_footer slide-18">
           <div class="inner">
             
+            <header><h1>Perzistence (2)</h1></header>
+            
+            
+            <section><ul>
+<li>předchozí příklad sice funguje, ale takový přístup má řadu nedostatků:<ul>
+<li>mixuje odpovědnost storage admina a vývojáře/devops inženýra</li>
+<li>nelze nastavit oprávnění na úrovni Kubernetes</li>
+<li>mnohdy je nutné zadat i přihlašovací údaje diktované volume pluginem</li>
+<li>pokud je potřeba použít volume i z jiného Podu, je nutné duplikovat konfiguraci</li>
+</ul>
+</li>
+</ul>
+<p>Řešením je použíti PersistentVolume a PersistentVolumeClaim - příklady (examples/k8s/pv-pvc)</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [20 min] 
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              18/32
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-19">
+          <div class="inner">
+            
+            <header><h1>StorageClass</h1></header>
+            
+            
+            <section><p>Jde to ale ještě snáze - pomocí StorageClass v kombinaci se storage autoprovisioningem
+(a admin se do celého procesu vůbec nemusí montovat).</p>
+<p>Příklad (examples/k8s/storageclass)</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [20 min] 
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              19/32
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-20">
+          <div class="inner">
+            
             <header><h1>ConfigMap, Secret</h1></header>
             
+            
+            <section>
+<ul>
+<li>i když se mechanismy perzistence dají použít k přístupu ke konfiguračním souborům, není to dobrá praxe</li>
+<li>existují totiž ConfigMap a Secret objekty - uchovávají<ul>
+<li>textové i binární soubory</li>
+<li>proměnné prostředí</li>
+<li>citlivá data</li>
+<li>PKI artefakty (certifikáty, klíče)</li>
+</ul>
+</li>
+</ul>
+<p>Příklad (examples/k8s/configmap-secret)</p></section>
             
           </div>
           <div class="presenter_notes">
@@ -738,7 +860,7 @@
             </aside>
             
             <aside class="page_number">
-              18/31
+              20/32
             </aside>
           </footer>
         </div>
@@ -746,7 +868,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-19">
+        <div class="slide has_footer slide-21">
           <div class="inner">
             
             <header><h1>Services – ClusterIP, NodePort, LoadBalancer</h1></header>
@@ -769,7 +891,7 @@
             </aside>
             
             <aside class="page_number">
-              19/31
+              21/32
             </aside>
           </footer>
         </div>
@@ -777,7 +899,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-20">
+        <div class="slide has_footer slide-22">
           <div class="inner">
             
             <header><h1>Ingress a ingress controller</h1></header>
@@ -800,7 +922,7 @@
             </aside>
             
             <aside class="page_number">
-              20/31
+              22/32
             </aside>
           </footer>
         </div>
@@ -808,38 +930,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-21">
-          <div class="inner">
-            
-            <header><h1>Perzistence, StorageClass</h1></header>
-            
-            
-          </div>
-          <div class="presenter_notes">
-            <header><h1>Presenter Notes</h1></header>
-            <section>
-            
-            </section>
-          </div>
-          <footer>
-            
-              [20 min] 
-            
-            
-            <aside class="source">
-              Source: <a href="presentation.md">presentation.md</a>
-            </aside>
-            
-            <aside class="page_number">
-              21/31
-            </aside>
-          </footer>
-        </div>
-      </div>
-      
-      <!-- slide source: presentation.md -->
-      <div class="slide-wrapper">
-        <div class="slide has_footer slide-22">
+        <div class="slide has_footer slide-23">
           <div class="inner">
             
             <header><h1>Přestávka na oběd</h1></header>
@@ -862,7 +953,7 @@
             </aside>
             
             <aside class="page_number">
-              22/31
+              23/32
             </aside>
           </footer>
         </div>
@@ -870,7 +961,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-23">
+        <div class="slide has_footer slide-24">
           <div class="inner">
             
             <header><h1>Controllery</h1></header>
@@ -893,7 +984,7 @@
             </aside>
             
             <aside class="page_number">
-              23/31
+              24/32
             </aside>
           </footer>
         </div>
@@ -901,7 +992,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-24">
+        <div class="slide has_footer slide-25">
           <div class="inner">
             
             <header><h1>ReplicaSet, DaemonSet, StatefulSet, Job, CronJob</h1></header>
@@ -924,7 +1015,7 @@
             </aside>
             
             <aside class="page_number">
-              24/31
+              25/32
             </aside>
           </footer>
         </div>
@@ -932,7 +1023,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-25">
+        <div class="slide has_footer slide-26">
           <div class="inner">
             
             <header><h1>Logování</h1></header>
@@ -955,7 +1046,7 @@
             </aside>
             
             <aside class="page_number">
-              25/31
+              26/32
             </aside>
           </footer>
         </div>
@@ -963,7 +1054,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-26">
+        <div class="slide has_footer slide-27">
           <div class="inner">
             
             <header><h1>Liveness a readiness endpointy</h1></header>
@@ -986,7 +1077,7 @@
             </aside>
             
             <aside class="page_number">
-              26/31
+              27/32
             </aside>
           </footer>
         </div>
@@ -994,7 +1085,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-27">
+        <div class="slide has_footer slide-28">
           <div class="inner">
             
             <header><h1>ImagePullPolicy</h1></header>
@@ -1017,7 +1108,7 @@
             </aside>
             
             <aside class="page_number">
-              27/31
+              28/32
             </aside>
           </footer>
         </div>
@@ -1025,7 +1116,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-28">
+        <div class="slide has_footer slide-29">
           <div class="inner">
             
             <header><h1>Resource requests &amp; limits</h1></header>
@@ -1048,7 +1139,7 @@
             </aside>
             
             <aside class="page_number">
-              28/31
+              29/32
             </aside>
           </footer>
         </div>
@@ -1056,7 +1147,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-29">
+        <div class="slide has_footer slide-30">
           <div class="inner">
             
             <header><h1>Přestávka</h1></header>
@@ -1079,7 +1170,7 @@
             </aside>
             
             <aside class="page_number">
-              29/31
+              30/32
             </aside>
           </footer>
         </div>
@@ -1087,7 +1178,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-30">
+        <div class="slide slide-31">
           <div class="inner">
             
             <header><h1>Nasazení demo aplikace + průzkum</h1></header>
@@ -1110,7 +1201,7 @@
             </aside>
             
             <aside class="page_number">
-              30/31
+              31/32
             </aside>
           </footer>
         </div>
@@ -1118,7 +1209,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-31">
+        <div class="slide slide-32">
           <div class="inner">
             
             <header><h1>Diskuse</h1></header>
@@ -1141,7 +1232,7 @@
             </aside>
             
             <aside class="page_number">
-              31/31
+              32/32
             </aside>
           </footer>
         </div>
@@ -1258,92 +1349,98 @@
       
       
       <tr id="toc-row-17">
-        <th><a href="#slide:17">Příklad deploymentu – kubectl run + průzkum</a></th>
+        <th><a href="#slide:17">Perzistence (1)</a></th>
         <td><a href="#slide:17">17</a></td>
       </tr>
       
       
       <tr id="toc-row-18">
-        <th><a href="#slide:18">ConfigMap, Secret</a></th>
+        <th><a href="#slide:18">Perzistence (2)</a></th>
         <td><a href="#slide:18">18</a></td>
       </tr>
       
       
       <tr id="toc-row-19">
-        <th><a href="#slide:19">Services – ClusterIP, NodePort, LoadBalancer</a></th>
+        <th><a href="#slide:19">StorageClass</a></th>
         <td><a href="#slide:19">19</a></td>
       </tr>
       
       
       <tr id="toc-row-20">
-        <th><a href="#slide:20">Ingress a ingress controller</a></th>
+        <th><a href="#slide:20">ConfigMap, Secret</a></th>
         <td><a href="#slide:20">20</a></td>
       </tr>
       
       
       <tr id="toc-row-21">
-        <th><a href="#slide:21">Perzistence, StorageClass</a></th>
+        <th><a href="#slide:21">Services – ClusterIP, NodePort, LoadBalancer</a></th>
         <td><a href="#slide:21">21</a></td>
       </tr>
       
       
       <tr id="toc-row-22">
-        <th><a href="#slide:22">Přestávka na oběd</a></th>
+        <th><a href="#slide:22">Ingress a ingress controller</a></th>
         <td><a href="#slide:22">22</a></td>
       </tr>
       
       
       <tr id="toc-row-23">
-        <th><a href="#slide:23">Controllery</a></th>
+        <th><a href="#slide:23">Přestávka na oběd</a></th>
         <td><a href="#slide:23">23</a></td>
       </tr>
       
       
       <tr id="toc-row-24">
-        <th><a href="#slide:24">ReplicaSet, DaemonSet, StatefulSet, Job, CronJob</a></th>
+        <th><a href="#slide:24">Controllery</a></th>
         <td><a href="#slide:24">24</a></td>
       </tr>
       
       
       <tr id="toc-row-25">
-        <th><a href="#slide:25">Logování</a></th>
+        <th><a href="#slide:25">ReplicaSet, DaemonSet, StatefulSet, Job, CronJob</a></th>
         <td><a href="#slide:25">25</a></td>
       </tr>
       
       
       <tr id="toc-row-26">
-        <th><a href="#slide:26">Liveness a readiness endpointy</a></th>
+        <th><a href="#slide:26">Logování</a></th>
         <td><a href="#slide:26">26</a></td>
       </tr>
       
       
       <tr id="toc-row-27">
-        <th><a href="#slide:27">ImagePullPolicy</a></th>
+        <th><a href="#slide:27">Liveness a readiness endpointy</a></th>
         <td><a href="#slide:27">27</a></td>
       </tr>
       
       
       <tr id="toc-row-28">
-        <th><a href="#slide:28">Resource requests &amp; limits</a></th>
+        <th><a href="#slide:28">ImagePullPolicy</a></th>
         <td><a href="#slide:28">28</a></td>
       </tr>
       
       
       <tr id="toc-row-29">
-        <th><a href="#slide:29">Přestávka</a></th>
+        <th><a href="#slide:29">Resource requests &amp; limits</a></th>
         <td><a href="#slide:29">29</a></td>
       </tr>
       
       
       <tr id="toc-row-30">
-        <th><a href="#slide:30">Nasazení demo aplikace + průzkum</a></th>
+        <th><a href="#slide:30">Přestávka</a></th>
         <td><a href="#slide:30">30</a></td>
       </tr>
       
       
       <tr id="toc-row-31">
-        <th><a href="#slide:31">Diskuse</a></th>
+        <th><a href="#slide:31">Nasazení demo aplikace + průzkum</a></th>
         <td><a href="#slide:31">31</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-32">
+        <th><a href="#slide:32">Diskuse</a></th>
+        <td><a href="#slide:32">32</a></td>
       </tr>
       
       
