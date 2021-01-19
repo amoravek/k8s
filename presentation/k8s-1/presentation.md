@@ -1,4 +1,10 @@
-# Kubernetes
+# Kubernetes I.
+
+Online poznámky: <https://codimd.trask.cz/s/rJPCa8C0v>
+
+Použitý cluster: <https://arm.lab.trask.cz/>
+
+Adam Morávek, amoravek@trask.cz, +420 724 514 916
 
 ---
 # Potřeba orchestrace kontejnerů
@@ -97,6 +103,11 @@
     - `kubectl run app1 --image=nginx`
     - `kubectl create deployment app1-deployment \
         --image=nginx --replicas=2`
+    - (o deploymentu později)
+
+- totéž lze docílit i vytvořením yaml - yaml je ale těžko zapamatovatelný, takže google nebo uložené šablony?
+
+- lepší řešení ja kombinace - vytvořit jednoduchou kostru pomocí CLI a obohacovat (příklad). To má ale smysl jen na úrovni developmentu, všude jinde zařídí CI/CD.
 
 ---
 # K9s, Kubernetes Web IU (Dashboard)
@@ -104,9 +115,58 @@
 .footer: [10 min] 
 
 ---
-# Deployment
+# Deployment (1)
 
-.footer: [10 min] 
+.footer: [5 min]
+
+- vytvořínme-li pod, zajistíme si tím jen to, že nám naše aplikace tak nějak běží v Kubernetes
+- kde je ale přidaná hodnota?
+- pokud pod spadne (=proces s PID 1 v kontejneru zanikne), Kubernetes ho nastartuje automaticky znovu.
+- jak ale řešit následující potřeby?
+    - nasazení nové verze aplikace (image) bez výpadku
+    - rollback nasazené verze
+    - navýšení replik z důvodu rostoucí zátěže (nejlépe automaticky)
+    - restart, znovunačtení konfigurace nebo změny stavu (yaml)?
+- se samostatným Podem to lze, ale zbytečně složitě - proto existuje Deployment
+
+---
+# Deployment (2)
+
+.footer: [5 min]
+
+Příklad - škálování:
+
+    - `kubectl create deployment scaling --image=nginx \
+        --replicas=1 --record`
+    - `kubectl scale deployment scaling --replicas=10 --record`
+    - `kubectl rollout status deployment`
+    - `kubectl scale deployment scaling --replicas=4 --record`
+    - `kubectl rollout status deployment`
+
+- 1 -> 10 -> 0 -> 4 + průzkum + --replicas=10 - vysvětlit proč jen 6 replik
+
+---
+# Deployment (3)
+
+Rollout nové verze:
+
+    - `kubectl create -f examples/k8s/k8s-shared-network-ns/deployment.yaml`
+    - `kubectl edit deployment interpod --record`
+    - `kubectl scale deployment interpod --replicas=2 --record`
+    - `kubectl scale deployment interpod --replicas=4 --record`
+    - `kubectl edit deployment interpod --record`
+    - `kubectl rollout history deployment interpod`
+
+
+Ukázat rollbackyVysvětlit, proč nejde rollback změn replik
+
+
+---
+# Deployment (4)
+
+- rollback
+
+<https://kubernetes.io/docs/concepts/workloads/controllers/deployment/>
 
 ---
 # Přestávka

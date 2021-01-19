@@ -1,5 +1,11 @@
 # Docker
 
+Online poznámky: <https://codimd.trask.cz/s/rJPCa8C0v>
+
+Použitý cluster: <https://arm.lab.trask.cz/>
+
+Adam Morávek, amoravek@trask.cz, +420 724 514 916
+
 ---
 # Co to je Docker?
 
@@ -7,7 +13,7 @@
 
 # ...je to nástroj, který umožňuje:
 
-- vytvořit artefakt schopný běhu všude tam, kde je Docker
+- vytvořit artefakt schopný běhu všude tam, kde je Docker runtime
 - zapouzdřit aplikaci včetně jejího prostředí
 - redukovat problémy při nasazování aplikací
 - řešit podobné úlohy jako VM
