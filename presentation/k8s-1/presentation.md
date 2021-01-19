@@ -233,23 +233,50 @@ Příklad (examples/k8s/storageclass)
     - proměnné prostředí
     - citlivá data
     - PKI artefakty (certifikáty, klíče)
+- je tu tedy další možnost separovat odpovědnost a vyjít vstříc CI/CD principům
 
 Příklad (examples/k8s/configmap-secret)
 
 ---
-# Services – ClusterIP, NodePort, LoadBalancer
+# Services
 
 .footer: [15 min] 
+
+- pody mají nestabilní IP i DNS name (=název Podu)
+- Objekt Service představuje elegantní způsob řešení:
+
+    - `kubectl create deployment nginx --image=nginx`
+    - `kubectl expose deployment nginx --port 8888 --target-port 80`
+
+- ClusterIP - pouze interně v rámci clusteru
+- NodePort - jednoduchý, funkční...ale ty porty...navíc obsadí porty na všech nodech
+- LoadBalancer - nejpohodlnější, ale v cloudu drahý (samostatná IP)
+
+<https://kubernetes.io/docs/concepts/services-networking/service/>
 
 ---
 # Ingress a ingress controller
 
 .footer: [20 min] 
 
+- objekt Ingress je pravidlo pro reverzní proxy deklarované v YAML
+- deklarujeme tedy pravidlo a o ostatní se postará reverzní proxy...a ta je kde?
+- je potřeba nainstalovat *ingress controller* (typicky kontejnerizovaný nginx nebo haproxy)
+- funguje jen pro HTTP
+- jako backend je použita Service typu ClusterIP
+
+Příklad (examples/k8s/ingress)
+
+Závěr: **pro HTTP je idealní vystavit ingress controller jako Service typu LoadBalancer a pro ostatní komunikaci použít buď LoadBalancer (drahé) nebo NodePort (levné, ale v Cloudu komplikované)**
+
+<https://kubernetes.io/docs/concepts/services-networking/ingress/>
+
 ---
 # Přestávka na oběd
 
-.footer: [30 min - 1 h] 
+.footer: [30 min - 1 h] 
+
+![obed](../common/open.knedliky.jpg)
 
 ---
 # Controllery

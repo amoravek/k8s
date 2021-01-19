@@ -415,7 +415,7 @@ Do registry je mnohdy nutný login:
 
 .footer: [30 min - 1 h] 
 
-![docker-vs-vm](../open.knedliky.jpg)
+![obed](../common/open.knedliky.jpg)
 
 ---
 # PID 1 podrobněji

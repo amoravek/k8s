@@ -840,6 +840,7 @@
 <li>PKI artefakty (certifikáty, klíče)</li>
 </ul>
 </li>
+<li>je tu tedy další možnost separovat odpovědnost a vyjít vstříc CI/CD principům</li>
 </ul>
 <p>Příklad (examples/k8s/configmap-secret)</p></section>
             
@@ -871,8 +872,26 @@
         <div class="slide has_footer slide-21">
           <div class="inner">
             
-            <header><h1>Services – ClusterIP, NodePort, LoadBalancer</h1></header>
+            <header><h1>Services</h1></header>
             
+            
+            <section>
+<ul>
+<li>pody mají nestabilní IP i DNS name (=název Podu)</li>
+<li>
+<p>Objekt Service představuje elegantní způsob řešení:</p>
+<ul>
+<li><code>kubectl create deployment nginx --image=nginx</code></li>
+<li><code>kubectl expose deployment nginx --port 8888 --target-port 80</code></li>
+</ul>
+</li>
+<li>
+<p>ClusterIP - pouze interně v rámci clusteru</p>
+</li>
+<li>NodePort - jednoduchý, funkční...ale ty porty...navíc obsadí porty na všech nodech</li>
+<li>LoadBalancer - nejpohodlnější, ale v cloudu drahý (samostatná IP)</li>
+</ul>
+<p><a href="https://kubernetes.io/docs/concepts/services-networking/service/">https://kubernetes.io/docs/concepts/services-networking/service/</a></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -905,6 +924,18 @@
             <header><h1>Ingress a ingress controller</h1></header>
             
             
+            <section>
+<ul>
+<li>objekt Ingress je pravidlo pro reverzní proxy deklarované v YAML</li>
+<li>deklarujeme tedy pravidlo a o ostatní se postará reverzní proxy...a ta je kde?</li>
+<li>je potřeba nainstalovat <em>ingress controller</em> (typicky kontejnerizovaný nginx nebo haproxy)</li>
+<li>funguje jen pro HTTP</li>
+<li>jako backend je použita Service typu ClusterIP</li>
+</ul>
+<p>Příklad (examples/k8s/ingress)</p>
+<p>Závěr: <strong>pro HTTP je idealní vystavit ingress controller jako Service typu LoadBalancer a pro ostatní komunikaci použít buď LoadBalancer (drahé) nebo NodePort (levné, ale v Cloudu komplikované)</strong></p>
+<p><a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">https://kubernetes.io/docs/concepts/services-networking/ingress/</a></p></section>
+            
           </div>
           <div class="presenter_notes">
             <header><h1>Presenter Notes</h1></header>
@@ -936,6 +967,9 @@
             <header><h1>Přestávka na oběd</h1></header>
             
             
+            <section>
+<p><img alt="obed" src="file:///home/amoravek/projects/trask/k8s-skoleni/git/k8s/presentation/k8s-1/../common/open.knedliky.jpg" /></p></section>
+            
           </div>
           <div class="presenter_notes">
             <header><h1>Presenter Notes</h1></header>
@@ -945,7 +979,7 @@
           </div>
           <footer>
             
-              [30 min - 1 h] 
+              [30 min - 1 h] 
             
             
             <aside class="source">
@@ -1373,7 +1407,7 @@
       
       
       <tr id="toc-row-21">
-        <th><a href="#slide:21">Services – ClusterIP, NodePort, LoadBalancer</a></th>
+        <th><a href="#slide:21">Services</a></th>
         <td><a href="#slide:21">21</a></td>
       </tr>
       
