@@ -283,6 +283,17 @@ Závěr: **pro HTTP je idealní vystavit ingress controller jako Service typu Lo
 
 .footer: [10 min] 
 
+- controllery udržují v Clusteru deklarovaný (požadovaný) stav (např. počet replik Podu)
+- každý controller řeší jinou úlohu
+- správu controllerů provádí komponenta Controller-manager
+- nejpoužívanější controller je Deployment
+
+<https://kubernetes.io/docs/concepts/architecture/controller/>
+
+Příklady:
+
+<https://kubernetes.io/docs/concepts/workloads/controllers/>
+
 ---
 # ReplicaSet, DaemonSet, StatefulSet, Job, CronJob
 
@@ -294,9 +305,18 @@ Závěr: **pro HTTP je idealní vystavit ingress controller jako Service typu Lo
 .footer: [10 min] 
 
 ---
-# Liveness a readiness endpointy
+# Liveness a readiness testy
 
 .footer: [15 min] 
+
+- každý kontejner by měl mít deklarován způsob, jakým Kubelet pozná, že se správně inicializoval a zda funguje.
+- readiness probe = testuje, zda je kontejner připraven přijímat požadavky
+- liveness probe = periodicky testuje kontejner, zda je živý a zdravý
+- typy: <https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#probe-v1-core>
+
+**Bez těchto testů nemůžeme mluvit o HA!**
+
+<https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/>
 
 ---
 # ImagePullPolicy
@@ -315,6 +335,8 @@ Závěr: **pro HTTP je idealní vystavit ingress controller jako Service typu Lo
 
 ---
 # Nasazení demo aplikace + průzkum 
+
+TIF_ApiSdSynchronizer
 
 ---
 # Diskuse 

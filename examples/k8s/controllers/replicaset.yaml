@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: replicaset-test
+  labels:
+    app: replicaset-test
+spec:
+  # modify replicas according to your case
+  replicas: 3
+  selector:
+    matchLabels:
+      app: replicaset-test
+  template:
+    metadata:
+      labels:
+        app: replicaset-test
+    spec:
+      containers:
+      - name: nginx
+        image: nginx

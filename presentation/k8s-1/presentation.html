@@ -1001,6 +1001,17 @@
             <header><h1>Controllery</h1></header>
             
             
+            <section>
+<ul>
+<li>controllery udržují v Clusteru deklarovaný (požadovaný) stav (např. počet replik Podu)</li>
+<li>každý controller řeší jinou úlohu</li>
+<li>správu controllerů provádí komponenta Controller-manager</li>
+<li>nejpoužívanější controller je Deployment</li>
+</ul>
+<p><a href="https://kubernetes.io/docs/concepts/architecture/controller/">https://kubernetes.io/docs/concepts/architecture/controller/</a></p>
+<p>Příklady:</p>
+<p><a href="https://kubernetes.io/docs/concepts/workloads/controllers/">https://kubernetes.io/docs/concepts/workloads/controllers/</a></p></section>
+            
           </div>
           <div class="presenter_notes">
             <header><h1>Presenter Notes</h1></header>
@@ -1091,8 +1102,18 @@
         <div class="slide has_footer slide-27">
           <div class="inner">
             
-            <header><h1>Liveness a readiness endpointy</h1></header>
+            <header><h1>Liveness a readiness testy</h1></header>
             
+            
+            <section>
+<ul>
+<li>každý kontejner by měl mít deklarován způsob, jakým Kubelet pozná, že se správně inicializoval a zda funguje.</li>
+<li>readiness probe = testuje, zda je kontejner připraven přijímat požadavky</li>
+<li>liveness probe = periodicky testuje kontejner, zda je živý a zdravý</li>
+<li>typy: <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#probe-v1-core">https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#probe-v1-core</a></li>
+</ul>
+<p><strong>Bez těchto testů nemůžeme mluvit o HA!</strong></p>
+<p><a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/">https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/</a></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -1212,11 +1233,13 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-31">
+        <div class="slide has_footer slide-31">
           <div class="inner">
             
             <header><h1>Nasazení demo aplikace + průzkum</h1></header>
             
+            
+            <section><p>TIF_ApiSdSynchronizer</p></section>
             
           </div>
           <div class="presenter_notes">
@@ -1443,7 +1466,7 @@
       
       
       <tr id="toc-row-27">
-        <th><a href="#slide:27">Liveness a readiness endpointy</a></th>
+        <th><a href="#slide:27">Liveness a readiness testy</a></th>
         <td><a href="#slide:27">27</a></td>
       </tr>
       
