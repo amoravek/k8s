@@ -92,7 +92,11 @@ Adam Morávek, amoravek@trask.cz, +420 724 514 916
 - CLI rozhraní pro komunikaci s clusterem (resp API-serverem)
 - vyžaduje přítomnost konfiguračniho souboru, tzv. *kubeconfig* (uložen typicky v $HOME/.kube/config) - viz váš osobní kubeconfig rozesílaný před kurzem
 - kubeconfig obsahuje sady clusterů a uživatelů propojených kontexty
-- Praktické ukázky
+- Praktické ukázky + merge kubeconfigu:
+
+        !shell
+        export KUBECONFIG=~/.kube/config:~/someotherconfig 
+        kubectl config view --flatten > ~/new-kubeconfig
 
 ---
 # Příklad spuštění aplikace v podu – kubectl run + průzkum
@@ -311,6 +315,8 @@ Příklady: examples/controllers
 
 .footer: [15 min] 
 
+(build image + sestavit celý deployment)
+
 - každý kontejner by měl mít deklarován způsob, jakým Kubelet pozná, že se správně inicializoval a zda funguje.
 - readiness probe = testuje, zda je kontejner připraven přijímat požadavky
 - liveness probe = periodicky testuje kontejner, zda je živý a zdravý
@@ -325,12 +331,29 @@ Příklad: examples/k8s/readiness-liveness
 ---
 # ImagePullPolicy
 
+- imagePullPolicy: IfNotPresent vs Always
+- AlwaysPullImages adminssion controller
+
 .footer: [10 min] 
+
+<https://kubernetes.io/docs/concepts/containers/images/#updating-images>
 
 ---
 # Resource requests & limits
 
 .footer: [15 min] 
+
+- Aby mohl Scheduler optimalizovat využití zdrojů jednotlivých nodů, potřebuje k tomu v ideálním případě znát miniální požadavky aplikace na CPU a paměť
+- u každého kontejneru by měla být sekce resources, např.:
+
+    !yaml
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
 
 ---
 # Diskuse 

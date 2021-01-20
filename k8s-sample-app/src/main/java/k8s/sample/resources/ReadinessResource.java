@@ -17,13 +17,27 @@ import k8s.sample.api.OutData;
 @Path("/ready")
 @Produces(MediaType.APPLICATION_JSON)
 public class ReadinessResource {
+	
+	private static final long UNREADY_MILLIS = Long.parseLong(System.getenv("UNREADY_MILLIS"));
 
 	public ReadinessResource() {
+		System.out.println("UNREADY_MILLIS: " + UNREADY_MILLIS);
 	}
 
 	@GET
 	@Timed
 	public Response isReady() {
+		
+		long unreadyAt = AppData.unreadyAt.get();
+		long now = System.currentTimeMillis();
+		
+		if (now - unreadyAt > UNREADY_MILLIS) {
+			synchronized (this) {
+				AppData.ready.set(true);
+				AppData.unreadyAt.set(0);
+			}
+		}
+
 		if (AppData.ready.get()) {
 			return Response.ok(new OutData("readiness-check", AppData.ready.toString())).build();
 		} else {
@@ -35,7 +49,10 @@ public class ReadinessResource {
 	@Timed
 	@Path("/false")
 	public Response setFalse() {
-		AppData.ready.set(false);
+		synchronized (this) {
+			AppData.ready.set(false);
+			AppData.unreadyAt.set(System.currentTimeMillis());
+		}
 
 		try {
 			return Response.temporaryRedirect(new URI("/ready")).build();
