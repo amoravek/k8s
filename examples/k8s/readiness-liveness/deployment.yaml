@@ -22,8 +22,11 @@ spec:
       containers:
       - image: harbor.trask.cz/arm64/k8s-sample-app:1.0
         imagePullPolicy: Always
+        env:
+        - name: UNREADY_MILLIS
+          value: '60000'
         livenessProbe:
-          failureThreshold: 1
+          failureThreshold: 3
           httpGet:
             path: /alive
             port: 8080
@@ -34,7 +37,7 @@ spec:
           timeoutSeconds: 1
         name: k8s-sample-app
         readinessProbe:
-          failureThreshold: 1
+          failureThreshold: 3
           httpGet:
             path: /ready
             port: 8080
