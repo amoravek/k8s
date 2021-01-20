@@ -2,8 +2,6 @@
 
 Online poznámky: <https://codimd.trask.cz/s/rJPCa8C0v>
 
-Použitý cluster: <https://arm.lab.trask.cz/>
-
 Adam Morávek, amoravek@trask.cz, +420 724 514 916
 
 ---
@@ -172,7 +170,7 @@ Adam Morávek, amoravek@trask.cz, +420 724 514 916
 .notes: objasnit nginx:alpine
 
 Vytvoříme image: `docker build -t docker-simple:0.1 .`
-Spustíme: `docker run -ti --rm -p 8881:8080 docker-simple:0.1`
+Spustíme: `docker run -ti --rm -p 8881:80 docker-simple:0.1`
 
 `docker <group> [options] <image> [command]`
 
@@ -183,7 +181,7 @@ http://localhost:8881
 
 Zastavíme kontejner (běží na popředí): Ctrl+C (pošle SIGINT, ne SIGKILL)
 
-Spustíme na pozadí: `docker run -d --name docker-simple -p 8881:8080 docker-simple:0.1`
+Spustíme na pozadí: `docker run -d --name docker-simple -p 8881:80 docker-simple:0.1`
 
 Ověříme, že běží:
 
@@ -254,7 +252,7 @@ Chtěli jsme to přece: `COPY . /usr/share/nginx/html`
 Zkusme tedy nový build...   
 
 ---
-# Přestávka
+# Přestávka do 10:45
 
 .footer: [15 min]
 
