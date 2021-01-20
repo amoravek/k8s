@@ -299,6 +299,8 @@ Příklady:
 
 .footer: [20 min] 
 
+Příklady: examples/controllers
+
 ---
 # Logování
 
@@ -316,6 +318,8 @@ Příklady:
 
 **Bez těchto testů nemůžeme mluvit o HA!**
 
+Příklad: examples/k8s/readiness-liveness
+
 <https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/>
 
 ---
@@ -327,16 +331,6 @@ Příklady:
 # Resource requests & limits
 
 .footer: [15 min] 
-
----
-# Přestávka
-
-.footer: [15 min] 
-
----
-# Nasazení demo aplikace + průzkum 
-
-TIF_ApiSdSynchronizer
 
 ---
 # Diskuse 
