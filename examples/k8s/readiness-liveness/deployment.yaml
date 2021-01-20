@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: k8s-sample-app
+  name: k8s-sample-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-sample-app
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: k8s-sample-app
+    spec:
+      containers:
+      - image: harbor.trask.cz/arm64/k8s-sample-app:1.0
+        imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 1
+          httpGet:
+            path: /alive
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: k8s-sample-app
+        readinessProbe:
+          failureThreshold: 1
+          httpGet:
+            path: /ready
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: "1"
+            memory: 128Mi
+          requests:
+            cpu: 500m
+            memory: 64Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        kubernetes.io/hostname: worker04
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+
