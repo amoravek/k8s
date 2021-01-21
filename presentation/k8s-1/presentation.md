@@ -98,6 +98,8 @@ Adam Morávek, amoravek@trask.cz, +420 724 514 916
         export KUBECONFIG=~/.kube/config:~/someotherconfig 
         kubectl config view --flatten > ~/new-kubeconfig
 
+<https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/>
+
 ---
 # Příklad spuštění aplikace v podu – kubectl run + průzkum
 
@@ -175,7 +177,7 @@ Rollback
 <https://kubernetes.io/docs/concepts/workloads/controllers/deployment/>
 
 ---
-# Přestávka
+# Přestávka do 10:45
 
 .footer: [15 min]
 
