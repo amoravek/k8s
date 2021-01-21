@@ -44,10 +44,10 @@ spec:
           periodSeconds: 5
         resources:
           limits:
-            cpu: "1"
+            cpu: "500m"
             memory: 128Mi
           requests:
-            cpu: 500m
+            cpu: 250m
             memory: 64Mi
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File

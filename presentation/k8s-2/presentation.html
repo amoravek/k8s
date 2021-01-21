@@ -61,7 +61,9 @@
             
             <section><p>Online poznámky: <a href="https://codimd.trask.cz/s/rJPCa8C0v">https://codimd.trask.cz/s/rJPCa8C0v</a></p>
 <p>Použitý cluster: <a href="https://arm.lab.trask.cz/">https://arm.lab.trask.cz/</a></p>
-<p>Adam Morávek, amoravek@trask.cz, +420 724 514 916</p></section>
+<p>Adam Morávek, amoravek@trask.cz, +420 724 514 916</p>
+<h1>Odpovědi na některé Dotazy</h1>
+<p><code>kubectl config view --minify|grep namespace</code></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -92,6 +94,10 @@
             <header><h1>Readiness a Liveness probes - pokračování</h1></header>
             
             
+            <section><ul>
+<li>kompletní ukázka chování při výpadku liveness i readiness probe</li>
+</ul></section>
+            
           </div>
           <div class="presenter_notes">
             <header><h1>Presenter Notes</h1></header>
@@ -118,8 +124,15 @@
         <div class="slide slide-3">
           <div class="inner">
             
-            <header><h1>Zabezpečení ingressu pomocí TLS, TLS secrety</h1></header>
+            <header><h1>TLS</h1></header>
             
+            
+            <section><ul>
+<li>Zabezpečení ingressu pomocí TLS</li>
+<li>TLS secrety </li>
+<li>Registry secrety</li>
+</ul>
+</section>
             
           </div>
           <div class="presenter_notes">
@@ -152,10 +165,19 @@
             <header><h1>Labels &amp; selectors, node selectors</h1></header>
             
             
+            <section><ul>
+<li>label je prostá nálepka</li>
+<li>selectory jsou filtry</li>
+</ul>
+
+<p><a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/">https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/</a></p></section>
+            
           </div>
           <div class="presenter_notes">
             <header><h1>Presenter Notes</h1></header>
             <section>
+            
+              <p>ukazat na examples/ha - je tam selector i nodeSelector, dal ukazat i cli --selector</p>
             
             </section>
           </div>
@@ -181,12 +203,17 @@
             <header><h1>High-availability, pod disruption budget</h1></header>
             
             
-            <section><p>examples/k8s/ha</p></section>
+            <section><p><code>kubectl create poddisruptionbudget k8s-sample-app-pdb --selector=app=k8s-sample-app --min-available=1</code></p>
+
+
+<p><a href="https://kubernetes.io/docs/tasks/run-application/configure-pdb/">https://kubernetes.io/docs/tasks/run-application/configure-pdb/</a></p></section>
             
           </div>
           <div class="presenter_notes">
             <header><h1>Presenter Notes</h1></header>
             <section>
+            
+              <p>examples/k8s/ha</p><p>ukazat nejprve drain bez pdb, pak s nim</p>
             
             </section>
           </div>
@@ -211,6 +238,11 @@
             
             <header><h1>Horizontal pod autoscaler</h1></header>
             
+            
+            <section><p><code>kubectl autoscale deployment k8s-sample-app --min=1 --max=3 --cpu-percent=50</code></p>
+<p>load:</p>
+<p><code>kubectl run -i --tty load-generator --rm --image=harbor.trask.cz/arm64/ubuntu-netcat --restart=Never -- /bin/sh -c "while sleep 0.01; do curl -s --connect-timeout 2 --max-time 2 http://10.4.61.4; done"</code></p>
+<p><a href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/">https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/</a></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -241,6 +273,8 @@
             <header><h1>Taints, tolerations</h1></header>
             
             
+            <section><p><a href="https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/">https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/</a></p></section>
+            
           </div>
           <div class="presenter_notes">
             <header><h1>Presenter Notes</h1></header>
@@ -270,8 +304,15 @@
             <header><h1>Cordon, drain</h1></header>
             
             
-            <section><p>kubectl drain worker05 --ignore-daemonsets --delete-local-data</p>
-<p>watch -n 1 curl -s --connect-timeout 2 --max-time 2 http://10.4.61.4</p></section>
+            <section><ul>
+<li>cordon: zamezení plánování na takto označený node</li>
+<li>drain: "vypuštění" node před údržbou (nebo při vyčerpání zdrojů)</li>
+<li>
+<p>při drain se automaticky provede cordon:</p>
+<p><code>kubectl drain worker05 --ignore-daemonsets --delete-local-data</code></p>
+<p><code>watch -n 1 curl -s --connect-timeout 2 --max-time 2 http://10.4.61.4</code></p>
+</li>
+</ul></section>
             
           </div>
           <div class="presenter_notes">
@@ -705,7 +746,7 @@
       
       
       <tr id="toc-row-3">
-        <th><a href="#slide:3">Zabezpečení ingressu pomocí TLS, TLS secrety</a></th>
+        <th><a href="#slide:3">TLS</a></th>
         <td><a href="#slide:3">3</a></td>
       </tr>
       
