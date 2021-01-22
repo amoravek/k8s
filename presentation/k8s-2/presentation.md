@@ -65,18 +65,18 @@ load:
 
   `kubectl taint nodes node1 key1=value1:NoSchedule-`
 
-  !yaml
-  tolerations:
-  - key: "key1"
-    operator: "Equal"
-    value: "value1"
-    effect: "NoSchedule"
+    !yaml
+    tolerations:
+    - key: "key1"
+      operator: "Equal"
+      value: "value1"
+      effect: "NoSchedule"
 
-  !yaml
-  tolerations:
-  - key: "key1"
-    operator: "Exists"
-    effect: "NoSchedule"
+    !yaml
+    tolerations:
+    - key: "key1"
+      operator: "Exists"
+      effect: "NoSchedule"
 
 .notes: kubectl describe nodes | egrep -hi "Taint|Hostname"
 
