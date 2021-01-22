@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: k8s-sample-app
+  name: k8s-sample-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-sample-app
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: k8s-sample-app
+    spec:
+      nodeSelector:
+        demo: 'yes'
+      containers:
+      - image: harbor.trask.cz/arm64/k8s-sample-app:1.0
+        imagePullPolicy: Always
+        env:
+        - name: UNREADY_MILLIS
+          value: '60000'
+        name: k8s-sample-app
+        resources:
+          limits:
+            cpu: "500m"
+            memory: 128Mi
+          requests:
+            cpu: 250m
+            memory: 64Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: k8s-sample-app
+  name: k8s-sample-app
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: k8s-sample-app
+  sessionAffinity: None
+  type: LoadBalancer
+

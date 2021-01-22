@@ -61,9 +61,7 @@
             
             <section><p>Online poznámky: <a href="https://codimd.trask.cz/s/rJPCa8C0v">https://codimd.trask.cz/s/rJPCa8C0v</a></p>
 <p>Použitý cluster: <a href="https://arm.lab.trask.cz/">https://arm.lab.trask.cz/</a></p>
-<p>Adam Morávek, amoravek@trask.cz, +420 724 514 916</p>
-<h1>Odpovědi na některé Dotazy</h1>
-<p><code>kubectl config view --minify|grep namespace</code></p></section>
+<p>Adam Morávek, amoravek@trask.cz, +420 724 514 916</p></section>
             
           </div>
           <div class="presenter_notes">
@@ -80,7 +78,7 @@
             </aside>
             
             <aside class="page_number">
-              1/20
+              1/21
             </aside>
           </footer>
         </div>
@@ -89,6 +87,37 @@
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
         <div class="slide slide-2">
+          <div class="inner">
+            
+            <header><h1>Odpovědi na některé Dotazy</h1></header>
+            
+            
+            <section><p><code>kubectl config view --minify|grep namespace</code></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              2/21
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-3">
           <div class="inner">
             
             <header><h1>Readiness a Liveness probes - pokračování</h1></header>
@@ -113,7 +142,7 @@
             </aside>
             
             <aside class="page_number">
-              2/20
+              3/21
             </aside>
           </footer>
         </div>
@@ -121,7 +150,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-3">
+        <div class="slide slide-4">
           <div class="inner">
             
             <header><h1>TLS</h1></header>
@@ -151,7 +180,7 @@
             </aside>
             
             <aside class="page_number">
-              3/20
+              4/21
             </aside>
           </footer>
         </div>
@@ -159,7 +188,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-4">
+        <div class="slide slide-5">
           <div class="inner">
             
             <header><h1>Labels &amp; selectors, node selectors</h1></header>
@@ -189,7 +218,7 @@
             </aside>
             
             <aside class="page_number">
-              4/20
+              5/21
             </aside>
           </footer>
         </div>
@@ -197,7 +226,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-5">
+        <div class="slide slide-6">
           <div class="inner">
             
             <header><h1>High-availability, pod disruption budget</h1></header>
@@ -225,7 +254,7 @@
             </aside>
             
             <aside class="page_number">
-              5/20
+              6/21
             </aside>
           </footer>
         </div>
@@ -233,7 +262,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-6">
+        <div class="slide slide-7">
           <div class="inner">
             
             <header><h1>Horizontal pod autoscaler</h1></header>
@@ -259,7 +288,7 @@
             </aside>
             
             <aside class="page_number">
-              6/20
+              7/21
             </aside>
           </footer>
         </div>
@@ -267,18 +296,34 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-7">
+        <div class="slide slide-8">
           <div class="inner">
             
             <header><h1>Taints, tolerations</h1></header>
             
             
-            <section><p><a href="https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/">https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/</a></p></section>
+            <section><p><code>kubectl taint nodes node1 key1=value1:NoSchedule</code></p>
+<p><code>kubectl taint nodes node1 key1=value1:NoSchedule-</code></p>
+<p>!yaml
+  tolerations:
+  - key: "key1"
+    operator: "Equal"
+    value: "value1"
+    effect: "NoSchedule"</p>
+<p>!yaml
+  tolerations:
+  - key: "key1"
+    operator: "Exists"
+    effect: "NoSchedule"</p>
+
+<p><a href="https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/">https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/</a></p></section>
             
           </div>
           <div class="presenter_notes">
             <header><h1>Presenter Notes</h1></header>
             <section>
+            
+              <p>kubectl describe nodes | egrep -hi "Taint|Hostname"</p>
             
             </section>
           </div>
@@ -290,7 +335,7 @@
             </aside>
             
             <aside class="page_number">
-              7/20
+              8/21
             </aside>
           </footer>
         </div>
@@ -298,7 +343,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-8">
+        <div class="slide slide-9">
           <div class="inner">
             
             <header><h1>Cordon, drain</h1></header>
@@ -329,7 +374,7 @@
             </aside>
             
             <aside class="page_number">
-              8/20
+              9/21
             </aside>
           </footer>
         </div>
@@ -337,7 +382,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-9">
+        <div class="slide slide-10">
           <div class="inner">
             
             <header><h1>Custom Resource Definition (CRD)</h1></header>
@@ -358,7 +403,7 @@
             </aside>
             
             <aside class="page_number">
-              9/20
+              10/21
             </aside>
           </footer>
         </div>
@@ -366,7 +411,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-10">
+        <div class="slide slide-11">
           <div class="inner">
             
             <header><h1>Resource quota</h1></header>
@@ -387,7 +432,7 @@
             </aside>
             
             <aside class="page_number">
-              10/20
+              11/21
             </aside>
           </footer>
         </div>
@@ -395,7 +440,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-11">
+        <div class="slide slide-12">
           <div class="inner">
             
             <header><h1>Resource limit</h1></header>
@@ -416,7 +461,7 @@
             </aside>
             
             <aside class="page_number">
-              11/20
+              12/21
             </aside>
           </footer>
         </div>
@@ -424,7 +469,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-12">
+        <div class="slide slide-13">
           <div class="inner">
             
             <header><h1>Kubernetes best practices</h1></header>
@@ -445,7 +490,7 @@
             </aside>
             
             <aside class="page_number">
-              12/20
+              13/21
             </aside>
           </footer>
         </div>
@@ -453,7 +498,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-13">
+        <div class="slide slide-14">
           <div class="inner">
             
             <header><h1>Autentifikace, uživatelské a servisní účty</h1></header>
@@ -474,7 +519,7 @@
             </aside>
             
             <aside class="page_number">
-              13/20
+              14/21
             </aside>
           </footer>
         </div>
@@ -482,7 +527,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-14">
+        <div class="slide slide-15">
           <div class="inner">
             
             <header><h1>Container registry - autentifikace</h1></header>
@@ -506,7 +551,7 @@
             </aside>
             
             <aside class="page_number">
-              14/20
+              15/21
             </aside>
           </footer>
         </div>
@@ -514,7 +559,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-15">
+        <div class="slide slide-16">
           <div class="inner">
             
             <header><h1>RBAC</h1></header>
@@ -535,7 +580,7 @@
             </aside>
             
             <aside class="page_number">
-              15/20
+              16/21
             </aside>
           </footer>
         </div>
@@ -543,7 +588,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-16">
+        <div class="slide slide-17">
           <div class="inner">
             
             <header><h1>Helm Charts</h1></header>
@@ -564,7 +609,7 @@
             </aside>
             
             <aside class="page_number">
-              16/20
+              17/21
             </aside>
           </footer>
         </div>
@@ -572,7 +617,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-17">
+        <div class="slide slide-18">
           <div class="inner">
             
             <header><h1>Multiplatformní přístupy (ARM64)</h1></header>
@@ -593,7 +638,7 @@
             </aside>
             
             <aside class="page_number">
-              17/20
+              18/21
             </aside>
           </footer>
         </div>
@@ -601,7 +646,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-18">
+        <div class="slide slide-19">
           <div class="inner">
             
             <header><h1>Diskuse</h1></header>
@@ -622,7 +667,7 @@
             </aside>
             
             <aside class="page_number">
-              18/20
+              19/21
             </aside>
           </footer>
         </div>
@@ -630,10 +675,10 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-19">
+        <div class="slide has_footer slide-20">
           <div class="inner">
             
-            <header><h1>Přestávka</h1></header>
+            <header><h1>Přestávka do 10:30</h1></header>
             
             
             <section>
@@ -656,7 +701,7 @@
             </aside>
             
             <aside class="page_number">
-              19/20
+              20/21
             </aside>
           </footer>
         </div>
@@ -664,7 +709,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-20">
+        <div class="slide has_footer slide-21">
           <div class="inner">
             
             <header><h1>Přestávka na oběd</h1></header>
@@ -690,7 +735,7 @@
             </aside>
             
             <aside class="page_number">
-              20/20
+              21/21
             </aside>
           </footer>
         </div>
@@ -713,7 +758,7 @@
             
             
             <aside class="page_number">
-              /20
+              /21
             </aside>
           </footer>
         </div>
@@ -740,116 +785,122 @@
       
       
       <tr id="toc-row-2">
-        <th><a href="#slide:2">Readiness a Liveness probes - pokračování</a></th>
+        <th><a href="#slide:2">Odpovědi na některé Dotazy</a></th>
         <td><a href="#slide:2">2</a></td>
       </tr>
       
       
       <tr id="toc-row-3">
-        <th><a href="#slide:3">TLS</a></th>
+        <th><a href="#slide:3">Readiness a Liveness probes - pokračování</a></th>
         <td><a href="#slide:3">3</a></td>
       </tr>
       
       
       <tr id="toc-row-4">
-        <th><a href="#slide:4">Labels &amp; selectors, node selectors</a></th>
+        <th><a href="#slide:4">TLS</a></th>
         <td><a href="#slide:4">4</a></td>
       </tr>
       
       
       <tr id="toc-row-5">
-        <th><a href="#slide:5">High-availability, pod disruption budget</a></th>
+        <th><a href="#slide:5">Labels &amp; selectors, node selectors</a></th>
         <td><a href="#slide:5">5</a></td>
       </tr>
       
       
       <tr id="toc-row-6">
-        <th><a href="#slide:6">Horizontal pod autoscaler</a></th>
+        <th><a href="#slide:6">High-availability, pod disruption budget</a></th>
         <td><a href="#slide:6">6</a></td>
       </tr>
       
       
       <tr id="toc-row-7">
-        <th><a href="#slide:7">Taints, tolerations</a></th>
+        <th><a href="#slide:7">Horizontal pod autoscaler</a></th>
         <td><a href="#slide:7">7</a></td>
       </tr>
       
       
       <tr id="toc-row-8">
-        <th><a href="#slide:8">Cordon, drain</a></th>
+        <th><a href="#slide:8">Taints, tolerations</a></th>
         <td><a href="#slide:8">8</a></td>
       </tr>
       
       
       <tr id="toc-row-9">
-        <th><a href="#slide:9">Custom Resource Definition (CRD)</a></th>
+        <th><a href="#slide:9">Cordon, drain</a></th>
         <td><a href="#slide:9">9</a></td>
       </tr>
       
       
       <tr id="toc-row-10">
-        <th><a href="#slide:10">Resource quota</a></th>
+        <th><a href="#slide:10">Custom Resource Definition (CRD)</a></th>
         <td><a href="#slide:10">10</a></td>
       </tr>
       
       
       <tr id="toc-row-11">
-        <th><a href="#slide:11">Resource limit</a></th>
+        <th><a href="#slide:11">Resource quota</a></th>
         <td><a href="#slide:11">11</a></td>
       </tr>
       
       
       <tr id="toc-row-12">
-        <th><a href="#slide:12">Kubernetes best practices</a></th>
+        <th><a href="#slide:12">Resource limit</a></th>
         <td><a href="#slide:12">12</a></td>
       </tr>
       
       
       <tr id="toc-row-13">
-        <th><a href="#slide:13">Autentifikace, uživatelské a servisní účty</a></th>
+        <th><a href="#slide:13">Kubernetes best practices</a></th>
         <td><a href="#slide:13">13</a></td>
       </tr>
       
       
       <tr id="toc-row-14">
-        <th><a href="#slide:14">Container registry - autentifikace</a></th>
+        <th><a href="#slide:14">Autentifikace, uživatelské a servisní účty</a></th>
         <td><a href="#slide:14">14</a></td>
       </tr>
       
       
       <tr id="toc-row-15">
-        <th><a href="#slide:15">RBAC</a></th>
+        <th><a href="#slide:15">Container registry - autentifikace</a></th>
         <td><a href="#slide:15">15</a></td>
       </tr>
       
       
       <tr id="toc-row-16">
-        <th><a href="#slide:16">Helm Charts</a></th>
+        <th><a href="#slide:16">RBAC</a></th>
         <td><a href="#slide:16">16</a></td>
       </tr>
       
       
       <tr id="toc-row-17">
-        <th><a href="#slide:17">Multiplatformní přístupy (ARM64)</a></th>
+        <th><a href="#slide:17">Helm Charts</a></th>
         <td><a href="#slide:17">17</a></td>
       </tr>
       
       
       <tr id="toc-row-18">
-        <th><a href="#slide:18">Diskuse</a></th>
+        <th><a href="#slide:18">Multiplatformní přístupy (ARM64)</a></th>
         <td><a href="#slide:18">18</a></td>
       </tr>
       
       
       <tr id="toc-row-19">
-        <th><a href="#slide:19">Přestávka</a></th>
+        <th><a href="#slide:19">Diskuse</a></th>
         <td><a href="#slide:19">19</a></td>
       </tr>
       
       
       <tr id="toc-row-20">
-        <th><a href="#slide:20">Přestávka na oběd</a></th>
+        <th><a href="#slide:20">Přestávka do 10:30</a></th>
         <td><a href="#slide:20">20</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-21">
+        <th><a href="#slide:21">Přestávka na oběd</a></th>
+        <td><a href="#slide:21">21</a></td>
       </tr>
       
       

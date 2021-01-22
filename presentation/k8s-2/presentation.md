@@ -6,6 +6,7 @@ Použitý cluster: <https://arm.lab.trask.cz/>
 
 Adam Morávek, amoravek@trask.cz, +420 724 514 916
 
+---
 # Odpovědi na některé Dotazy
 
 `kubectl config view --minify|grep namespace`
@@ -60,6 +61,25 @@ load:
 ---
 # Taints, tolerations 
 
+  `kubectl taint nodes node1 key1=value1:NoSchedule`
+
+  `kubectl taint nodes node1 key1=value1:NoSchedule-`
+
+  !yaml
+  tolerations:
+  - key: "key1"
+    operator: "Equal"
+    value: "value1"
+    effect: "NoSchedule"
+
+  !yaml
+  tolerations:
+  - key: "key1"
+    operator: "Exists"
+    effect: "NoSchedule"
+
+.notes: kubectl describe nodes | egrep -hi "Taint|Hostname"
+
 <https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/>
 
 ---
@@ -107,7 +127,7 @@ load:
 # Diskuse
 
 ---
-# Přestávka
+# Přestávka do 10:30
 
 .footer: [15 min]
 
