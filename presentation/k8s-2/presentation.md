@@ -1,4 +1,4 @@
-# Kubernetes II.
+2# Kubernetes II.
 
 Online poznámky: <https://codimd.trask.cz/s/rJPCa8C0v>
 
@@ -103,7 +103,7 @@ load:
 # Resource limit 
 
 ---
-# Kubernetes best practices 
+# Kubernetes best practices -> Helm Charts
 
 ---
 # Autentifikace, uživatelské a servisní účty 
@@ -112,13 +112,11 @@ load:
 # Container registry - autentifikace
 
 .notes: default/docker-registry-harbor
+
 .notes: objasnit princip sa + registry secret
 
 ---
 # RBAC 
-
----
-# Helm Charts
 
 ---
 # Multiplatformní přístupy (ARM64) 
