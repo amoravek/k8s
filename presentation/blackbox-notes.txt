@@ -40,13 +40,33 @@ Cil prezentace:​
 
 
 
-01
-- co je kontejnerizace a co nam prinesla
+01 uvod + kontejnery
+- letmo naznacit cile blackboxu: na co se zamerit, co nastudovat, trend
+- co je kontejnerizace a co nam prinesla (priklad vyvojare a jeho dev procesu s- a bez kontejneru)
 - soucasna role Dockeru (=jako klientsky tool - zminit deprecation v 1.20)
-- letmo objasnit, proc je mozne vymenit container-runtime (OCI image- a runtime-spec)
+- letmo objasnit, proc je mozne bez dopadu vymenit container-runtime  k8s (OCI image- a runtime-spec)
+- zivotni cyklus image
+- vulnerabilita + scan + podepisovani - proc je dnes nutne?
 
-02
+02 kubernetes
+- proc jsou potreba / co je orchestrace?
+- co jsou a co nejsou
+- zasadni zmena v chapani platformy (uz neni jen java=tomcat, ale platforma na vse)
+- priklady vyhod deklarativni konfigurace
+- cloud-native - co to je (cil) a co neni (je nasazeno v cloudu != cloud-native, atd.)
+- projekty, graduated, incubating
+- co by mela umet cloud-native aplikace? (high-level pohled)
+- mapa sluzeb nutnych pro produkcni provoz aplikace
 
-03
+03 automatizace 
+- automatizace jako nutnost
+- nevyhody kontejnerizace legacy cicd nastroju
+- klicove komponenty spojene s ci/cd
+- high-level popis ci/cd pipeline
 
-04
+04 kubernetes v trasku
+- vystavba referencnich clusteru (predpriptavene sluzby a prostredi)
+- arm trenazer a jeho smysl
+- multi-platform (trend - viz amazon, docker + arm, atd.)
+- priklad ci/cd z gitlabu do arm trenazeru
+- odkaz na skoleni
