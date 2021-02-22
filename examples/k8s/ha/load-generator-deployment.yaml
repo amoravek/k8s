@@ -17,7 +17,7 @@ spec:
       containers:
       - args:
         - -c
-        - while echo "Generating load ..."; do curl -s --connect-timeout 2 --max-time 2 http://10.4.61.4;
+        - while echo "Generating load ..."; do curl -s --connect-timeout 2 --max-time 2 http://10.4.61.6;
           done
         command:
         - sh
@@ -26,10 +26,10 @@ spec:
         name: ubuntu-netcat
         resources:
           requests:
-            cpu: 250m
+            cpu: 100m
             memory: 32Mi
           limits:
-            cpu: 500m
+            cpu: 1250m
             memory: 64Mi
       terminationGracePeriodSeconds: 5
 
