@@ -5,15 +5,29 @@ Online poznámky: <https://codimd.trask.cz/s/rJPCa8C0v>
 Adam Morávek, amoravek@trask.cz, +420 724 514 916
 
 ---
-# Co to je Docker?
+# Co to je Docker? (1)
+
+- nástroj, který zjednodušuje
+  - výrobu *images*
+  - spouštění *kontejnerů*
+  - jejich správu
+  - komunikaci s registry
 
 .footer: [5 min]
 
-# ...je to nástroj, který umožňuje:
+---
+# Co to je Docker? (2)
 
-- vytvořit artefakt schopný běhu všude tam, kde je Docker runtime
+- cli + daemon (api server s root oprávněním)
+- chytré využití funkcí jádra linuxu (namespaces, cgroups)
+- 
+
+---
+# ...je to **nástroj**, který umožňuje ():
+
+- vytvořit artefakt schopný běhu všude tam, kde je *OCI* runtime
 - zapouzdřit aplikaci včetně jejího prostředí
-- redukovat problémy při nasazování aplikací
+- redukovat problémy při nasazování aplikací (viz např. nasazení WAR do WAS HA)
 - řešit podobné úlohy jako VM
 
 .notes: zminit napr. komplexitu nasazeni webapp na vice AS, vice OS, apod.
@@ -23,7 +37,7 @@ Adam Morávek, amoravek@trask.cz, +420 724 514 916
 #
 #
 
-.footer: Základy Docker a Kubernetes 01/2021
+.footer: Základy Docker a Kubernetes 12/2022
 
 ---
 # Srovnání s VM
@@ -139,6 +153,36 @@ Adam Morávek, amoravek@trask.cz, +420 724 514 916
 #
 
 ---
+
+# Docker - alternativy (1)
+
+- několik aspektů:
+  - runtime (spouštění kontejnerů)
+    - runc, crun
+    - containerd
+    - cri-o
+  - vytváření (build)
+    - buildah
+    - BuildKit
+    - JIB
+    - Kaniko
+
+OCI (Open Container Initiative - https://opencontainers.org/)
+
+Viz https://blog.logrocket.com/docker-desktop-alternatives
+
+---
+---
+
+# Docker - alternativy (2)
+
+Proč vlastně?
+
+- docker daemon (root)
+- 
+
+---
+
 # Docker CLI
 
 .footer: [5 min] 
