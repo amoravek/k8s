@@ -19,23 +19,35 @@ Adam Morávek, amoravek@trask.cz, +420 724 514 916
 # Co to je Docker? (2)
 
 - cli + daemon (api server s root oprávněním)
-- chytré využití funkcí jádra linuxu (namespaces, cgroups)
-- 
+- chytré využití funkcí jádra **Linuxu** (namespaces, cgroups) - https://www.nginx.com/blog/what-are-namespaces-cgroups-how-do-they-work/
+- "virtualizace" aplikací
 
 ---
-# ...je to **nástroj**, který umožňuje ():
+# Co to je Docker především?
+
+- nástroj, který extrémně usnadňuje práci:
+  - legacy WAS
+  - redis
+  - příklad TIF komponent
+  - ...
+
+---
+# ...je to **nástroj**, který umožňuje:
 
 - vytvořit artefakt schopný běhu všude tam, kde je *OCI* runtime
 - zapouzdřit aplikaci včetně jejího prostředí
-- redukovat problémy při nasazování aplikací (viz např. nasazení WAR do WAS HA)
-- řešit podobné úlohy jako VM
+- redukovat problémy při nasazování aplikací (aplikace + kontext + fs OS)
+- řešit podobné úlohy jako VM, ale s lepším využitím zdrojů
 
 .notes: zminit napr. komplexitu nasazeni webapp na vice AS, vice OS, apod.
 
 .notes: redukce problemu = redukuje pacive problemy dneska, prinasi ale nove (nova tech.)
 
-#
-#
+---
+# Co Docker není?
+
+- virtualizace jak ji známe (VMWare, VirtualBox, ...)
+  - z toho plyne i nižší míra izolace
 
 .footer: Základy Docker a Kubernetes 12/2022
 
@@ -56,8 +68,8 @@ Adam Morávek, amoravek@trask.cz, +420 724 514 916
 .footer: [5 min]
 
 - Docker je produkt založený na vlastnostech a funkcích jádra **Linuxu**
-- nefunguje nativně např. na AIX, Windows ani macOS (jen s virtualizační mezivrstvou nebo s plnohodnotným Linuxem jako součástí OS)
-- všechny kontejnery (viz dále) sdílí s host OS jeho linux kernel
+- nefunguje nativně např. na AIX, Windows ani macOS (jen s virtualizační mezivrstvou)
+- všechny kontejnery (viz dále) sdílí s host OS jeho linux kernel -> rychlý "start"
 - kontejnery nejsou nic jiného než běžné procesy uzavřené do vlastního namespace a se zdroji omezenými za pomocí control groups (obojí funkce linuxového jádra)
 - kontejner tedy není žádný "aktivní obal", ale jen logicky izolovaný proces, který se tváří jako samostatná VM
 
@@ -127,6 +139,7 @@ Adam Morávek, amoravek@trask.cz, +420 724 514 916
 .footer: [5 min] 
 
 - *kontejner* je vlastní aktivní proces spuštěný nad souborovým systémem z image (lze si představit jako *instanci* image)
+- kontejner přidává nové fs vrstvy nad image 
 - spuštění kontejneru s aplikací = spuštění procesu aplikace na systému, kde běží Docker daemon, ale proces je izolován ve vlastním *namespace* a běží jako root proces (PID 1)
 - root procesem host OS je zpravidla initd nebo systemd - kontejner init proces nemá, protože nebootuje, začíná přímo spuštěním procesu
 
@@ -135,7 +148,7 @@ Adam Morávek, amoravek@trask.cz, +420 724 514 916
 
 .footer: [5 min] 
 
-- proces běžící na pozadí
+- proces běžící na pozadí (root oprávnění)
 - spravuje Docker objekty (image, kontejnery, síť, úložiště)
 - občas je potřeba změnit konfiguraci: /etc/docker/daemon.json (typicky kvůli insecure registry)
 - musí běžet jako root - často terčem kritiky (v kombinaci s root právy uživatele v kontejneru)
@@ -161,25 +174,26 @@ Adam Morávek, amoravek@trask.cz, +420 724 514 916
     - runc, crun
     - containerd
     - cri-o
-  - vytváření (build)
+  - vytváření images (build)
     - buildah
     - BuildKit
     - JIB
     - Kaniko
+    - ...
 
 OCI (Open Container Initiative - https://opencontainers.org/)
 
 Viz https://blog.logrocket.com/docker-desktop-alternatives
 
 ---
----
-
 # Docker - alternativy (2)
 
 Proč vlastně?
 
-- docker daemon (root)
-- 
+- Docker daemon (root) - komu to ale vadí?
+- Docker opustil Kubernetes-based platformy
+- ...je to ale stále extrémně užitečný nástroj pro DEV
+  - spolu s např. docker-compose
 
 ---
 
@@ -192,7 +206,7 @@ Proč vlastně?
 - spuštění kontejneru: `docker run -d -name mycont1 -p 8088:8080 myimage:1.0`
 
 ---
-# Dockerfile
+# Dockerfile a build image
 
 .footer: [5 min] 
 
@@ -235,7 +249,7 @@ Ověříme, že běží:
 ---
 # Příklad (3)
 
-Prozkoumáme kontejner (pocitově jsme už *jako kdyby* ve VM):
+Prozkoumáme kontejner (pocitově jsme *jako kdyby* ve VM):
 
 - `docker exec -ti docker-simple sh`
 - `cd /usr/share/nginx/html`
@@ -266,7 +280,7 @@ Uklidíme:
 
 ...a nikde nic...EPHEMERAL! :-)
 
-(pozor, spolu s kontejnerem zmizí i vše, co vyprodukoval, pokud neprodukoval na VOLUME)
+(pozor, spolu s kontejnerem zmizí i vše, co vyprodukoval, pokud neprodukoval na VOLUME - viz dále)
 
 ---
 # docker kontext
@@ -329,55 +343,147 @@ Vybrané příkazy:
 - [`ARG`](https://docs.docker.com/engine/reference/builder/#arg)
 
 ---
+# Čas na příklad
+
+- build image z Dockerfile
+- base image: alpine (ale je to na vás, alpine se ale stáhne rychle) (FROM)
+- použijte .dockerignore
+- do image dodejte 2 nebo více textových souborů (**COPY** / ADD)
+- po **spuštění** image (pozor, nejedná se o RUN v Dockerfile!):
+  - zobrazte obsah textového souboru (cat) zadaného parametrem v docker run ...
+    - pou6ijte ENTRYPOINT a CMD
+  - pokud nebude zadán parametr, zobrazte jeden ze souborů
+
+---
+# Řešení
+
+```
+FROM alpine
+
+COPY my1.txt /
+COPY my2.txt /
+WORKDIR /
+
+ENTRYPOINT ["cat"]
+
+CMD ["my1.txt"]
+```
+
+---
 # PID 1, exec vs shell formy
 
 .footer: [25 min] 
 
-Existence kontejneru je přímo spojena s životem procesu s PID 1.
+Existence kontejneru je přímo spojena s životem procesu s PID 1 a správná propagace signálů (SIGTERM, SIGINT) k hlavnímu procesu (korektní ukončení)
 
 Rozdíl mezi:
 
-- ENTRYPOINT "/app/bin/your-app arg1 arg2" (shell-form)
-- ENTRYPOINT ["/app/bin/your-app", "arg1", "arg2"] (exec-form)
+- ENTRYPOINT "/app/bin/your-app arg1 arg2" (shell-form) - signály přijme sh, který je NEPROPAGUJE
+- ENTRYPOINT ["/app/bin/your-app", "arg1", "arg2"] (exec-form) - signály přijme your-app
 
-Pěkně vysvětleno: <https://hynek.me/articles/docker-signals/>
+(ukázat exit code)
+
+Pěkně vysvětleno:
+- https://hynek.me/articles/docker-signals/
+- https://engineering.pipefy.com/2021/07/30/1-docker-bits-shell-vs-exec/
 
 ---
-# Build a vrstvy
+# Co je linux exec?
+
+"The exec() family of functions **replaces** the current process image with a new process image."
+https://man7.org/linux/man-pages/man3/exec.3.html
+
+./app.sh:
+- sh -c
+  - /app.sh
+
+vs
+
+exec ./app.sh
+- /app.sh
+
+---
+# Příklad
+```
+FROM ubuntu
+ENTRYPOINT top -b
+CMD ["-c"]
+```
+vs
+```
+FROM ubuntu
+ENTRYPOINT ["top", "-b"]
+CMD ["-c"]
+```
+pak Ctrl+C a sledovat výstup echo $?
+
+---
+# Proč existuje SHELL forma?
+
+Protože v ní lze použít proměnné prostředí (narozdíl od EXEC):
+```
+FROM alpine
+ENV VAR1=abc
+CMD echo $VAR1
+```
+vs
+```
+FROM alpine
+ENV VAR1=abc
+CMD ["echo", "$VAR1"]
+```
+
+---
+# Build a vrstvy (1)
 
 .footer: [10 min] 
+
+![layers](layers.webp)
+
+---
+
+# Build a vrstvy (2)
 
 - Každý příkaz v rámci Dockerfile = vrstva v souborovém systému
 - vrstvy jsou read-only, zápisová je jen ta "vrchní"
 - copy-on-write
 - vhodná organizace vrstev tak, aby je nebylo nutné zbytečně buildovat/stahovat
+- každá vrstva se ukládá do cache (hash) a lze ji využít i v jiném image (build, pull, push)
 
-Příklad buildu + push, pull (docker-images/mdr) + porovnat rychlosti při změnách
-
-Dokumentace: <https://docs.docker.com/storage/storagedriver/>
+Dokumentace: https://docs.docker.com/storage/storagedriver/
 
 ---
-# Multi-stage build
+# Multi-stage build (1)
 
 .footer: [20 min]
 
 - složitý build může zanechat spoustu nepotřebných dat (i když si dáme pozor)
 - jednodušší je provést např. maven build někde jinde (v nějakém jiném kontejneru) a pak jen zkopírovat výsledný artefakt:
+```
+!docker
+FROM alpine:latest AS builder
+<nějaký build>
+<artefakt uložen do /git/app/target/app.jar>
+FROM centos:8
+COPY --from=builder /git/app/target/app.jar /deployments/
+...
+```
 
-        !docker
-        FROM alpine AS builder
-        <nějaký build>
-        <artefakt uložen do /git/app/target/app.jar>
-        FROM centos:8
-        COPY --from builder /git/app/target/app.jar /deployments/
-        ...
+---
+# Multi-stage build (2)
 
 - builder image je po použití smazán (nevytvoří se image, ale zůstávají vrstvy)
-- je možné použít už existující image a jen zkopírovat data
+- je možné použít už existující image a jen zkopírovat data:
+
+```
+FROM ubuntu:latest
+COPY --from=alpine:latest /etc/os-release /ALPINE
+```
 
 <https://docs.docker.com/develop/develop-images/multistage-build/>
 
 Příklad s ta:1.1.10 image - porovnat výslednou velikost
+(vrstvy - apt install, multistage)
 
 ---
 # Názvy images, Docker repository
@@ -388,23 +494,21 @@ Název image: `[host:port/]<repository1>/<repository2>/.../<image-name>[:<image-
 
 Např.:
 
-- trask/tif/mdr:3.1.21
-- harbor.trask.cz/arm64/keycloak:12.0.1
-- localhost:5000/redis
+- trask/tif/mdr:3.1.21 (lokální registry)
+- harbor.trask.cz/arm64/keycloak:12.0.1 (remote registry)
+- localhost:5000/redis ('remote' registry na localhostu)
 
-
-
-Pokud chybí verze image, použije se `latest` (má nevýhody)
+Pokud chybí verze image, použije se `latest`
+- nemusí vždy odkazovat ne tentýž image!!!
 
 ---
 # Docker registry
 
 - `[host:port/]` část z předchozího slidu = docker registry; pokud chybí je lokální
-
 - image je tedy možné ukládat kromě lokální registry i do remote registry, např:
-
-        docker push harbor.trask.cz/arm64/keycloak:12.0.1
-
+```
+docker push harbor.trask.cz/arm64/keycloak:12.0.1
+```
 - hostname a port je součástí názvu (FQN) image...i když to je divné, je to praktické (viz např. Kubernetes)
 - i remote registry používá vrstvy, což VELMI urychluje
 
@@ -418,19 +522,29 @@ Příklad: push do remote registry, malá změna, nový push
 - registry by měla být zabezpečená ([m]TLS, login, ...)
 - insecure registry = registry nezabezpečená pomocí TLS
 - Pokud se nejedná o registry na localhostu (výjimka), Docker se s ní vůbec nebaví:
-
-        !shell
-        Error response from daemon: Get https://:5000/v1/_ping:
-        http: server gave HTTP response to HTTPS client
-
+```
+!shell
+Error response from daemon: Get https://myregistrydomain.com:5000/v1/_ping:
+http: server gave HTTP response to HTTPS client
+```
 - lze obejít úpravou `/etc/docker/daemon.json`:
-
-        !json
-        {
-        "insecure-registries" : ["myregistrydomain.com:5000"]
-        }
-
+```
+!json
+{
+    "insecure-registries" : ["myregistrydomain.com:5000"]
+}
+```
 Příklad externí insecure registry (proč je to užitečné a proč se často nezabezpečuje)
+
+---
+# TLS
+
+- pokud registry zabezpečíme self-signed certifikátem, máme stejně smůlu:
+```
+x509 certificate signed by unknown authority error
+```
+nutno dodat certifikát do:
+/etc/docker/certs.d/<your_registry_host_name>:<your_registry_host_port>/ca.crt
 
 ---
 # harbor.trask.cz
@@ -503,10 +617,10 @@ Příklad: docker run -dit --name app1 -p 5678:5678 hashicorp/http-echo -text "T
 - řešením je `VOLUME` - můžeme provést mount externího adresáře, NFS, apod.
 - dvě možnosti použití:
     - named volume:
-
-            docker volume create myvol1
-            docker run -d --name nginx -v myvol:/app nginx
-
+        ```
+        docker volume create myvol1
+        docker run -d --name nginx -v myvol:/app nginx
+        ```
         data volume se ukládají do `/var/lib/docker/volumes`
 
     - mount specifického adresáře z host OS: `docker run -d --name nginx -v /data:/app nginx`
@@ -527,8 +641,8 @@ Příklady obou typů volume
 (ubuntu image, doinstalovat ping: `sudo apt install iputils-ping`, předvést oddědění image, kde je ping nainstalován)
 
     docker network create mynet
-    docker run -tid --name app1 --network mynet ubuntu (pak ubuntu-ping)
-    docker run -tid --name app2 ubuntu (pak ubuntu-ping)
+    docker run -d --name app1 --network mynet ubuntu (pak ubuntu-ping)
+    docker run -d --name app2 ubuntu (pak ubuntu-ping)
     docker network connect mynet app2
 
 ---
