@@ -1,4 +1,4 @@
-2# Kubernetes II.
+# Kubernetes II.
 
 Online poznámky: <https://codimd.trask.cz/s/rJPCa8C0v>
 
@@ -107,6 +107,8 @@ load:
 
 ---
 # Autentifikace, uživatelské a servisní účty 
+
+https://kubernetes-tutorial.schoolofdevops.com/configuring_authentication_and_authorization/
 
 ---
 # Container registry - autentifikace
