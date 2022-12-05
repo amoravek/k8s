@@ -59,6 +59,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>k8s-sample-app</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-shade-plugin</artifactId>
