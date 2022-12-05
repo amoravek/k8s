@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
@@ -16,6 +15,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<dropwizard.version>2.0.18</dropwizard.version>
+		<!-- fixy vulnerabilit -->
+		<!-- <dropwizard.version>2.1.4</dropwizard.version> -->
 		<mainClass>k8s.sample.KubeSampleApp</mainClass>
 	</properties>
 
@@ -67,10 +68,8 @@
 				<configuration>
 					<createDependencyReducedPom>false</createDependencyReducedPom>
 					<transformers>
-						<transformer
-							implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
-						<transformer
-							implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+						<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+						<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 							<mainClass>${mainClass}</mainClass>
 						</transformer>
 					</transformers>
