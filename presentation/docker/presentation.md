@@ -1,6 +1,6 @@
 # Docker
 
-Online poznámky: <https://codimd.trask.cz/s/rJPCa8C0v>
+Online poznámky: https://codimd.trask.cz/s/rJPCa8C0v
 
 Adam Morávek, amoravek@trask.cz, +420 724 514 916
 
@@ -116,24 +116,33 @@ Adam Morávek, amoravek@trask.cz, +420 724 514 916
 
 .notes: scratch je rezervovaný název - prázdný parent image
 
-#
-    !bash
-    $ sudo debootstrap xenial xenial > /dev/null
-    $ sudo tar -C xenial -c . | docker import - xenial
-
-    a29c15f1bf7a
-
-    $ docker run xenial cat /etc/lsb-release
-
-    DISTRIB_ID=Ubuntu
-    DISTRIB_RELEASE=16.04
-    DISTRIB_CODENAME=xenial
-    DISTRIB_DESCRIPTION="Ubuntu 16.04 LTS"    
-#
-#
-
 ---
 
+```
+$ sudo debootstrap xenial xenial > /dev/null
+$ sudo tar -C xenial -c . | docker import - xenial
+
+a29c15f1bf7a
+
+$ docker run xenial cat /etc/lsb-release
+
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=16.04
+DISTRIB_CODENAME=xenial
+DISTRIB_DESCRIPTION="Ubuntu 16.04 LTS"    
+```
+---
+
+# Současný trend - mikroskopický image
+
+- image, který obsahuje jen aplikaci
+- nemá ani shell
+- všechny závislosti součástí aplikace (např. golang, ale i c, cpp, quarkus? micronaut?)
+- velmi malý image - rychlé stažení z registry
+- malá útočná plocha
+- není možné "vlézt dovnitř" (důraz na sběr logů a metrik)
+
+---
 # Kontejner
 
 .footer: [5 min] 
@@ -307,7 +316,7 @@ Chtěli jsme to přece: `COPY . /usr/share/nginx/html`
     *.sh
     Dockerfile*
 
-Zkusme tedy nový build...   
+Zkusme tedy nový build... (také např. https://github.com/argoproj/argo-cd)
 
 ---
 # Přestávka do 10:45
@@ -453,6 +462,10 @@ CMD ["echo", "$VAR1"]
 Dokumentace: https://docs.docker.com/storage/storagedriver/
 
 ---
+# Build a vrstvy (3)
+![layers](docker-layers.webp)
+
+---
 # Multi-stage build (1)
 
 .footer: [20 min]
@@ -468,6 +481,40 @@ FROM centos:8
 COPY --from=builder /git/app/target/app.jar /deployments/
 ...
 ```
+
+---
+# Cvičení - prerekvizity
+
+- Docker zavedl maximální počet stažení pro naplatiče
+- v Trasku máme cache (Harbor) - login viz https://codimd.trask.cz/s/rJPCa8C0v
+- image prefixy:
+  - harbor.trask.cz/dockerhub-proxy/xxx/yyy[:<verze|latest>] (alespon 1 *repository* v názvu)
+  - harbor.trask.cz/dockerhub-proxy/library/xxx[:<verze|latest>]
+
+```
+docker login harbor.trask.cz
+...
+docker pull harbor.trask.cz/dockerhub-proxy/library/nginx
+docker pull harbor.trask.cz/dockerhub-proxy/tchiotludo/akhq:0.23.0
+```
+
+---
+# Cvičení
+
+Pokuste se optimalizovat následující Dockerfile:
+(Git - examples/docker/multistage/Dockerfile)
+```
+FROM ubuntu:latest
+RUN apt update \
+  && apt install openjdk maven
+```
+
+---
+# Řešení
+
+- oddělit apt sekci - kvůli cachování (následné buildy budou rychlejší)
+- smazat apt cache ve stejné vrstvě
+- git clone a maven build provést v jiném image (multistage)
 
 ---
 # Multi-stage build (2)
