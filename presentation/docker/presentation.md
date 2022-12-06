@@ -1,6 +1,6 @@
 # Docker
 
-Online poznámky: https://codimd.trask.cz/s/rJPCa8C0v
+Online poznámky: <https://codimd.trask.cz/s/rJPCa8C0v>
 
 Adam Morávek, amoravek@trask.cz, +420 724 514 916
 
@@ -19,7 +19,7 @@ Adam Morávek, amoravek@trask.cz, +420 724 514 916
 # Co to je Docker? (2)
 
 - cli + daemon (api server s root oprávněním)
-- chytré využití funkcí jádra **Linuxu** (namespaces, cgroups) - https://www.nginx.com/blog/what-are-namespaces-cgroups-how-do-they-work/
+- chytré využití funkcí jádra **Linuxu** (namespaces, cgroups) - <https://www.nginx.com/blog/what-are-namespaces-cgroups-how-do-they-work>
 - "virtualizace" aplikací
 
 ---
@@ -85,6 +85,14 @@ Adam Morávek, amoravek@trask.cz, +420 724 514 916
 - součástí image i kompletní souborový systém OS - např. OS CVE lze řešit rebuildem image
 - image se verzují
 
+        docker run \
+        --name was \
+        -p 9043:9043 \
+        -p 9443:9443 \
+        -d ibmcom/websphere-traditional:latest
+
+(heslo je v kontejneru v /tmp/PASSWORD)
+
 ---
 # Image
 
@@ -95,16 +103,16 @@ Adam Morávek, amoravek@trask.cz, +420 724 514 916
 - lze si představit jako .tar.gz souborového systému OS + nějaká metadata
 - *image* je vždy read-only, vytváří se *buildem*
 - image se většinou zakládá na nějakém již existujícím - např. JDK image dědí z Alpine linux image a dodá instalaci JDK
-#
-    !dockerfile
-    FROM alpine
-    RUN <instalace jdk>
-#
+
+        !dockerfile
+        FROM alpine
+        RUN <instalace jdk>
+
 (je to něco jako vzít souborový systém Alpine linuxu, nakopírovat tam JDK, zazipovat a obalit metadaty)
 
 ---
 
-# Parent a base image
+# Parent a base image (1)
 
 .footer: [5 min] 
 
@@ -117,20 +125,21 @@ Adam Morávek, amoravek@trask.cz, +420 724 514 916
 .notes: scratch je rezervovaný název - prázdný parent image
 
 ---
+# Parent a base image (2)
 
-```
-$ sudo debootstrap xenial xenial > /dev/null
-$ sudo tar -C xenial -c . | docker import - xenial
+    !bash
+    $ sudo debootstrap xenial xenial > /dev/null
+    $ sudo tar -C xenial -c . | docker import - xenial
 
-a29c15f1bf7a
+    a29c15f1bf7a
 
-$ docker run xenial cat /etc/lsb-release
+    $ docker run xenial cat /etc/lsb-release
 
-DISTRIB_ID=Ubuntu
-DISTRIB_RELEASE=16.04
-DISTRIB_CODENAME=xenial
-DISTRIB_DESCRIPTION="Ubuntu 16.04 LTS"    
-```
+    DISTRIB_ID=Ubuntu
+    DISTRIB_RELEASE=16.04
+    DISTRIB_CODENAME=xenial
+    DISTRIB_DESCRIPTION="Ubuntu 16.04 LTS"    
+
 ---
 
 # Současný trend - mikroskopický image
@@ -172,7 +181,6 @@ DISTRIB_DESCRIPTION="Ubuntu 16.04 LTS"
 - díky OCI mohlo Kubernetes opustit docker daemon a přejít na containerd
 - vzhledem k raketovému rozvoji kontejnerizace je OCI nutnost
 - mezi OCI-compliant runtime patří např. docker, cri-o a containerd (docker již ale interně používá containderd)
-#
 
 ---
 
@@ -190,9 +198,9 @@ DISTRIB_DESCRIPTION="Ubuntu 16.04 LTS"
     - Kaniko
     - ...
 
-OCI (Open Container Initiative - https://opencontainers.org/)
+OCI (Open Container Initiative - <https://opencontainers.org/>)
 
-Viz https://blog.logrocket.com/docker-desktop-alternatives
+Viz <https://blog.logrocket.com/docker-desktop-alternatives>
 
 ---
 # Docker - alternativy (2)
@@ -241,51 +249,63 @@ Spustíme: `docker run -ti --rm -p 8881:80 docker-simple:0.1`
 
 `docker <group> [options] <image> [command]`
 
-http://localhost:8881
+<http://localhost:8881>
 
 ---
 # Příklad (2)
 
 Zastavíme kontejner (běží na popředí): Ctrl+C (pošle SIGINT, ne SIGKILL)
 
-Spustíme na pozadí: `docker run -d --name docker-simple -p 8881:80 docker-simple:0.1`
+Spustíme na pozadí:
+
+    !bash
+    docker run -d \
+    --name docker-simple \
+    -p 8881:80 \
+    docker-simple:0.1
 
 Ověříme, že běží:
 
-- docker ps
-- docker logs -f docker-simple
+    !bash
+    docker ps
+    docker logs -f docker-simple
 
 ---
 # Příklad (3)
 
 Prozkoumáme kontejner (pocitově jsme *jako kdyby* ve VM):
 
-- `docker exec -ti docker-simple sh`
-- `cd /usr/share/nginx/html`
-- `ls -l`:
+    !bash
+    docker exec -ti docker-simple sh
+    cd /usr/share/nginx/html
+    ls -l
 
-        !bash
-        50x.html    Dockerfile  build.sh    index.html
+Vypíše:
+
+    !bash
+    50x.html    Dockerfile  build.sh    index.html
 
 Pokusy:
 
-- `hostname`
-- `ps`
-- `ls -la /`
-- `uname -a`
-- `cat /etc/*release`
+    !bash
+    hostname
+    ps
+    ls -la /
+    uname -a
+    cat /etc/*release
 
 ---
 # Příklad (4)
 
 Uklidíme:
 
-- `exit`
-- `docker ps`
-- `docker stop/kill docker-simple`
-- `docker ps -a`
-- `docker rm/rm -f docker-simple`
-- `docker ps -a`
+    !bash
+    exit
+    docker ps
+    docker stop/kill docker-simple
+    docker ps -a
+    docker rm/rm -f docker-simple
+    docker ps -a
 
 ...a nikde nic...EPHEMERAL! :-)
 
@@ -310,13 +330,13 @@ Chtěli jsme to přece: `COPY . /usr/share/nginx/html`
     *.md
     !README.md
 
-...a pro náš příklad:
+...a pro **náš** příklad:
 
     !bash
     *.sh
     Dockerfile*
 
-Zkusme tedy nový build... (také např. https://github.com/argoproj/argo-cd)
+Zkusme tedy nový build... (také např. <https://github.com/argoproj/argo-cd>)
 
 ---
 # Přestávka do 10:45
@@ -334,22 +354,22 @@ Inspirace: <https://repogit.trask.cz/git/BI_Docker>
 
 Vybrané příkazy:
 
-- [`FROM`](https://docs.docker.com/engine/reference/builder/#from)
-- [`ADD`](https://docs.docker.com/engine/reference/builder/#add)
-- [`COPY`](https://docs.docker.com/engine/reference/builder/#copy)
-- [`RUN`](https://docs.docker.com/engine/reference/builder/#run)
-- [`USER`](https://docs.docker.com/engine/reference/builder/#user)
-- [`WORKDIR`](https://docs.docker.com/engine/reference/builder/#workdir)
+- [`FROM`](<https://docs.docker.com/engine/reference/builder/#from>)
+- [`ADD`](<https://docs.docker.com/engine/reference/builder/#add>)
+- [`COPY`](<https://docs.docker.com/engine/reference/builder/#copy>)
+- [`RUN`](<https://docs.docker.com/engine/reference/builder/#run>)
+- [`USER`](<https://docs.docker.com/engine/reference/builder/#user>)
+- [`WORKDIR`](<https://docs.docker.com/engine/reference/builder/#workdir>)
 
 ---
 # Dockerfile - příkazy (2)
 
-- [`EXPOSE`](https://docs.docker.com/engine/reference/builder/#expose)
-- [`VOLUME`](https://docs.docker.com/engine/reference/builder/#volume)
-- [`ENTRYPOINT`](https://docs.docker.com/engine/reference/builder/#entrypoint)
-- [`CMD`](https://docs.docker.com/engine/reference/builder/#cmd)
-- [`ENV`](https://docs.docker.com/engine/reference/builder/#env)
-- [`ARG`](https://docs.docker.com/engine/reference/builder/#arg)
+- [`EXPOSE`](<https://docs.docker.com/engine/reference/builder/#expose>)
+- [`VOLUME`](<https://docs.docker.com/engine/reference/builder/#volume>)
+- [`ENTRYPOINT`](<https://docs.docker.com/engine/reference/builder/#entrypoint>)
+- [`CMD`](<https://docs.docker.com/engine/reference/builder/#cmd>)
+- [`ENV`](<https://docs.docker.com/engine/reference/builder/#env>)
+- [`ARG`](<https://docs.docker.com/engine/reference/builder/#arg>)
 
 ---
 # Čas na příklad
@@ -366,81 +386,85 @@ Vybrané příkazy:
 ---
 # Řešení
 
-```
-FROM alpine
+    !dockerfile
+    FROM alpine
 
-COPY my1.txt /
-COPY my2.txt /
-WORKDIR /
+    COPY my1.txt /
+    COPY my2.txt /
+    WORKDIR /
 
-ENTRYPOINT ["cat"]
+    ENTRYPOINT ["cat"]
 
-CMD ["my1.txt"]
-```
+    CMD ["my1.txt"]
 
 ---
 # PID 1, exec vs shell formy
 
 .footer: [25 min] 
 
-Existence kontejneru je přímo spojena s životem procesu s PID 1 a správná propagace signálů (SIGTERM, SIGINT) k hlavnímu procesu (korektní ukončení)
+Existence kontejneru je přímo spojena s životem procesu s PID 1 a správná propagace signálů (`SIGTERM`, `SIGINT`) k hlavnímu procesu (korektní ukončení)
 
 Rozdíl mezi:
 
-- ENTRYPOINT "/app/bin/your-app arg1 arg2" (shell-form) - signály přijme sh, který je NEPROPAGUJE
-- ENTRYPOINT ["/app/bin/your-app", "arg1", "arg2"] (exec-form) - signály přijme your-app
+- `ENTRYPOINT "/app/bin/your-app arg1 arg2"` (shell-form) - signály přijme sh, který je NEPROPAGUJE
+- `ENTRYPOINT ["/app/bin/your-app", "arg1", "arg2"]` (exec-form) - signály přijme your-app
 
 (ukázat exit code)
 
 Pěkně vysvětleno:
-- https://hynek.me/articles/docker-signals/
-- https://engineering.pipefy.com/2021/07/30/1-docker-bits-shell-vs-exec/
+- <https://hynek.me/articles/docker-signals/>
+- <https://engineering.pipefy.com/2021/07/30/1-docker-bits-shell-vs-exec/>
 
 ---
 # Co je linux exec?
 
 "The exec() family of functions **replaces** the current process image with a new process image."
-https://man7.org/linux/man-pages/man3/exec.3.html
+<https://man7.org/linux/man-pages/man3/exec.3.html>
 
-./app.sh:
-- sh -c
-  - /app.sh
+    !bash
+    ./app.sh:
+    - sh -c
+      - /app.sh
 
 vs
 
-exec ./app.sh
-- /app.sh
+    !bash
+    exec ./app.sh
+    - /app.sh
 
 ---
 # Příklad
-```
-FROM ubuntu
-ENTRYPOINT top -b
-CMD ["-c"]
-```
+
+    !dockerfile
+    FROM ubuntu
+    ENTRYPOINT top -b
+    CMD ["-c"]
+
 vs
-```
-FROM ubuntu
-ENTRYPOINT ["top", "-b"]
-CMD ["-c"]
-```
+
+    !dockerfile
+    FROM ubuntu
+    ENTRYPOINT ["top", "-b"]
+    CMD ["-c"]
+
 pak Ctrl+C a sledovat výstup echo $?
 
 ---
 # Proč existuje SHELL forma?
 
 Protože v ní lze použít proměnné prostředí (narozdíl od EXEC):
-```
-FROM alpine
-ENV VAR1=abc
-CMD echo $VAR1
-```
+
+    !dockerfile
+    FROM alpine
+    ENV VAR1=abc
+    CMD echo $VAR1
+
 vs
-```
-FROM alpine
-ENV VAR1=abc
-CMD ["echo", "$VAR1"]
-```
+
+    !dockerfile
+    FROM alpine
+    ENV VAR1=abc
+    CMD ["echo", "$VAR1"]
 
 ---
 # Build a vrstvy (1)
@@ -459,10 +483,11 @@ CMD ["echo", "$VAR1"]
 - vhodná organizace vrstev tak, aby je nebylo nutné zbytečně buildovat/stahovat
 - každá vrstva se ukládá do cache (hash) a lze ji využít i v jiném image (build, pull, push)
 
-Dokumentace: https://docs.docker.com/storage/storagedriver/
+Dokumentace: <https://docs.docker.com/storage/storagedriver/>
 
 ---
 # Build a vrstvy (3)
+
 ![layers](docker-layers.webp)
 
 ---
@@ -472,15 +497,15 @@ Dokumentace: https://docs.docker.com/storage/storagedriver/
 
 - složitý build může zanechat spoustu nepotřebných dat (i když si dáme pozor)
 - jednodušší je provést např. maven build někde jinde (v nějakém jiném kontejneru) a pak jen zkopírovat výsledný artefakt:
-```
-!docker
-FROM alpine:latest AS builder
-<nějaký build>
-<artefakt uložen do /git/app/target/app.jar>
-FROM centos:8
-COPY --from=builder /git/app/target/app.jar /deployments/
-...
-```
+<br/><br/>
+
+        !docker
+        FROM alpine:latest AS builder
+        <nějaký build>
+        <artefakt uložen do /git/app/target/app.jar>
+        FROM centos:8
+        COPY --from=builder /git/app/target/app.jar /deployments/
+        ...
 
 ---
 # Cvičení - prerekvizity
@@ -488,26 +513,26 @@ COPY --from=builder /git/app/target/app.jar /deployments/
 - Docker zavedl maximální počet stažení pro naplatiče
 - v Trasku máme cache (Harbor) - login viz https://codimd.trask.cz/s/rJPCa8C0v
 - image prefixy:
-  - harbor.trask.cz/dockerhub-proxy/xxx/yyy[:<verze|latest>] (alespon 1 *repository* v názvu)
-  - harbor.trask.cz/dockerhub-proxy/library/xxx[:<verze|latest>]
+  - `harbor.trask.cz/dockerhub-proxy/xxx/yyy[:<verze|latest>]` (alespoň 1 *repository* v názvu)
+  - `harbor.trask.cz/dockerhub-proxy/library/xxx[:<verze|latest>]`
+    <br/><br/>
 
-```
-docker login harbor.trask.cz
-...
-docker pull harbor.trask.cz/dockerhub-proxy/library/nginx
-docker pull harbor.trask.cz/dockerhub-proxy/tchiotludo/akhq:0.23.0
-```
+        !bash
+        docker login harbor.trask.cz
+        ...
+        docker pull harbor.trask.cz/dockerhub-proxy/library/nginx
+        docker pull harbor.trask.cz/dockerhub-proxy/tchiotludo/akhq:0.23.0
 
 ---
 # Cvičení
 
 Pokuste se optimalizovat následující Dockerfile:
 (Git - examples/docker/multistage/Dockerfile)
-```
-FROM ubuntu:latest
-RUN apt update \
-  && apt install openjdk maven
-```
+
+    !dockerfile
+    FROM ubuntu:latest
+    RUN apt update \
+      && apt install openjdk maven
 
 ---
 # Řešení
@@ -521,15 +546,16 @@ RUN apt update \
 
 - builder image je po použití smazán (nevytvoří se image, ale zůstávají vrstvy)
 - je možné použít už existující image a jen zkopírovat data:
+  <br/><br/>
 
-```
-FROM ubuntu:latest
-COPY --from=alpine:latest /etc/os-release /ALPINE
-```
+        !dockerfile
+        FROM ubuntu:latest
+        COPY --from=alpine:latest /etc/os-release /ALPINE
+
 
 <https://docs.docker.com/develop/develop-images/multistage-build/>
 
-Příklad s ta:1.1.10 image - porovnat výslednou velikost
+Příklad s `ta:1.1.10` image - porovnat výslednou velikost
 (vrstvy - apt install, multistage)
 
 ---
@@ -541,9 +567,9 @@ Název image: `[host:port/]<repository1>/<repository2>/.../<image-name>[:<image-
 
 Např.:
 
-- trask/tif/mdr:3.1.21 (lokální registry)
-- harbor.trask.cz/arm64/keycloak:12.0.1 (remote registry)
-- localhost:5000/redis ('remote' registry na localhostu)
+- `trask/tif/mdr:3.1.21` (lokální registry)
+- `harbor.trask.cz/arm64/keycloak:12.0.1` (remote registry)
+- `localhost:5000/redis` ('remote' registry na localhostu)
 
 Pokud chybí verze image, použije se `latest`
 - nemusí vždy odkazovat ne tentýž image!!!
@@ -553,9 +579,10 @@ Pokud chybí verze image, použije se `latest`
 
 - `[host:port/]` část z předchozího slidu = docker registry; pokud chybí je lokální
 - image je tedy možné ukládat kromě lokální registry i do remote registry, např:
-```
-docker push harbor.trask.cz/arm64/keycloak:12.0.1
-```
+  <br/><br/>
+
+        docker push harbor.trask.cz/arm64/keycloak:12.0.1
+
 - hostname a port je součástí názvu (FQN) image...i když to je divné, je to praktické (viz např. Kubernetes)
 - i remote registry používá vrstvy, což VELMI urychluje
 
@@ -569,29 +596,32 @@ Příklad: push do remote registry, malá změna, nový push
 - registry by měla být zabezpečená ([m]TLS, login, ...)
 - insecure registry = registry nezabezpečená pomocí TLS
 - Pokud se nejedná o registry na localhostu (výjimka), Docker se s ní vůbec nebaví:
-```
-!shell
-Error response from daemon: Get https://myregistrydomain.com:5000/v1/_ping:
-http: server gave HTTP response to HTTPS client
-```
+  <br/><br/>
+
+        !bash
+        Error response from daemon: Get https://myregistrydomain.com:5000/v1/_ping:
+        http: server gave HTTP response to HTTPS client
+
 - lze obejít úpravou `/etc/docker/daemon.json`:
-```
-!json
-{
-    "insecure-registries" : ["myregistrydomain.com:5000"]
-}
-```
+  <br/><br/>
+
+        !json
+        {
+            "insecure-registries" : ["myregistrydomain.com:5000"]
+        }
+
 Příklad externí insecure registry (proč je to užitečné a proč se často nezabezpečuje)
 
 ---
 # TLS
 
 - pokud registry zabezpečíme self-signed certifikátem, máme stejně smůlu:
-```
-x509 certificate signed by unknown authority error
-```
+  <br/><br/>
+
+        x509 certificate signed by unknown authority error
+
 nutno dodat certifikát do:
-/etc/docker/certs.d/<your_registry_host_name>:<your_registry_host_port>/ca.crt
+`/etc/docker/certs.d/<your_registry_host_name>:<your_registry_host_port>/ca.crt`
 
 ---
 # harbor.trask.cz
@@ -610,8 +640,8 @@ Image, jeho správa a přesun do- a z registry:
 
 Do registry je mnohdy nutný login:
 
-- docker login
-- docker logout
+- `docker login`
+- `docker logout`
 
 ---
 # Přestávka na oběd
@@ -625,7 +655,7 @@ Do registry je mnohdy nutný login:
 
 .footer: [30 min] 
 
-Příklad: git/examples/exec-shell/
+Příklad: `git/examples/exec-shell/`
 
 ---
 # Uživatelské účty a oprávnění uvnitř kontejneru, USER
@@ -649,10 +679,16 @@ Příklad: git/examples/exec-shell/
 - je potřeba explicitně určit, jaký port/rozsah bude publikován ven
 - porty je třeba publikovat při vytváření kontejneru, pak už nejde (jednoduše) změnit
 - pokud je port v Dockerfile explicitně označen pomocí `EXPOSE`, je možné použí automatiku:
+  <br/><br/>
 
         docker run -d --name nginx -P nginx
 
-Příklad: docker run -dit --name app1 -p 5678:5678 hashicorp/http-echo -text "Test OK"
+Příklad:
+
+    docker run -it \
+    --name app1 \
+    -p 5678:5678 \
+    hashicorp/http-echo -text "Test OK"
 
 ---
 # Volumes
@@ -683,7 +719,7 @@ Příklady obou typů volume
 .footer: [15 min] 
 
 - kontejnery je možné připojovat do izolovaných sítí
-- výhodou je izolace a možnost DNS
+- výhodou je např. izolace a automatické DNS
 
 (ubuntu image, doinstalovat ping: `sudo apt install iputils-ping`, předvést oddědění image, kde je ping nainstalován)
 
