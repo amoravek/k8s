@@ -27,21 +27,28 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Kubernetes I.</title>
-    <!-- Styles -->
-    
-    <link rel="stylesheet" href="file:///usr/lib/python3/dist-packages/darkslide/themes/default/css/base.css">
-    <link rel="stylesheet" media="print" href="file:///usr/lib/python3/dist-packages/darkslide/themes/default/css/print.css">
-    <link rel="stylesheet" media="screen, projection" href="file:///usr/lib/python3/dist-packages/darkslide/themes/default/css/screen.css">
-    <link rel="stylesheet" media="all" href="file:///usr/lib/python3/dist-packages/darkslide/themes/default/css/theme.css">
-    
-    
-    <!-- /Styles -->
-    <!-- Javascripts -->
-    
-    <script type="text/javascript" src="file:///usr/lib/python3/dist-packages/darkslide/themes/default/js/slides.js"></script>
-    
-    
-    <!-- /Javascripts -->
+
+  
+     <link rel="stylesheet" href="file:///usr/local/lib/python3.10/dist-packages/darkslide/themes/default/css/base.css">
+  
+
+  
+     <link rel="stylesheet" href="file:///usr/local/lib/python3.10/dist-packages/darkslide/themes/default/css/print.css">
+  
+
+  
+     <link rel="stylesheet" href="file:///usr/local/lib/python3.10/dist-packages/darkslide/themes/default/css/screen.css">
+  
+
+  
+     <link rel="stylesheet" href="file:///usr/local/lib/python3.10/dist-packages/darkslide/themes/default/css/theme.css">
+  
+
+
+  
+    <script type="text/javascript" src="file:///usr/local/lib/python3.10/dist-packages/darkslide/themes/default/js/slides.js"></script>
+  
+
 </head>
 <body>
   <div id="blank"></div>
@@ -249,13 +256,13 @@
             
             
             <section><ul>
-<li>API server: centrální vstupní bod clusteru, REST API</li>
-<li>Scheduler: plánuje workload na konkrétní nody a hlídá jejich systémové zdroje (CPU, RAM, disk, ...)</li>
-<li>Controller-manager: <em>hlídá</em> stav (controllerů) clusteru (deklarovaný stav vs reálný stav)</li>
+<li>API server: centrální vstupní bod clusteru, REST API - využíván pody, komponentami clusteru, uživateli, ...</li>
+<li>Scheduler: <em>plánuje</em> workload na konkrétní nody a hlídá jejich systémové zdroje (CPU, RAM, disk, ...)</li>
+<li>Controller-manager: démon, který <em>hlídá</em> stav clusteru (deklarovaný stav vs reálný stav)</li>
 <li>etcd: <em>uchovává</em> stav clusteru</li>
-<li>Kubelet: "node agent" - hlídá pody, jejich kontejnery, stav node</li>
+<li>Kubelet: "node agent" - hlídá pody, jejich kontejnery, reportuje stav nodu</li>
 <li>Kube-proxy: na každém node směruje příchozí provoz </li>
-<li>Container runtime (zde Docker): runtime pro běh kontejnerů - viz dále CNI</li>
+<li>Container runtime (zde containerd): runtime pro běh kontejnerů - viz dále CNI</li>
 </ul></section>
             
           </div>
@@ -334,7 +341,7 @@
             
             <section>
 <ul>
-<li>Kubernetes namespace slouží k izolaci objektů a zdrojů</li>
+<li><em>Kubernetes</em> namespace (pozor neplest s Linux namespaces) slouží k izolaci objektů a zdrojů</li>
 <li>
 <p>ale také k plošnému nastavení různých kvót, limitů a autorizací:</p>
 <p><code>kubectl describe namespace amo</code></p>
@@ -377,8 +384,8 @@
 <li>CLI rozhraní pro komunikaci s clusterem (resp API-serverem)</li>
 <li>vyžaduje přítomnost konfiguračniho souboru, tzv. <em>kubeconfig</em> (uložen typicky v $HOME/.kube/config) - viz váš osobní kubeconfig rozesílaný před kurzem</li>
 <li>kubeconfig obsahuje sady clusterů a uživatelů propojených kontexty</li>
-<li>Praktické ukázky + merge kubeconfigu:<div class="highlight"><pre><span></span><span class="lineno">1 </span><span class="nb">export</span> <span class="nv">KUBECONFIG</span><span class="o">=</span>~/.kube/config:~/someotherconfig 
-<span class="lineno">2 </span>kubectl config view --flatten &gt; ~/new-kubeconfig
+<li>Praktické ukázky + merge kubeconfigu:<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">KUBECONFIG</span><span class="o">=</span>~/.kube/config:~/someotherconfig 
+kubectl config view --flatten &gt; ~/new-kubeconfig
 </pre></div>
 
 </li>
@@ -431,7 +438,7 @@
 <p>totéž lze docílit i vytvořením yaml - yaml je ale těžko zapamatovatelný, takže google nebo uložené šablony?</p>
 </li>
 <li>
-<p>lepší řešení ja kombinace - vytvořit jednoduchou kostru pomocí CLI a obohacovat (příklad). To má ale smysl jen na úrovni developmentu, všude jinde zařídí CI/CD.</p>
+<p>lepší řešení ja kombinace - vytvořit jednoduchou kostru pomocí CLI a obohacovat (příklad). To má ale smysl jen na úrovni developmentu (Helm), všude jinde zařídí CI/CD.</p>
 </li>
 </ul></section>
             
@@ -554,7 +561,8 @@
 </code></pre>
 <ul>
 <li>1 -&gt; 10 -&gt; 0 -&gt; 4 + průzkum + --replicas=10 - vysvětlit proč jen 6 replik</li>
-</ul></section>
+</ul>
+<p><code>--record</code> slouzi k ulozeni kubectl prikazu do anotace <code>kubernetes.io/change-cause</code> napr. pro pozdejsi analyzu</p></section>
             
           </div>
           <div class="presenter_notes">
@@ -705,19 +713,19 @@
 <li>aby bylo možné uchovávat data produkovaná kontejnery v Podu, je potřeba je někam uložit (jinak zaniknou spolu s Podem)</li>
 <li>
 <p>na úrovni Podu (ukázat) je možné definovat externí úložiště - např.:</p>
-<div class="highlight"><pre><span></span><span class="lineno">1 </span><span class="nt">volumes</span><span class="p">:</span>
-<span class="lineno">2 </span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">test-volume</span>
-<span class="lineno">3 </span>  <span class="nt">hostPath</span><span class="p">:</span>
-<span class="lineno">4 </span>    <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/data-xxx</span>
-<span class="lineno">5 </span>    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">DirectoryOrCreate</span>
+<div class="highlight"><pre><span></span><span class="nt">volumes</span><span class="p">:</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test-volume</span><span class="w"></span>
+<span class="w">  </span><span class="nt">hostPath</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/data-xxx</span><span class="w"></span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DirectoryOrCreate</span><span class="w"></span>
 </pre></div>
 
 </li>
 <li>
 <p>aby bylo dostupné v <em>kontejneru</em>, je potřeba provést mount:</p>
-<div class="highlight"><pre><span></span><span class="lineno">1 </span><span class="nt">volumeMounts</span><span class="p">:</span>
-<span class="lineno">2 </span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">test-volume</span>
-<span class="lineno">3 </span>  <span class="nt">mountPath</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/data</span>
+<div class="highlight"><pre><span></span><span class="nt">volumeMounts</span><span class="p">:</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test-volume</span><span class="w"></span>
+<span class="w">  </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/data</span><span class="w"></span>
 </pre></div>
 
 </li>
@@ -725,7 +733,7 @@
 <p>každý kontejner může provést mount téhož volume do jiného adresáře</p>
 </li>
 </ul>
-<p><a href="https://kubernetes.io/docs/concepts/storage/volumes/">https://kubernetes.io/docs/concepts/storage/volumes/</a></p></section>
+<p>https://kubernetes.io/docs/concepts/storage/volumes/</p></section>
             
           </div>
           <div class="presenter_notes">
@@ -763,7 +771,7 @@
 <li>mixuje odpovědnost storage admina a vývojáře/devops inženýra</li>
 <li>nelze nastavit oprávnění na úrovni Kubernetes</li>
 <li>mnohdy je nutné zadat i přihlašovací údaje diktované volume pluginem</li>
-<li>pokud je potřeba použít volume i z jiného Podu, je nutné duplikovat konfiguraci</li>
+<li>pokud je potřeba použít sdílený volume, je nutné duplikovat konfiguraci</li>
 </ul>
 </li>
 </ul>
@@ -882,7 +890,7 @@
             
             <section>
 <ul>
-<li>pody mají nestabilní IP i DNS name (=název Podu)</li>
+<li>pody mají nestabilní IP i DNS name (=název Podu) - změní se mapř. po "restartu" (=smazání podu v deploymentu)</li>
 <li>
 <p>Objekt Service představuje elegantní způsob řešení:</p>
 <ul>
@@ -893,10 +901,10 @@
 <li>
 <p>ClusterIP - pouze interně v rámci clusteru</p>
 </li>
-<li>NodePort - jednoduchý, funkční...ale ty porty...navíc obsadí porty na všech nodech</li>
+<li>NodePort - jednoduchý, funkční...ale ty porty...navíc obsadí port na všech nodech současně</li>
 <li>LoadBalancer - nejpohodlnější, ale v cloudu drahý (samostatná IP)</li>
 </ul>
-<p><a href="https://kubernetes.io/docs/concepts/services-networking/service/">https://kubernetes.io/docs/concepts/services-networking/service/</a></p></section>
+<p>https://kubernetes.io/docs/concepts/services-networking/service/</p></section>
             
           </div>
           <div class="presenter_notes">
@@ -932,14 +940,15 @@
             <section>
 <ul>
 <li>objekt Ingress je pravidlo pro reverzní proxy deklarované v YAML</li>
-<li>deklarujeme tedy pravidlo a o ostatní se postará reverzní proxy...a ta je kde?</li>
-<li>je potřeba nainstalovat <em>ingress controller</em> (typicky kontejnerizovaný nginx nebo haproxy)</li>
+<li>deklarujeme tedy pravidlo a o ostatní se postará reverzní proxy...ale ta je kde?</li>
+<li>je potřeba nainstalovat <em>ingress controller</em> (typicky kontejnerizovaný nginx, haproxy, Traefik, ...)</li>
 <li>funguje jen pro HTTP</li>
 <li>jako backend je použita Service typu ClusterIP</li>
 </ul>
 <p>Příklad (examples/k8s/ingress)</p>
-<p>Závěr: <strong>pro HTTP je idealní vystavit ingress controller jako Service typu LoadBalancer a pro ostatní komunikaci použít buď LoadBalancer (drahé) nebo NodePort (levné, ale v Cloudu komplikované)</strong></p>
-<p><a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">https://kubernetes.io/docs/concepts/services-networking/ingress/</a></p></section>
+<p>Závěr: <strong>pro HTTP je idealní vystavit ingress controller jako Service typu LoadBalancer a pro ostatní komunikaci použít buď LoadBalancer (drahé) nebo NodePort (levné, ale v Cloudu komplikované/nepodporované)</strong></p>
+<p>https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/
+https://kubernetes.io/docs/concepts/services-networking/ingress/</p></section>
             
           </div>
           <div class="presenter_notes">
@@ -1503,7 +1512,7 @@ resources:
       </tr>
     </table>
     <br>
-    <strong>Generated with Darkslide 5.1.0</strong>
+    <strong>Generated with Darkslide 6.0.0</strong>
   </div>
   <script>main()</script>
 </body>
