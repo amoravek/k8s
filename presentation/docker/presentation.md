@@ -1,8 +1,13 @@
 # Docker
+---
+
+# Organizační informace
 
 Online poznámky: <https://codimd.trask.cz/s/rJPCa8C0v>
 
-Adam Morávek, amoravek@trask.cz, +420 724 514 916
+Adam Morávek<br/>
+amoravek@trask.cz<br/>
++420 724 514 916<br/>
 
 ---
 # Co to je Docker? (1)
@@ -25,7 +30,7 @@ Adam Morávek, amoravek@trask.cz, +420 724 514 916
 ---
 # Co to je Docker především?
 
-- nástroj, který extrémně usnadňuje práci:
+- nástroj, který extrémně usnadňuje práci - ukázky:
   - legacy WAS
   - redis
   - příklad TIF komponent
@@ -46,7 +51,7 @@ Adam Morávek, amoravek@trask.cz, +420 724 514 916
 ---
 # Co Docker není?
 
-- virtualizace jak ji známe (VMWare, VirtualBox, ...)
+- virtualizace jak ji známe (VMWare, VirtualBox, KVM, ...)
   - z toho plyne i nižší míra izolace
 
 .footer: Základy Docker a Kubernetes 12/2022
@@ -84,6 +89,7 @@ Adam Morávek, amoravek@trask.cz, +420 724 514 916
 - image lze digitálně podepsat
 - součástí image i kompletní souborový systém OS - např. OS CVE lze řešit rebuildem image
 - image se verzují
+  <br/><br/>
 
         docker run \
         --name was \
@@ -103,6 +109,7 @@ Adam Morávek, amoravek@trask.cz, +420 724 514 916
 - lze si představit jako .tar.gz souborového systému OS + nějaká metadata
 - *image* je vždy read-only, vytváří se *buildem*
 - image se většinou zakládá na nějakém již existujícím - např. JDK image dědí z Alpine linux image a dodá instalaci JDK
+  <br/><br/>
 
         !dockerfile
         FROM alpine
@@ -220,7 +227,14 @@ Proč vlastně?
 
 - základní (a naprosto dostačující) utilita pro vytváření, správu a manipulaci s docker objekty
 - build image: `docker build -t myimage:1.0` .
-- spuštění kontejneru: `docker run -d -name mycont1 -p 8088:8080 myimage:1.0`
+- spuštění kontejneru:
+  <br/><br/>
+
+        !bash
+        docker run -d \
+        --name mycont1 \
+        -p 8088:8080 \
+        myimage:1.0
 
 ---
 # Dockerfile a build image
@@ -244,12 +258,18 @@ Proč vlastně?
 
 .notes: objasnit nginx:alpine
 
-Vytvoříme image: `docker build -t docker-simple:0.1 .`
-Spustíme: `docker run -ti --rm -p 8881:80 docker-simple:0.1`
+Vytvoříme image:
 
-`docker <group> [options] <image> [command]`
+    docker build -t docker-simple:0.1 .
 
-<http://localhost:8881>
+
+Spustíme (poběží pak na <http://localhost:8881>):
+
+    docker run -ti --rm -p 8881:80 docker-simple:0.1
+
+Obecný formát:
+
+    docker <group> [options] <image> [command]
 
 ---
 # Příklad (2)
@@ -510,11 +530,16 @@ Dokumentace: <https://docs.docker.com/storage/storagedriver/>
 ---
 # Cvičení - prerekvizity
 
-- Docker zavedl maximální počet stažení pro naplatiče
-- v Trasku máme cache (Harbor) - login viz https://codimd.trask.cz/s/rJPCa8C0v
+- Docker zavedl maximální počet stažení pro neplatiče
+- v Trasku ale máme cache (Harbor) - login viz <https://codimd.trask.cz/s/rJPCa8C0v>
 - image prefixy:
-  - `harbor.trask.cz/dockerhub-proxy/xxx/yyy[:<verze|latest>]` (alespoň 1 *repository* v názvu)
-  - `harbor.trask.cz/dockerhub-proxy/library/xxx[:<verze|latest>]`
+  <br/><br/>
+
+        !bash
+        harbor.trask.cz/dockerhub-proxy/xxx/yyy[:<verze|latest>]
+        harbor.trask.cz/dockerhub-proxy/library/xxx[:<verze|latest>]
+
+- příklad:     
     <br/><br/>
 
         !bash
@@ -530,9 +555,19 @@ Pokuste se optimalizovat následující Dockerfile:
 (Git - examples/docker/multistage/Dockerfile)
 
     !dockerfile
-    FROM ubuntu:latest
-    RUN apt update \
-      && apt install openjdk maven
+    FROM ubuntu
+
+    RUN apt-get update \
+        && apt-get install -y maven git
+
+    RUN git clone https://github.com/amoravek/k8s.git \
+        && cd k8s/k8s-sample-app \
+        && mvn clean package
+
+    WORKDIR k8s/k8s-sample-app/target
+
+    ENTRYPOINT ["java", "-jar", "/app/k8s-sample-app.jar"]
+    CMD ["server"]
 
 ---
 # Řešení
@@ -685,6 +720,7 @@ Příklad: `git/examples/exec-shell/`
 
 Příklad:
 
+    !bash
     docker run -it \
     --name app1 \
     -p 5678:5678 \
@@ -700,18 +736,19 @@ Příklad:
 - řešením je `VOLUME` - můžeme provést mount externího adresáře, NFS, apod.
 - dvě možnosti použití:
     - named volume:
-        ```
-        docker volume create myvol1
-        docker run -d --name nginx -v myvol:/app nginx
-        ```
+      <br/><br/>
+
+            !bash        
+            docker volume create myvol1
+            docker run -d --name nginx -v myvol:/app nginx
+
+        <br/>
         data volume se ukládají do `/var/lib/docker/volumes`
 
     - mount specifického adresáře z host OS: `docker run -d --name nginx -v /data:/app nginx`
     - modifikátor `:ro`
 
-Příklady obou typů volume
-
-<https://docs.docker.com/storage/volumes/>
+Příklady obou typů volume. <https://docs.docker.com/storage/volumes/>
 
 ---
 # Networking, komunikace mezi kontejnery
@@ -723,6 +760,7 @@ Příklady obou typů volume
 
 (ubuntu image, doinstalovat ping: `sudo apt install iputils-ping`, předvést oddědění image, kde je ping nainstalován)
 
+    !bash
     docker network create mynet
     docker run -d --name app1 --network mynet ubuntu (pak ubuntu-ping)
     docker run -d --name app2 ubuntu (pak ubuntu-ping)
@@ -759,7 +797,12 @@ Ukážeme si reálný projekt: ta:1.1.10
 
 .footer: [5 min] 
 
-docker run -d --name app1 --cpus 2 --memory 512m ubuntu
+    !bash
+    docker run -d \
+    --name app1 \
+    --cpus 2 \
+    --memory 512m \
+    ubuntu
 
 <https://docs.docker.com/config/containers/resource_constraints/>
 

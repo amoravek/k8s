@@ -12,5 +12,5 @@ RUN git clone https://github.com/amoravek/k8s.git \
 
 WORKDIR k8s/k8s-sample-app/target
 
-ENTRYPOINT ["java", "-jar", "/app/k8s-sample-app-1.0-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "/app/k8s-sample-app.jar"]
 CMD ["server"]
