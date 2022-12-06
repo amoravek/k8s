@@ -1,0 +1,11 @@
+services:
+  app:
+    build: .
+    restart: on-failure
+    ports:
+      - "8080:8080"
+  client:
+    depends_on:
+      - app
+    image: nginx
+    command: bash -c "while true; do curl http://app:8080; sleep 5; done"
