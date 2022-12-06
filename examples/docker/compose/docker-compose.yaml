@@ -5,6 +5,8 @@ services:
     ports:
       - "8080:8080"
     networks:
+      # po odkomentovani bude fungovat (kontejner bude zarazen do stejne site jako frontend
+      # - frontend
       - backend
   client:
     depends_on:
