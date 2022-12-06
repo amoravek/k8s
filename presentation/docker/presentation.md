@@ -566,7 +566,7 @@ Pokuste se optimalizovat následující Dockerfile:
 
     WORKDIR k8s/k8s-sample-app/target
 
-    ENTRYPOINT ["java", "-jar", "/app/k8s-sample-app.jar"]
+    ENTRYPOINT ["java", "-jar", "k8s-sample-app.jar"]
     CMD ["server"]
 
 ---
@@ -655,8 +655,12 @@ Příklad externí insecure registry (proč je to užitečné a proč se často 
 
         x509 certificate signed by unknown authority error
 
-nutno dodat certifikát do:
+- nutno dodat certifikát do:
 `/etc/docker/certs.d/<your_registry_host_name>:<your_registry_host_port>/ca.crt`
+
+- totéž ale musíme udělat i v případě, kdy certifikát vydá naše CA
+
+- nejjednodušší varianta: máme certifikát od uznávané CA (není ale u interní registry moc časté)
 
 ---
 # harbor.trask.cz
@@ -693,11 +697,11 @@ Do registry je mnohdy nutný login:
 Příklad: `git/examples/exec-shell/`
 
 ---
-# Uživatelské účty a oprávnění uvnitř kontejneru, USER
+# Účty a oprávnění, USER
 
 .footer: [15 min] 
 
-- drtivá většina kontejnerů vytvořených z nějakého image na Docker HUBu používá `USER root`
+- hodně kontejnerů vytvořených z nějakého image na Docker HUBu používá `USER root` (je default)
 - není to bezpečné - za určitých okolností takto lze získat přístup k host OS
 - v Dockerfile je možné použít libovolné množství `USER <user>[:<group>]` nebo `USER <UID>[:<GID>]`
 - to, pod jakým uživatelem poběží `ENTRYPOINT` nebo `CMD` proces určuje předchozí `USER`
@@ -710,43 +714,54 @@ Příklad: `git/examples/exec-shell/`
 
 .footer: [15 min] 
 
-- kontejner po spuštění nepropaguje porty ven (jsou dostupné pouze interně)
+- kontejner po spuštění **nepropaguje** porty ven (jsou dostupné pouze interně)
 - je potřeba explicitně určit, jaký port/rozsah bude publikován ven
 - porty je třeba publikovat při vytváření kontejneru, pak už nejde (jednoduše) změnit
-- pokud je port v Dockerfile explicitně označen pomocí `EXPOSE`, je možné použí automatiku:
+- pokud je port v Dockerfile explicitně označen pomocí `EXPOSE`, je možné propagovat automaticky:
   <br/><br/>
 
-        docker run -d --name nginx -P nginx
+                docker run -d --name nginx -P nginx
 
 Příklad:
 
-    !bash
-    docker run -it \
-    --name app1 \
-    -p 5678:5678 \
-    hashicorp/http-echo -text "Test OK"
+        !bash
+        docker run -it \
+        --name app1 \
+        -p 5678:5678 \
+        hashicorp/http-echo -text "Test OK"
 
 ---
-# Volumes
+# Volumes (1)
 
 .footer: [15 min]
 
 - kontejner ukládá implicitně všechna data "do sebe"
 - po sazání kontejneru (`docker rm`) přijdeme i o data
 - řešením je `VOLUME` - můžeme provést mount externího adresáře, NFS, apod.
+
+---
+# Volumes (2)
+
 - dvě možnosti použití:
     - named volume:
       <br/><br/>
 
-            !bash        
+            !bash
             docker volume create myvol1
             docker run -d --name nginx -v myvol:/app nginx
 
         <br/>
         data volume se ukládají do `/var/lib/docker/volumes`
 
-    - mount specifického adresáře z host OS: `docker run -d --name nginx -v /data:/app nginx`
+    - mount specifického adresáře z host OS:
+      <br/><br/>
+
+                docker run -d --name nginx -v /data:/app nginx
+  
     - modifikátor `:ro`
+      <br/><br/>
+
+                docker run -d --name nginx -v /data:/app nginx:ro
 
 Příklady obou typů volume. <https://docs.docker.com/storage/volumes/>
 
