@@ -25,10 +25,11 @@ amoravek@trask.cz<br/>
 # Co to je Docker? (1)
 
 - nástroj, který zjednodušuje
-  - výrobu *images*
+  - výrobu aplikačních ... **imidžů** ... **images** ... eeeeeeee
   - spouštění *kontejnerů*
   - jejich správu
   - komunikaci s registry
+- ...a mnoho dalšího + obludně rozsáhlý ekosystém :-)
 
 .footer: [5 min]
 
@@ -43,12 +44,12 @@ amoravek@trask.cz<br/>
 # Co to je Docker především?
 
 - nástroj, který extrémně usnadňuje práci - ukázky:
-  - IBM MQ + TA
-  - legacy WAS
-  - redis
-  - nginx
-  - ...
-
+    - IBM MQ + TA
+    - legacy WAS
+    - redis
+    - nginx
+    - ...
+- povídání o "omlazení" TIF
 ---
 # ...je to **nástroj**, který umožňuje:
 
@@ -75,6 +76,8 @@ amoravek@trask.cz<br/>
 .footer: [5 min]
 
 ![docker-vs-vm](docker-vs-vm.png)
+
+...je to tedy spíše taková *aplikační virtualizace*
 
 .notes: zmínit prakticky okamžité spuštění oproti nutnosti bootu VM
 
@@ -119,20 +122,20 @@ amoravek@trask.cz<br/>
 
 ## Co je vlastně image?
 
-- lze si představit jako .tar.gz souborového systému OS + nějaká metadata
+- lze si představit jako ZIP aplikačních binárek, souborového systému OS + nějaká metadata
 - *image* je vždy read-only, vytváří se *buildem*
-- image se většinou zakládá na nějakém již existujícím - např. JDK image dědí z Alpine linux image a dodá instalaci JDK
+- image se většinou zakládá na nějakém již existujícím - např. JDK image dědí z Alpine Linux image a dodá instalaci JDK
   <br/><br/>
 
         !dockerfile
         FROM alpine
         RUN <instalace jdk>
 
-(je to něco jako vzít souborový systém Alpine linuxu, nakopírovat tam JDK, zazipovat a obalit metadaty)
+(je to něco jako vzít souborový systém Alpine Linuxu, nakopírovat tam JDK, zazipovat a obalit metadaty)
 
 ---
 
-# Parent a base image (1)
+# Parent / base image (1)
 
 .footer: [5 min] 
 
@@ -145,7 +148,7 @@ amoravek@trask.cz<br/>
 .notes: scratch je rezervovaný název - prázdný parent image
 
 ---
-# Parent a base image (2)
+# Parent / base image (2)
 
     !bash
     $ sudo debootstrap xenial xenial > /dev/null
