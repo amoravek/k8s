@@ -43,9 +43,10 @@ amoravek@trask.cz<br/>
 # Co to je Docker především?
 
 - nástroj, který extrémně usnadňuje práci - ukázky:
+  - IBM MQ + TA
   - legacy WAS
   - redis
-  - příklad TIF komponent
+  - nginx
   - ...
 
 ---
