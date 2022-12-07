@@ -167,7 +167,7 @@ amoravek@trask.cz<br/>
 
 # Současný trend - mikroskopický image
 
-- image, který obsahuje jen aplikaci
+- image, který obsahuje jen aplikaci (distroless)
 - nemá ani shell
 - všechny závislosti součástí aplikace (např. golang, ale i c, cpp, quarkus? micronaut?)
 - velmi malý image - rychlé stažení z registry
@@ -416,22 +416,33 @@ Vybrané příkazy:
 - do image dodejte 2 nebo více textových souborů (**COPY** / ADD)
 - po **spuštění** image (pozor, nejedná se o RUN v Dockerfile!):
   - zobrazte obsah textového souboru (cat) zadaného parametrem v docker run ...
-    - pou6ijte ENTRYPOINT a CMD
+    - použijte ENTRYPOINT a CMD
   - pokud nebude zadán parametr, zobrazte jeden ze souborů
 
 ---
 # Řešení
 
-    !dockerfile
-    FROM alpine
+- obsah .dockerignore
+  <br/><br/>
 
-    COPY my1.txt /
-    COPY my2.txt /
-    WORKDIR /
+        !bash
+        !my1.txt
+        !my2.txt
+            
 
-    ENTRYPOINT ["cat"]
+- obsah Dockerfile
+  <br/><br/>
 
-    CMD ["my1.txt"]
+        !dockerfile
+        FROM alpine
+
+        COPY my1.txt /
+        COPY my2.txt /
+        WORKDIR /
+
+        ENTRYPOINT ["cat"]
+
+        CMD ["my1.txt"]
 
 ---
 # PID 1, exec vs shell formy
@@ -544,6 +555,23 @@ Dokumentace: <https://docs.docker.com/storage/storagedriver/>
         ...
 
 ---
+# Multi-stage build (2)
+
+- builder image je po použití smazán (nevytvoří se image, ale zůstávají vrstvy)
+- je možné použít už existující image a jen zkopírovat data:
+  <br/><br/>
+
+        !dockerfile
+        FROM ubuntu:latest
+        COPY --from=alpine:latest /etc/os-release /ALPINE
+
+
+<https://docs.docker.com/develop/develop-images/multistage-build/>
+
+Příklad viz `ta:1.1.13` image - porovnat výslednou velikost
+(vrstvy - apt install, multistage)
+
+---
 # Cvičení - prerekvizity
 
 - Docker zavedl maximální počet stažení pro neplatiče
@@ -592,22 +620,7 @@ Pokuste se optimalizovat následující Dockerfile:
 - smazat apt cache ve stejné vrstvě
 - git clone a maven build provést v jiném image (multistage)
 
----
-# Multi-stage build (2)
-
-- builder image je po použití smazán (nevytvoří se image, ale zůstávají vrstvy)
-- je možné použít už existující image a jen zkopírovat data:
-  <br/><br/>
-
-        !dockerfile
-        FROM ubuntu:latest
-        COPY --from=alpine:latest /etc/os-release /ALPINE
-
-
-<https://docs.docker.com/develop/develop-images/multistage-build/>
-
-Příklad s `ta:1.1.10` image - porovnat výslednou velikost
-(vrstvy - apt install, multistage)
+(vše vit Git - k8s/examples/docker/multistage)
 
 ---
 # Názvy images, Docker repository
@@ -751,8 +764,8 @@ Příklad:
 
 .footer: [15 min]
 
-- kontejner ukládá implicitně všechna data "do sebe"
-- po sazání kontejneru (`docker rm`) přijdeme i o data
+- kontejner ukládá implicitně všechna data "do sebe" (=do svrchní RW vrstvy)
+- po smazání kontejneru (`docker rm`) přijdeme i o data
 - řešením je `VOLUME` - můžeme provést mount externího adresáře, NFS, apod.
 
 ---
@@ -779,7 +792,8 @@ Příklad:
 
                 docker run -d --name nginx -v /data:/app nginx:ro
 
-Příklady obou typů volume. <https://docs.docker.com/storage/volumes/>
+Můžeme i sdílet volume mezi kontejnery.
+Příklady obou typů: <https://docs.docker.com/storage/volumes/>
 
 ---
 # Networking, komunikace mezi kontejnery
@@ -811,7 +825,7 @@ Příklady obou typů volume. <https://docs.docker.com/storage/volumes/>
 
 Projdeme <https://docs.docker.com/develop/develop-images/dockerfile_best-practices/>
 
-Ukážeme si reálný projekt: ta:1.1.10
+Ukážeme si reálný projekt: ta:1.1.13
 
 ---
 # Orchestrace – Docker Compose, Docker Swarm
