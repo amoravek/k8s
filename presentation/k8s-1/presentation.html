@@ -66,9 +66,39 @@
             <header><h1>Kubernetes I.</h1></header>
             
             
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              1/31
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-2">
+          <div class="inner">
+            
+            <header><h1>Organizační informace</h1></header>
+            
+            
             <section><p>Online poznámky: <a href="https://codimd.trask.cz/s/rJPCa8C0v">https://codimd.trask.cz/s/rJPCa8C0v</a></p>
-<p>Použitý cluster: <a href="https://arm.lab.trask.cz/">https://arm.lab.trask.cz/</a></p>
-<p>Adam Morávek, amoravek@trask.cz, +420 724 514 916</p></section>
+<p>Adam Morávek<br/>
+amoravek@trask.cz<br/>
++420 724 514 916<br/></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -85,7 +115,7 @@
             </aside>
             
             <aside class="page_number">
-              1/30
+              2/31
             </aside>
           </footer>
         </div>
@@ -93,7 +123,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-2">
+        <div class="slide has_footer slide-3">
           <div class="inner">
             
             <header><h1>Potřeba orchestrace kontejnerů</h1></header>
@@ -131,7 +161,7 @@
             </aside>
             
             <aside class="page_number">
-              2/30
+              3/31
             </aside>
           </footer>
         </div>
@@ -139,7 +169,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-3">
+        <div class="slide has_footer slide-4">
           <div class="inner">
             
             <header><h1>Kubernetes</h1></header>
@@ -174,7 +204,7 @@
             </aside>
             
             <aside class="page_number">
-              3/30
+              4/31
             </aside>
           </footer>
         </div>
@@ -182,7 +212,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-4">
+        <div class="slide has_footer slide-5">
           <div class="inner">
             
             <header><h1>Příklad deklarativního způsobu konfigurace (YAML)</h1></header>
@@ -207,7 +237,7 @@
             </aside>
             
             <aside class="page_number">
-              4/30
+              5/31
             </aside>
           </footer>
         </div>
@@ -215,7 +245,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-5">
+        <div class="slide has_footer slide-6">
           <div class="inner">
             
             <header><h1>Architektura Kubernetes (1)</h1></header>
@@ -241,7 +271,7 @@
             </aside>
             
             <aside class="page_number">
-              5/30
+              6/31
             </aside>
           </footer>
         </div>
@@ -249,7 +279,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-6">
+        <div class="slide has_footer slide-7">
           <div class="inner">
             
             <header><h1>Architektura Kubernetes (2)</h1></header>
@@ -282,7 +312,7 @@
             </aside>
             
             <aside class="page_number">
-              6/30
+              7/31
             </aside>
           </footer>
         </div>
@@ -290,7 +320,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-7">
+        <div class="slide has_footer slide-8">
           <div class="inner">
             
             <header><h1>Pod a jeho kontejnery</h1></header>
@@ -325,7 +355,7 @@
             </aside>
             
             <aside class="page_number">
-              7/30
+              8/31
             </aside>
           </footer>
         </div>
@@ -333,7 +363,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-8">
+        <div class="slide has_footer slide-9">
           <div class="inner">
             
             <header><h1>Namespaces</h1></header>
@@ -365,7 +395,7 @@
             </aside>
             
             <aside class="page_number">
-              8/30
+              9/31
             </aside>
           </footer>
         </div>
@@ -373,7 +403,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_code has_footer slide-9">
+        <div class="slide has_code has_footer slide-10">
           <div class="inner">
             
             <header><h1>Kubectl</h1></header>
@@ -382,14 +412,16 @@
             <section>
 <ul>
 <li>CLI rozhraní pro komunikaci s clusterem (resp API-serverem)</li>
-<li>vyžaduje přítomnost konfiguračniho souboru, tzv. <em>kubeconfig</em> (uložen typicky v $HOME/.kube/config) - viz váš osobní kubeconfig rozesílaný před kurzem</li>
+<li>vyžaduje přítomnost konfiguračniho souboru, tzv. <em>kubeconfig</em> (uložen typicky v $HOME/.kube/config) - viz váš osobní kubeconfig (vyrobíme)</li>
 <li>kubeconfig obsahuje sady clusterů a uživatelů propojených kontexty</li>
-<li>Praktické ukázky + merge kubeconfigu:<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">KUBECONFIG</span><span class="o">=</span>~/.kube/config:~/someotherconfig 
+<li>Praktické ukázky + merge kubeconfigu:
+  <br/><br/><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">KUBECONFIG</span><span class="o">=</span>~/.kube/config:/path/to/someotherconfig 
 kubectl config view --flatten &gt; ~/new-kubeconfig
 </pre></div>
 
 </li>
 </ul>
+<p>pozor, některé verze kubectl mají problém s ~</p>
 <p><a href="https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/">https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/</a></p></section>
             
           </div>
@@ -409,7 +441,7 @@ kubectl config view --flatten &gt; ~/new-kubeconfig
             </aside>
             
             <aside class="page_number">
-              9/30
+              10/31
             </aside>
           </footer>
         </div>
@@ -417,7 +449,7 @@ kubectl config view --flatten &gt; ~/new-kubeconfig
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-10">
+        <div class="slide has_footer slide-11">
           <div class="inner">
             
             <header><h1>Příklad spuštění aplikace v podu – kubectl run + průzkum</h1></header>
@@ -459,7 +491,7 @@ kubectl config view --flatten &gt; ~/new-kubeconfig
             </aside>
             
             <aside class="page_number">
-              10/30
+              11/31
             </aside>
           </footer>
         </div>
@@ -467,7 +499,7 @@ kubectl config view --flatten &gt; ~/new-kubeconfig
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-11">
+        <div class="slide has_footer slide-12">
           <div class="inner">
             
             <header><h1>K9s, Kubernetes Web IU (Dashboard)</h1></header>
@@ -490,7 +522,7 @@ kubectl config view --flatten &gt; ~/new-kubeconfig
             </aside>
             
             <aside class="page_number">
-              11/30
+              12/31
             </aside>
           </footer>
         </div>
@@ -498,7 +530,7 @@ kubectl config view --flatten &gt; ~/new-kubeconfig
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-12">
+        <div class="slide has_footer slide-13">
           <div class="inner">
             
             <header><h1>Deployment (1)</h1></header>
@@ -536,7 +568,7 @@ kubectl config view --flatten &gt; ~/new-kubeconfig
             </aside>
             
             <aside class="page_number">
-              12/30
+              13/31
             </aside>
           </footer>
         </div>
@@ -544,7 +576,7 @@ kubectl config view --flatten &gt; ~/new-kubeconfig
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-13">
+        <div class="slide has_footer slide-14">
           <div class="inner">
             
             <header><h1>Deployment (2)</h1></header>
@@ -581,7 +613,7 @@ kubectl config view --flatten &gt; ~/new-kubeconfig
             </aside>
             
             <aside class="page_number">
-              13/30
+              14/31
             </aside>
           </footer>
         </div>
@@ -589,7 +621,7 @@ kubectl config view --flatten &gt; ~/new-kubeconfig
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-14">
+        <div class="slide has_footer slide-15">
           <div class="inner">
             
             <header><h1>Deployment (3)</h1></header>
@@ -623,7 +655,7 @@ kubectl config view --flatten &gt; ~/new-kubeconfig
             </aside>
             
             <aside class="page_number">
-              14/30
+              15/31
             </aside>
           </footer>
         </div>
@@ -631,7 +663,7 @@ kubectl config view --flatten &gt; ~/new-kubeconfig
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-15">
+        <div class="slide has_footer slide-16">
           <div class="inner">
             
             <header><h1>Deployment (4)</h1></header>
@@ -660,7 +692,7 @@ kubectl config view --flatten &gt; ~/new-kubeconfig
             </aside>
             
             <aside class="page_number">
-              15/30
+              16/31
             </aside>
           </footer>
         </div>
@@ -668,7 +700,7 @@ kubectl config view --flatten &gt; ~/new-kubeconfig
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-16">
+        <div class="slide has_footer slide-17">
           <div class="inner">
             
             <header><h1>Přestávka do 10:45</h1></header>
@@ -694,7 +726,7 @@ kubectl config view --flatten &gt; ~/new-kubeconfig
             </aside>
             
             <aside class="page_number">
-              16/30
+              17/31
             </aside>
           </footer>
         </div>
@@ -702,7 +734,7 @@ kubectl config view --flatten &gt; ~/new-kubeconfig
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_code has_footer slide-17">
+        <div class="slide has_code has_footer slide-18">
           <div class="inner">
             
             <header><h1>Perzistence (1)</h1></header>
@@ -752,7 +784,7 @@ kubectl config view --flatten &gt; ~/new-kubeconfig
             </aside>
             
             <aside class="page_number">
-              17/30
+              18/31
             </aside>
           </footer>
         </div>
@@ -760,7 +792,7 @@ kubectl config view --flatten &gt; ~/new-kubeconfig
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-18">
+        <div class="slide has_footer slide-19">
           <div class="inner">
             
             <header><h1>Perzistence (2)</h1></header>
@@ -794,7 +826,7 @@ kubectl config view --flatten &gt; ~/new-kubeconfig
             </aside>
             
             <aside class="page_number">
-              18/30
+              19/31
             </aside>
           </footer>
         </div>
@@ -802,7 +834,7 @@ kubectl config view --flatten &gt; ~/new-kubeconfig
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-19">
+        <div class="slide has_footer slide-20">
           <div class="inner">
             
             <header><h1>StorageClass</h1></header>
@@ -829,7 +861,7 @@ kubectl config view --flatten &gt; ~/new-kubeconfig
             </aside>
             
             <aside class="page_number">
-              19/30
+              20/31
             </aside>
           </footer>
         </div>
@@ -837,7 +869,7 @@ kubectl config view --flatten &gt; ~/new-kubeconfig
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-20">
+        <div class="slide has_footer slide-21">
           <div class="inner">
             
             <header><h1>ConfigMap, Secret</h1></header>
@@ -874,7 +906,7 @@ kubectl config view --flatten &gt; ~/new-kubeconfig
             </aside>
             
             <aside class="page_number">
-              20/30
+              21/31
             </aside>
           </footer>
         </div>
@@ -882,7 +914,7 @@ kubectl config view --flatten &gt; ~/new-kubeconfig
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-21">
+        <div class="slide has_footer slide-22">
           <div class="inner">
             
             <header><h1>Services</h1></header>
@@ -923,7 +955,7 @@ kubectl config view --flatten &gt; ~/new-kubeconfig
             </aside>
             
             <aside class="page_number">
-              21/30
+              22/31
             </aside>
           </footer>
         </div>
@@ -931,7 +963,7 @@ kubectl config view --flatten &gt; ~/new-kubeconfig
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-22">
+        <div class="slide has_footer slide-23">
           <div class="inner">
             
             <header><h1>Ingress a ingress controller</h1></header>
@@ -967,7 +999,7 @@ https://kubernetes.io/docs/concepts/services-networking/ingress/</p></section>
             </aside>
             
             <aside class="page_number">
-              22/30
+              23/31
             </aside>
           </footer>
         </div>
@@ -975,7 +1007,7 @@ https://kubernetes.io/docs/concepts/services-networking/ingress/</p></section>
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-23">
+        <div class="slide has_footer slide-24">
           <div class="inner">
             
             <header><h1>Přestávka na oběd</h1></header>
@@ -1001,7 +1033,7 @@ https://kubernetes.io/docs/concepts/services-networking/ingress/</p></section>
             </aside>
             
             <aside class="page_number">
-              23/30
+              24/31
             </aside>
           </footer>
         </div>
@@ -1009,7 +1041,7 @@ https://kubernetes.io/docs/concepts/services-networking/ingress/</p></section>
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-24">
+        <div class="slide has_footer slide-25">
           <div class="inner">
             
             <header><h1>Controllery</h1></header>
@@ -1043,7 +1075,7 @@ https://kubernetes.io/docs/concepts/services-networking/ingress/</p></section>
             </aside>
             
             <aside class="page_number">
-              24/30
+              25/31
             </aside>
           </footer>
         </div>
@@ -1051,7 +1083,7 @@ https://kubernetes.io/docs/concepts/services-networking/ingress/</p></section>
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-25">
+        <div class="slide has_footer slide-26">
           <div class="inner">
             
             <header><h1>ReplicaSet, DaemonSet, StatefulSet, Job, CronJob</h1></header>
@@ -1077,7 +1109,7 @@ https://kubernetes.io/docs/concepts/services-networking/ingress/</p></section>
             </aside>
             
             <aside class="page_number">
-              25/30
+              26/31
             </aside>
           </footer>
         </div>
@@ -1085,7 +1117,7 @@ https://kubernetes.io/docs/concepts/services-networking/ingress/</p></section>
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-26">
+        <div class="slide has_footer slide-27">
           <div class="inner">
             
             <header><h1>Logování</h1></header>
@@ -1108,7 +1140,7 @@ https://kubernetes.io/docs/concepts/services-networking/ingress/</p></section>
             </aside>
             
             <aside class="page_number">
-              26/30
+              27/31
             </aside>
           </footer>
         </div>
@@ -1116,7 +1148,7 @@ https://kubernetes.io/docs/concepts/services-networking/ingress/</p></section>
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-27">
+        <div class="slide has_footer slide-28">
           <div class="inner">
             
             <header><h1>Liveness a readiness testy</h1></header>
@@ -1151,7 +1183,7 @@ https://kubernetes.io/docs/concepts/services-networking/ingress/</p></section>
             </aside>
             
             <aside class="page_number">
-              27/30
+              28/31
             </aside>
           </footer>
         </div>
@@ -1159,7 +1191,7 @@ https://kubernetes.io/docs/concepts/services-networking/ingress/</p></section>
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-28">
+        <div class="slide has_footer slide-29">
           <div class="inner">
             
             <header><h1>ImagePullPolicy</h1></header>
@@ -1189,7 +1221,7 @@ https://kubernetes.io/docs/concepts/services-networking/ingress/</p></section>
             </aside>
             
             <aside class="page_number">
-              28/30
+              29/31
             </aside>
           </footer>
         </div>
@@ -1197,7 +1229,7 @@ https://kubernetes.io/docs/concepts/services-networking/ingress/</p></section>
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-29">
+        <div class="slide has_footer slide-30">
           <div class="inner">
             
             <header><h1>Resource requests &amp; limits</h1></header>
@@ -1236,7 +1268,7 @@ resources:
             </aside>
             
             <aside class="page_number">
-              29/30
+              30/31
             </aside>
           </footer>
         </div>
@@ -1244,7 +1276,7 @@ resources:
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-30">
+        <div class="slide slide-31">
           <div class="inner">
             
             <header><h1>Diskuse</h1></header>
@@ -1267,7 +1299,7 @@ resources:
             </aside>
             
             <aside class="page_number">
-              30/30
+              31/31
             </aside>
           </footer>
         </div>
@@ -1294,176 +1326,182 @@ resources:
       
       
       <tr id="toc-row-2">
-        <th><a href="#slide:2">Potřeba orchestrace kontejnerů</a></th>
+        <th><a href="#slide:2">Organizační informace</a></th>
         <td><a href="#slide:2">2</a></td>
       </tr>
       
       
       <tr id="toc-row-3">
-        <th><a href="#slide:3">Kubernetes</a></th>
+        <th><a href="#slide:3">Potřeba orchestrace kontejnerů</a></th>
         <td><a href="#slide:3">3</a></td>
       </tr>
       
       
       <tr id="toc-row-4">
-        <th><a href="#slide:4">Příklad deklarativního způsobu konfigurace (YAML)</a></th>
+        <th><a href="#slide:4">Kubernetes</a></th>
         <td><a href="#slide:4">4</a></td>
       </tr>
       
       
       <tr id="toc-row-5">
-        <th><a href="#slide:5">Architektura Kubernetes (1)</a></th>
+        <th><a href="#slide:5">Příklad deklarativního způsobu konfigurace (YAML)</a></th>
         <td><a href="#slide:5">5</a></td>
       </tr>
       
       
       <tr id="toc-row-6">
-        <th><a href="#slide:6">Architektura Kubernetes (2)</a></th>
+        <th><a href="#slide:6">Architektura Kubernetes (1)</a></th>
         <td><a href="#slide:6">6</a></td>
       </tr>
       
       
       <tr id="toc-row-7">
-        <th><a href="#slide:7">Pod a jeho kontejnery</a></th>
+        <th><a href="#slide:7">Architektura Kubernetes (2)</a></th>
         <td><a href="#slide:7">7</a></td>
       </tr>
       
       
       <tr id="toc-row-8">
-        <th><a href="#slide:8">Namespaces</a></th>
+        <th><a href="#slide:8">Pod a jeho kontejnery</a></th>
         <td><a href="#slide:8">8</a></td>
       </tr>
       
       
       <tr id="toc-row-9">
-        <th><a href="#slide:9">Kubectl</a></th>
+        <th><a href="#slide:9">Namespaces</a></th>
         <td><a href="#slide:9">9</a></td>
       </tr>
       
       
       <tr id="toc-row-10">
-        <th><a href="#slide:10">Příklad spuštění aplikace v podu – kubectl run + průzkum</a></th>
+        <th><a href="#slide:10">Kubectl</a></th>
         <td><a href="#slide:10">10</a></td>
       </tr>
       
       
       <tr id="toc-row-11">
-        <th><a href="#slide:11">K9s, Kubernetes Web IU (Dashboard)</a></th>
+        <th><a href="#slide:11">Příklad spuštění aplikace v podu – kubectl run + průzkum</a></th>
         <td><a href="#slide:11">11</a></td>
       </tr>
       
       
       <tr id="toc-row-12">
-        <th><a href="#slide:12">Deployment (1)</a></th>
+        <th><a href="#slide:12">K9s, Kubernetes Web IU (Dashboard)</a></th>
         <td><a href="#slide:12">12</a></td>
       </tr>
       
       
       <tr id="toc-row-13">
-        <th><a href="#slide:13">Deployment (2)</a></th>
+        <th><a href="#slide:13">Deployment (1)</a></th>
         <td><a href="#slide:13">13</a></td>
       </tr>
       
       
       <tr id="toc-row-14">
-        <th><a href="#slide:14">Deployment (3)</a></th>
+        <th><a href="#slide:14">Deployment (2)</a></th>
         <td><a href="#slide:14">14</a></td>
       </tr>
       
       
       <tr id="toc-row-15">
-        <th><a href="#slide:15">Deployment (4)</a></th>
+        <th><a href="#slide:15">Deployment (3)</a></th>
         <td><a href="#slide:15">15</a></td>
       </tr>
       
       
       <tr id="toc-row-16">
-        <th><a href="#slide:16">Přestávka do 10:45</a></th>
+        <th><a href="#slide:16">Deployment (4)</a></th>
         <td><a href="#slide:16">16</a></td>
       </tr>
       
       
       <tr id="toc-row-17">
-        <th><a href="#slide:17">Perzistence (1)</a></th>
+        <th><a href="#slide:17">Přestávka do 10:45</a></th>
         <td><a href="#slide:17">17</a></td>
       </tr>
       
       
       <tr id="toc-row-18">
-        <th><a href="#slide:18">Perzistence (2)</a></th>
+        <th><a href="#slide:18">Perzistence (1)</a></th>
         <td><a href="#slide:18">18</a></td>
       </tr>
       
       
       <tr id="toc-row-19">
-        <th><a href="#slide:19">StorageClass</a></th>
+        <th><a href="#slide:19">Perzistence (2)</a></th>
         <td><a href="#slide:19">19</a></td>
       </tr>
       
       
       <tr id="toc-row-20">
-        <th><a href="#slide:20">ConfigMap, Secret</a></th>
+        <th><a href="#slide:20">StorageClass</a></th>
         <td><a href="#slide:20">20</a></td>
       </tr>
       
       
       <tr id="toc-row-21">
-        <th><a href="#slide:21">Services</a></th>
+        <th><a href="#slide:21">ConfigMap, Secret</a></th>
         <td><a href="#slide:21">21</a></td>
       </tr>
       
       
       <tr id="toc-row-22">
-        <th><a href="#slide:22">Ingress a ingress controller</a></th>
+        <th><a href="#slide:22">Services</a></th>
         <td><a href="#slide:22">22</a></td>
       </tr>
       
       
       <tr id="toc-row-23">
-        <th><a href="#slide:23">Přestávka na oběd</a></th>
+        <th><a href="#slide:23">Ingress a ingress controller</a></th>
         <td><a href="#slide:23">23</a></td>
       </tr>
       
       
       <tr id="toc-row-24">
-        <th><a href="#slide:24">Controllery</a></th>
+        <th><a href="#slide:24">Přestávka na oběd</a></th>
         <td><a href="#slide:24">24</a></td>
       </tr>
       
       
       <tr id="toc-row-25">
-        <th><a href="#slide:25">ReplicaSet, DaemonSet, StatefulSet, Job, CronJob</a></th>
+        <th><a href="#slide:25">Controllery</a></th>
         <td><a href="#slide:25">25</a></td>
       </tr>
       
       
       <tr id="toc-row-26">
-        <th><a href="#slide:26">Logování</a></th>
+        <th><a href="#slide:26">ReplicaSet, DaemonSet, StatefulSet, Job, CronJob</a></th>
         <td><a href="#slide:26">26</a></td>
       </tr>
       
       
       <tr id="toc-row-27">
-        <th><a href="#slide:27">Liveness a readiness testy</a></th>
+        <th><a href="#slide:27">Logování</a></th>
         <td><a href="#slide:27">27</a></td>
       </tr>
       
       
       <tr id="toc-row-28">
-        <th><a href="#slide:28">ImagePullPolicy</a></th>
+        <th><a href="#slide:28">Liveness a readiness testy</a></th>
         <td><a href="#slide:28">28</a></td>
       </tr>
       
       
       <tr id="toc-row-29">
-        <th><a href="#slide:29">Resource requests &amp; limits</a></th>
+        <th><a href="#slide:29">ImagePullPolicy</a></th>
         <td><a href="#slide:29">29</a></td>
       </tr>
       
       
       <tr id="toc-row-30">
-        <th><a href="#slide:30">Diskuse</a></th>
+        <th><a href="#slide:30">Resource requests &amp; limits</a></th>
         <td><a href="#slide:30">30</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-31">
+        <th><a href="#slide:31">Diskuse</a></th>
+        <td><a href="#slide:31">31</a></td>
       </tr>
       
       

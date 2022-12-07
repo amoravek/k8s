@@ -9,6 +9,18 @@ Adam Morávek<br/>
 amoravek@trask.cz<br/>
 +420 724 514 916<br/>
 
+# Prerekvizity
+
+- příklady v rámci kurzu vyžadují nějakou Docker instalaci
+- pokud máte Windows, doporučuji mít na Docker VM s Linuxem (VirtualBox)
+
+---
+# Docker VM
+
+- <https://www.virtualbox.org/>
+- <https://docs.docker.com/engine/install/ubuntu/>
+- host-only network
+
 ---
 # Co to je Docker? (1)
 

@@ -1,10 +1,13 @@
 # Kubernetes I.
+---
+
+# Organizační informace
 
 Online poznámky: <https://codimd.trask.cz/s/rJPCa8C0v>
 
-Použitý cluster: <https://arm.lab.trask.cz/>
-
-Adam Morávek, amoravek@trask.cz, +420 724 514 916
+Adam Morávek<br/>
+amoravek@trask.cz<br/>
++420 724 514 916<br/>
 
 ---
 # Potřeba orchestrace kontejnerů
@@ -90,13 +93,16 @@ Adam Morávek, amoravek@trask.cz, +420 724 514 916
 .footer: [20 min] 
 
 - CLI rozhraní pro komunikaci s clusterem (resp API-serverem)
-- vyžaduje přítomnost konfiguračniho souboru, tzv. *kubeconfig* (uložen typicky v $HOME/.kube/config) - viz váš osobní kubeconfig rozesílaný před kurzem
+- vyžaduje přítomnost konfiguračniho souboru, tzv. *kubeconfig* (uložen typicky v $HOME/.kube/config) - viz váš osobní kubeconfig (vyrobíme)
 - kubeconfig obsahuje sady clusterů a uživatelů propojených kontexty
 - Praktické ukázky + merge kubeconfigu:
+  <br/><br/>
 
-        !shell
-        export KUBECONFIG=~/.kube/config:~/someotherconfig 
+        !bash
+        export KUBECONFIG=~/.kube/config:/path/to/someotherconfig 
         kubectl config view --flatten > ~/new-kubeconfig
+
+pozor, některé verze kubectl mají problém s ~
 
 <https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/>
 
