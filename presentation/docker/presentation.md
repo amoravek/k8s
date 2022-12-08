@@ -268,6 +268,8 @@ Proč vlastně?
 
 (examples/docker-simple)
 
+Dockerfile
+
     !dockerfile
     FROM nginx:alpine
     COPY . /usr/share/nginx/html
