@@ -42,7 +42,7 @@ spec:
       name: www
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: "ontap-nas-basic"
+      storageClassName: "longhorn"
       resources:
         requests:
           storage: 1Gi

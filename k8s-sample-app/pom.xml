@@ -144,6 +144,18 @@
 				<artifactId>jib-maven-plugin</artifactId>
 				<version>3.3.1</version>
 				<configuration>
+					<from>
+						<platforms>
+							<platform>
+								<architecture>amd64</architecture>
+								<os>linux</os>
+							</platform>
+							<platform>
+								<architecture>arm64</architecture>
+								<os>linux</os>
+							</platform>
+						</platforms>
+					</from>
 					<to>
 						<image>harbor.trask.cz/amor/k8s-sample-app</image>
 						<tags>

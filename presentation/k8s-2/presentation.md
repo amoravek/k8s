@@ -7,11 +7,6 @@ Použitý cluster: <https://arm.lab.trask.cz/>
 Adam Morávek, amoravek@trask.cz, +420 724 514 916
 
 ---
-# Odpovědi na některé Dotazy
-
-`kubectl config view --minify|grep namespace`
-
----
 # Readiness a Liveness probes - pokračování
 
 - kompletní ukázka chování při výpadku liveness i readiness probe
