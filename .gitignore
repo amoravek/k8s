@@ -39,4 +39,5 @@ hs_err_pid*
 log/
 target/
 
+examples/k8s/security/*
 !examples/k8s/security/*.sh
