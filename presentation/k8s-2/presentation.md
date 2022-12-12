@@ -7,6 +7,105 @@ Použitý cluster: <https://arm.lab.trask.cz/>
 Adam Morávek, amoravek@trask.cz, +420 724 514 916
 
 ---
+# Autentizace - pokračování
+
+- User vs. ServiceAccount
+
+---
+# Autentizace - x509
+
+- kubeconfig - podrobněji
+- Kubernetes PKI (viz k8s/examples/k8s/security/create-user.sh)
+  - nutny cluster admin
+
+<https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/>
+
+---
+# Autentizace - bootstrap tokens
+
+`kubeadm token create` -> `lsvnin.y4cc92mo4zrd7ea7` (`<user>.<secret>`)
+
+(user = lsvnin, secret = y4cc92mo4zrd7ea7)
+
+`system:bootstrap:<user>`
+
+`system:bootstrappers` - skupina, kde jsou všechny `system:bootstrap:*` účty
+
+Příklady:
+
+`kubectl create rolebinding system:bootstrap:lsvnin-default-admin --clusterrole cluster-admin --user system:bootstrap:lsvnin -n default`
+
+`kubectl create rolebinding bootstrapers-default-admin --clusterrole admin --group system:bootstrappers --namespace default`
+
+`kubectl create clusterrolebinding system:bootstrap:lsvnin-cluster-admin --clusterrole cluster-admin --user system:bootstrap:lsvnin`
+
+<https://kubernetes.io/docs/reference/access-authn-authz/bootstrap-tokens/>
+
+---
+# Autentizace - Service Account Tokens
+
+`kubectl create serviceaccount jenkins`
+`kubectl create token jenkins`
+
+User: `system:serviceaccount:(NAMESPACE):(SERVICEACCOUNT)`
+
+Group: `system:serviceaccounts`
+
+---
+# OpenID Connect
+
+<https://kubernetes.io/docs/reference/access-authn-authz/authentication/#openid-connect-tokens>
+
+---
+# RBAC (Role-Based Access Control)
+
+- dá se vypnout (default = 
+- příklad - Users + Group 'skoleni'
+- Role
+- ClusterRole
+- RoleBinding
+- ClusterRoleBinding
+
+Seznam verbs: `kubectl api-resources --sort-by name -o wide`
+
+---
+# RBAC - cvičení 1
+
+- nová role pro PKI (namespaced)
+  - CertificateSigningRequest
+  - certificate approve
+
+<https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/>
+
+`kubectl api-resources --verbs=list --api-group certificates.k8s.io -o wide`
+
+---
+# Řešení
+
+`kubectl create clusterrole pki-admin --resource certificatesigningrequest.certificates.k8s.io --verb create,get,list,watch`
+
+`kubectl create clusterrolebinding pki-admin-amo-amoravek --clusterrole pki-admin --namespace amo --user amoravek`
+
+Proč **cluster**rolebinding a ne rolebinding?
+Protože `certificatesigningrequest` není *namespaced* resource.
+
+Approval:
+
+Verbs: update, group: certificates.k8s.io, resource: certificatesigningrequests/approval
+
+Verbs: approve, group: certificates.k8s.io, resource: signers, resourceName: <signerNameDomain>/<signerNamePath> or <signerNameDomain>/*
+
+---
+# RBAC - cvičení 2
+
+- umožnit uživatelům získat informace o nodech (kubectl get/describe nodes)
+
+---
+# Řešení
+
+
+
+---
 # Readiness a Liveness probes - pokračování
 
 - kompletní ukázka chování při výpadku liveness i readiness probe
@@ -111,9 +210,6 @@ https://kubernetes-tutorial.schoolofdevops.com/configuring_authentication_and_au
 .notes: default/docker-registry-harbor
 
 .notes: objasnit princip sa + registry secret
-
----
-# RBAC 
 
 ---
 # Multiplatformní přístupy (ARM64) 
