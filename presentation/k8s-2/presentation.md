@@ -17,6 +17,7 @@ Adam Morávek, amoravek@trask.cz, +420 724 514 916
 - kubeconfig - podrobněji
 - Kubernetes PKI (viz k8s/examples/k8s/security/create-user.sh)
   - nutny cluster admin
+- User a Group - vazba na DN (opět viz create-user.sh)
 
 <https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/>
 
@@ -98,10 +99,11 @@ Verbs: approve, group: certificates.k8s.io, resource: signers, resourceName: <si
 ---
 # RBAC - cvičení 2
 
-- umožnit uživatelům získat informace o nodech (kubectl get/describe nodes)
+- umožnit všem uživatelům získat informace o nodech (kubectl get/describe nodes)
 
 ---
 # Řešení
+
 
 
 
