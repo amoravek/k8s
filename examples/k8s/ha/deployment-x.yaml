@@ -22,7 +22,7 @@ spec:
       nodeSelector:
         demo: 'yes'
       containers:
-      - image: harbor.trask.cz/arm64/k8s-sample-app:1.0
+      - image: harbor.trask.cz/amor/k8s-sample-app:1.0-SNAPSHOT
         imagePullPolicy: Always
         env:
         - name: UNREADY_MILLIS

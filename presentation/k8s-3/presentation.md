@@ -20,4 +20,5 @@ Adam Morávek, amoravek@trask.cz, +420 724 514 916
     - self-signed
     - HashiCorp Vault
 - MetalLB
+- Taikun
 ---

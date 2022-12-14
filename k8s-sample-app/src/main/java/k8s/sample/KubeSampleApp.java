@@ -10,12 +10,27 @@ import k8s.sample.resources.ReadinessResource;
 
 public class KubeSampleApp extends Application<HelloWorldConfiguration> {
 	public static void main(String[] args) throws Exception {
+        // Runtime.getRuntime().addShutdownHook(new Thread() {
+        //     @Override
+        //     public void run() {
+		// 		AppData.ready.set(false);
+
+        //         System.out.println("Shutdown hook ran!");
+				
+		// 		try {
+		// 			Thread.sleep(5000);
+		// 		} catch (InterruptedException ie) {
+		// 			ie.printStackTrace();
+		// 		}
+        //     }
+        // });
+
 		new KubeSampleApp().run(args);
 	}
 
 	@Override
 	public String getName() {
-		return "hello-world";
+		return "KubeSampleApp";
 	}
 
 	@Override

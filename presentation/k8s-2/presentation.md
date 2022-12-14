@@ -32,7 +32,10 @@ Adam Morávek, amoravek@trask.cz, +420 724 514 916
 
 `system:bootstrappers` - skupina, kde jsou všechny `system:bootstrap:*` účty
 
-Příklady:
+Token buď do .kube/config nebo `kubectl ... --token <token>`
+
+---
+# Autentizace - bootstrap tokens (příklady)
 
 `kubectl create rolebinding system:bootstrap:lsvnin-default-admin --clusterrole cluster-admin --user system:bootstrap:lsvnin -n default`
 
@@ -46,6 +49,7 @@ Příklady:
 # Autentizace - Service Account Tokens
 
 `kubectl create serviceaccount jenkins`
+
 `kubectl create token jenkins`
 
 User: `system:serviceaccount:(NAMESPACE):(SERVICEACCOUNT)`
@@ -99,13 +103,13 @@ Verbs: approve, group: certificates.k8s.io, resource: signers, resourceName: <si
 ---
 # RBAC - cvičení 2
 
-- umožnit všem uživatelům získat informace o nodech (kubectl get/describe nodes)
+- umožnit všem uživatelům naráz získat informace o nodech (kubectl get/describe nodes)
+- Hint: všichni jsou ve skupině `skoleni` --> `--group`
 
 ---
 # Řešení
 
-
-
+`kubectl create clusterrolebinding skoleni-view --group skoleni --clusterrole view`
 
 ---
 # Readiness a Liveness probes - pokračování
@@ -113,11 +117,51 @@ Verbs: approve, group: certificates.k8s.io, resource: signers, resourceName: <si
 - kompletní ukázka chování při výpadku liveness i readiness probe
 
 ---
-# TLS
+# Hledání problémů
 
-- Zabezpečení ingressu pomocí TLS
-- TLS secrety 
+- scaling - neudělá požadovaný počet replik
+  - kontrola logů controller-managera; možné příčiny
+    - kvóty
+    - existuje PodDisruptionBudget
+
+---
+
+# LimitRange 
+
+- default limits
+
+<https://kubernetes.io/docs/concepts/policy/limit-range/>
+
+---
+
+# ResourceQuota
+
+- PriorityClass
+
+<https://kubernetes.io/docs/concepts/policy/resource-quotas/>
+
+---
+# kubectl patch
+
+`kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "harbor-dockerhubproxy"}]}'`
+
+jenže co když chceme postupně přidávat více (přes CLI)?
+- json: `kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "harbor-amor"}, {"name": "harbor-dockerhubproxy"}]}'`
+  
+- patch file: `kubectl patch serviceaccount default --patch-file ...`
+
+        imagePullSecrets:
+        - harbor-amor
+        - harbor-dockerhubproxy
+
+<https://kubernetes.io/docs/tasks/manage-kubernetes-objects/update-api-object-kubectl-patch/>
+
+---
+# Zabezpečení ingressu pomocí TLS
+
+- TLS secrety - viz entry app (ukázka vytvoření TLS secretu)
 - Registry secrety
+- generické secrety
 
 .notes: projit ingress + tls secret entry-app
 
@@ -134,7 +178,7 @@ Verbs: approve, group: certificates.k8s.io, resource: signers, resourceName: <si
 ---
 # High-availability, pod disruption budget 
 
-  `kubectl create poddisruptionbudget k8s-sample-app-pdb --selector=app=k8s-sample-app --min-available=1`
+  `kubectl create poddisruptionbudget k8s-sample-app-pdb --selector=app=k8s-sample-app --min-available=2`
 
 .notes: examples/k8s/ha
 
@@ -142,7 +186,7 @@ Verbs: approve, group: certificates.k8s.io, resource: signers, resourceName: <si
 
 <https://kubernetes.io/docs/tasks/run-application/configure-pdb/>
 
----
+****---
 # Horizontal pod autoscaler 
 
 `kubectl autoscale deployment k8s-sample-app --min=1 --max=3 --cpu-percent=50`
@@ -153,6 +197,7 @@ load:
 
 
 <https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/>
+<https://v1-25.docs.kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/>
 
 ---
 # Taints, tolerations 
