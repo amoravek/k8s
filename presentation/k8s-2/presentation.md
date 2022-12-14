@@ -162,7 +162,7 @@ Verbs: approve, group: certificates.k8s.io, resource: signers, resourceName: <si
 <https://kubernetes.io/docs/concepts/policy/resource-quotas/>
 
 ---
-# kubectl patch
+# kubectl patch (1)
 
 `kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "harbor-dockerhubproxy"}]}'`
 
@@ -171,11 +171,29 @@ Verbs: approve, group: certificates.k8s.io, resource: signers, resourceName: <si
 jenže co když chceme postupně přidávat více (přes CLI)?
 - json: `kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "harbor-amor"}, {"name": "harbor-dockerhubproxy"}]}'`
   
+---
+# kubectl patch (2)
+
 - patch file: `kubectl patch serviceaccount default --patch-file ...`
 
         imagePullSecrets:
         - harbor-amor
         - harbor-dockerhubproxy
+- type=json:
+  
+      kubectl patch nodes worker04 worker05 \
+      --type=json -p='[{"op": "add", "path": "/metadata/labels/demo", "value": "yes"}]'
+
+      kubectl patch nodes worker04 worker05 \
+      --type=json -p='[{"op": "remove", "path": "/metadata/labels/demo"}]'
+
+...nebo dohromady:
+
+      kubectl patch nodes worker04 worker05 \
+      --type=json -p='[
+        {"op": "add", "path": "/metadata/labels/demo", "value": "yes"},
+        {"op": "remove", "path": "/metadata/labels/xxx", "value": "yes"}
+      ]'
 
 <https://kubernetes.io/docs/tasks/manage-kubernetes-objects/update-api-object-kubectl-patch/>
 
@@ -197,33 +215,6 @@ jenže co když chceme postupně přidávat více (přes CLI)?
 .notes: ukazat na examples/ha - je tam selector i nodeSelector, dal ukazat i cli --selector
 
 <https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/>
-
----
-# High-availability, pod disruption budget 
-
-  `kubectl create poddisruptionbudget k8s-sample-app-pdb --selector=app=k8s-sample-app --min-available=2`
-
-.notes: examples/k8s/ha
-
-.notes: ukazat nejprve drain bez pdb, pak s nim
-
-<https://kubernetes.io/docs/tasks/run-application/configure-pdb/>
-<https://kubernetes.io/docs/concepts/workloads/pods/disruptions/>
-
-POZOR! PDB nefunguje v případech **taint-based eviction** (vysvětlit a ukázat)
-
----
-# Horizontal pod autoscaler 
-
-`kubectl autoscale deployment k8s-sample-app --min=1 --max=3 --cpu-percent=50`
-
-load:
-
-`kubectl run -i --tty load-generator --rm --image=harbor.trask.cz/arm64/ubuntu-netcat --restart=Never -- /bin/sh -c "while sleep 0.01; do curl -s --connect-timeout 2 --max-time 2 http://10.4.61.4; done"`
-
-
-<https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/>
-<https://v1-25.docs.kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/>
 
 ---
 # Taints, tolerations 
@@ -254,6 +245,79 @@ load:
 .notes: kubectl describe nodes | egrep -hi "Taint|Hostname"
 
 <https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/>
+
+---
+# High-availability, pod disruption budget (příprava 1)
+
+  1) nejprve vyčistit 2 nody (vysvětlit):
+
+          kubectl patch nodes worker04 worker05 -p '{"spec":{"taints": null}}'
+          kubectl patch nodes worker04 worker05 --type=json -p='[{"op": "remove", "path": "/metadata/labels/demo"}]'
+
+          kubectl taint node worker04 demo=pdb-test:NoExecute
+          kubectl taint node worker05 demo=pdb-test:NoExecute
+          kubectl taint node worker05 demo=pdb-test:NoSchedule
+
+  2) přidat label `demo=yes` oběma nodům (třeba přes patch)
+
+    - `kubectl patch nodes worker04 worker05 --type=json -p='[{"op": "add", "path": "/metadata/labels/demo", "value": "yes"}]'`
+  
+    - zkontrolovat přes --selector
+
+---
+# High-availability, pod disruption budget (příprava 2)
+
+  3) nodeSelector -> node label demo=yes
+    - na oba nody
+    - nasadit deployment
+    - naškálovat na 2 repliky
+  
+  4) dodat toleration do deploymentu:
+
+          tolerations:
+          - key: "demo"
+            operator: "Equal"
+            value: "pdb-test"
+            effect: "NoExecute"
+
+      cílem je dostat pody jen na worker04
+  
+  5) osdtranit taint NoSchedule (proč?)
+
+  6) předvést drain worker04 při zapnuté curl smyčce (app-client)
+
+          while true; do
+            curl http://k8s-sample-app/ready
+            cat /proc/uptime|awk '{print $1}'
+            sleep 0.1
+          done
+
+---
+# High-availability, pod disruption budget
+
+  `kubectl create poddisruptionbudget k8s-sample-app-pdb --selector=app=k8s-sample-app --min-available=2`
+
+.notes: examples/k8s/ha
+
+.notes: ukazat nejprve drain bez pdb, pak s nim
+
+<https://kubernetes.io/docs/tasks/run-application/configure-pdb/>
+<https://kubernetes.io/docs/concepts/workloads/pods/disruptions/>
+
+POZOR! PDB nefunguje v případech **taint-based eviction** (vysvětlit a ukázat)
+
+---
+# Horizontal pod autoscaler 
+
+`kubectl autoscale deployment k8s-sample-app --min=1 --max=3 --cpu-percent=50`
+
+load:
+
+`kubectl run -i --tty load-generator --rm --image=harbor.trask.cz/arm64/ubuntu-netcat --restart=Never -- /bin/sh -c "while sleep 0.01; do curl -s --connect-timeout 2 --max-time 2 http://10.4.61.4; done"`
+
+
+<https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/>
+<https://v1-25.docs.kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/>
 
 ---
 # Cordon, drain 
