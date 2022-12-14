@@ -7,6 +7,20 @@ Použitý cluster: <https://arm.lab.trask.cz/>
 Adam Morávek, amoravek@trask.cz, +420 724 514 916
 
 ---
+# Requests, limits v k9s
+
+- ukázka v k9s
+
+---
+# kubectl ... -o jsonpath
+
+`kubectl get pod k8s-sample-app-648d688cfc-8h7hx -o jsonpath='{.spec.nodeName}'`
+
+`kubectl get pod k8s-sample-app-648d688cfc-8h7hx -o jsonpath='{range .spec.containers[*]}{.name}{"\t"}{.image}'`
+
+<https://kubernetes.io/docs/reference/kubectl/jsonpath/>
+
+---
 # Autentizace - pokračování
 
 - User vs. ServiceAccount
@@ -62,6 +76,9 @@ Group: `system:serviceaccounts`
 <https://kubernetes.io/docs/reference/access-authn-authz/authentication/#openid-connect-tokens>
 
 ---
+# kubeconfigy (kdo nemá)
+
+---
 # RBAC (Role-Based Access Control)
 
 - dá se vypnout (default = 
@@ -115,6 +132,7 @@ Verbs: approve, group: certificates.k8s.io, resource: signers, resourceName: <si
 # Readiness a Liveness probes - pokračování
 
 - kompletní ukázka chování při výpadku liveness i readiness probe
+- ukázka výpadků v případě chybějící readiness proby
 
 ---
 # Hledání problémů
@@ -138,12 +156,17 @@ Verbs: approve, group: certificates.k8s.io, resource: signers, resourceName: <si
 
 - PriorityClass
 
+      kubectl create quota my-quota \
+      --hard=cpu=1,memory=1G,pods=2,services=3,replicationcontrollers=2,resourcequotas=1,secrets=5,persistentvolumeclaims=10
+
 <https://kubernetes.io/docs/concepts/policy/resource-quotas/>
 
 ---
 # kubectl patch
 
 `kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "harbor-dockerhubproxy"}]}'`
+
+`kubectl patch deployment k8s-sample-app -p '{"metadata":{"labels":{"demo":"yes"}}}'`
 
 jenže co když chceme postupně přidávat více (přes CLI)?
 - json: `kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "harbor-amor"}, {"name": "harbor-dockerhubproxy"}]}'`
@@ -185,8 +208,11 @@ jenže co když chceme postupně přidávat více (přes CLI)?
 .notes: ukazat nejprve drain bez pdb, pak s nim
 
 <https://kubernetes.io/docs/tasks/run-application/configure-pdb/>
+<https://kubernetes.io/docs/concepts/workloads/pods/disruptions/>
 
-****---
+POZOR! PDB nefunguje v případech **taint-based eviction** (vysvětlit a ukázat)
+
+---
 # Horizontal pod autoscaler 
 
 `kubectl autoscale deployment k8s-sample-app --min=1 --max=3 --cpu-percent=50`
@@ -212,6 +238,12 @@ load:
       operator: "Equal"
       value: "value1"
       effect: "NoSchedule"
+
+    tolerations:
+    - key: "key1"
+      operator: "Equal"
+      value: "value1"
+      effect: "NoExecute"
 
     !yaml
     tolerations:
@@ -265,7 +297,7 @@ https://kubernetes-tutorial.schoolofdevops.com/configuring_authentication_and_au
 # Diskuse
 
 ---
-# Přestávka do 10:30
+# Přestávka
 
 .footer: [15 min]
 
