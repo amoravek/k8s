@@ -297,9 +297,9 @@ jenže co když chceme postupně přidávat více (přes CLI)?
 
   `kubectl create poddisruptionbudget k8s-sample-app-pdb --selector=app=k8s-sample-app --min-available=2`
 
-.notes: examples/k8s/ha
-
-.notes: ukazat nejprve drain bez pdb, pak s nim
+- app-client + skript
+- drain bez PDB
+- drain s PDB
 
 <https://kubernetes.io/docs/tasks/run-application/configure-pdb/>
 <https://kubernetes.io/docs/concepts/workloads/pods/disruptions/>
