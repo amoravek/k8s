@@ -19,8 +19,6 @@ spec:
       labels:
         app: k8s-sample-app
     spec:
-      nodeSelector:
-        demo: 'yes'
       containers:
       - image: harbor.trask.cz/amor/k8s-sample-app:1.0-SNAPSHOT
         imagePullPolicy: Always

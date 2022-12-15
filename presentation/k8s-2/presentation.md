@@ -198,7 +198,7 @@ jenže co když chceme postupně přidávat více (přes CLI)?
 <https://kubernetes.io/docs/tasks/manage-kubernetes-objects/update-api-object-kubectl-patch/>
 
 ---
-# Zabezpečení ingressu pomocí TLS
+# Zabezpečení ingresu pomocí TLS
 
 - TLS secrety - viz entry app (ukázka vytvoření TLS secretu)
 - Registry secrety
