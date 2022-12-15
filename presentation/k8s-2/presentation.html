@@ -26,22 +26,29 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>None</title>
-    <!-- Styles -->
-    
-    <link rel="stylesheet" href="file:///usr/lib/python3/dist-packages/darkslide/themes/default/css/base.css">
-    <link rel="stylesheet" media="print" href="file:///usr/lib/python3/dist-packages/darkslide/themes/default/css/print.css">
-    <link rel="stylesheet" media="screen, projection" href="file:///usr/lib/python3/dist-packages/darkslide/themes/default/css/screen.css">
-    <link rel="stylesheet" media="all" href="file:///usr/lib/python3/dist-packages/darkslide/themes/default/css/theme.css">
-    
-    
-    <!-- /Styles -->
-    <!-- Javascripts -->
-    
-    <script type="text/javascript" src="file:///usr/lib/python3/dist-packages/darkslide/themes/default/js/slides.js"></script>
-    
-    
-    <!-- /Javascripts -->
+    <title>Kubernetes II.</title>
+
+  
+     <link rel="stylesheet" href="file:///usr/local/lib/python3.10/dist-packages/darkslide/themes/default/css/base.css">
+  
+
+  
+     <link rel="stylesheet" href="file:///usr/local/lib/python3.10/dist-packages/darkslide/themes/default/css/print.css">
+  
+
+  
+     <link rel="stylesheet" href="file:///usr/local/lib/python3.10/dist-packages/darkslide/themes/default/css/screen.css">
+  
+
+  
+     <link rel="stylesheet" href="file:///usr/local/lib/python3.10/dist-packages/darkslide/themes/default/css/theme.css">
+  
+
+
+  
+    <script type="text/javascript" src="file:///usr/local/lib/python3.10/dist-packages/darkslide/themes/default/js/slides.js"></script>
+  
+
 </head>
 <body>
   <div id="blank"></div>
@@ -56,9 +63,10 @@
         <div class="slide slide-1">
           <div class="inner">
             
+            <header><h1>Kubernetes II.</h1></header>
             
-            <section><p>2# Kubernetes II.</p>
-<p>Online poznámky: <a href="https://codimd.trask.cz/s/rJPCa8C0v">https://codimd.trask.cz/s/rJPCa8C0v</a></p>
+            
+            <section><p>Online poznámky: <a href="https://codimd.trask.cz/s/rJPCa8C0v">https://codimd.trask.cz/s/rJPCa8C0v</a></p>
 <p>Použitý cluster: <a href="https://arm.lab.trask.cz/">https://arm.lab.trask.cz/</a></p>
 <p>Adam Morávek, amoravek@trask.cz, +420 724 514 916</p></section>
             
@@ -77,7 +85,7 @@
             </aside>
             
             <aside class="page_number">
-              1/20
+              1/40
             </aside>
           </footer>
         </div>
@@ -88,42 +96,11 @@
         <div class="slide slide-2">
           <div class="inner">
             
-            <header><h1>Odpovědi na některé Dotazy</h1></header>
-            
-            
-            <section><p><code>kubectl config view --minify|grep namespace</code></p></section>
-            
-          </div>
-          <div class="presenter_notes">
-            <header><h1>Presenter Notes</h1></header>
-            <section>
-            
-            </section>
-          </div>
-          <footer>
-            
-            
-            <aside class="source">
-              Source: <a href="presentation.md">presentation.md</a>
-            </aside>
-            
-            <aside class="page_number">
-              2/20
-            </aside>
-          </footer>
-        </div>
-      </div>
-      
-      <!-- slide source: presentation.md -->
-      <div class="slide-wrapper">
-        <div class="slide slide-3">
-          <div class="inner">
-            
-            <header><h1>Readiness a Liveness probes - pokračování</h1></header>
+            <header><h1>Requests, limits v k9s</h1></header>
             
             
             <section><ul>
-<li>kompletní ukázka chování při výpadku liveness i readiness probe</li>
+<li>ukázka v k9s</li>
 </ul></section>
             
           </div>
@@ -141,7 +118,40 @@
             </aside>
             
             <aside class="page_number">
-              3/20
+              2/40
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-3">
+          <div class="inner">
+            
+            <header><h1>kubectl ... -o jsonpath</h1></header>
+            
+            
+            <section><p><code>kubectl get pod k8s-sample-app-648d688cfc-8h7hx -o jsonpath='{.spec.nodeName}'</code></p>
+<p><code>kubectl get pod k8s-sample-app-648d688cfc-8h7hx -o jsonpath='{range .spec.containers[*]}{.name}{"\t"}{.image}'</code></p>
+<p><a href="https://kubernetes.io/docs/reference/kubectl/jsonpath/">https://kubernetes.io/docs/reference/kubectl/jsonpath/</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              3/40
             </aside>
           </footer>
         </div>
@@ -152,13 +162,656 @@
         <div class="slide slide-4">
           <div class="inner">
             
-            <header><h1>TLS</h1></header>
+            <header><h1>Autentizace - pokračování</h1></header>
             
             
             <section><ul>
-<li>Zabezpečení ingressu pomocí TLS</li>
-<li>TLS secrety </li>
+<li>User vs. ServiceAccount</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              4/40
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-5">
+          <div class="inner">
+            
+            <header><h1>Autentizace - x509</h1></header>
+            
+            
+            <section><ul>
+<li>kubeconfig - podrobněji</li>
+<li>Kubernetes PKI (viz k8s/examples/k8s/security/create-user.sh)</li>
+<li>nutny cluster admin</li>
+<li>User a Group - vazba na DN (opět viz create-user.sh)</li>
+</ul>
+<p><a href="https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/">https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              5/40
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-6">
+          <div class="inner">
+            
+            <header><h1>Autentizace - bootstrap tokens</h1></header>
+            
+            
+            <section><p><code>kubeadm token create</code> -&gt; <code>lsvnin.y4cc92mo4zrd7ea7</code> (<code>&lt;user&gt;.&lt;secret&gt;</code>)</p>
+<p>(user = lsvnin, secret = y4cc92mo4zrd7ea7)</p>
+<p><code>system:bootstrap:&lt;user&gt;</code></p>
+<p><code>system:bootstrappers</code> - skupina, kde jsou všechny <code>system:bootstrap:*</code> účty</p>
+<p>Token buď do .kube/config nebo <code>kubectl ... --token &lt;token&gt;</code></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              6/40
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-7">
+          <div class="inner">
+            
+            <header><h1>Autentizace - bootstrap tokens (příklady)</h1></header>
+            
+            
+            <section><p><code>kubectl create rolebinding system:bootstrap:lsvnin-default-admin --clusterrole cluster-admin --user system:bootstrap:lsvnin -n default</code></p>
+<p><code>kubectl create rolebinding bootstrapers-default-admin --clusterrole admin --group system:bootstrappers --namespace default</code></p>
+<p><code>kubectl create clusterrolebinding system:bootstrap:lsvnin-cluster-admin --clusterrole cluster-admin --user system:bootstrap:lsvnin</code></p>
+<p><a href="https://kubernetes.io/docs/reference/access-authn-authz/bootstrap-tokens/">https://kubernetes.io/docs/reference/access-authn-authz/bootstrap-tokens/</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              7/40
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-8">
+          <div class="inner">
+            
+            <header><h1>Autentizace - Service Account Tokens</h1></header>
+            
+            
+            <section><p><code>kubectl create serviceaccount jenkins</code></p>
+<p><code>kubectl create token jenkins</code></p>
+<p>User: <code>system:serviceaccount:(NAMESPACE):(SERVICEACCOUNT)</code></p>
+<p>Group: <code>system:serviceaccounts</code></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/40
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-9">
+          <div class="inner">
+            
+            <header><h1>OpenID Connect</h1></header>
+            
+            
+            <section><p><a href="https://kubernetes.io/docs/reference/access-authn-authz/authentication/#openid-connect-tokens">https://kubernetes.io/docs/reference/access-authn-authz/authentication/#openid-connect-tokens</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/40
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-10">
+          <div class="inner">
+            
+            <header><h1>kubeconfigy (kdo nemá)</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              10/40
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-11">
+          <div class="inner">
+            
+            <header><h1>RBAC (Role-Based Access Control)</h1></header>
+            
+            
+            <section><ul>
+<li>dá se vypnout (default = </li>
+<li>příklad - Users + Group 'skoleni'</li>
+<li>Role</li>
+<li>ClusterRole</li>
+<li>RoleBinding</li>
+<li>ClusterRoleBinding</li>
+</ul>
+<p>Seznam verbs: <code>kubectl api-resources --sort-by name -o wide</code></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              11/40
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-12">
+          <div class="inner">
+            
+            <header><h1>RBAC - cvičení 1</h1></header>
+            
+            
+            <section><ul>
+<li>nová role pro PKI (namespaced)</li>
+<li>CertificateSigningRequest</li>
+<li>certificate approve</li>
+</ul>
+<p><a href="https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/">https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/</a></p>
+<p><code>kubectl api-resources --verbs=list --api-group certificates.k8s.io -o wide</code></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              12/40
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-13">
+          <div class="inner">
+            
+            <header><h1>Řešení</h1></header>
+            
+            
+            <section><p><code>kubectl create clusterrole pki-admin --resource certificatesigningrequest.certificates.k8s.io --verb create,get,list,watch</code></p>
+<p><code>kubectl create clusterrolebinding pki-admin-amo-amoravek --clusterrole pki-admin --namespace amo --user amoravek</code></p>
+<p>Proč <strong>cluster</strong>rolebinding a ne rolebinding?
+Protože <code>certificatesigningrequest</code> není <em>namespaced</em> resource.</p>
+<p>Approval:</p>
+<p>Verbs: update, group: certificates.k8s.io, resource: certificatesigningrequests/approval</p>
+<p>Verbs: approve, group: certificates.k8s.io, resource: signers, resourceName: <signerNameDomain>/<signerNamePath> or <signerNameDomain>/*</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              13/40
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-14">
+          <div class="inner">
+            
+            <header><h1>RBAC - cvičení 2</h1></header>
+            
+            
+            <section><ul>
+<li>umožnit všem uživatelům naráz získat informace o nodech (kubectl get/describe nodes)</li>
+<li>Hint: všichni jsou ve skupině <code>skoleni</code> --&gt; <code>--group</code></li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              14/40
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-15">
+          <div class="inner">
+            
+            <header><h1>Řešení</h1></header>
+            
+            
+            <section><p><code>kubectl create clusterrolebinding skoleni-view --group skoleni --clusterrole view</code></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              15/40
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-16">
+          <div class="inner">
+            
+            <header><h1>Readiness a Liveness probes - pokračování</h1></header>
+            
+            
+            <section><ul>
+<li>kompletní ukázka chování při výpadku liveness i readiness probe</li>
+<li>ukázka výpadků v případě chybějící readiness proby</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              16/40
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-17">
+          <div class="inner">
+            
+            <header><h1>Hledání problémů</h1></header>
+            
+            
+            <section><ul>
+<li>scaling - neudělá požadovaný počet replik</li>
+<li>kontrola logů controller-managera; možné příčiny<ul>
+<li>kvóty</li>
+<li>existuje PodDisruptionBudget</li>
+</ul>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              17/40
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-18">
+          <div class="inner">
+            
+            <header><h1>LimitRange</h1></header>
+            
+            
+            <section><ul>
+<li>default limits</li>
+</ul>
+<p><a href="https://kubernetes.io/docs/concepts/policy/limit-range/">https://kubernetes.io/docs/concepts/policy/limit-range/</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              18/40
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-19">
+          <div class="inner">
+            
+            <header><h1>ResourceQuota</h1></header>
+            
+            
+            <section><ul>
+<li>
+<p>PriorityClass</p>
+<p>kubectl create quota my-quota \
+  --hard=cpu=1,memory=1G,pods=2,services=3,replicationcontrollers=2,resourcequotas=1,secrets=5,persistentvolumeclaims=10</p>
+</li>
+</ul>
+<p><a href="https://kubernetes.io/docs/concepts/policy/resource-quotas/">https://kubernetes.io/docs/concepts/policy/resource-quotas/</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              19/40
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-20">
+          <div class="inner">
+            
+            <header><h1>kubectl patch (1)</h1></header>
+            
+            
+            <section><p><code>kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "harbor-dockerhubproxy"}]}'</code></p>
+<p><code>kubectl patch deployment k8s-sample-app -p '{"metadata":{"labels":{"demo":"yes"}}}'</code></p>
+<p>jenže co když chceme postupně přidávat více (přes CLI)?
+- json: <code>kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "harbor-amor"}, {"name": "harbor-dockerhubproxy"}]}'</code></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              20/40
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-21">
+          <div class="inner">
+            
+            <header><h1>kubectl patch (2)</h1></header>
+            
+            
+            <section><ul>
+<li>
+<p>patch file: <code>kubectl patch serviceaccount default --patch-file ...</code></p>
+<pre><code>imagePullSecrets:
+- harbor-amor
+- harbor-dockerhubproxy
+</code></pre>
+<ul>
+<li>type=json:</li>
+</ul>
+<p>kubectl patch nodes worker04 worker05 \
+  --type=json -p='[{"op": "add", "path": "/metadata/labels/demo", "value": "yes"}]'</p>
+<p>kubectl patch nodes worker04 worker05 \
+  --type=json -p='[{"op": "remove", "path": "/metadata/labels/demo"}]'</p>
+</li>
+</ul>
+<p>...nebo dohromady:</p>
+<pre><code>  kubectl patch nodes worker04 worker05 \
+  --type=json -p='[
+    {"op": "add", "path": "/metadata/labels/demo", "value": "yes"},
+    {"op": "remove", "path": "/metadata/labels/xxx", "value": "yes"}
+  ]'
+</code></pre>
+<p><a href="https://kubernetes.io/docs/tasks/manage-kubernetes-objects/update-api-object-kubectl-patch/">https://kubernetes.io/docs/tasks/manage-kubernetes-objects/update-api-object-kubectl-patch/</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              21/40
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-22">
+          <div class="inner">
+            
+            <header><h1>Zabezpečení ingressu pomocí TLS</h1></header>
+            
+            
+            <section><ul>
+<li>TLS secrety - viz entry app (ukázka vytvoření TLS secretu)</li>
 <li>Registry secrety</li>
+<li>generické secrety</li>
 </ul>
 </section>
             
@@ -179,7 +832,7 @@
             </aside>
             
             <aside class="page_number">
-              4/20
+              22/40
             </aside>
           </footer>
         </div>
@@ -187,7 +840,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-5">
+        <div class="slide slide-23">
           <div class="inner">
             
             <header><h1>Labels &amp; selectors, node selectors</h1></header>
@@ -217,7 +870,7 @@
             </aside>
             
             <aside class="page_number">
-              5/20
+              23/40
             </aside>
           </footer>
         </div>
@@ -225,23 +878,38 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-6">
+        <div class="slide has_code slide-24">
           <div class="inner">
             
-            <header><h1>High-availability, pod disruption budget</h1></header>
+            <header><h1>Taints, tolerations (1)</h1></header>
             
             
-            <section><p><code>kubectl create poddisruptionbudget k8s-sample-app-pdb --selector=app=k8s-sample-app --min-available=1</code></p>
+            <section><p><code>kubectl taint nodes node1 key1=value1:NoSchedule</code></p>
+<p><code>kubectl taint nodes node1 key1=value1:NoSchedule-</code></p>
+<div class="highlight"><pre><span></span><span class="nt">tolerations</span><span class="p">:</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;key1&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Equal&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;value1&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">effect</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;NoSchedule&quot;</span><span class="w"></span>
 
+<span class="nt">tolerations</span><span class="p">:</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;key1&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Equal&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;value1&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">effect</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;NoExecute&quot;</span><span class="w"></span>
 
-<p><a href="https://kubernetes.io/docs/tasks/run-application/configure-pdb/">https://kubernetes.io/docs/tasks/run-application/configure-pdb/</a></p></section>
+<span class="kt">!yaml</span><span class="w"></span>
+<span class="nt">tolerations</span><span class="p">:</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;key1&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Exists&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">effect</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;NoSchedule&quot;</span><span class="w"></span>
+</pre></div>
+</section>
             
           </div>
           <div class="presenter_notes">
             <header><h1>Presenter Notes</h1></header>
             <section>
-            
-              <p>examples/k8s/ha</p><p>ukazat nejprve drain bez pdb, pak s nim</p>
             
             </section>
           </div>
@@ -253,7 +921,7 @@
             </aside>
             
             <aside class="page_number">
-              6/20
+              24/40
             </aside>
           </footer>
         </div>
@@ -261,7 +929,173 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-7">
+        <div class="slide slide-25">
+          <div class="inner">
+            
+            <header><h1>Taints, tolerations (1)</h1></header>
+            
+            
+            <section><p><code>kubectl describe nodes | egrep -hi "Taint|Hostname"</code></p>
+<p><code>kubectl get nodes -o custom-columns=NAME:.metadata.name,TAINTS:.spec.taints --no-headers</code></p>
+<p><a href="https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/">https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              25/40
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-26">
+          <div class="inner">
+            
+            <header><h1>High-availability, pod disruption budget (příprava 1)</h1></header>
+            
+            
+            <section><p>1) nejprve vyčistit 2 nody (vysvětlit):</p>
+<pre><code>      kubectl patch nodes worker04 worker05 -p '{"spec":{"taints": null}}'
+      kubectl patch nodes worker04 worker05 --type=json -p='[{"op": "remove", "path": "/metadata/labels/demo"}]'
+
+      kubectl taint node worker04 demo=pdb-test:NoExecute
+      kubectl taint node worker05 demo=pdb-test:NoExecute
+      kubectl taint node worker05 demo=pdb-test:NoSchedule
+</code></pre>
+<p>2) přidat label <code>demo=yes</code> oběma nodům (třeba přes patch)</p>
+<pre><code>- `kubectl patch nodes worker04 worker05 --type=json -p='[{"op": "add", "path": "/metadata/labels/demo", "value": "yes"}]'`
+
+- zkontrolovat přes --selector
+</code></pre></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              26/40
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-27">
+          <div class="inner">
+            
+            <header><h1>High-availability, pod disruption budget (příprava 2)</h1></header>
+            
+            
+            <section><p>3) nodeSelector -&gt; node label demo=yes
+    - na oba nody
+    - nasadit deployment
+    - naškálovat na 2 repliky</p>
+<p>4) dodat toleration do deploymentu:</p>
+<pre><code>      tolerations:
+      - key: "demo"
+        operator: "Equal"
+        value: "pdb-test"
+        effect: "NoExecute"
+
+  cílem je dostat pody jen na worker04
+</code></pre>
+<p>5) osdtranit taint NoSchedule (proč?)</p>
+<p>6) předvést drain worker04 při zapnuté curl smyčce (app-client)</p>
+<pre><code>      while true; do
+        curl http://k8s-sample-app/ready
+        cat /proc/uptime|awk '{print $1}'
+        sleep 0.1
+      done
+</code></pre></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              27/40
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-28">
+          <div class="inner">
+            
+            <header><h1>High-availability, pod disruption budget</h1></header>
+            
+            
+            <section><p><code>kubectl create poddisruptionbudget k8s-sample-app-pdb --selector=app=k8s-sample-app --min-available=2</code></p>
+<ul>
+<li>app-client + skript</li>
+<li>drain bez PDB</li>
+<li>drain s PDB</li>
+</ul>
+<p><a href="https://kubernetes.io/docs/tasks/run-application/configure-pdb/">https://kubernetes.io/docs/tasks/run-application/configure-pdb/</a>
+<a href="https://kubernetes.io/docs/concepts/workloads/pods/disruptions/">https://kubernetes.io/docs/concepts/workloads/pods/disruptions/</a></p>
+<p>POZOR! PDB nefunguje v případech <strong>taint-based eviction</strong> (vysvětlit a ukázat)</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              28/40
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-29">
           <div class="inner">
             
             <header><h1>Horizontal pod autoscaler</h1></header>
@@ -270,7 +1104,8 @@
             <section><p><code>kubectl autoscale deployment k8s-sample-app --min=1 --max=3 --cpu-percent=50</code></p>
 <p>load:</p>
 <p><code>kubectl run -i --tty load-generator --rm --image=harbor.trask.cz/arm64/ubuntu-netcat --restart=Never -- /bin/sh -c "while sleep 0.01; do curl -s --connect-timeout 2 --max-time 2 http://10.4.61.4; done"</code></p>
-<p><a href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/">https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/</a></p></section>
+<p><a href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/">https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/</a>
+<a href="https://v1-25.docs.kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/">https://v1-25.docs.kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/</a></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -287,7 +1122,7 @@
             </aside>
             
             <aside class="page_number">
-              7/20
+              29/40
             </aside>
           </footer>
         </div>
@@ -295,56 +1130,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_code slide-8">
-          <div class="inner">
-            
-            <header><h1>Taints, tolerations</h1></header>
-            
-            
-            <section><p><code>kubectl taint nodes node1 key1=value1:NoSchedule</code></p>
-<p><code>kubectl taint nodes node1 key1=value1:NoSchedule-</code></p>
-<div class="highlight"><pre><span></span><span class="lineno"> 1 </span><span class="nt">tolerations</span><span class="p">:</span>
-<span class="lineno"> 2 </span><span class="p p-Indicator">-</span> <span class="nt">key</span><span class="p">:</span> <span class="s">&quot;key1&quot;</span>
-<span class="lineno"> 3 </span>  <span class="nt">operator</span><span class="p">:</span> <span class="s">&quot;Equal&quot;</span>
-<span class="lineno"> 4 </span>  <span class="nt">value</span><span class="p">:</span> <span class="s">&quot;value1&quot;</span>
-<span class="lineno"> 5 </span>  <span class="nt">effect</span><span class="p">:</span> <span class="s">&quot;NoSchedule&quot;</span>
-<span class="lineno"> 6 </span>
-<span class="lineno"> 7 </span><span class="kt">!yaml</span>
-<span class="lineno"> 8 </span><span class="nt">tolerations</span><span class="p">:</span>
-<span class="lineno"> 9 </span><span class="p p-Indicator">-</span> <span class="nt">key</span><span class="p">:</span> <span class="s">&quot;key1&quot;</span>
-<span class="lineno">10 </span>  <span class="nt">operator</span><span class="p">:</span> <span class="s">&quot;Exists&quot;</span>
-<span class="lineno">11 </span>  <span class="nt">effect</span><span class="p">:</span> <span class="s">&quot;NoSchedule&quot;</span>
-</pre></div>
-
-
-<p><a href="https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/">https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/</a></p></section>
-            
-          </div>
-          <div class="presenter_notes">
-            <header><h1>Presenter Notes</h1></header>
-            <section>
-            
-              <p>kubectl describe nodes | egrep -hi "Taint|Hostname"</p>
-            
-            </section>
-          </div>
-          <footer>
-            
-            
-            <aside class="source">
-              Source: <a href="presentation.md">presentation.md</a>
-            </aside>
-            
-            <aside class="page_number">
-              8/20
-            </aside>
-          </footer>
-        </div>
-      </div>
-      
-      <!-- slide source: presentation.md -->
-      <div class="slide-wrapper">
-        <div class="slide slide-9">
+        <div class="slide slide-30">
           <div class="inner">
             
             <header><h1>Cordon, drain</h1></header>
@@ -375,7 +1161,7 @@
             </aside>
             
             <aside class="page_number">
-              9/20
+              30/40
             </aside>
           </footer>
         </div>
@@ -383,7 +1169,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-10">
+        <div class="slide slide-31">
           <div class="inner">
             
             <header><h1>Custom Resource Definition (CRD)</h1></header>
@@ -404,7 +1190,7 @@
             </aside>
             
             <aside class="page_number">
-              10/20
+              31/40
             </aside>
           </footer>
         </div>
@@ -412,7 +1198,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-11">
+        <div class="slide slide-32">
           <div class="inner">
             
             <header><h1>Resource quota</h1></header>
@@ -433,7 +1219,7 @@
             </aside>
             
             <aside class="page_number">
-              11/20
+              32/40
             </aside>
           </footer>
         </div>
@@ -441,7 +1227,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-12">
+        <div class="slide slide-33">
           <div class="inner">
             
             <header><h1>Resource limit</h1></header>
@@ -462,7 +1248,7 @@
             </aside>
             
             <aside class="page_number">
-              12/20
+              33/40
             </aside>
           </footer>
         </div>
@@ -470,7 +1256,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-13">
+        <div class="slide slide-34">
           <div class="inner">
             
             <header><h1>Kubernetes best practices -&gt; Helm Charts</h1></header>
@@ -491,7 +1277,7 @@
             </aside>
             
             <aside class="page_number">
-              13/20
+              34/40
             </aside>
           </footer>
         </div>
@@ -499,11 +1285,13 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-14">
+        <div class="slide slide-35">
           <div class="inner">
             
             <header><h1>Autentifikace, uživatelské a servisní účty</h1></header>
             
+            
+            <section><p>https://kubernetes-tutorial.schoolofdevops.com/configuring_authentication_and_authorization/</p></section>
             
           </div>
           <div class="presenter_notes">
@@ -520,7 +1308,7 @@
             </aside>
             
             <aside class="page_number">
-              14/20
+              35/40
             </aside>
           </footer>
         </div>
@@ -528,7 +1316,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-15">
+        <div class="slide slide-36">
           <div class="inner">
             
             <header><h1>Container registry - autentifikace</h1></header>
@@ -554,7 +1342,7 @@
             </aside>
             
             <aside class="page_number">
-              15/20
+              36/40
             </aside>
           </footer>
         </div>
@@ -562,36 +1350,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-16">
-          <div class="inner">
-            
-            <header><h1>RBAC</h1></header>
-            
-            
-          </div>
-          <div class="presenter_notes">
-            <header><h1>Presenter Notes</h1></header>
-            <section>
-            
-            </section>
-          </div>
-          <footer>
-            
-            
-            <aside class="source">
-              Source: <a href="presentation.md">presentation.md</a>
-            </aside>
-            
-            <aside class="page_number">
-              16/20
-            </aside>
-          </footer>
-        </div>
-      </div>
-      
-      <!-- slide source: presentation.md -->
-      <div class="slide-wrapper">
-        <div class="slide slide-17">
+        <div class="slide slide-37">
           <div class="inner">
             
             <header><h1>Multiplatformní přístupy (ARM64)</h1></header>
@@ -612,7 +1371,7 @@
             </aside>
             
             <aside class="page_number">
-              17/20
+              37/40
             </aside>
           </footer>
         </div>
@@ -620,7 +1379,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-18">
+        <div class="slide slide-38">
           <div class="inner">
             
             <header><h1>Diskuse</h1></header>
@@ -641,7 +1400,7 @@
             </aside>
             
             <aside class="page_number">
-              18/20
+              38/40
             </aside>
           </footer>
         </div>
@@ -649,10 +1408,10 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-19">
+        <div class="slide has_footer slide-39">
           <div class="inner">
             
-            <header><h1>Přestávka do 10:30</h1></header>
+            <header><h1>Přestávka</h1></header>
             
             
             <section>
@@ -675,7 +1434,7 @@
             </aside>
             
             <aside class="page_number">
-              19/20
+              39/40
             </aside>
           </footer>
         </div>
@@ -683,7 +1442,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-20">
+        <div class="slide has_footer slide-40">
           <div class="inner">
             
             <header><h1>Přestávka na oběd</h1></header>
@@ -709,7 +1468,7 @@
             </aside>
             
             <aside class="page_number">
-              20/20
+              40/40
             </aside>
           </footer>
         </div>
@@ -732,7 +1491,7 @@
             
             
             <aside class="page_number">
-              /20
+              /40
             </aside>
           </footer>
         </div>
@@ -752,117 +1511,243 @@
 
       <!-- generating sections of TOC -->
       
+      <tr id="toc-row-1">
+        <th><a href="#slide:1">Kubernetes II.</a></th>
+        <td><a href="#slide:1">1</a></td>
+      </tr>
+      
+      
       <tr id="toc-row-2">
-        <th><a href="#slide:2">Odpovědi na některé Dotazy</a></th>
+        <th><a href="#slide:2">Requests, limits v k9s</a></th>
         <td><a href="#slide:2">2</a></td>
       </tr>
       
       
       <tr id="toc-row-3">
-        <th><a href="#slide:3">Readiness a Liveness probes - pokračování</a></th>
+        <th><a href="#slide:3">kubectl ... -o jsonpath</a></th>
         <td><a href="#slide:3">3</a></td>
       </tr>
       
       
       <tr id="toc-row-4">
-        <th><a href="#slide:4">TLS</a></th>
+        <th><a href="#slide:4">Autentizace - pokračování</a></th>
         <td><a href="#slide:4">4</a></td>
       </tr>
       
       
       <tr id="toc-row-5">
-        <th><a href="#slide:5">Labels &amp; selectors, node selectors</a></th>
+        <th><a href="#slide:5">Autentizace - x509</a></th>
         <td><a href="#slide:5">5</a></td>
       </tr>
       
       
       <tr id="toc-row-6">
-        <th><a href="#slide:6">High-availability, pod disruption budget</a></th>
+        <th><a href="#slide:6">Autentizace - bootstrap tokens</a></th>
         <td><a href="#slide:6">6</a></td>
       </tr>
       
       
       <tr id="toc-row-7">
-        <th><a href="#slide:7">Horizontal pod autoscaler</a></th>
+        <th><a href="#slide:7">Autentizace - bootstrap tokens (příklady)</a></th>
         <td><a href="#slide:7">7</a></td>
       </tr>
       
       
       <tr id="toc-row-8">
-        <th><a href="#slide:8">Taints, tolerations</a></th>
+        <th><a href="#slide:8">Autentizace - Service Account Tokens</a></th>
         <td><a href="#slide:8">8</a></td>
       </tr>
       
       
       <tr id="toc-row-9">
-        <th><a href="#slide:9">Cordon, drain</a></th>
+        <th><a href="#slide:9">OpenID Connect</a></th>
         <td><a href="#slide:9">9</a></td>
       </tr>
       
       
       <tr id="toc-row-10">
-        <th><a href="#slide:10">Custom Resource Definition (CRD)</a></th>
+        <th><a href="#slide:10">kubeconfigy (kdo nemá)</a></th>
         <td><a href="#slide:10">10</a></td>
       </tr>
       
       
       <tr id="toc-row-11">
-        <th><a href="#slide:11">Resource quota</a></th>
+        <th><a href="#slide:11">RBAC (Role-Based Access Control)</a></th>
         <td><a href="#slide:11">11</a></td>
       </tr>
       
       
       <tr id="toc-row-12">
-        <th><a href="#slide:12">Resource limit</a></th>
+        <th><a href="#slide:12">RBAC - cvičení 1</a></th>
         <td><a href="#slide:12">12</a></td>
       </tr>
       
       
       <tr id="toc-row-13">
-        <th><a href="#slide:13">Kubernetes best practices -&gt; Helm Charts</a></th>
+        <th><a href="#slide:13">Řešení</a></th>
         <td><a href="#slide:13">13</a></td>
       </tr>
       
       
       <tr id="toc-row-14">
-        <th><a href="#slide:14">Autentifikace, uživatelské a servisní účty</a></th>
+        <th><a href="#slide:14">RBAC - cvičení 2</a></th>
         <td><a href="#slide:14">14</a></td>
       </tr>
       
       
       <tr id="toc-row-15">
-        <th><a href="#slide:15">Container registry - autentifikace</a></th>
+        <th><a href="#slide:15">Řešení</a></th>
         <td><a href="#slide:15">15</a></td>
       </tr>
       
       
       <tr id="toc-row-16">
-        <th><a href="#slide:16">RBAC</a></th>
+        <th><a href="#slide:16">Readiness a Liveness probes - pokračování</a></th>
         <td><a href="#slide:16">16</a></td>
       </tr>
       
       
       <tr id="toc-row-17">
-        <th><a href="#slide:17">Multiplatformní přístupy (ARM64)</a></th>
+        <th><a href="#slide:17">Hledání problémů</a></th>
         <td><a href="#slide:17">17</a></td>
       </tr>
       
       
       <tr id="toc-row-18">
-        <th><a href="#slide:18">Diskuse</a></th>
+        <th><a href="#slide:18">LimitRange</a></th>
         <td><a href="#slide:18">18</a></td>
       </tr>
       
       
       <tr id="toc-row-19">
-        <th><a href="#slide:19">Přestávka do 10:30</a></th>
+        <th><a href="#slide:19">ResourceQuota</a></th>
         <td><a href="#slide:19">19</a></td>
       </tr>
       
       
       <tr id="toc-row-20">
-        <th><a href="#slide:20">Přestávka na oběd</a></th>
+        <th><a href="#slide:20">kubectl patch (1)</a></th>
         <td><a href="#slide:20">20</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-21">
+        <th><a href="#slide:21">kubectl patch (2)</a></th>
+        <td><a href="#slide:21">21</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-22">
+        <th><a href="#slide:22">Zabezpečení ingressu pomocí TLS</a></th>
+        <td><a href="#slide:22">22</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-23">
+        <th><a href="#slide:23">Labels &amp; selectors, node selectors</a></th>
+        <td><a href="#slide:23">23</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-24">
+        <th><a href="#slide:24">Taints, tolerations (1)</a></th>
+        <td><a href="#slide:24">24</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-25">
+        <th><a href="#slide:25">Taints, tolerations (1)</a></th>
+        <td><a href="#slide:25">25</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-26">
+        <th><a href="#slide:26">High-availability, pod disruption budget (příprava 1)</a></th>
+        <td><a href="#slide:26">26</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-27">
+        <th><a href="#slide:27">High-availability, pod disruption budget (příprava 2)</a></th>
+        <td><a href="#slide:27">27</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-28">
+        <th><a href="#slide:28">High-availability, pod disruption budget</a></th>
+        <td><a href="#slide:28">28</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-29">
+        <th><a href="#slide:29">Horizontal pod autoscaler</a></th>
+        <td><a href="#slide:29">29</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-30">
+        <th><a href="#slide:30">Cordon, drain</a></th>
+        <td><a href="#slide:30">30</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-31">
+        <th><a href="#slide:31">Custom Resource Definition (CRD)</a></th>
+        <td><a href="#slide:31">31</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-32">
+        <th><a href="#slide:32">Resource quota</a></th>
+        <td><a href="#slide:32">32</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-33">
+        <th><a href="#slide:33">Resource limit</a></th>
+        <td><a href="#slide:33">33</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-34">
+        <th><a href="#slide:34">Kubernetes best practices -&gt; Helm Charts</a></th>
+        <td><a href="#slide:34">34</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-35">
+        <th><a href="#slide:35">Autentifikace, uživatelské a servisní účty</a></th>
+        <td><a href="#slide:35">35</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-36">
+        <th><a href="#slide:36">Container registry - autentifikace</a></th>
+        <td><a href="#slide:36">36</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-37">
+        <th><a href="#slide:37">Multiplatformní přístupy (ARM64)</a></th>
+        <td><a href="#slide:37">37</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-38">
+        <th><a href="#slide:38">Diskuse</a></th>
+        <td><a href="#slide:38">38</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-39">
+        <th><a href="#slide:39">Přestávka</a></th>
+        <td><a href="#slide:39">39</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-40">
+        <th><a href="#slide:40">Přestávka na oběd</a></th>
+        <td><a href="#slide:40">40</a></td>
       </tr>
       
       
@@ -911,7 +1796,7 @@
       </tr>
     </table>
     <br>
-    <strong>Generated with Darkslide 5.1.0</strong>
+    <strong>Generated with Darkslide 6.0.0</strong>
   </div>
   <script>main()</script>
 </body>

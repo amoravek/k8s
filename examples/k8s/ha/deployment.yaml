@@ -27,6 +27,7 @@ spec:
         env:
         - name: UNREADY_MILLIS
           value: '60000'
+        name: k8s-sample-app
         livenessProbe:
           httpGet:
             path: /alive
@@ -34,7 +35,6 @@ spec:
             scheme: HTTP
           initialDelaySeconds: 60
           periodSeconds: 10
-        name: k8s-sample-app
         readinessProbe:
           httpGet:
             path: /ready

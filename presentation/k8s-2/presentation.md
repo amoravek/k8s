@@ -217,7 +217,7 @@ jenže co když chceme postupně přidávat více (přes CLI)?
 <https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/>
 
 ---
-# Taints, tolerations 
+# Taints, tolerations (1)
 
   `kubectl taint nodes node1 key1=value1:NoSchedule`
 
@@ -242,7 +242,12 @@ jenže co když chceme postupně přidávat více (přes CLI)?
       operator: "Exists"
       effect: "NoSchedule"
 
-.notes: kubectl describe nodes | egrep -hi "Taint|Hostname"
+---
+# Taints, tolerations (2)
+
+`kubectl describe nodes | egrep -hi "Taint|Hostname"`
+
+`kubectl get nodes -o custom-columns=NAME:.metadata.name,TAINTS:.spec.taints --no-headers`
 
 <https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/>
 
