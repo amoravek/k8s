@@ -10,8 +10,8 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: 1.0-SNAPSHOT
 
-imagePullSecrets:
-  - name: harbor-amor
+imagePullSecrets: []
+#   - name: harbor-amor
 nameOverride: ""
 fullnameOverride: ""
 
