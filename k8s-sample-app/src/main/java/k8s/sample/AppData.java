@@ -14,7 +14,7 @@ public final class AppData {
 	public static final AtomicBoolean ready = new AtomicBoolean(true);
 	public static final AtomicLong unreadyAt = new AtomicLong(0);
 	
-	private static final String SECRET_DATA_FILE_DEFAULT = "/vault/secret-data";
+	private static final String SECRET_DATA_FILE_DEFAULT = "/vault/secrets/secret-data.txt";
 	private static final String SECRET_DATA_FILE = System.getenv("SECRET_DATA_FILE") != null ? System.getenv("SECRET_DATA_FILE") : SECRET_DATA_FILE_DEFAULT;
 
 	private static final String readFileContents(String fileName) throws IOException {
