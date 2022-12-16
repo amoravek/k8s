@@ -28,6 +28,10 @@ podAnnotations:
   vault.hashicorp.com/agent-inject: 'true'
   vault.hashicorp.com/role: 'internal-app'
   vault.hashicorp.com/agent-inject-secret-secret-data.txt: 'internal/data/mysecret'
+  vault.hashicorp.com/agent-inject-template-secret-data.txt: |
+    {{- with secret "internal/data/mysecret" -}}
+    {{ .Data.data.heslo }}
+    {{- end -}}
 
 podSecurityContext: {}
   # fsGroup: 2000
