@@ -29,24 +29,24 @@
     <title>Docker</title>
 
   
-     <link rel="stylesheet" href="file:///usr/local/lib/python3.10/dist-packages/darkslide/themes/default/css/base.css">
+     <link rel="stylesheet" href="file:///usr/lib/python3/dist-packages/darkslide/themes/default/css/base.css">
   
 
   
-     <link rel="stylesheet" href="file:///usr/local/lib/python3.10/dist-packages/darkslide/themes/default/css/print.css">
+     <link rel="stylesheet" href="file:///usr/lib/python3/dist-packages/darkslide/themes/default/css/print.css">
   
 
   
-     <link rel="stylesheet" href="file:///usr/local/lib/python3.10/dist-packages/darkslide/themes/default/css/screen.css">
+     <link rel="stylesheet" href="file:///usr/lib/python3/dist-packages/darkslide/themes/default/css/screen.css">
   
 
   
-     <link rel="stylesheet" href="file:///usr/local/lib/python3.10/dist-packages/darkslide/themes/default/css/theme.css">
+     <link rel="stylesheet" href="file:///usr/lib/python3/dist-packages/darkslide/themes/default/css/theme.css">
   
 
 
   
-    <script type="text/javascript" src="file:///usr/local/lib/python3.10/dist-packages/darkslide/themes/default/js/slides.js"></script>
+    <script type="text/javascript" src="file:///usr/lib/python3/dist-packages/darkslide/themes/default/js/slides.js"></script>
   
 
 </head>
@@ -370,7 +370,7 @@ amoravek@trask.cz<br/>
             
             
             <section>
-<p><img alt="docker-vs-vm" src="file:///home/amoravek/projects/trask/k8s-skoleni/git/k8s/presentation/docker/docker-vs-vm.png" /></p>
+<p><img alt="docker-vs-vm" src="file:///home/amoravek/git/k8s/presentation/docker/docker-vs-vm.png" /></p>
 <p>...je to tedy spíše taková <em>aplikační virtualizace</em></p>
 
 </section>
@@ -503,8 +503,8 @@ amoravek@trask.cz<br/>
 <li>lze si představit jako ZIP aplikačních binárek, souborového systému OS + nějaká metadata</li>
 <li><em>image</em> je vždy read-only, vytváří se <em>buildem</em></li>
 <li>image se většinou zakládá na nějakém již existujícím - např. JDK image dědí z Alpine Linux image a dodá instalaci JDK
-  <br/><br/><div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">alpine</span>
-<span class="k">RUN</span><span class="w"> </span>&lt;instalace jdk&gt;
+  <br/><br/><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">FROM</span><span class="w"> </span><span class="s">alpine</span>
+<span class="linenos">2</span><span class="k">RUN</span><span class="w"> </span>&lt;instalace jdk&gt;
 </pre></div>
 
 </li>
@@ -584,17 +584,17 @@ amoravek@trask.cz<br/>
             <header><h1>Parent / base image (2)</h1></header>
             
             
-            <section><div class="highlight"><pre><span></span>$ sudo debootstrap xenial xenial &gt; /dev/null
-$ sudo tar -C xenial -c . <span class="p">|</span> docker import - xenial
-
-a29c15f1bf7a
-
-$ docker run xenial cat /etc/lsb-release
-
-<span class="nv">DISTRIB_ID</span><span class="o">=</span>Ubuntu
-<span class="nv">DISTRIB_RELEASE</span><span class="o">=</span><span class="m">16</span>.04
-<span class="nv">DISTRIB_CODENAME</span><span class="o">=</span>xenial
-<span class="nv">DISTRIB_DESCRIPTION</span><span class="o">=</span><span class="s2">&quot;Ubuntu 16.04 LTS&quot;</span>
+            <section><div class="highlight"><pre><span></span><span class="linenos"> 1</span>$ sudo debootstrap xenial xenial &gt; /dev/null
+<span class="linenos"> 2</span>$ sudo tar -C xenial -c . <span class="p">|</span> docker import - xenial
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span>a29c15f1bf7a
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span>$ docker run xenial cat /etc/lsb-release
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="nv">DISTRIB_ID</span><span class="o">=</span>Ubuntu
+<span class="linenos"> 9</span><span class="nv">DISTRIB_RELEASE</span><span class="o">=</span><span class="m">16</span>.04
+<span class="linenos">10</span><span class="nv">DISTRIB_CODENAME</span><span class="o">=</span>xenial
+<span class="linenos">11</span><span class="nv">DISTRIB_DESCRIPTION</span><span class="o">=</span><span class="s2">&quot;Ubuntu 16.04 LTS&quot;</span>
 </pre></div>
 </section>
             
@@ -882,10 +882,10 @@ $ docker run xenial cat /etc/lsb-release
 <li>základní (a naprosto dostačující) utilita pro vytváření, správu a manipulaci s docker objekty</li>
 <li>build image: <code>docker build -t myimage:1.0</code> .</li>
 <li>spuštění kontejneru:
-  <br/><br/><div class="highlight"><pre><span></span>docker run -d <span class="se">\</span>
---name mycont1 <span class="se">\</span>
--p <span class="m">8088</span>:8080 <span class="se">\</span>
-myimage:1.0
+  <br/><br/><div class="highlight"><pre><span></span><span class="linenos">1</span>docker run -d <span class="se">\</span>
+<span class="linenos">2</span>--name mycont1 <span class="se">\</span>
+<span class="linenos">3</span>-p <span class="m">8088</span>:8080 <span class="se">\</span>
+<span class="linenos">4</span>myimage:1.0
 </pre></div>
 
 </li>
@@ -963,8 +963,8 @@ myimage:1.0
             <section>
 <p>(examples/docker-simple)</p>
 <p>Dockerfile</p>
-<div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">nginx:alpine</span>
-<span class="k">COPY</span><span class="w"> </span>. /usr/share/nginx/html
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">FROM</span><span class="w"> </span><span class="s">nginx:alpine</span>
+<span class="linenos">2</span><span class="k">COPY</span><span class="w"> </span>. /usr/share/nginx/html
 </pre></div>
 
 
@@ -1013,15 +1013,15 @@ myimage:1.0
             
             <section><p>Zastavíme kontejner (běží na popředí): Ctrl+C (pošle SIGINT, ne SIGKILL)</p>
 <p>Spustíme na pozadí:</p>
-<div class="highlight"><pre><span></span>docker run -d <span class="se">\</span>
---name docker-simple <span class="se">\</span>
--p <span class="m">8881</span>:80 <span class="se">\</span>
-docker-simple:0.1
+<div class="highlight"><pre><span></span><span class="linenos">1</span>docker run -d <span class="se">\</span>
+<span class="linenos">2</span>--name docker-simple <span class="se">\</span>
+<span class="linenos">3</span>-p <span class="m">8881</span>:80 <span class="se">\</span>
+<span class="linenos">4</span>docker-simple:0.1
 </pre></div>
 
 <p>Ověříme, že běží:</p>
-<div class="highlight"><pre><span></span>docker ps
-docker logs -f docker-simple
+<div class="highlight"><pre><span></span><span class="linenos">1</span>docker ps
+<span class="linenos">2</span>docker logs -f docker-simple
 </pre></div>
 </section>
             
@@ -1057,21 +1057,21 @@ docker logs -f docker-simple
             
             
             <section><p>Prozkoumáme kontejner (pocitově jsme <em>jako kdyby</em> ve VM):</p>
-<div class="highlight"><pre><span></span>docker <span class="nb">exec</span> -ti docker-simple sh
-<span class="nb">cd</span> /usr/share/nginx/html
-ls -l
+<div class="highlight"><pre><span></span><span class="linenos">1</span>docker <span class="nb">exec</span> -ti docker-simple sh
+<span class="linenos">2</span><span class="nb">cd</span> /usr/share/nginx/html
+<span class="linenos">3</span>ls -l
 </pre></div>
 
 <p>Vypíše:</p>
-<div class="highlight"><pre><span></span>50x.html    Dockerfile  build.sh    index.html
+<div class="highlight"><pre><span></span><span class="linenos">1</span>50x.html    Dockerfile  build.sh    index.html
 </pre></div>
 
 <p>Pokusy:</p>
-<div class="highlight"><pre><span></span>hostname
-ps
-ls -la /
-uname -a
-cat /etc/*release
+<div class="highlight"><pre><span></span><span class="linenos">1</span>hostname
+<span class="linenos">2</span>ps
+<span class="linenos">3</span>ls -la /
+<span class="linenos">4</span>uname -a
+<span class="linenos">5</span>cat /etc/*release
 </pre></div>
 </section>
             
@@ -1107,12 +1107,12 @@ cat /etc/*release
             
             
             <section><p>Uklidíme:</p>
-<div class="highlight"><pre><span></span><span class="nb">exit</span>
-docker ps
-docker stop/kill docker-simple
-docker ps -a
-docker rm/rm -f docker-simple
-docker ps -a
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="nb">exit</span>
+<span class="linenos">2</span>docker ps
+<span class="linenos">3</span>docker stop/kill docker-simple
+<span class="linenos">4</span>docker ps -a
+<span class="linenos">5</span>docker rm/rm -f docker-simple
+<span class="linenos">6</span>docker ps -a
 </pre></div>
 
 <p>...a nikde nic...EPHEMERAL! :-)</p>
@@ -1153,17 +1153,17 @@ docker ps -a
 <p>...vraťme se ještě na slide <strong><a href="#slide:14">Příklad (3)</a></strong>: co tam dělá Dockerfile a build.sh???</p>
 <p>Chtěli jsme to přece: <code>COPY . /usr/share/nginx/html</code></p>
 <p>Řešení je snadné - filtrace kontextu pomocí <code>.dockerignore</code> (obdoba .gitignore) - např.:</p>
-<div class="highlight"><pre><span></span>.git
-.cache
-target
-**/*.class
-*.md
-!README.md
+<div class="highlight"><pre><span></span><span class="linenos">1</span>.git
+<span class="linenos">2</span>.cache
+<span class="linenos">3</span>target
+<span class="linenos">4</span>**/*.class
+<span class="linenos">5</span>*.md
+<span class="linenos">6</span>!README.md
 </pre></div>
 
 <p>...a pro <strong>náš</strong> příklad:</p>
-<div class="highlight"><pre><span></span>*.sh
-Dockerfile*
+<div class="highlight"><pre><span></span><span class="linenos">1</span>*.sh
+<span class="linenos">2</span>Dockerfile*
 </pre></div>
 
 <p>Zkusme tedy nový build... (také např. <a href="https://github.com/argoproj/argo-cd">https://github.com/argoproj/argo-cd</a>)</p></section>
@@ -1200,7 +1200,7 @@ Dockerfile*
             
             
             <section>
-<p><img alt="docker-vs-vm" src="file:///home/amoravek/projects/trask/k8s-skoleni/git/k8s/presentation/docker/../common/coffee.jpg" /></p></section>
+<p><img alt="docker-vs-vm" src="file:///home/amoravek/git/k8s/presentation/docker/../common/coffee.jpg" /></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -1364,23 +1364,23 @@ Dockerfile*
 <li>
 <p>obsah .dockerignore
   <br/><br/></p>
-<div class="highlight"><pre><span></span>!my1.txt
-!my2.txt
+<div class="highlight"><pre><span></span><span class="linenos">1</span>!my1.txt
+<span class="linenos">2</span>!my2.txt
 </pre></div>
 
 </li>
 <li>
 <p>obsah Dockerfile
   <br/><br/></p>
-<div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">alpine</span>
-
-<span class="k">COPY</span><span class="w"> </span>my1.txt /
-<span class="k">COPY</span><span class="w"> </span>my2.txt /
-<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/</span>
-
-<span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;cat&quot;</span><span class="p">]</span>
-
-<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;my1.txt&quot;</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">FROM</span><span class="w"> </span><span class="s">alpine</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="k">COPY</span><span class="w"> </span>my1.txt /
+<span class="linenos">4</span><span class="k">COPY</span><span class="w"> </span>my2.txt /
+<span class="linenos">5</span><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/</span>
+<span class="linenos">6</span>
+<span class="linenos">7</span><span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;cat&quot;</span><span class="p">]</span>
+<span class="linenos">8</span>
+<span class="linenos">9</span><span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;my1.txt&quot;</span><span class="p">]</span>
 </pre></div>
 
 </li>
@@ -1462,14 +1462,14 @@ Dockerfile*
             
             <section><p>"The exec() family of functions <strong>replaces</strong> the current process image with a new process image."
 <a href="https://man7.org/linux/man-pages/man3/exec.3.html">https://man7.org/linux/man-pages/man3/exec.3.html</a></p>
-<div class="highlight"><pre><span></span>./app.sh:
-- sh -c
-  - /app.sh
+<div class="highlight"><pre><span></span><span class="linenos">1</span>./app.sh:
+<span class="linenos">2</span>- sh -c
+<span class="linenos">3</span>  - /app.sh
 </pre></div>
 
 <p>vs</p>
-<div class="highlight"><pre><span></span><span class="nb">exec</span> ./app.sh
-- /app.sh
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="nb">exec</span> ./app.sh
+<span class="linenos">2</span>- /app.sh
 </pre></div>
 </section>
             
@@ -1504,15 +1504,15 @@ Dockerfile*
             <header><h1>Příklad</h1></header>
             
             
-            <section><div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu</span>
-<span class="k">ENTRYPOINT</span><span class="w"> </span>top -b
-<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;-c&quot;</span><span class="p">]</span>
+            <section><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu</span>
+<span class="linenos">2</span><span class="k">ENTRYPOINT</span><span class="w"> </span>top -b
+<span class="linenos">3</span><span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;-c&quot;</span><span class="p">]</span>
 </pre></div>
 
 <p>vs</p>
-<div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu</span>
-<span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;top&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;-b&quot;</span><span class="p">]</span>
-<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;-c&quot;</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu</span>
+<span class="linenos">2</span><span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;top&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;-b&quot;</span><span class="p">]</span>
+<span class="linenos">3</span><span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;-c&quot;</span><span class="p">]</span>
 </pre></div>
 
 <p>pak Ctrl+C a sledovat výstup echo $?</p></section>
@@ -1549,15 +1549,15 @@ Dockerfile*
             
             
             <section><p>Protože v ní lze použít proměnné prostředí (narozdíl od EXEC):</p>
-<div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">alpine</span>
-<span class="k">ENV</span><span class="w"> </span><span class="nv">VAR1</span><span class="o">=</span>abc
-<span class="k">CMD</span><span class="w"> </span><span class="nb">echo</span> <span class="nv">$VAR1</span>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">FROM</span><span class="w"> </span><span class="s">alpine</span>
+<span class="linenos">2</span><span class="k">ENV</span><span class="w"> </span><span class="nv">VAR1</span><span class="o">=</span>abc
+<span class="linenos">3</span><span class="k">CMD</span><span class="w"> </span><span class="nb">echo</span> <span class="nv">$VAR1</span>
 </pre></div>
 
 <p>vs</p>
-<div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">alpine</span>
-<span class="k">ENV</span><span class="w"> </span><span class="nv">VAR1</span><span class="o">=</span>abc
-<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;echo&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;$VAR1&quot;</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">FROM</span><span class="w"> </span><span class="s">alpine</span>
+<span class="linenos">2</span><span class="k">ENV</span><span class="w"> </span><span class="nv">VAR1</span><span class="o">=</span>abc
+<span class="linenos">3</span><span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;echo&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;$VAR1&quot;</span><span class="p">]</span>
 </pre></div>
 </section>
             
@@ -1593,7 +1593,7 @@ Dockerfile*
             
             
             <section>
-<p><img alt="layers" src="file:///home/amoravek/projects/trask/k8s-skoleni/git/k8s/presentation/docker/layers.webp" /></p></section>
+<p><img alt="layers" src="file:///home/amoravek/git/k8s/presentation/docker/layers.webp" /></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -1666,7 +1666,7 @@ Dockerfile*
             <header><h1>Build a vrstvy (3)</h1></header>
             
             
-            <section><p><img alt="layers" src="file:///home/amoravek/projects/trask/k8s-skoleni/git/k8s/presentation/docker/docker-layers.webp" /></p></section>
+            <section><p><img alt="layers" src="file:///home/amoravek/git/k8s/presentation/docker/docker-layers.webp" /></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -1703,12 +1703,12 @@ Dockerfile*
 <ul>
 <li>složitý build může zanechat spoustu nepotřebných dat (i když si dáme pozor)</li>
 <li>jednodušší je provést např. maven build někde jinde (v nějakém jiném kontejneru) a pak jen zkopírovat výsledný artefakt:
-<br/><br/><div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">alpine:latest</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">builder</span>
-&lt;nějaký build&gt;
-&lt;artefakt uložen <span class="k">do</span> /git/app/target/app.jar&gt;
-<span class="k">FROM</span><span class="w"> </span><span class="s">centos:8</span>
-<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder /git/app/target/app.jar /deployments/
-...
+<br/><br/><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">FROM</span><span class="w"> </span><span class="s">alpine:latest</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">builder</span>
+<span class="linenos">2</span>&lt;nějaký build&gt;
+<span class="linenos">3</span>&lt;artefakt uložen <span class="k">do</span> /git/app/target/app.jar&gt;
+<span class="linenos">4</span><span class="k">FROM</span><span class="w"> </span><span class="s">centos:8</span>
+<span class="linenos">5</span><span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder /git/app/target/app.jar /deployments/
+<span class="linenos">6</span>...
 </pre></div>
 
 </li>
@@ -1748,8 +1748,8 @@ Dockerfile*
             <section><ul>
 <li>builder image je po použití smazán (nevytvoří se image, ale zůstávají vrstvy)</li>
 <li>je možné použít už existující image a jen zkopírovat data:
-  <br/><br/><div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:latest</span>
-<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>alpine:latest /etc/os-release /ALPINE
+  <br/><br/><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:latest</span>
+<span class="linenos">2</span><span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>alpine:latest /etc/os-release /ALPINE
 </pre></div>
 
 </li>
@@ -1795,18 +1795,18 @@ Dockerfile*
 <li>
 <p>image prefixy:
   <br/><br/></p>
-<div class="highlight"><pre><span></span>harbor.trask.cz/dockerhub-proxy/xxx/yyy<span class="o">[</span>:&lt;verze<span class="p">|</span>latest&gt;<span class="o">]</span>
-harbor.trask.cz/dockerhub-proxy/library/xxx<span class="o">[</span>:&lt;verze<span class="p">|</span>latest&gt;<span class="o">]</span>
+<div class="highlight"><pre><span></span><span class="linenos">1</span>harbor.trask.cz/dockerhub-proxy/xxx/yyy<span class="o">[</span>:&lt;verze<span class="p">|</span>latest&gt;<span class="o">]</span>
+<span class="linenos">2</span>harbor.trask.cz/dockerhub-proxy/library/xxx<span class="o">[</span>:&lt;verze<span class="p">|</span>latest&gt;<span class="o">]</span>
 </pre></div>
 
 </li>
 <li>
 <p>příklad:   <br />
     <br/><br/></p>
-<div class="highlight"><pre><span></span>docker login harbor.trask.cz
-...
-docker pull harbor.trask.cz/dockerhub-proxy/library/nginx
-docker pull harbor.trask.cz/dockerhub-proxy/tchiotludo/akhq:0.23.0
+<div class="highlight"><pre><span></span><span class="linenos">1</span>docker login harbor.trask.cz
+<span class="linenos">2</span>...
+<span class="linenos">3</span>docker pull harbor.trask.cz/dockerhub-proxy/library/nginx
+<span class="linenos">4</span>docker pull harbor.trask.cz/dockerhub-proxy/tchiotludo/akhq:0.23.0
 </pre></div>
 
 </li>
@@ -1845,19 +1845,19 @@ docker pull harbor.trask.cz/dockerhub-proxy/tchiotludo/akhq:0.23.0
             
             <section><p>Pokuste se optimalizovat následující Dockerfile:
 (Git - examples/docker/multistage/Dockerfile)</p>
-<div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu</span>
-
-<span class="k">RUN</span><span class="w"> </span>apt-get update <span class="se">\</span>
-    <span class="o">&amp;&amp;</span> apt-get install -y maven git
-
-<span class="k">RUN</span><span class="w"> </span>git clone https://github.com/amoravek/k8s.git <span class="se">\</span>
-    <span class="o">&amp;&amp;</span> <span class="nb">cd</span> k8s/k8s-sample-app <span class="se">\</span>
-    <span class="o">&amp;&amp;</span> mvn clean package
-
-<span class="k">WORKDIR</span><span class="w"> </span><span class="s">k8s/k8s-sample-app/target</span>
-
-<span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;java&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;-jar&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;k8s-sample-app.jar&quot;</span><span class="p">]</span>
-<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;server&quot;</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">RUN</span><span class="w"> </span>apt-get update <span class="se">\</span>
+<span class="linenos"> 4</span>    <span class="o">&amp;&amp;</span> apt-get install -y maven git
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="k">RUN</span><span class="w"> </span>git clone https://github.com/amoravek/k8s.git <span class="se">\</span>
+<span class="linenos"> 7</span>    <span class="o">&amp;&amp;</span> <span class="nb">cd</span> k8s/k8s-sample-app <span class="se">\</span>
+<span class="linenos"> 8</span>    <span class="o">&amp;&amp;</span> mvn clean package
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="k">WORKDIR</span><span class="w"> </span><span class="s">k8s/k8s-sample-app/target</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;java&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;-jar&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;k8s-sample-app.jar&quot;</span><span class="p">]</span>
+<span class="linenos">13</span><span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;server&quot;</span><span class="p">]</span>
 </pre></div>
 </section>
             
@@ -2025,17 +2025,17 @@ docker pull harbor.trask.cz/dockerhub-proxy/tchiotludo/akhq:0.23.0
 <li>
 <p>Pokud se nejedná o registry na localhostu (výjimka), Docker se s ní vůbec nebaví:
   <br/><br/></p>
-<div class="highlight"><pre><span></span>Error response from daemon: Get https://myregistrydomain.com:5000/v1/_ping:
-http: server gave HTTP response to HTTPS client
+<div class="highlight"><pre><span></span><span class="linenos">1</span>Error response from daemon: Get https://myregistrydomain.com:5000/v1/_ping:
+<span class="linenos">2</span>http: server gave HTTP response to HTTPS client
 </pre></div>
 
 </li>
 <li>
 <p>lze obejít úpravou <code>/etc/docker/daemon.json</code>:
   <br/><br/></p>
-<div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;insecure-registries&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;myregistrydomain.com:5000&quot;</span><span class="p">]</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="linenos">1</span><span class="p">{</span><span class="w"></span>
+<span class="linenos">2</span><span class="w">    </span><span class="nt">&quot;insecure-registries&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;myregistrydomain.com:5000&quot;</span><span class="p">]</span><span class="w"></span>
+<span class="linenos">3</span><span class="p">}</span><span class="w"></span>
 </pre></div>
 
 </li>
@@ -2200,7 +2200,7 @@ http: server gave HTTP response to HTTPS client
             
             
             <section>
-<p><img alt="obed" src="file:///home/amoravek/projects/trask/k8s-skoleni/git/k8s/presentation/docker/../common/open.knedliky.jpg" /></p></section>
+<p><img alt="obed" src="file:///home/amoravek/git/k8s/presentation/docker/../common/open.knedliky.jpg" /></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -2403,8 +2403,8 @@ http: server gave HTTP response to HTTPS client
 <li>
 <p>named volume:
   <br/><br/></p>
-<div class="highlight"><pre><span></span>docker volume create myvol1
-docker run -d --name nginx -v myvol:/app nginx
+<div class="highlight"><pre><span></span><span class="linenos">1</span>docker volume create myvol1
+<span class="linenos">2</span>docker run -d --name nginx -v myvol:/app nginx
 </pre></div>
 
 <p><br/>
@@ -2465,10 +2465,10 @@ Příklady obou typů: <a href="https://docs.docker.com/storage/volumes/">https:
 <li>výhodou je např. izolace a automatické DNS</li>
 </ul>
 <p>(ubuntu image, doinstalovat ping: <code>sudo apt install iputils-ping</code>, předvést oddědění image, kde je ping nainstalován)</p>
-<div class="highlight"><pre><span></span>docker network create mynet
-docker run -d --name app1 --network mynet ubuntu <span class="o">(</span>pak ubuntu-ping<span class="o">)</span>
-docker run -d --name app2 ubuntu <span class="o">(</span>pak ubuntu-ping<span class="o">)</span>
-docker network connect mynet app2
+<div class="highlight"><pre><span></span><span class="linenos">1</span>docker network create mynet
+<span class="linenos">2</span>docker run -d --name app1 --network mynet ubuntu <span class="o">(</span>pak ubuntu-ping<span class="o">)</span>
+<span class="linenos">3</span>docker run -d --name app2 ubuntu <span class="o">(</span>pak ubuntu-ping<span class="o">)</span>
+<span class="linenos">4</span>docker network connect mynet app2
 </pre></div>
 </section>
             
@@ -2504,7 +2504,7 @@ docker network connect mynet app2
             
             
             <section>
-<p><img alt="docker-vs-vm" src="file:///home/amoravek/projects/trask/k8s-skoleni/git/k8s/presentation/docker/../common/coffee.jpg" /></p></section>
+<p><img alt="docker-vs-vm" src="file:///home/amoravek/git/k8s/presentation/docker/../common/coffee.jpg" /></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -2614,11 +2614,11 @@ docker network connect mynet app2
             
             
             <section>
-<div class="highlight"><pre><span></span>docker run -d <span class="se">\</span>
---name app1 <span class="se">\</span>
---cpus <span class="m">2</span> <span class="se">\</span>
---memory 512m <span class="se">\</span>
-ubuntu
+<div class="highlight"><pre><span></span><span class="linenos">1</span>docker run -d <span class="se">\</span>
+<span class="linenos">2</span>--name app1 <span class="se">\</span>
+<span class="linenos">3</span>--cpus <span class="m">2</span> <span class="se">\</span>
+<span class="linenos">4</span>--memory 512m <span class="se">\</span>
+<span class="linenos">5</span>ubuntu
 </pre></div>
 
 <p><a href="https://docs.docker.com/config/containers/resource_constraints/">https://docs.docker.com/config/containers/resource_constraints/</a></p></section>

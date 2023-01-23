@@ -41,6 +41,21 @@ amoravek@trask.cz<br/>
 - "virtualizace" aplikací
 
 ---
+# Linux namespaces - příklad
+
+- unshare --help
+- sudo unshare --pid --fork --mount-proc /bin/bash
+- ps
+
+---
+# Linux cgroups - příklad
+
+- mkdir /sys/fs/cgroup/cpu/cg1
+- echo $$ > /sys/fs/cgroup/cpu/cg1/cgroup.procs (PID procesu se uloží do cgroup.procs)
+- echo 0 > /sys/fs/cgroup/cpu/cg1/cgroup.procs (PID aktuálního procesu se uloží do cgroup.procs)
+- ls /sys/fs/cgroup/cpu/cg1
+
+---
 # Co to je Docker především?
 
 - nástroj, který extrémně usnadňuje práci - ukázky:
