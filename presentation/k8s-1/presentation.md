@@ -93,7 +93,7 @@ amoravek@trask.cz<br/>
 .footer: [20 min] 
 
 - CLI rozhraní pro komunikaci s clusterem (resp API-serverem)
-- vyžaduje přítomnost konfiguračniho souboru, tzv. *kubeconfig* (uložen typicky v $HOME/.kube/config) - viz váš osobní kubeconfig (vyrobíme)
+- vyžaduje přítomnost konfiguračniho souboru, tzv. *kubeconfig* (uložen typicky v $HOME/.kube/config) - viz váš osobní kubeconfig -> *vyrobíme*
 - kubeconfig obsahuje sady clusterů a uživatelů propojených kontexty
 - Praktické ukázky + merge kubeconfigu:
   <br/><br/>
