@@ -44,8 +44,6 @@ kubectl create -f manifests/limit-range.yaml -n ${KUBE_USER} --dry-run=client -o
 export USER_KEY="$(cat ${KUBE_USER}-key.pem | base64 | tr -d '\n')"
 export USER_CERT="$(cat ${KUBE_USER}-crt.pem | base64 | tr -d '\n')"
 
-echo "============================================================"
-echo "KUBECONFIG for ${KUBE_USER}"
-echo "============================================================"
-envsubst < kubeconfig-template
-echo "============================================================"
+envsubst < kubeconfig-template > config.${KUBE_USER}
+echo "KUBECONFIG for ${KUBE_USER} written to config.${KUBE_USER}"
+echo "=== OK ==="
