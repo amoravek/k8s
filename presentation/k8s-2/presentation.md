@@ -94,16 +94,38 @@ Group: `system:serviceaccounts`
 ---
 # RBAC (Role-Based Access Control)
 
-- dá se vypnout (default = 
+- dá se vypnout (standardně bývá zapnuto - viz apiserver param --authorization-mode)
 - příklad - Users + Group 'skoleni'
-- Role
-- ClusterRole
+- Role - oprávnění pouze v rámci namespace
+- ClusterRole - oprávnění ve všech ns + na non-namespaced (cluster-wide) objekty
 - RoleBinding
 - ClusterRoleBinding
 
 Seznam verbs: `kubectl api-resources --sort-by name -o wide`
 
 <https://kubernetes.io/docs/reference/access-authn-authz/rbac/>
+
+---
+# Příklad role
+
+```
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: pod-reader
+  namespace: amoravek
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  - services
+  verbs:
+  - get
+  - list
+  - watch
+```
+`kubectl create role pod-reader --resource "pods,service" --verb "get,list,watch"`
 
 ---
 # RBAC - cvičení 1
@@ -238,12 +260,12 @@ jenže co když chceme postupně přidávat více (přes CLI)?
 
   `kubectl taint nodes node1 key1=value1:NoSchedule-`
 
-    !yaml
     tolerations:
     - key: "key1"
       operator: "Equal"
       value: "value1"
       effect: "NoSchedule"
+      tolerationSeconds: 300
 
     tolerations:
     - key: "key1"
@@ -251,7 +273,6 @@ jenže co když chceme postupně přidávat více (přes CLI)?
       value: "value1"
       effect: "NoExecute"
 
-    !yaml
     tolerations:
     - key: "key1"
       operator: "Exists"
@@ -304,7 +325,7 @@ jenže co když chceme postupně přidávat více (přes CLI)?
   
   5) osdtranit taint NoSchedule (proč?)
 
-  6) předvést drain worker04 při zapnuté curl smyčce (app-client)
+  6) předvést drain worker04 při zapnuté curl smyčce (app-client = nginx terminal)
 
           while true; do
             curl http://k8s-sample-app/ready
@@ -354,10 +375,15 @@ load:
 # Custom Resource Definition (CRD) 
 
 ---
-# Resource quota 
+# Headless service
+
+- service, která neslouží k loadbalancingu, ale k mapování IP podů
+- DNS A záznamy (ukzat nslookup, dig - app-client - apt install dnsutils)
 
 ---
-# Resource limit 
+# StatefulSet
+
+
 
 ---
 # Kubernetes best practices -> Helm Charts
@@ -379,19 +405,5 @@ https://kubernetes-tutorial.schoolofdevops.com/configuring_authentication_and_au
 
 ---
 # Diskuse
-
----
-# Přestávka
-
-.footer: [15 min]
-
-![docker-vs-vm](../common/coffee.jpg)
-
----
-# Přestávka na oběd
-
-.footer: [30 min - 1 h] 
-
-![obed](../common/open.knedliky.jpg)
 
 ---
