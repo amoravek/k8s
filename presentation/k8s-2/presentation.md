@@ -1,10 +1,13 @@
 # Kubernetes II.
 
+---
+# Organizační informace
+
 Online poznámky: <https://codimd.trask.cz/s/rJPCa8C0v>
 
-Použitý cluster: <https://arm.lab.trask.cz/>
-
-Adam Morávek, amoravek@trask.cz, +420 724 514 916
+Adam Morávek<br/>
+amoravek@trask.cz<br/>
++420 724 514 916<br/>
 
 ---
 # Requests, limits v k9s
@@ -19,6 +22,16 @@ Adam Morávek, amoravek@trask.cz, +420 724 514 916
 `kubectl get pod k8s-sample-app-648d688cfc-8h7hx -o jsonpath='{range .spec.containers[*]}{.name}{"\t"}{.image}'`
 
 <https://kubernetes.io/docs/reference/kubectl/jsonpath/>
+
+---
+# Labels & selectors v CLI
+
+- `kubectl get po --selector mujlabel=hodnota`
+
+---
+# kubectl api-resources
+
+- `kubectl api-resources`
 
 ---
 # Autentizace - pokračování
@@ -89,6 +102,8 @@ Group: `system:serviceaccounts`
 - ClusterRoleBinding
 
 Seznam verbs: `kubectl api-resources --sort-by name -o wide`
+
+<https://kubernetes.io/docs/reference/access-authn-authz/rbac/>
 
 ---
 # RBAC - cvičení 1
