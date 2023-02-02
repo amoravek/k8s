@@ -7,12 +7,12 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  # ignoreDifferences:
-  #   - group: admissionregistration.k8s.io
-  #     jsonPointers:
-  #       - /webhooks
-  #     kind: MutatingWebhookConfiguration
-  #     name: vault-agent-injector-cfg
+  ignoreDifferences:
+    - group: admissionregistration.k8s.io
+      jsonPointers:
+        - /webhooks
+      kind: MutatingWebhookConfiguration
+      name: vault-agent-injector-cfg
   destination:
     namespace: vault
     name: in-cluster
