@@ -1,10 +1,13 @@
 # Kubernetes III.
 
+---
+# Organizační informace
+
 Online poznámky: <https://codimd.trask.cz/s/rJPCa8C0v>
 
-Použitý cluster: <https://arm.lab.trask.cz/>
-
-Adam Morávek, amoravek@trask.cz, +420 724 514 916
+Adam Morávek<br/>
+amoravek@trask.cz<br/>
++420 724 514 916<br/>
 
 ---
 # Osnova
