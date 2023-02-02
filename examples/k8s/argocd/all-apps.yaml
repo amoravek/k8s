@@ -8,8 +8,8 @@ spec:
     name: in-cluster
   project: default
   source:
-    path: argocd/infrastructure-apps
-    repoURL: https://github.com/edgeclusters/academy-cluster-setup.git
+    repoURL: https://github.com/amoravek/k8s.git
+    path: ./examples/k8s/argocd/all-apps
     helm:
       valueFiles: ['values-edge-cluster.yaml']
       parameters:
