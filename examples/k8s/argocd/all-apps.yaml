@@ -11,7 +11,7 @@ spec:
     repoURL: https://github.com/amoravek/k8s.git
     path: ./examples/k8s/argocd/all-apps
     helm:
-      valueFiles: ['values-edge-cluster.yaml']
+      valueFiles: ['values.yaml']
       parameters:
         - name: actionsRunnerController.gitHubAccessToken
           value: "${ACCESS_TOKEN}"
