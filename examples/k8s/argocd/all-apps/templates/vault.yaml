@@ -24,9 +24,9 @@ spec:
     helm:
       values: |
         fullnameOverride: vault
-        # server:
-        #   dev:
-        #     enabled: true
+        server:
+          dev:
+            enabled: true
         ui:
           enabled: true
           serviceType: LoadBalancer
