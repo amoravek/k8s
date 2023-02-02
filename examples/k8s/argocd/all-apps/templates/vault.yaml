@@ -1,0 +1,39 @@
+{{- if .Values.vaultEnabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vault
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  # ignoreDifferences:
+  #   - group: admissionregistration.k8s.io
+  #     jsonPointers:
+  #       - /webhooks
+  #     kind: MutatingWebhookConfiguration
+  #     name: vault-agent-injector-cfg
+  destination:
+    namespace: vault
+    name: in-cluster
+  project: default
+  source:
+    chart: vault
+    repoURL: https://helm.releases.hashicorp.com
+    targetRevision: 0.23.0
+    helm:
+      values: |
+        fullnameOverride: vault
+        # server:
+        #   dev:
+        #     enabled: true
+        ui:
+          enabled: true
+          serviceType: LoadBalancer
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+{{- end }}

@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: all-apps
+  namespace: argocd
+spec:
+  destination:
+    name: in-cluster
+  project: default
+  source:
+    path: argocd/infrastructure-apps
+    repoURL: https://github.com/edgeclusters/academy-cluster-setup.git
+    helm:
+      valueFiles: ['values-edge-cluster.yaml']
+      parameters:
+        - name: actionsRunnerController.gitHubAccessToken
+          value: "${ACCESS_TOKEN}"
+        - name: postgresql.password
+          value: "${POSTGRESQL_ADMIN_PASSWORD}"
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

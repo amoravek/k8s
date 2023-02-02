@@ -1,0 +1,25 @@
+{{- if .Values.certManagerIssuersEnabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager-issuers
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io  
+  annotations:
+    argocd.argoproj.io/sync-wave: "15"
+spec:
+  destination:
+    namespace: cert-manager-issuers
+    name: in-cluster
+  project: default
+  source:
+    repoURL: https://github.com/amoravek/k8s.git
+    path: ./examples/k8s/argocd/cert-manager-issuers
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+{{- end }}

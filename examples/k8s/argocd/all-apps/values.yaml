@@ -1,0 +1,3 @@
+vaultEnabled: true
+certManagerEnabled: true
+certManagerIssuersEnabled: true
