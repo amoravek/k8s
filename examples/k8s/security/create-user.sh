@@ -2,7 +2,7 @@
 
 export KUBE_USER=${1,,}
 #export KUBE_GROUP=${2,,}
-export KUBE_GROUP=skoleni
+export KUBE_GROUP=skoleni2
 export KUBE_NS=${3:-$KUBE_USER}
 
 EXPIRATION_SECS=31536000 # 1 year
@@ -36,12 +36,12 @@ kubectl certificate approve ${KUBE_USER}
 kubectl get csr/${KUBE_USER} -o jsonpath='{ .status.certificate }' | base64 -d > ${KUBE_USER}-crt.pem
 
 # RBAC
-kubectl create namespace ${KUBE_USER} || true
-kubectl create rolebinding ${KUBE_USER}-${KUBE_USER}-admin --clusterrole admin --user ${KUBE_USER} --namespace ${KUBE_NS}
+#kubectl create namespace ${KUBE_USER} || true
+#kubectl create rolebinding ${KUBE_USER}-${KUBE_USER}-admin --clusterrole admin --user ${KUBE_USER} --namespace ${KUBE_NS}
 
 # ResourceQuota, LimirRange
-kubectl create -f manifests/resource-quota.yaml -n ${KUBE_USER} --dry-run=client -o yaml | kubectl apply -f -
-kubectl create -f manifests/limit-range.yaml -n ${KUBE_USER} --dry-run=client -o yaml | kubectl apply -f -
+#kubectl create -f manifests/resource-quota.yaml -n ${KUBE_USER} --dry-run=client -o yaml | kubectl apply -f -
+#kubectl create -f manifests/limit-range.yaml -n ${KUBE_USER} --dry-run=client -o yaml | kubectl apply -f -
 
 export USER_KEY="$(cat ${KUBE_USER}-key.pem | base64 | tr -d '\n')"
 export USER_CERT="$(cat ${KUBE_USER}-crt.pem | base64 | tr -d '\n')"

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ResourceQuota
 metadata:
-  name: namespace-resources
+  name: namespace-resources1
 spec:
   hard:
     limits.cpu: "3"
