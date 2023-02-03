@@ -21,6 +21,7 @@ spec:
           insecureSkipTLSVerify: true
         args: 
           - --kubelet-insecure-tls
+        installCRDs: true
   syncPolicy:
     automated:
       prune: true
