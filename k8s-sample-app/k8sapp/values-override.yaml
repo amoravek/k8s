@@ -1,0 +1,20 @@
+image:
+  repository: harbor.trask.cz/amor/k8s-sample-app
+  pullPolicy: Always
+  tag: ""
+
+livenessProbe:
+  httpGet:
+    path: /alive
+    port: 8080
+    scheme: HTTP
+  initialDelaySeconds: 60
+  periodSeconds: 10
+  
+readinessProbe:
+  httpGet:
+    path: /ready
+    port: 8080
+    scheme: HTTP
+  initialDelaySeconds: 30
+  periodSeconds: 5

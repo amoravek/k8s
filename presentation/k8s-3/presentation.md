@@ -15,7 +15,7 @@ amoravek@trask.cz<br/>
 1) Taikun
    
 2) Multi-arch (datascript prezka)
-   
+
 3) Helm - vytvořit chart pro k8s-sample-app (v repu k8s-sample-app)
    
 4) Kustomize (datascript prezka + git) 
