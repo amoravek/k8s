@@ -19,14 +19,13 @@ spec:
       labels:
         app: k8s-sample-app
     spec:
-      nodeSelector:
-        demo: 'yes'
       containers:
-      - image: harbor.trask.cz/arm64/k8s-sample-app:1.0
+      - image: harbor.trask.cz/amor/k8s-sample-app:1.0-SNAPSHOT
         imagePullPolicy: Always
         env:
         - name: UNREADY_MILLIS
           value: '60000'
+        name: k8s-sample-app
         livenessProbe:
           httpGet:
             path: /alive
@@ -34,7 +33,6 @@ spec:
             scheme: HTTP
           initialDelaySeconds: 60
           periodSeconds: 10
-        name: k8s-sample-app
         readinessProbe:
           httpGet:
             path: /ready
@@ -42,9 +40,13 @@ spec:
             scheme: HTTP
           initialDelaySeconds: 30
           periodSeconds: 5
+        lifecycle:
+          preStop:
+            exec:
+              command: ["/bin/bash", "-c", "sleep 5"]
         resources:
           limits:
-            cpu: 1500m
+            cpu: 1000m
             memory: 256Mi
           requests:
             cpu: 500m
@@ -54,20 +56,3 @@ spec:
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: k8s-sample-app
-  name: k8s-sample-app
-spec:
-  ports:
-  - port: 80
-    protocol: TCP
-    targetPort: 8080
-  selector:
-    app: k8s-sample-app
-  sessionAffinity: None
-  type: LoadBalancer
-

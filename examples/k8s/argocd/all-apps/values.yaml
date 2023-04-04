@@ -1,0 +1,4 @@
+vaultEnabled: true
+certManagerEnabled: true
+certManagerIssuersEnabled: true
+metricsServerEnabled: true

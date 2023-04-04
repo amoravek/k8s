@@ -15,7 +15,7 @@ public class KubeSampleApp extends Application<HelloWorldConfiguration> {
 
 	@Override
 	public String getName() {
-		return "hello-world";
+		return "KubeSampleApp";
 	}
 
 	@Override

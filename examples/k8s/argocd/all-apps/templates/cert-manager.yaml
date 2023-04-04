@@ -1,0 +1,30 @@
+{{- if .Values.certManagerEnabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
+spec:
+  destination:
+    namespace: cert-manager
+    name: in-cluster
+  project: default
+  source:
+    chart: cert-manager
+    helm:
+      parameters:
+      - name: installCRDs
+        value: "true"
+    repoURL: https://charts.jetstack.io
+    targetRevision: 1.11.0
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+{{- end }}

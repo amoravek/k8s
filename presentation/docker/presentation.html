@@ -27,21 +27,28 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Docker</title>
-    <!-- Styles -->
-    
-    <link rel="stylesheet" href="file:///usr/lib/python3/dist-packages/darkslide/themes/default/css/base.css">
-    <link rel="stylesheet" media="print" href="file:///usr/lib/python3/dist-packages/darkslide/themes/default/css/print.css">
-    <link rel="stylesheet" media="screen, projection" href="file:///usr/lib/python3/dist-packages/darkslide/themes/default/css/screen.css">
-    <link rel="stylesheet" media="all" href="file:///usr/lib/python3/dist-packages/darkslide/themes/default/css/theme.css">
-    
-    
-    <!-- /Styles -->
-    <!-- Javascripts -->
-    
+
+  
+     <link rel="stylesheet" href="file:///usr/lib/python3/dist-packages/darkslide/themes/default/css/base.css">
+  
+
+  
+     <link rel="stylesheet" href="file:///usr/lib/python3/dist-packages/darkslide/themes/default/css/print.css">
+  
+
+  
+     <link rel="stylesheet" href="file:///usr/lib/python3/dist-packages/darkslide/themes/default/css/screen.css">
+  
+
+  
+     <link rel="stylesheet" href="file:///usr/lib/python3/dist-packages/darkslide/themes/default/css/theme.css">
+  
+
+
+  
     <script type="text/javascript" src="file:///usr/lib/python3/dist-packages/darkslide/themes/default/js/slides.js"></script>
-    
-    
-    <!-- /Javascripts -->
+  
+
 </head>
 <body>
   <div id="blank"></div>
@@ -59,8 +66,44 @@
             <header><h1>Docker</h1></header>
             
             
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              1/65
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-2">
+          <div class="inner">
+            
+            <header><h1>Organizační informace</h1></header>
+            
+            
             <section><p>Online poznámky: <a href="https://codimd.trask.cz/s/rJPCa8C0v">https://codimd.trask.cz/s/rJPCa8C0v</a></p>
-<p>Adam Morávek, amoravek@trask.cz, +420 724 514 916</p></section>
+<p>Adam Morávek<br/>
+amoravek@trask.cz<br/>
++420 724 514 916<br/></p>
+<h1>Prerekvizity</h1>
+<ul>
+<li>příklady v rámci kurzu vyžadují nějakou Docker instalaci</li>
+<li>pokud máte Windows, doporučuji mít na Docker VM s Linuxem (VirtualBox)</li>
+</ul></section>
             
           </div>
           <div class="presenter_notes">
@@ -77,7 +120,7 @@
             </aside>
             
             <aside class="page_number">
-              1/40
+              2/65
             </aside>
           </footer>
         </div>
@@ -85,24 +128,250 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-2">
+        <div class="slide slide-3">
           <div class="inner">
             
-            <header><h1>Co to je Docker?</h1></header>
+            <header><h1>Docker VM</h1></header>
             
             
+            <section><ul>
+<li><a href="https://www.virtualbox.org/">https://www.virtualbox.org/</a></li>
+<li><a href="https://docs.docker.com/engine/install/ubuntu/">https://docs.docker.com/engine/install/ubuntu/</a></li>
+<li>host-only network</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
             <section>
-<h1>...je to nástroj, který umožňuje:</h1>
-<ul>
-<li>vytvořit artefakt schopný běhu všude tam, kde je Docker runtime</li>
+            
+            </section>
+          </div>
+          <footer>
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              3/65
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-4">
+          <div class="inner">
+            
+            <header><h1>Co to je Docker? (1)</h1></header>
+            
+            
+            <section><ul>
+<li>nástroj, který zjednodušuje</li>
+<li>výrobu aplikačních ... <strong>imidžů</strong> ... <strong>images</strong> ... eeeeeeee</li>
+<li>spouštění <em>kontejnerů</em></li>
+<li>jejich správu</li>
+<li>komunikaci s registry</li>
+<li>...a mnoho dalšího + obludně rozsáhlý ekosystém :-)</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [5 min]
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              4/65
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-5">
+          <div class="inner">
+            
+            <header><h1>Co to je Docker? (2)</h1></header>
+            
+            
+            <section><ul>
+<li>cli + daemon (api server s root oprávněním)</li>
+<li>chytré využití funkcí jádra <strong>Linuxu</strong> (namespaces, cgroups) - <a href="https://www.nginx.com/blog/what-are-namespaces-cgroups-how-do-they-work">https://www.nginx.com/blog/what-are-namespaces-cgroups-how-do-they-work</a></li>
+<li>"virtualizace" aplikací</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [5 min]
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              5/65
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-6">
+          <div class="inner">
+            
+            <header><h1>Linux namespaces - příklad</h1></header>
+            
+            
+            <section><ul>
+<li>unshare --help</li>
+<li>sudo unshare --pid --fork --mount-proc /bin/bash</li>
+<li>ps</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [5 min]
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              6/65
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-7">
+          <div class="inner">
+            
+            <header><h1>Linux cgroups - příklad</h1></header>
+            
+            
+            <section><ul>
+<li>mkdir /sys/fs/cgroup/cpu/cg1</li>
+<li>echo $$ &gt; /sys/fs/cgroup/cpu/cg1/cgroup.procs (PID procesu se uloží do cgroup.procs)</li>
+<li>echo 0 &gt; /sys/fs/cgroup/cpu/cg1/cgroup.procs (PID aktuálního procesu se uloží do cgroup.procs)</li>
+<li>ls /sys/fs/cgroup/cpu/cg1</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [5 min]
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              7/65
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-8">
+          <div class="inner">
+            
+            <header><h1>Co to je Docker především?</h1></header>
+            
+            
+            <section><ul>
+<li>nástroj, který extrémně usnadňuje práci - ukázky:<ul>
+<li>IBM MQ + TA</li>
+<li>legacy WAS</li>
+<li>redis</li>
+<li>nginx</li>
+<li>...</li>
+</ul>
+</li>
+<li>povídání o "omlazení" TIF</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [5 min]
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/65
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-9">
+          <div class="inner">
+            
+            <header><h1>...je to <strong>nástroj</strong>, který umožňuje:</h1></header>
+            
+            
+            <section><ul>
+<li>vytvořit artefakt schopný běhu všude tam, kde je <em>OCI</em> runtime</li>
 <li>zapouzdřit aplikaci včetně jejího prostředí</li>
-<li>redukovat problémy při nasazování aplikací</li>
-<li>řešit podobné úlohy jako VM</li>
+<li>redukovat problémy při nasazování aplikací (aplikace + kontext + fs OS)</li>
+<li>řešit podobné úlohy jako VM, ale s lepším využitím zdrojů</li>
 </ul>
 
-
-<h1></h1>
-<h1></h1>
 </section>
             
           </div>
@@ -116,7 +385,7 @@
           </div>
           <footer>
             
-              Základy Docker a Kubernetes 01/2021
+              [5 min]
             
             
             <aside class="source">
@@ -124,7 +393,7 @@
             </aside>
             
             <aside class="page_number">
-              2/40
+              9/65
             </aside>
           </footer>
         </div>
@@ -132,14 +401,52 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-3">
+        <div class="slide has_footer slide-10">
+          <div class="inner">
+            
+            <header><h1>Co Docker není?</h1></header>
+            
+            
+            <section><ul>
+<li>virtualizace jak ji známe (VMWare, VirtualBox, KVM, ...)</li>
+<li>z toho plyne i nižší míra izolace</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              Základy Docker a Kubernetes 12/2022
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              10/65
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-11">
           <div class="inner">
             
             <header><h1>Srovnání s VM</h1></header>
             
             
             <section>
-<p><img alt="docker-vs-vm" src="file:///home/amoravek/projects/trask/k8s-skoleni/git/k8s/presentation/docker/docker-vs-vm.png" /></p>
+<p><img alt="docker-vs-vm" src="file:///home/amoravek/git/k8s/presentation/docker/docker-vs-vm.png" /></p>
+<p>...je to tedy spíše taková <em>aplikační virtualizace</em></p>
 
 </section>
             
@@ -162,7 +469,7 @@
             </aside>
             
             <aside class="page_number">
-              3/40
+              11/65
             </aside>
           </footer>
         </div>
@@ -170,7 +477,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-4">
+        <div class="slide has_footer slide-12">
           <div class="inner">
             
             <header><h1>Linux kernel</h1></header>
@@ -179,8 +486,8 @@
             <section>
 <ul>
 <li>Docker je produkt založený na vlastnostech a funkcích jádra <strong>Linuxu</strong></li>
-<li>nefunguje nativně např. na AIX, Windows ani macOS (jen s virtualizační mezivrstvou nebo s plnohodnotným Linuxem jako součástí OS)</li>
-<li>všechny kontejnery (viz dále) sdílí s host OS jeho linux kernel</li>
+<li>nefunguje nativně např. na AIX, Windows ani macOS (jen s virtualizační mezivrstvou)</li>
+<li>všechny kontejnery (viz dále) sdílí s host OS jeho linux kernel -&gt; rychlý "start"</li>
 <li>kontejnery nejsou nic jiného než běžné procesy uzavřené do vlastního namespace a se zdroji omezenými za pomocí control groups (obojí funkce linuxového jádra)</li>
 <li>kontejner tedy není žádný "aktivní obal", ale jen logicky izolovaný proces, který se tváří jako samostatná VM</li>
 </ul></section>
@@ -202,7 +509,7 @@
             </aside>
             
             <aside class="page_number">
-              4/40
+              12/65
             </aside>
           </footer>
         </div>
@@ -210,7 +517,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-5">
+        <div class="slide has_footer slide-13">
           <div class="inner">
             
             <header><h1>Motivace</h1></header>
@@ -223,8 +530,16 @@
 <li>docker image obsahuje vše potřebné pro spuštění aplikace</li>
 <li>image lze digitálně podepsat</li>
 <li>součástí image i kompletní souborový systém OS - např. OS CVE lze řešit rebuildem image</li>
-<li>image se verzují</li>
-</ul></section>
+<li>image se verzují
+  <br/><br/><pre><code>docker run \
+--name was \
+-p 9043:9043 \
+-p 9443:9443 \
+-d ibmcom/websphere-traditional:latest
+</code></pre>
+</li>
+</ul>
+<p>(heslo je v kontejneru v /tmp/PASSWORD)</p></section>
             
           </div>
           <div class="presenter_notes">
@@ -243,7 +558,7 @@
             </aside>
             
             <aside class="page_number">
-              5/40
+              13/65
             </aside>
           </footer>
         </div>
@@ -251,7 +566,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_code has_footer slide-6">
+        <div class="slide has_code has_footer slide-14">
           <div class="inner">
             
             <header><h1>Image</h1></header>
@@ -260,17 +575,16 @@
             <section>
 <h2>Co je vlastně image?</h2>
 <ul>
-<li>lze si představit jako .tar.gz souborového systému OS + nějaká metadata</li>
+<li>lze si představit jako ZIP aplikačních binárek, souborového systému OS + nějaká metadata</li>
 <li><em>image</em> je vždy read-only, vytváří se <em>buildem</em></li>
-<li>image se většinou zakládá na nějakém již existujícím - např. JDK image dědí z Alpine linux image a dodá instalaci JDK</li>
-</ul>
-<h1></h1>
-<div class="highlight"><pre><span></span><span class="lineno">1 </span><span class="k">FROM</span><span class="s"> alpine</span>
-<span class="lineno">2 </span><span class="k">RUN</span> &lt;instalace jdk&gt;
+<li>image se většinou zakládá na nějakém již existujícím - např. JDK image dědí z Alpine Linux image a dodá instalaci JDK
+  <br/><br/><div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">alpine</span>
+<span class="k">RUN</span><span class="w"> </span>&lt;instalace jdk&gt;
 </pre></div>
 
-<h1></h1>
-<p>(je to něco jako vzít souborový systém Alpine linuxu, nakopírovat tam JDK, zazipovat a obalit metadaty)</p></section>
+</li>
+</ul>
+<p>(je to něco jako vzít souborový systém Alpine Linuxu, nakopírovat tam JDK, zazipovat a obalit metadaty)</p></section>
             
           </div>
           <div class="presenter_notes">
@@ -289,7 +603,7 @@
             </aside>
             
             <aside class="page_number">
-              6/40
+              14/65
             </aside>
           </footer>
         </div>
@@ -297,10 +611,10 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_code has_footer slide-7">
+        <div class="slide has_footer slide-15">
           <div class="inner">
             
-            <header><h1>Parent a base image</h1></header>
+            <header><h1>Parent / base image (1)</h1></header>
             
             
             <section>
@@ -310,23 +624,7 @@
 <li>kde je ale root image? Je to image s <code>FROM scratch</code>, ale častěji se vytváří importem zazipovaného souborového systému:</li>
 </ul>
 
-
-<h1></h1>
-<div class="highlight"><pre><span></span><span class="lineno"> 1 </span>$ sudo debootstrap xenial xenial &gt; /dev/null
-<span class="lineno"> 2 </span>$ sudo tar -C xenial -c . <span class="p">|</span> docker import - xenial
-<span class="lineno"> 3 </span>
-<span class="lineno"> 4 </span>a29c15f1bf7a
-<span class="lineno"> 5 </span>
-<span class="lineno"> 6 </span>$ docker run xenial cat /etc/lsb-release
-<span class="lineno"> 7 </span>
-<span class="lineno"> 8 </span><span class="nv">DISTRIB_ID</span><span class="o">=</span>Ubuntu
-<span class="lineno"> 9 </span><span class="nv">DISTRIB_RELEASE</span><span class="o">=</span><span class="m">16</span>.04
-<span class="lineno">10 </span><span class="nv">DISTRIB_CODENAME</span><span class="o">=</span>xenial
-<span class="lineno">11 </span><span class="nv">DISTRIB_DESCRIPTION</span><span class="o">=</span><span class="s2">&quot;Ubuntu 16.04 LTS&quot;</span>
-</pre></div>
-
-<h1></h1>
-<h1></h1></section>
+</section>
             
           </div>
           <div class="presenter_notes">
@@ -347,7 +645,7 @@
             </aside>
             
             <aside class="page_number">
-              7/40
+              15/65
             </aside>
           </footer>
         </div>
@@ -355,7 +653,92 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-8">
+        <div class="slide has_code has_footer slide-16">
+          <div class="inner">
+            
+            <header><h1>Parent / base image (2)</h1></header>
+            
+            
+            <section><div class="highlight"><pre><span></span>$ sudo debootstrap xenial xenial &gt; /dev/null
+$ sudo tar -C xenial -c . <span class="p">|</span> docker import - xenial
+
+a29c15f1bf7a
+
+$ docker run xenial cat /etc/lsb-release
+
+<span class="nv">DISTRIB_ID</span><span class="o">=</span>Ubuntu
+<span class="nv">DISTRIB_RELEASE</span><span class="o">=</span><span class="m">16</span>.04
+<span class="nv">DISTRIB_CODENAME</span><span class="o">=</span>xenial
+<span class="nv">DISTRIB_DESCRIPTION</span><span class="o">=</span><span class="s2">&quot;Ubuntu 16.04 LTS&quot;</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [5 min] 
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              16/65
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-17">
+          <div class="inner">
+            
+            <header><h1>Současný trend - mikroskopický image</h1></header>
+            
+            
+            <section><ul>
+<li>image, který obsahuje jen aplikaci (distroless)</li>
+<li>nemá ani shell</li>
+<li>všechny závislosti součástí aplikace (např. golang, ale i c, cpp, quarkus? micronaut?)</li>
+<li>velmi malý image - rychlé stažení z registry</li>
+<li>malá útočná plocha</li>
+<li>není možné "vlézt dovnitř" (důraz na sběr logů a metrik)</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [5 min] 
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              17/65
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-18">
           <div class="inner">
             
             <header><h1>Kontejner</h1></header>
@@ -364,6 +747,7 @@
             <section>
 <ul>
 <li><em>kontejner</em> je vlastní aktivní proces spuštěný nad souborovým systémem z image (lze si představit jako <em>instanci</em> image)</li>
+<li>kontejner přidává nové fs vrstvy nad image </li>
 <li>spuštění kontejneru s aplikací = spuštění procesu aplikace na systému, kde běží Docker daemon, ale proces je izolován ve vlastním <em>namespace</em> a běží jako root proces (PID 1)</li>
 <li>root procesem host OS je zpravidla initd nebo systemd - kontejner init proces nemá, protože nebootuje, začíná přímo spuštěním procesu</li>
 </ul></section>
@@ -385,7 +769,7 @@
             </aside>
             
             <aside class="page_number">
-              8/40
+              18/65
             </aside>
           </footer>
         </div>
@@ -393,7 +777,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-9">
+        <div class="slide has_footer slide-19">
           <div class="inner">
             
             <header><h1>Docker daemon</h1></header>
@@ -401,7 +785,7 @@
             
             <section>
 <ul>
-<li>proces běžící na pozadí</li>
+<li>proces běžící na pozadí (root oprávnění)</li>
 <li>spravuje Docker objekty (image, kontejnery, síť, úložiště)</li>
 <li>občas je potřeba změnit konfiguraci: /etc/docker/daemon.json (typicky kvůli insecure registry)</li>
 <li>musí běžet jako root - často terčem kritiky (v kombinaci s root právy uživatele v kontejneru)</li>
@@ -424,7 +808,7 @@
             </aside>
             
             <aside class="page_number">
-              9/40
+              19/65
             </aside>
           </footer>
         </div>
@@ -432,7 +816,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-10">
+        <div class="slide has_footer slide-20">
           <div class="inner">
             
             <header><h1>OCI</h1></header>
@@ -445,45 +829,6 @@
 <li>díky OCI mohlo Kubernetes opustit docker daemon a přejít na containerd</li>
 <li>vzhledem k raketovému rozvoji kontejnerizace je OCI nutnost</li>
 <li>mezi OCI-compliant runtime patří např. docker, cri-o a containerd (docker již ale interně používá containderd)</li>
-</ul>
-<h1></h1></section>
-            
-          </div>
-          <div class="presenter_notes">
-            <header><h1>Presenter Notes</h1></header>
-            <section>
-            
-            </section>
-          </div>
-          <footer>
-            
-              [5 min] 
-            
-            
-            <aside class="source">
-              Source: <a href="presentation.md">presentation.md</a>
-            </aside>
-            
-            <aside class="page_number">
-              10/40
-            </aside>
-          </footer>
-        </div>
-      </div>
-      
-      <!-- slide source: presentation.md -->
-      <div class="slide-wrapper">
-        <div class="slide has_footer slide-11">
-          <div class="inner">
-            
-            <header><h1>Docker CLI</h1></header>
-            
-            
-            <section>
-<ul>
-<li>základní (a naprosto dostačující) utilita pro vytváření, správu a manipulaci s docker objekty</li>
-<li>build image: <code>docker build -t myimage:1.0</code> .</li>
-<li>spuštění kontejneru: <code>docker run -d -name mycont1 -p 8088:8080 myimage:1.0</code></li>
 </ul></section>
             
           </div>
@@ -503,7 +848,7 @@
             </aside>
             
             <aside class="page_number">
-              11/40
+              20/65
             </aside>
           </footer>
         </div>
@@ -511,10 +856,145 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-12">
+        <div class="slide has_footer slide-21">
           <div class="inner">
             
-            <header><h1>Dockerfile</h1></header>
+            <header><h1>Docker - alternativy (1)</h1></header>
+            
+            
+            <section><ul>
+<li>několik aspektů:</li>
+<li>runtime (spouštění kontejnerů)<ul>
+<li>runc, crun</li>
+<li>containerd</li>
+<li>cri-o</li>
+</ul>
+</li>
+<li>vytváření images (build)<ul>
+<li>buildah</li>
+<li>BuildKit</li>
+<li>JIB</li>
+<li>Kaniko</li>
+<li>...</li>
+</ul>
+</li>
+</ul>
+<p>OCI (Open Container Initiative - <a href="https://opencontainers.org/">https://opencontainers.org/</a>)</p>
+<p>Viz <a href="https://blog.logrocket.com/docker-desktop-alternatives">https://blog.logrocket.com/docker-desktop-alternatives</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [5 min] 
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              21/65
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-22">
+          <div class="inner">
+            
+            <header><h1>Docker - alternativy (2)</h1></header>
+            
+            
+            <section><p>Proč vlastně?</p>
+<ul>
+<li>Docker daemon (root) - komu to ale vadí?</li>
+<li>Docker opustil Kubernetes-based platformy</li>
+<li>...je to ale stále extrémně užitečný nástroj pro DEV</li>
+<li>spolu s např. docker-compose</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [5 min] 
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              22/65
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code has_footer slide-23">
+          <div class="inner">
+            
+            <header><h1>Docker CLI</h1></header>
+            
+            
+            <section>
+<ul>
+<li>základní (a naprosto dostačující) utilita pro vytváření, správu a manipulaci s docker objekty</li>
+<li>build image: <code>docker build -t myimage:1.0</code> .</li>
+<li>spuštění kontejneru:
+  <br/><br/><div class="highlight"><pre><span></span>docker run -d <span class="se">\</span>
+--name mycont1 <span class="se">\</span>
+-p <span class="m">8088</span>:8080 <span class="se">\</span>
+myimage:1.0
+</pre></div>
+
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [5 min] 
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              23/65
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-24">
+          <div class="inner">
+            
+            <header><h1>Dockerfile a build image</h1></header>
             
             
             <section>
@@ -541,7 +1021,7 @@
             </aside>
             
             <aside class="page_number">
-              12/40
+              24/65
             </aside>
           </footer>
         </div>
@@ -549,7 +1029,7 @@
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_code has_footer slide-13">
+        <div class="slide has_code has_footer slide-25">
           <div class="inner">
             
             <header><h1>Příklad (1)</h1></header>
@@ -557,15 +1037,21 @@
             
             <section>
 <p>(examples/docker-simple)</p>
-<div class="highlight"><pre><span></span><span class="lineno">1 </span><span class="k">FROM</span><span class="s"> nginx:alpine</span>
-<span class="lineno">2 </span><span class="k">COPY</span> . /usr/share/nginx/html
+<p>Dockerfile</p>
+<div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">nginx:alpine</span>
+<span class="k">COPY</span><span class="w"> </span>. /usr/share/nginx/html
 </pre></div>
 
 
-<p>Vytvoříme image: <code>docker build -t docker-simple:0.1 .</code>
-Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
-<p><code>docker &lt;group&gt; [options] &lt;image&gt; [command]</code></p>
-<p>http://localhost:8881</p></section>
+<p>Vytvoříme image:</p>
+<pre><code>docker build -t docker-simple:0.1 .
+</code></pre>
+<p>Spustíme (poběží pak na <a href="http://localhost:8881">http://localhost:8881</a>):</p>
+<pre><code>docker run -ti --rm -p 8881:80 docker-simple:0.1
+</code></pre>
+<p>Obecný formát:</p>
+<pre><code>docker &lt;group&gt; [options] &lt;image&gt; [command]
+</code></pre></section>
             
           </div>
           <div class="presenter_notes">
@@ -586,7 +1072,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
             </aside>
             
             <aside class="page_number">
-              13/40
+              25/65
             </aside>
           </footer>
         </div>
@@ -594,19 +1080,25 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-14">
+        <div class="slide has_code has_footer slide-26">
           <div class="inner">
             
             <header><h1>Příklad (2)</h1></header>
             
             
             <section><p>Zastavíme kontejner (běží na popředí): Ctrl+C (pošle SIGINT, ne SIGKILL)</p>
-<p>Spustíme na pozadí: <code>docker run -d --name docker-simple -p 8881:80 docker-simple:0.1</code></p>
+<p>Spustíme na pozadí:</p>
+<div class="highlight"><pre><span></span>docker run -d <span class="se">\</span>
+--name docker-simple <span class="se">\</span>
+-p <span class="m">8881</span>:80 <span class="se">\</span>
+docker-simple:0.1
+</pre></div>
+
 <p>Ověříme, že běží:</p>
-<ul>
-<li>docker ps</li>
-<li>docker logs -f docker-simple</li>
-</ul></section>
+<div class="highlight"><pre><span></span>docker ps
+docker logs -f docker-simple
+</pre></div>
+</section>
             
           </div>
           <div class="presenter_notes">
@@ -625,7 +1117,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
             </aside>
             
             <aside class="page_number">
-              14/40
+              26/65
             </aside>
           </footer>
         </div>
@@ -633,29 +1125,30 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_code has_footer slide-15">
+        <div class="slide has_code has_footer slide-27">
           <div class="inner">
             
             <header><h1>Příklad (3)</h1></header>
             
             
-            <section><p>Prozkoumáme kontejner (pocitově jsme už <em>jako kdyby</em> ve VM):</p>
-<ul>
-<li><code>docker exec -ti docker-simple sh</code></li>
-<li><code>cd /usr/share/nginx/html</code></li>
-<li><code>ls -l</code>:<div class="highlight"><pre><span></span><span class="lineno">1 </span>50x.html    Dockerfile  build.sh    index.html
+            <section><p>Prozkoumáme kontejner (pocitově jsme <em>jako kdyby</em> ve VM):</p>
+<div class="highlight"><pre><span></span>docker <span class="nb">exec</span> -ti docker-simple sh
+<span class="nb">cd</span> /usr/share/nginx/html
+ls -l
 </pre></div>
 
-</li>
-</ul>
+<p>Vypíše:</p>
+<div class="highlight"><pre><span></span>50x.html    Dockerfile  build.sh    index.html
+</pre></div>
+
 <p>Pokusy:</p>
-<ul>
-<li><code>hostname</code></li>
-<li><code>ps</code></li>
-<li><code>ls -la /</code></li>
-<li><code>uname -a</code></li>
-<li><code>cat /etc/*release</code></li>
-</ul></section>
+<div class="highlight"><pre><span></span>hostname
+ps
+ls -la /
+uname -a
+cat /etc/*release
+</pre></div>
+</section>
             
           </div>
           <div class="presenter_notes">
@@ -674,7 +1167,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
             </aside>
             
             <aside class="page_number">
-              15/40
+              27/65
             </aside>
           </footer>
         </div>
@@ -682,23 +1175,23 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-16">
+        <div class="slide has_code has_footer slide-28">
           <div class="inner">
             
             <header><h1>Příklad (4)</h1></header>
             
             
             <section><p>Uklidíme:</p>
-<ul>
-<li><code>exit</code></li>
-<li><code>docker ps</code></li>
-<li><code>docker stop/kill docker-simple</code></li>
-<li><code>docker ps -a</code></li>
-<li><code>docker rm/rm -f docker-simple</code></li>
-<li><code>docker ps -a</code></li>
-</ul>
+<div class="highlight"><pre><span></span><span class="nb">exit</span>
+docker ps
+docker stop/kill docker-simple
+docker ps -a
+docker rm/rm -f docker-simple
+docker ps -a
+</pre></div>
+
 <p>...a nikde nic...EPHEMERAL! :-)</p>
-<p>(pozor, spolu s kontejnerem zmizí i vše, co vyprodukoval, pokud neprodukoval na VOLUME)</p></section>
+<p>(pozor, spolu s kontejnerem zmizí i vše, co vyprodukoval, pokud neprodukoval na VOLUME - viz dále)</p></section>
             
           </div>
           <div class="presenter_notes">
@@ -717,7 +1210,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
             </aside>
             
             <aside class="page_number">
-              16/40
+              28/65
             </aside>
           </footer>
         </div>
@@ -725,7 +1218,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_code has_footer slide-17">
+        <div class="slide has_code has_footer slide-29">
           <div class="inner">
             
             <header><h1>docker kontext</h1></header>
@@ -735,20 +1228,20 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
 <p>...vraťme se ještě na slide <strong><a href="#slide:14">Příklad (3)</a></strong>: co tam dělá Dockerfile a build.sh???</p>
 <p>Chtěli jsme to přece: <code>COPY . /usr/share/nginx/html</code></p>
 <p>Řešení je snadné - filtrace kontextu pomocí <code>.dockerignore</code> (obdoba .gitignore) - např.:</p>
-<div class="highlight"><pre><span></span><span class="lineno">1 </span>.git
-<span class="lineno">2 </span>.cache
-<span class="lineno">3 </span>target
-<span class="lineno">4 </span>**/*.class
-<span class="lineno">5 </span>*.md
-<span class="lineno">6 </span>!README.md
+<div class="highlight"><pre><span></span>.git
+.cache
+target
+**/*.class
+*.md
+!README.md
 </pre></div>
 
-<p>...a pro náš příklad:</p>
-<div class="highlight"><pre><span></span><span class="lineno">1 </span>*.sh
-<span class="lineno">2 </span>Dockerfile*
+<p>...a pro <strong>náš</strong> příklad:</p>
+<div class="highlight"><pre><span></span>*.sh
+Dockerfile*
 </pre></div>
 
-<p>Zkusme tedy nový build...   </p></section>
+<p>Zkusme tedy nový build... (také např. <a href="https://github.com/argoproj/argo-cd">https://github.com/argoproj/argo-cd</a>)</p></section>
             
           </div>
           <div class="presenter_notes">
@@ -767,7 +1260,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
             </aside>
             
             <aside class="page_number">
-              17/40
+              29/65
             </aside>
           </footer>
         </div>
@@ -775,14 +1268,14 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-18">
+        <div class="slide has_footer slide-30">
           <div class="inner">
             
             <header><h1>Přestávka do 10:45</h1></header>
             
             
             <section>
-<p><img alt="docker-vs-vm" src="file:///home/amoravek/projects/trask/k8s-skoleni/git/k8s/presentation/docker/../common/coffee.jpg" /></p></section>
+<p><img alt="docker-vs-vm" src="file:///home/amoravek/git/k8s/presentation/docker/../common/coffee.jpg" /></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -801,7 +1294,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
             </aside>
             
             <aside class="page_number">
-              18/40
+              30/65
             </aside>
           </footer>
         </div>
@@ -809,7 +1302,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-19">
+        <div class="slide has_footer slide-31">
           <div class="inner">
             
             <header><h1>Dockerfile - příkazy (1)</h1></header>
@@ -844,7 +1337,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
             </aside>
             
             <aside class="page_number">
-              19/40
+              31/65
             </aside>
           </footer>
         </div>
@@ -852,7 +1345,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-20">
+        <div class="slide has_footer slide-32">
           <div class="inner">
             
             <header><h1>Dockerfile - příkazy (2)</h1></header>
@@ -884,7 +1377,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
             </aside>
             
             <aside class="page_number">
-              20/40
+              32/65
             </aside>
           </footer>
         </div>
@@ -892,20 +1385,124 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-21">
+        <div class="slide has_footer slide-33">
+          <div class="inner">
+            
+            <header><h1>Čas na příklad</h1></header>
+            
+            
+            <section><ul>
+<li>build image z Dockerfile</li>
+<li>base image: alpine (ale je to na vás, alpine se ale stáhne rychle) (FROM)</li>
+<li>použijte .dockerignore</li>
+<li>do image dodejte 2 nebo více textových souborů (<strong>COPY</strong> / ADD)</li>
+<li>po <strong>spuštění</strong> image (pozor, nejedná se o RUN v Dockerfile!):</li>
+<li>zobrazte obsah textového souboru (cat) zadaného parametrem v docker run ...<ul>
+<li>použijte ENTRYPOINT a CMD</li>
+</ul>
+</li>
+<li>pokud nebude zadán parametr, zobrazte jeden ze souborů</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [15 min] 
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              33/65
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code has_footer slide-34">
+          <div class="inner">
+            
+            <header><h1>Řešení</h1></header>
+            
+            
+            <section><ul>
+<li>
+<p>obsah .dockerignore
+  <br/><br/></p>
+<div class="highlight"><pre><span></span>!my1.txt
+!my2.txt
+</pre></div>
+
+</li>
+<li>
+<p>obsah Dockerfile
+  <br/><br/></p>
+<div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">alpine</span>
+
+<span class="k">COPY</span><span class="w"> </span>my1.txt /
+<span class="k">COPY</span><span class="w"> </span>my2.txt /
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/</span>
+
+<span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;cat&quot;</span><span class="p">]</span>
+
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;my1.txt&quot;</span><span class="p">]</span>
+</pre></div>
+
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [15 min] 
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              34/65
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-35">
           <div class="inner">
             
             <header><h1>PID 1, exec vs shell formy</h1></header>
             
             
             <section>
-<p>Existence kontejneru je přímo spojena s životem procesu s PID 1.</p>
+<p>Existence kontejneru je přímo spojena s životem procesu s PID 1 a správná propagace signálů (<code>SIGTERM</code>, <code>SIGINT</code>) k hlavnímu procesu (korektní ukončení)</p>
 <p>Rozdíl mezi:</p>
 <ul>
-<li>ENTRYPOINT "/app/bin/your-app arg1 arg2" (shell-form)</li>
-<li>ENTRYPOINT ["/app/bin/your-app", "arg1", "arg2"] (exec-form)</li>
+<li><code>ENTRYPOINT "/app/bin/your-app arg1 arg2"</code> (shell-form) - signály přijme sh, který je NEPROPAGUJE</li>
+<li><code>ENTRYPOINT ["/app/bin/your-app", "arg1", "arg2"]</code> (exec-form) - signály přijme your-app</li>
 </ul>
-<p>Pěkně vysvětleno: <a href="https://hynek.me/articles/docker-signals/">https://hynek.me/articles/docker-signals/</a></p></section>
+<p>(ukázat exit code)</p>
+<p>Pěkně vysvětleno:
+- <a href="https://hynek.me/articles/docker-signals/">https://hynek.me/articles/docker-signals/</a>
+- <a href="https://engineering.pipefy.com/2021/07/30/1-docker-bits-shell-vs-exec/">https://engineering.pipefy.com/2021/07/30/1-docker-bits-shell-vs-exec/</a></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -924,7 +1521,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
             </aside>
             
             <aside class="page_number">
-              21/40
+              35/65
             </aside>
           </footer>
         </div>
@@ -932,20 +1529,185 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-22">
+        <div class="slide has_code has_footer slide-36">
           <div class="inner">
             
-            <header><h1>Build a vrstvy</h1></header>
+            <header><h1>Co je linux exec?</h1></header>
+            
+            
+            <section><p>"The exec() family of functions <strong>replaces</strong> the current process image with a new process image."
+<a href="https://man7.org/linux/man-pages/man3/exec.3.html">https://man7.org/linux/man-pages/man3/exec.3.html</a></p>
+<div class="highlight"><pre><span></span>./app.sh:
+- sh -c
+  - /app.sh
+</pre></div>
+
+<p>vs</p>
+<div class="highlight"><pre><span></span><span class="nb">exec</span> ./app.sh
+- /app.sh
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [25 min] 
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              36/65
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code has_footer slide-37">
+          <div class="inner">
+            
+            <header><h1>Příklad</h1></header>
+            
+            
+            <section><div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu</span>
+<span class="k">ENTRYPOINT</span><span class="w"> </span>top -b
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;-c&quot;</span><span class="p">]</span>
+</pre></div>
+
+<p>vs</p>
+<div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu</span>
+<span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;top&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;-b&quot;</span><span class="p">]</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;-c&quot;</span><span class="p">]</span>
+</pre></div>
+
+<p>pak Ctrl+C a sledovat výstup echo $?</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [25 min] 
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              37/65
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code has_footer slide-38">
+          <div class="inner">
+            
+            <header><h1>Proč existuje SHELL forma?</h1></header>
+            
+            
+            <section><p>Protože v ní lze použít proměnné prostředí (narozdíl od EXEC):</p>
+<div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">alpine</span>
+<span class="k">ENV</span><span class="w"> </span><span class="nv">VAR1</span><span class="o">=</span>abc
+<span class="k">CMD</span><span class="w"> </span><span class="nb">echo</span> <span class="nv">$VAR1</span>
+</pre></div>
+
+<p>vs</p>
+<div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">alpine</span>
+<span class="k">ENV</span><span class="w"> </span><span class="nv">VAR1</span><span class="o">=</span>abc
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;echo&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;$VAR1&quot;</span><span class="p">]</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [25 min] 
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              38/65
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-39">
+          <div class="inner">
+            
+            <header><h1>Build a vrstvy (1)</h1></header>
             
             
             <section>
-<ul>
+<p><img alt="layers" src="file:///home/amoravek/git/k8s/presentation/docker/layers.webp" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [10 min] 
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              39/65
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-40">
+          <div class="inner">
+            
+            <header><h1>Build a vrstvy (2)</h1></header>
+            
+            
+            <section><ul>
 <li>Každý příkaz v rámci Dockerfile = vrstva v souborovém systému</li>
 <li>vrstvy jsou read-only, zápisová je jen ta "vrchní"</li>
 <li>copy-on-write</li>
 <li>vhodná organizace vrstev tak, aby je nebylo nutné zbytečně buildovat/stahovat</li>
+<li>každá vrstva se ukládá do cache (hash) a lze ji využít i v jiném image (build, pull, push)</li>
 </ul>
-<p>Příklad buildu + push, pull (docker-images/mdr) + porovnat rychlosti při změnách</p>
 <p>Dokumentace: <a href="https://docs.docker.com/storage/storagedriver/">https://docs.docker.com/storage/storagedriver/</a></p></section>
             
           </div>
@@ -965,7 +1727,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
             </aside>
             
             <aside class="page_number">
-              22/40
+              40/65
             </aside>
           </footer>
         </div>
@@ -973,33 +1735,59 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_code has_footer slide-23">
+        <div class="slide has_footer slide-41">
           <div class="inner">
             
-            <header><h1>Multi-stage build</h1></header>
+            <header><h1>Build a vrstvy (3)</h1></header>
+            
+            
+            <section><p><img alt="layers" src="file:///home/amoravek/git/k8s/presentation/docker/docker-layers.webp" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [10 min] 
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              41/65
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code has_footer slide-42">
+          <div class="inner">
+            
+            <header><h1>Multi-stage build (1)</h1></header>
             
             
             <section>
 <ul>
 <li>složitý build může zanechat spoustu nepotřebných dat (i když si dáme pozor)</li>
-<li>
-<p>jednodušší je provést např. maven build někde jinde (v nějakém jiném kontejneru) a pak jen zkopírovat výsledný artefakt:</p>
-<div class="highlight"><pre><span></span><span class="lineno">1 </span><span class="k">FROM</span><span class="s"> alpine AS builder</span>
-<span class="lineno">2 </span>&lt;nějaký build&gt;
-<span class="lineno">3 </span>&lt;artefakt uložen <span class="k">do</span> /git/app/target/app.jar&gt;
-<span class="lineno">4 </span><span class="k">FROM</span><span class="s"> centos:8</span>
-<span class="lineno">5 </span><span class="k">COPY</span> --from builder /git/app/target/app.jar /deployments/
-<span class="lineno">6 </span>...
+<li>jednodušší je provést např. maven build někde jinde (v nějakém jiném kontejneru) a pak jen zkopírovat výsledný artefakt:
+<br/><br/><div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">alpine:latest</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">builder</span>
+&lt;nějaký build&gt;
+&lt;artefakt uložen <span class="k">do</span> /git/app/target/app.jar&gt;
+<span class="k">FROM</span><span class="w"> </span><span class="s">centos:8</span>
+<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder /git/app/target/app.jar /deployments/
+...
 </pre></div>
 
 </li>
-<li>
-<p>builder image je po použití smazán (nevytvoří se image, ale zůstávají vrstvy)</p>
-</li>
-<li>je možné použít už existující image a jen zkopírovat data</li>
-</ul>
-<p><a href="https://docs.docker.com/develop/develop-images/multistage-build/">https://docs.docker.com/develop/develop-images/multistage-build/</a></p>
-<p>Příklad s ta:1.1.10 image - porovnat výslednou velikost</p></section>
+</ul></section>
             
           </div>
           <div class="presenter_notes">
@@ -1018,7 +1806,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
             </aside>
             
             <aside class="page_number">
-              23/40
+              42/65
             </aside>
           </footer>
         </div>
@@ -1026,7 +1814,192 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-24">
+        <div class="slide has_code has_footer slide-43">
+          <div class="inner">
+            
+            <header><h1>Multi-stage build (2)</h1></header>
+            
+            
+            <section><ul>
+<li>builder image je po použití smazán (nevytvoří se image, ale zůstávají vrstvy)</li>
+<li>je možné použít už existující image a jen zkopírovat data:
+  <br/><br/><div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:latest</span>
+<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>alpine:latest /etc/os-release /ALPINE
+</pre></div>
+
+</li>
+</ul>
+<p><a href="https://docs.docker.com/develop/develop-images/multistage-build/">https://docs.docker.com/develop/develop-images/multistage-build/</a></p>
+<p>Příklad viz <code>ta:1.1.13</code> image - porovnat výslednou velikost
+(vrstvy - apt install, multistage)</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [20 min]
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              43/65
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code has_footer slide-44">
+          <div class="inner">
+            
+            <header><h1>Cvičení - prerekvizity</h1></header>
+            
+            
+            <section><ul>
+<li>Docker zavedl maximální počet stažení pro neplatiče</li>
+<li>v Trasku ale máme cache (Harbor) - login viz <a href="https://codimd.trask.cz/s/rJPCa8C0v">https://codimd.trask.cz/s/rJPCa8C0v</a></li>
+<li>
+<p>image prefixy:
+  <br/><br/></p>
+<div class="highlight"><pre><span></span>harbor.trask.cz/dockerhub-proxy/xxx/yyy<span class="o">[</span>:&lt;verze<span class="p">|</span>latest&gt;<span class="o">]</span>
+harbor.trask.cz/dockerhub-proxy/library/xxx<span class="o">[</span>:&lt;verze<span class="p">|</span>latest&gt;<span class="o">]</span>
+</pre></div>
+
+</li>
+<li>
+<p>příklad:   <br />
+    <br/><br/></p>
+<div class="highlight"><pre><span></span>docker login harbor.trask.cz
+...
+docker pull harbor.trask.cz/dockerhub-proxy/library/nginx
+docker pull harbor.trask.cz/dockerhub-proxy/tchiotludo/akhq:0.23.0
+</pre></div>
+
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [20 min]
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              44/65
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code has_footer slide-45">
+          <div class="inner">
+            
+            <header><h1>Cvičení</h1></header>
+            
+            
+            <section><p>Pokuste se optimalizovat následující Dockerfile:
+(Git - examples/docker/multistage/Dockerfile)</p>
+<div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu</span>
+
+<span class="k">RUN</span><span class="w"> </span>apt-get update <span class="se">\</span>
+    <span class="o">&amp;&amp;</span> apt-get install -y maven git
+
+<span class="k">RUN</span><span class="w"> </span>git clone https://github.com/amoravek/k8s.git <span class="se">\</span>
+    <span class="o">&amp;&amp;</span> <span class="nb">cd</span> k8s/k8s-sample-app <span class="se">\</span>
+    <span class="o">&amp;&amp;</span> mvn clean package
+
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">k8s/k8s-sample-app/target</span>
+
+<span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;java&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;-jar&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;k8s-sample-app.jar&quot;</span><span class="p">]</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;server&quot;</span><span class="p">]</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [20 min]
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              45/65
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-46">
+          <div class="inner">
+            
+            <header><h1>Řešení</h1></header>
+            
+            
+            <section><ul>
+<li>oddělit apt sekci - kvůli cachování (následné buildy budou rychlejší)</li>
+<li>smazat apt cache ve stejné vrstvě</li>
+<li>git clone a maven build provést v jiném image (multistage)</li>
+</ul>
+<p>(vše vit Git - k8s/examples/docker/multistage)</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [20 min]
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              46/65
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-47">
           <div class="inner">
             
             <header><h1>Názvy images, Docker repository</h1></header>
@@ -1036,11 +2009,12 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
 <p>Název image: <code>[host:port/]&lt;repository1&gt;/&lt;repository2&gt;/.../&lt;image-name&gt;[:&lt;image-version&gt;]</code></p>
 <p>Např.:</p>
 <ul>
-<li>trask/tif/mdr:3.1.21</li>
-<li>harbor.trask.cz/arm64/keycloak:12.0.1</li>
-<li>localhost:5000/redis</li>
+<li><code>trask/tif/mdr:3.1.21</code> (lokální registry)</li>
+<li><code>harbor.trask.cz/arm64/keycloak:12.0.1</code> (remote registry)</li>
+<li><code>localhost:5000/redis</code> ('remote' registry na localhostu)</li>
 </ul>
-<p>Pokud chybí verze image, použije se <code>latest</code> (má nevýhody)</p></section>
+<p>Pokud chybí verze image, použije se <code>latest</code>
+- nemusí vždy odkazovat ne tentýž image!!!</p></section>
             
           </div>
           <div class="presenter_notes">
@@ -1059,7 +2033,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
             </aside>
             
             <aside class="page_number">
-              24/40
+              47/65
             </aside>
           </footer>
         </div>
@@ -1067,18 +2041,17 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-25">
+        <div class="slide has_footer slide-48">
           <div class="inner">
             
             <header><h1>Docker registry</h1></header>
             
             
             <section><ul>
+<li><code>[host:port/]</code> část z předchozího slidu = docker registry; pokud chybí je lokální</li>
 <li>
-<p><code>[host:port/]</code> část z předchozího slidu = docker registry; pokud chybí je lokální</p>
-</li>
-<li>
-<p>image je tedy možné ukládat kromě lokální registry i do remote registry, např:</p>
+<p>image je tedy možné ukládat kromě lokální registry i do remote registry, např:
+  <br/><br/></p>
 <pre><code>docker push harbor.trask.cz/arm64/keycloak:12.0.1
 </code></pre>
 </li>
@@ -1106,7 +2079,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
             </aside>
             
             <aside class="page_number">
-              25/40
+              48/65
             </aside>
           </footer>
         </div>
@@ -1114,7 +2087,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_code has_footer slide-26">
+        <div class="slide has_code has_footer slide-49">
           <div class="inner">
             
             <header><h1>Secure/insecure</h1></header>
@@ -1125,17 +2098,19 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
 <li>registry by měla být zabezpečená ([m]TLS, login, ...)</li>
 <li>insecure registry = registry nezabezpečená pomocí TLS</li>
 <li>
-<p>Pokud se nejedná o registry na localhostu (výjimka), Docker se s ní vůbec nebaví:</p>
-<div class="highlight"><pre><span></span><span class="lineno">1 </span>Error response from daemon: Get https://:5000/v1/_ping:
-<span class="lineno">2 </span>http: server gave HTTP response to HTTPS client
+<p>Pokud se nejedná o registry na localhostu (výjimka), Docker se s ní vůbec nebaví:
+  <br/><br/></p>
+<div class="highlight"><pre><span></span>Error response from daemon: Get https://myregistrydomain.com:5000/v1/_ping:
+http: server gave HTTP response to HTTPS client
 </pre></div>
 
 </li>
 <li>
-<p>lze obejít úpravou <code>/etc/docker/daemon.json</code>:</p>
-<div class="highlight"><pre><span></span><span class="lineno">1 </span><span class="p">{</span>
-<span class="lineno">2 </span><span class="nt">&quot;insecure-registries&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;myregistrydomain.com:5000&quot;</span><span class="p">]</span>
-<span class="lineno">3 </span><span class="p">}</span>
+<p>lze obejít úpravou <code>/etc/docker/daemon.json</code>:
+  <br/><br/></p>
+<div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;insecure-registries&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;myregistrydomain.com:5000&quot;</span><span class="p">]</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 
 </li>
@@ -1159,7 +2134,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
             </aside>
             
             <aside class="page_number">
-              26/40
+              49/65
             </aside>
           </footer>
         </div>
@@ -1167,7 +2142,57 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-27">
+        <div class="slide has_footer slide-50">
+          <div class="inner">
+            
+            <header><h1>TLS</h1></header>
+            
+            
+            <section><ul>
+<li>
+<p>pokud registry zabezpečíme self-signed certifikátem, máme stejně smůlu:
+  <br/><br/></p>
+<pre><code>x509 certificate signed by unknown authority error
+</code></pre>
+</li>
+<li>
+<p>nutno dodat certifikát do:
+<code>/etc/docker/certs.d/&lt;your_registry_host_name&gt;:&lt;your_registry_host_port&gt;/ca.crt</code></p>
+</li>
+<li>
+<p>totéž ale musíme udělat i v případě, kdy certifikát vydá naše CA</p>
+</li>
+<li>
+<p>nejjednodušší varianta: máme certifikát od uznávané CA (není ale u interní registry moc časté)</p>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [5 min] 
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              50/65
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-51">
           <div class="inner">
             
             <header><h1>harbor.trask.cz</h1></header>
@@ -1190,7 +2215,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
             </aside>
             
             <aside class="page_number">
-              27/40
+              51/65
             </aside>
           </footer>
         </div>
@@ -1198,7 +2223,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-28">
+        <div class="slide has_footer slide-52">
           <div class="inner">
             
             <header><h1>pull, push, tag, login/logout</h1></header>
@@ -1214,8 +2239,8 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
 </ul>
 <p>Do registry je mnohdy nutný login:</p>
 <ul>
-<li>docker login</li>
-<li>docker logout</li>
+<li><code>docker login</code></li>
+<li><code>docker logout</code></li>
 </ul></section>
             
           </div>
@@ -1235,7 +2260,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
             </aside>
             
             <aside class="page_number">
-              28/40
+              52/65
             </aside>
           </footer>
         </div>
@@ -1243,14 +2268,14 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-29">
+        <div class="slide has_footer slide-53">
           <div class="inner">
             
             <header><h1>Přestávka na oběd</h1></header>
             
             
             <section>
-<p><img alt="obed" src="file:///home/amoravek/projects/trask/k8s-skoleni/git/k8s/presentation/docker/../common/open.knedliky.jpg" /></p></section>
+<p><img alt="obed" src="file:///home/amoravek/git/k8s/presentation/docker/../common/open.knedliky.jpg" /></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -1269,7 +2294,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
             </aside>
             
             <aside class="page_number">
-              29/40
+              53/65
             </aside>
           </footer>
         </div>
@@ -1277,14 +2302,14 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-30">
+        <div class="slide has_footer slide-54">
           <div class="inner">
             
             <header><h1>PID 1 podrobněji</h1></header>
             
             
             <section>
-<p>Příklad: git/examples/exec-shell/</p></section>
+<p>Příklad: <code>git/examples/exec-shell/</code></p></section>
             
           </div>
           <div class="presenter_notes">
@@ -1303,7 +2328,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
             </aside>
             
             <aside class="page_number">
-              30/40
+              54/65
             </aside>
           </footer>
         </div>
@@ -1311,15 +2336,15 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-31">
+        <div class="slide has_footer slide-55">
           <div class="inner">
             
-            <header><h1>Uživatelské účty a oprávnění uvnitř kontejneru, USER</h1></header>
+            <header><h1>Účty a oprávnění, USER</h1></header>
             
             
             <section>
 <ul>
-<li>drtivá většina kontejnerů vytvořených z nějakého image na Docker HUBu používá <code>USER root</code></li>
+<li>hodně kontejnerů vytvořených z nějakého image na Docker HUBu používá <code>USER root</code> (je default)</li>
 <li>není to bezpečné - za určitých okolností takto lze získat přístup k host OS</li>
 <li>v Dockerfile je možné použít libovolné množství <code>USER &lt;user&gt;[:&lt;group&gt;]</code> nebo <code>USER &lt;UID&gt;[:&lt;GID&gt;]</code></li>
 <li>to, pod jakým uživatelem poběží <code>ENTRYPOINT</code> nebo <code>CMD</code> proces určuje předchozí <code>USER</code></li>
@@ -1345,7 +2370,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
             </aside>
             
             <aside class="page_number">
-              31/40
+              55/65
             </aside>
           </footer>
         </div>
@@ -1353,7 +2378,7 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-32">
+        <div class="slide has_footer slide-56">
           <div class="inner">
             
             <header><h1>Publikace portů, EXPOSE</h1></header>
@@ -1361,112 +2386,20 @@ Spustíme: <code>docker run -ti --rm -p 8881:80 docker-simple:0.1</code></p>
             
             <section>
 <ul>
-<li>kontejner po spuštění nepropaguje porty ven (jsou dostupné pouze interně)</li>
+<li>kontejner po spuštění <strong>nepropaguje</strong> porty ven (jsou dostupné pouze interně)</li>
 <li>je potřeba explicitně určit, jaký port/rozsah bude publikován ven</li>
 <li>porty je třeba publikovat při vytváření kontejneru, pak už nejde (jednoduše) změnit</li>
-<li>pokud je port v Dockerfile explicitně označen pomocí <code>EXPOSE</code>, je možné použí automatiku:<pre><code>docker run -d --name nginx -P nginx
+<li>pokud je port v Dockerfile explicitně označen pomocí <code>EXPOSE</code>, je možné propagovat automaticky:
+  <br/><br/><pre><code>        docker run -d --name nginx -P nginx
 </code></pre>
 </li>
 </ul>
-<p>Příklad: docker run -dit --name app1 -p 5678:5678 hashicorp/http-echo -text "Test OK"</p></section>
-            
-          </div>
-          <div class="presenter_notes">
-            <header><h1>Presenter Notes</h1></header>
-            <section>
-            
-            </section>
-          </div>
-          <footer>
-            
-              [15 min] 
-            
-            
-            <aside class="source">
-              Source: <a href="presentation.md">presentation.md</a>
-            </aside>
-            
-            <aside class="page_number">
-              32/40
-            </aside>
-          </footer>
-        </div>
-      </div>
-      
-      <!-- slide source: presentation.md -->
-      <div class="slide-wrapper">
-        <div class="slide has_footer slide-33">
-          <div class="inner">
-            
-            <header><h1>Volumes</h1></header>
-            
-            
-            <section>
-<ul>
-<li>kontejner ukládá implicitně všechna data "do sebe"</li>
-<li>po sazání kontejneru (<code>docker rm</code>) přijdeme i o data</li>
-<li>řešením je <code>VOLUME</code> - můžeme provést mount externího adresáře, NFS, apod.</li>
-<li>
-<p>dvě možnosti použití:</p>
-<ul>
-<li>
-<p>named volume:</p>
-<pre><code>docker volume create myvol1
-docker run -d --name nginx -v myvol:/app nginx
-</code></pre>
-<p>data volume se ukládají do <code>/var/lib/docker/volumes</code></p>
-</li>
-<li>
-<p>mount specifického adresáře z host OS: <code>docker run -d --name nginx -v /data:/app nginx</code></p>
-</li>
-<li>modifikátor <code>:ro</code></li>
-</ul>
-</li>
-</ul>
-<p>Příklady obou typů volume</p>
-<p><a href="https://docs.docker.com/storage/volumes/">https://docs.docker.com/storage/volumes/</a></p></section>
-            
-          </div>
-          <div class="presenter_notes">
-            <header><h1>Presenter Notes</h1></header>
-            <section>
-            
-            </section>
-          </div>
-          <footer>
-            
-              [15 min]
-            
-            
-            <aside class="source">
-              Source: <a href="presentation.md">presentation.md</a>
-            </aside>
-            
-            <aside class="page_number">
-              33/40
-            </aside>
-          </footer>
-        </div>
-      </div>
-      
-      <!-- slide source: presentation.md -->
-      <div class="slide-wrapper">
-        <div class="slide has_footer slide-34">
-          <div class="inner">
-            
-            <header><h1>Networking, komunikace mezi kontejnery</h1></header>
-            
-            
-            <section>
-<ul>
-<li>kontejnery je možné připojovat do izolovaných sítí</li>
-<li>výhodou je izolace a možnost DNS</li>
-</ul>
-<p>(ubuntu image, doinstalovat ping: <code>sudo apt install iputils-ping</code>, předvést oddědění image, kde je ping nainstalován)</p>
-<pre><code>docker network create mynet
-docker run -tid --name app1 --network mynet ubuntu (pak ubuntu-ping)
-docker run -tid --name app2 ubuntu (pak ubuntu-ping)
-docker network connect mynet app2
+<p>Příklad:</p>
+<pre><code>    !bash
+    docker run -it \
+    --name app1 \
+    -p 5678:5678 \
+    hashicorp/http-echo -text "Test OK"
 </code></pre></section>
             
           </div>
@@ -1486,7 +2419,7 @@ docker network connect mynet app2
             </aside>
             
             <aside class="page_number">
-              34/40
+              56/65
             </aside>
           </footer>
         </div>
@@ -1494,14 +2427,18 @@ docker network connect mynet app2
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-35">
+        <div class="slide has_footer slide-57">
           <div class="inner">
             
-            <header><h1>Přestávka</h1></header>
+            <header><h1>Volumes (1)</h1></header>
             
             
             <section>
-<p><img alt="docker-vs-vm" src="file:///home/amoravek/projects/trask/k8s-skoleni/git/k8s/presentation/docker/../common/coffee.jpg" /></p></section>
+<ul>
+<li>kontejner ukládá implicitně všechna data "do sebe" (=do svrchní RW vrstvy)</li>
+<li>po smazání kontejneru (<code>docker rm</code>) přijdeme i o data</li>
+<li>řešením je <code>VOLUME</code> - můžeme provést mount externího adresáře, NFS, apod.</li>
+</ul></section>
             
           </div>
           <div class="presenter_notes">
@@ -1520,7 +2457,7 @@ docker network connect mynet app2
             </aside>
             
             <aside class="page_number">
-              35/40
+              57/65
             </aside>
           </footer>
         </div>
@@ -1528,7 +2465,148 @@ docker network connect mynet app2
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-36">
+        <div class="slide has_code has_footer slide-58">
+          <div class="inner">
+            
+            <header><h1>Volumes (2)</h1></header>
+            
+            
+            <section><ul>
+<li>
+<p>dvě možnosti použití:</p>
+<ul>
+<li>
+<p>named volume:
+  <br/><br/></p>
+<div class="highlight"><pre><span></span>docker volume create myvol1
+docker run -d --name nginx -v myvol:/app nginx
+</pre></div>
+
+<p><br/>
+data volume se ukládají do <code>/var/lib/docker/volumes</code></p>
+</li>
+<li>
+<p>mount specifického adresáře z host OS:
+  <br/><br/></p>
+<pre><code>    docker run -d --name nginx -v /data:/app nginx
+</code></pre>
+</li>
+<li>
+<p>modifikátor <code>:ro</code>
+  <br/><br/></p>
+<pre><code>    docker run -d --name nginx -v /data:/app nginx:ro
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<p>Můžeme i sdílet volume mezi kontejnery.
+Příklady obou typů: <a href="https://docs.docker.com/storage/volumes/">https://docs.docker.com/storage/volumes/</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [15 min]
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              58/65
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code has_footer slide-59">
+          <div class="inner">
+            
+            <header><h1>Networking, komunikace mezi kontejnery</h1></header>
+            
+            
+            <section>
+<ul>
+<li>kontejnery je možné připojovat do izolovaných sítí</li>
+<li>výhodou je např. izolace a automatické DNS</li>
+</ul>
+<p>(ubuntu image, doinstalovat ping: <code>sudo apt install iputils-ping</code>, předvést oddědění image, kde je ping nainstalován)</p>
+<div class="highlight"><pre><span></span>docker network create mynet
+docker run -d --name app1 --network mynet ubuntu <span class="o">(</span>pak ubuntu-ping<span class="o">)</span>
+docker run -d --name app2 ubuntu <span class="o">(</span>pak ubuntu-ping<span class="o">)</span>
+docker network connect mynet app2
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [15 min] 
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              59/65
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-60">
+          <div class="inner">
+            
+            <header><h1>Přestávka</h1></header>
+            
+            
+            <section>
+<p><img alt="docker-vs-vm" src="file:///home/amoravek/git/k8s/presentation/docker/../common/coffee.jpg" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              [15 min]
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              60/65
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-61">
           <div class="inner">
             
             <header><h1>Docker best practices</h1></header>
@@ -1536,7 +2614,7 @@ docker network connect mynet app2
             
             <section>
 <p>Projdeme <a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/">https://docs.docker.com/develop/develop-images/dockerfile_best-practices/</a></p>
-<p>Ukážeme si reálný projekt: ta:1.1.10</p></section>
+<p>Ukážeme si reálný projekt: ta:1.1.13</p></section>
             
           </div>
           <div class="presenter_notes">
@@ -1555,7 +2633,7 @@ docker network connect mynet app2
             </aside>
             
             <aside class="page_number">
-              36/40
+              61/65
             </aside>
           </footer>
         </div>
@@ -1563,7 +2641,7 @@ docker network connect mynet app2
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-37">
+        <div class="slide has_footer slide-62">
           <div class="inner">
             
             <header><h1>Orchestrace – Docker Compose, Docker Swarm</h1></header>
@@ -1596,7 +2674,7 @@ docker network connect mynet app2
             </aside>
             
             <aside class="page_number">
-              37/40
+              62/65
             </aside>
           </footer>
         </div>
@@ -1604,14 +2682,20 @@ docker network connect mynet app2
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-38">
+        <div class="slide has_code has_footer slide-63">
           <div class="inner">
             
             <header><h1>Přidělování CPU a paměti</h1></header>
             
             
             <section>
-<p>docker run -d --name app1 --cpus 2 --memory 512m ubuntu</p>
+<div class="highlight"><pre><span></span>docker run -d <span class="se">\</span>
+--name app1 <span class="se">\</span>
+--cpus <span class="m">2</span> <span class="se">\</span>
+--memory 512m <span class="se">\</span>
+ubuntu
+</pre></div>
+
 <p><a href="https://docs.docker.com/config/containers/resource_constraints/">https://docs.docker.com/config/containers/resource_constraints/</a></p></section>
             
           </div>
@@ -1631,7 +2715,7 @@ docker network connect mynet app2
             </aside>
             
             <aside class="page_number">
-              38/40
+              63/65
             </aside>
           </footer>
         </div>
@@ -1639,7 +2723,7 @@ docker network connect mynet app2
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide has_footer slide-39">
+        <div class="slide has_footer slide-64">
           <div class="inner">
             
             <header><h1>Kontejnerizace Java aplikace, JIB</h1></header>
@@ -1671,7 +2755,7 @@ docker network connect mynet app2
             </aside>
             
             <aside class="page_number">
-              39/40
+              64/65
             </aside>
           </footer>
         </div>
@@ -1679,7 +2763,7 @@ docker network connect mynet app2
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-40">
+        <div class="slide slide-65">
           <div class="inner">
             
             <header><h1>Diskuse</h1></header>
@@ -1702,7 +2786,7 @@ docker network connect mynet app2
             </aside>
             
             <aside class="page_number">
-              40/40
+              65/65
             </aside>
           </footer>
         </div>
@@ -1729,236 +2813,386 @@ docker network connect mynet app2
       
       
       <tr id="toc-row-2">
-        <th><a href="#slide:2">Co to je Docker?</a></th>
+        <th><a href="#slide:2">Organizační informace</a></th>
         <td><a href="#slide:2">2</a></td>
       </tr>
       
       
       <tr id="toc-row-3">
-        <th><a href="#slide:3">Srovnání s VM</a></th>
+        <th><a href="#slide:3">Docker VM</a></th>
         <td><a href="#slide:3">3</a></td>
       </tr>
       
       
       <tr id="toc-row-4">
-        <th><a href="#slide:4">Linux kernel</a></th>
+        <th><a href="#slide:4">Co to je Docker? (1)</a></th>
         <td><a href="#slide:4">4</a></td>
       </tr>
       
       
       <tr id="toc-row-5">
-        <th><a href="#slide:5">Motivace</a></th>
+        <th><a href="#slide:5">Co to je Docker? (2)</a></th>
         <td><a href="#slide:5">5</a></td>
       </tr>
       
       
       <tr id="toc-row-6">
-        <th><a href="#slide:6">Image</a></th>
+        <th><a href="#slide:6">Linux namespaces - příklad</a></th>
         <td><a href="#slide:6">6</a></td>
       </tr>
       
       
       <tr id="toc-row-7">
-        <th><a href="#slide:7">Parent a base image</a></th>
+        <th><a href="#slide:7">Linux cgroups - příklad</a></th>
         <td><a href="#slide:7">7</a></td>
       </tr>
       
       
       <tr id="toc-row-8">
-        <th><a href="#slide:8">Kontejner</a></th>
+        <th><a href="#slide:8">Co to je Docker především?</a></th>
         <td><a href="#slide:8">8</a></td>
       </tr>
       
       
       <tr id="toc-row-9">
-        <th><a href="#slide:9">Docker daemon</a></th>
+        <th><a href="#slide:9">...je to <strong>nástroj</strong>, který umožňuje:</a></th>
         <td><a href="#slide:9">9</a></td>
       </tr>
       
       
       <tr id="toc-row-10">
-        <th><a href="#slide:10">OCI</a></th>
+        <th><a href="#slide:10">Co Docker není?</a></th>
         <td><a href="#slide:10">10</a></td>
       </tr>
       
       
       <tr id="toc-row-11">
-        <th><a href="#slide:11">Docker CLI</a></th>
+        <th><a href="#slide:11">Srovnání s VM</a></th>
         <td><a href="#slide:11">11</a></td>
       </tr>
       
       
       <tr id="toc-row-12">
-        <th><a href="#slide:12">Dockerfile</a></th>
+        <th><a href="#slide:12">Linux kernel</a></th>
         <td><a href="#slide:12">12</a></td>
       </tr>
       
       
       <tr id="toc-row-13">
-        <th><a href="#slide:13">Příklad (1)</a></th>
+        <th><a href="#slide:13">Motivace</a></th>
         <td><a href="#slide:13">13</a></td>
       </tr>
       
       
       <tr id="toc-row-14">
-        <th><a href="#slide:14">Příklad (2)</a></th>
+        <th><a href="#slide:14">Image</a></th>
         <td><a href="#slide:14">14</a></td>
       </tr>
       
       
       <tr id="toc-row-15">
-        <th><a href="#slide:15">Příklad (3)</a></th>
+        <th><a href="#slide:15">Parent / base image (1)</a></th>
         <td><a href="#slide:15">15</a></td>
       </tr>
       
       
       <tr id="toc-row-16">
-        <th><a href="#slide:16">Příklad (4)</a></th>
+        <th><a href="#slide:16">Parent / base image (2)</a></th>
         <td><a href="#slide:16">16</a></td>
       </tr>
       
       
       <tr id="toc-row-17">
-        <th><a href="#slide:17">docker kontext</a></th>
+        <th><a href="#slide:17">Současný trend - mikroskopický image</a></th>
         <td><a href="#slide:17">17</a></td>
       </tr>
       
       
       <tr id="toc-row-18">
-        <th><a href="#slide:18">Přestávka do 10:45</a></th>
+        <th><a href="#slide:18">Kontejner</a></th>
         <td><a href="#slide:18">18</a></td>
       </tr>
       
       
       <tr id="toc-row-19">
-        <th><a href="#slide:19">Dockerfile - příkazy (1)</a></th>
+        <th><a href="#slide:19">Docker daemon</a></th>
         <td><a href="#slide:19">19</a></td>
       </tr>
       
       
       <tr id="toc-row-20">
-        <th><a href="#slide:20">Dockerfile - příkazy (2)</a></th>
+        <th><a href="#slide:20">OCI</a></th>
         <td><a href="#slide:20">20</a></td>
       </tr>
       
       
       <tr id="toc-row-21">
-        <th><a href="#slide:21">PID 1, exec vs shell formy</a></th>
+        <th><a href="#slide:21">Docker - alternativy (1)</a></th>
         <td><a href="#slide:21">21</a></td>
       </tr>
       
       
       <tr id="toc-row-22">
-        <th><a href="#slide:22">Build a vrstvy</a></th>
+        <th><a href="#slide:22">Docker - alternativy (2)</a></th>
         <td><a href="#slide:22">22</a></td>
       </tr>
       
       
       <tr id="toc-row-23">
-        <th><a href="#slide:23">Multi-stage build</a></th>
+        <th><a href="#slide:23">Docker CLI</a></th>
         <td><a href="#slide:23">23</a></td>
       </tr>
       
       
       <tr id="toc-row-24">
-        <th><a href="#slide:24">Názvy images, Docker repository</a></th>
+        <th><a href="#slide:24">Dockerfile a build image</a></th>
         <td><a href="#slide:24">24</a></td>
       </tr>
       
       
       <tr id="toc-row-25">
-        <th><a href="#slide:25">Docker registry</a></th>
+        <th><a href="#slide:25">Příklad (1)</a></th>
         <td><a href="#slide:25">25</a></td>
       </tr>
       
       
       <tr id="toc-row-26">
-        <th><a href="#slide:26">Secure/insecure</a></th>
+        <th><a href="#slide:26">Příklad (2)</a></th>
         <td><a href="#slide:26">26</a></td>
       </tr>
       
       
       <tr id="toc-row-27">
-        <th><a href="#slide:27">harbor.trask.cz</a></th>
+        <th><a href="#slide:27">Příklad (3)</a></th>
         <td><a href="#slide:27">27</a></td>
       </tr>
       
       
       <tr id="toc-row-28">
-        <th><a href="#slide:28">pull, push, tag, login/logout</a></th>
+        <th><a href="#slide:28">Příklad (4)</a></th>
         <td><a href="#slide:28">28</a></td>
       </tr>
       
       
       <tr id="toc-row-29">
-        <th><a href="#slide:29">Přestávka na oběd</a></th>
+        <th><a href="#slide:29">docker kontext</a></th>
         <td><a href="#slide:29">29</a></td>
       </tr>
       
       
       <tr id="toc-row-30">
-        <th><a href="#slide:30">PID 1 podrobněji</a></th>
+        <th><a href="#slide:30">Přestávka do 10:45</a></th>
         <td><a href="#slide:30">30</a></td>
       </tr>
       
       
       <tr id="toc-row-31">
-        <th><a href="#slide:31">Uživatelské účty a oprávnění uvnitř kontejneru, USER</a></th>
+        <th><a href="#slide:31">Dockerfile - příkazy (1)</a></th>
         <td><a href="#slide:31">31</a></td>
       </tr>
       
       
       <tr id="toc-row-32">
-        <th><a href="#slide:32">Publikace portů, EXPOSE</a></th>
+        <th><a href="#slide:32">Dockerfile - příkazy (2)</a></th>
         <td><a href="#slide:32">32</a></td>
       </tr>
       
       
       <tr id="toc-row-33">
-        <th><a href="#slide:33">Volumes</a></th>
+        <th><a href="#slide:33">Čas na příklad</a></th>
         <td><a href="#slide:33">33</a></td>
       </tr>
       
       
       <tr id="toc-row-34">
-        <th><a href="#slide:34">Networking, komunikace mezi kontejnery</a></th>
+        <th><a href="#slide:34">Řešení</a></th>
         <td><a href="#slide:34">34</a></td>
       </tr>
       
       
       <tr id="toc-row-35">
-        <th><a href="#slide:35">Přestávka</a></th>
+        <th><a href="#slide:35">PID 1, exec vs shell formy</a></th>
         <td><a href="#slide:35">35</a></td>
       </tr>
       
       
       <tr id="toc-row-36">
-        <th><a href="#slide:36">Docker best practices</a></th>
+        <th><a href="#slide:36">Co je linux exec?</a></th>
         <td><a href="#slide:36">36</a></td>
       </tr>
       
       
       <tr id="toc-row-37">
-        <th><a href="#slide:37">Orchestrace – Docker Compose, Docker Swarm</a></th>
+        <th><a href="#slide:37">Příklad</a></th>
         <td><a href="#slide:37">37</a></td>
       </tr>
       
       
       <tr id="toc-row-38">
-        <th><a href="#slide:38">Přidělování CPU a paměti</a></th>
+        <th><a href="#slide:38">Proč existuje SHELL forma?</a></th>
         <td><a href="#slide:38">38</a></td>
       </tr>
       
       
       <tr id="toc-row-39">
-        <th><a href="#slide:39">Kontejnerizace Java aplikace, JIB</a></th>
+        <th><a href="#slide:39">Build a vrstvy (1)</a></th>
         <td><a href="#slide:39">39</a></td>
       </tr>
       
       
       <tr id="toc-row-40">
-        <th><a href="#slide:40">Diskuse</a></th>
+        <th><a href="#slide:40">Build a vrstvy (2)</a></th>
         <td><a href="#slide:40">40</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-41">
+        <th><a href="#slide:41">Build a vrstvy (3)</a></th>
+        <td><a href="#slide:41">41</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-42">
+        <th><a href="#slide:42">Multi-stage build (1)</a></th>
+        <td><a href="#slide:42">42</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-43">
+        <th><a href="#slide:43">Multi-stage build (2)</a></th>
+        <td><a href="#slide:43">43</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-44">
+        <th><a href="#slide:44">Cvičení - prerekvizity</a></th>
+        <td><a href="#slide:44">44</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-45">
+        <th><a href="#slide:45">Cvičení</a></th>
+        <td><a href="#slide:45">45</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-46">
+        <th><a href="#slide:46">Řešení</a></th>
+        <td><a href="#slide:46">46</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-47">
+        <th><a href="#slide:47">Názvy images, Docker repository</a></th>
+        <td><a href="#slide:47">47</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-48">
+        <th><a href="#slide:48">Docker registry</a></th>
+        <td><a href="#slide:48">48</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-49">
+        <th><a href="#slide:49">Secure/insecure</a></th>
+        <td><a href="#slide:49">49</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-50">
+        <th><a href="#slide:50">TLS</a></th>
+        <td><a href="#slide:50">50</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-51">
+        <th><a href="#slide:51">harbor.trask.cz</a></th>
+        <td><a href="#slide:51">51</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-52">
+        <th><a href="#slide:52">pull, push, tag, login/logout</a></th>
+        <td><a href="#slide:52">52</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-53">
+        <th><a href="#slide:53">Přestávka na oběd</a></th>
+        <td><a href="#slide:53">53</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-54">
+        <th><a href="#slide:54">PID 1 podrobněji</a></th>
+        <td><a href="#slide:54">54</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-55">
+        <th><a href="#slide:55">Účty a oprávnění, USER</a></th>
+        <td><a href="#slide:55">55</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-56">
+        <th><a href="#slide:56">Publikace portů, EXPOSE</a></th>
+        <td><a href="#slide:56">56</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-57">
+        <th><a href="#slide:57">Volumes (1)</a></th>
+        <td><a href="#slide:57">57</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-58">
+        <th><a href="#slide:58">Volumes (2)</a></th>
+        <td><a href="#slide:58">58</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-59">
+        <th><a href="#slide:59">Networking, komunikace mezi kontejnery</a></th>
+        <td><a href="#slide:59">59</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-60">
+        <th><a href="#slide:60">Přestávka</a></th>
+        <td><a href="#slide:60">60</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-61">
+        <th><a href="#slide:61">Docker best practices</a></th>
+        <td><a href="#slide:61">61</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-62">
+        <th><a href="#slide:62">Orchestrace – Docker Compose, Docker Swarm</a></th>
+        <td><a href="#slide:62">62</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-63">
+        <th><a href="#slide:63">Přidělování CPU a paměti</a></th>
+        <td><a href="#slide:63">63</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-64">
+        <th><a href="#slide:64">Kontejnerizace Java aplikace, JIB</a></th>
+        <td><a href="#slide:64">64</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-65">
+        <th><a href="#slide:65">Diskuse</a></th>
+        <td><a href="#slide:65">65</a></td>
       </tr>
       
       
@@ -2007,7 +3241,7 @@ docker network connect mynet app2
       </tr>
     </table>
     <br>
-    <strong>Generated with Darkslide 5.1.0</strong>
+    <strong>Generated with Darkslide 6.0.0</strong>
   </div>
   <script>main()</script>
 </body>

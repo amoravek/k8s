@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: all-apps
+  namespace: argocd
+spec:
+  destination:
+    name: in-cluster
+  project: default
+  source:
+    repoURL: https://github.com/amoravek/k8s.git
+    path: ./examples/k8s/argocd/all-apps
+    helm:
+      valueFiles: ['values.yaml']
+      parameters:
+        - name: actionsRunnerController.gitHubAccessToken
+          value: "${ACCESS_TOKEN}"
+        - name: postgresql.password
+          value: "${POSTGRESQL_ADMIN_PASSWORD}"
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

@@ -1,6 +1,6 @@
-template: Hello, %s!
+# template: Hello, %s!
 
-defaultName: ${DW_DEFAULT_NAME:-Stranger}
+# defaultName: ${DW_DEFAULT_NAME:-Stranger}
 
 logging:
   level: INFO

@@ -30,10 +30,18 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
       - name: nginx
-        image: nginx
+        image: harbor.trask.cz/dockerhub-proxy/nginxinc/nginx-unprivileged
         ports:
-        - containerPort: 80
-          name: web
+          - name: backend-http
+            containerPort: 80
+        volumeMounts:
+        - name: www
+          mountPath: /usr/share/nginx/html
+      - name: redis
+        image: harbor.trask.cz/dockerhub-proxy/library/redis
+        ports:
+          - name: redis
+            containerPort: 6379
         volumeMounts:
         - name: www
           mountPath: /usr/share/nginx/html
@@ -42,7 +50,7 @@ spec:
       name: www
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: "ontap-nas-basic"
+      storageClassName: "longhorn"
       resources:
         requests:
           storage: 1Gi

@@ -1,0 +1,31 @@
+# Build spustime:
+# 
+# docker build \
+#     -t multistage-opt2 \
+#     --build-arg SOURCES_DIR="./k8s/k8s-sample-app/" \
+#     -f Dockerfile.optimized2 .
+# 
+# !!!POZOR!!!  --build-arg musi ukazovat na data v AKTUALNIM adresari (=kontextu),
+# proto zacina cesta teckou - ./k8s/k8s-sample-app/
+# jinak to lehne...
+
+FROM ubuntu as builder
+
+ARG SOURCES_DIR=.
+
+RUN apt-get update \
+    && apt-get install -y maven \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY ${SOURCES_DIR} /sources
+
+WORKDIR /sources
+
+RUN mvn clean package
+
+FROM gcr.io/distroless/java11
+
+COPY --from=builder /sources/target/k8s-sample-app-1.0-SNAPSHOT.jar /app/
+
+ENTRYPOINT ["java", "-jar", "/app/k8s-sample-app-1.0-SNAPSHOT.jar"]
+CMD ["server"]

@@ -1,0 +1,21 @@
+services:
+  app:
+    image: harbor.trask.cz/amor/k8s-sample-app:1.0-SNAPSHOT
+    restart: on-failure
+    ports:
+      - "8080:8080"
+    networks:
+      # po odkomentovani bude fungovat (kontejner bude zarazen do stejne site jako frontend
+      - frontend
+      - backend
+  client:
+    depends_on:
+      - app
+    image: nginx
+    command: bash -c "while true; do curl http://app:8080; sleep 5; done"
+    networks:
+      - frontend
+
+networks:
+  frontend: {}
+  backend: {}

@@ -3,8 +3,8 @@
 How to start the K8sSampleApp application
 ---
 
-1. Run `mvn clean install` to build your application
-1. Start application with `java -jar target/k8s-sample-app-1.0-SNAPSHOT.jar server config.yml`
+1. Run `mvn clean package` to build your application
+1. Start application with `java -jar target/k8s-sample-app.jar server config.yml`
 1. To check that your application is running enter url `http://localhost:8080`
 
 Health Check

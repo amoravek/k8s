@@ -17,3 +17,6 @@ target/
 /bin/
 
 *.swp
+*.zip
+*.tgz
+*.tar.gz

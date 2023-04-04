@@ -1,0 +1,31 @@
+{{- if .Values.metricsServerEnabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: metrics-server
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: kube-system
+    name: in-cluster
+  project: default
+  source:
+    chart: metrics-server
+    repoURL: https://kubernetes-sigs.github.io/metrics-server/
+    targetRevision: 3.8.3
+    helm:
+      values: |
+        apiService:
+          insecureSkipTLSVerify: true
+        args: 
+          - --kubelet-insecure-tls
+        installCRDs: true
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+{{- end }}

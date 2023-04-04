@@ -1,10 +1,13 @@
 # Kubernetes I.
+---
+
+# Organizační informace
 
 Online poznámky: <https://codimd.trask.cz/s/rJPCa8C0v>
 
-Použitý cluster: <https://arm.lab.trask.cz/>
-
-Adam Morávek, amoravek@trask.cz, +420 724 514 916
+Adam Morávek<br/>
+amoravek@trask.cz<br/>
++420 724 514 916<br/>
 
 ---
 # Potřeba orchestrace kontejnerů
@@ -50,13 +53,13 @@ Adam Morávek, amoravek@trask.cz, +420 724 514 916
 ---
 # Architektura Kubernetes (2)
 
-- API server: centrální vstupní bod clusteru, REST API
-- Scheduler: plánuje workload na konkrétní nody a hlídá jejich systémové zdroje (CPU, RAM, disk, ...)
-- Controller-manager: *hlídá* stav (controllerů) clusteru (deklarovaný stav vs reálný stav)
+- API server: centrální vstupní bod clusteru, REST API - využíván pody, komponentami clusteru, uživateli, ...
+- Scheduler: *plánuje* workload na konkrétní nody a hlídá jejich systémové zdroje (CPU, RAM, disk, ...)
+- Controller-manager: démon, který *hlídá* stav clusteru (deklarovaný stav vs reálný stav)
 - etcd: *uchovává* stav clusteru
-- Kubelet: "node agent" - hlídá pody, jejich kontejnery, stav node
+- Kubelet: "node agent" - hlídá pody, jejich kontejnery, reportuje stav nodu
 - Kube-proxy: na každém node směruje příchozí provoz 
-- Container runtime (zde Docker): runtime pro běh kontejnerů - viz dále CNI
+- Container runtime (zde containerd): runtime pro běh kontejnerů - viz dále CNI
 
 ---
 # Pod a jeho kontejnery
@@ -79,7 +82,7 @@ Adam Morávek, amoravek@trask.cz, +420 724 514 916
 
 .footer: [5min] 
 
-- Kubernetes namespace slouží k izolaci objektů a zdrojů
+- *Kubernetes* namespace (pozor neplest s Linux namespaces) slouží k izolaci objektů a zdrojů
 - ale také k plošnému nastavení různých kvót, limitů a autorizací:
 
     `kubectl describe namespace amo`
@@ -90,13 +93,16 @@ Adam Morávek, amoravek@trask.cz, +420 724 514 916
 .footer: [20 min] 
 
 - CLI rozhraní pro komunikaci s clusterem (resp API-serverem)
-- vyžaduje přítomnost konfiguračniho souboru, tzv. *kubeconfig* (uložen typicky v $HOME/.kube/config) - viz váš osobní kubeconfig rozesílaný před kurzem
+- vyžaduje přítomnost konfiguračniho souboru, tzv. *kubeconfig* (uložen typicky v $HOME/.kube/config) - viz váš osobní kubeconfig -> *vyrobíme*
 - kubeconfig obsahuje sady clusterů a uživatelů propojených kontexty
 - Praktické ukázky + merge kubeconfigu:
+  <br/><br/>
 
-        !shell
-        export KUBECONFIG=~/.kube/config:~/someotherconfig 
+        !bash
+        export KUBECONFIG=~/.kube/config:/path/to/someotherconfig 
         kubectl config view --flatten > ~/new-kubeconfig
+
+pozor, některé verze kubectl mají problém s ~
 
 <https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/>
 
@@ -113,7 +119,7 @@ Adam Morávek, amoravek@trask.cz, +420 724 514 916
 
 - totéž lze docílit i vytvořením yaml - yaml je ale těžko zapamatovatelný, takže google nebo uložené šablony?
 
-- lepší řešení ja kombinace - vytvořit jednoduchou kostru pomocí CLI a obohacovat (příklad). To má ale smysl jen na úrovni developmentu, všude jinde zařídí CI/CD.
+- lepší řešení ja kombinace - vytvořit jednoduchou kostru pomocí CLI a obohacovat (příklad). To má ale smysl jen na úrovni developmentu (Helm), všude jinde zařídí CI/CD.
 
 ---
 # K9s, Kubernetes Web IU (Dashboard)
@@ -150,6 +156,8 @@ Příklad - škálování:
     - `kubectl rollout status deployment`
 
 - 1 -> 10 -> 0 -> 4 + průzkum + --replicas=10 - vysvětlit proč jen 6 replik
+
+`--record` slouzi k ulozeni kubectl prikazu do anotace `kubernetes.io/change-cause` napr. pro pozdejsi analyzu
 
 ---
 # Deployment (3)
@@ -207,7 +215,7 @@ Rollback
 
 - každý kontejner může provést mount téhož volume do jiného adresáře
 
-<https://kubernetes.io/docs/concepts/storage/volumes/>
+https://kubernetes.io/docs/concepts/storage/volumes/
 
 ---
 # Perzistence (2)
@@ -216,7 +224,7 @@ Rollback
     - mixuje odpovědnost storage admina a vývojáře/devops inženýra
     - nelze nastavit oprávnění na úrovni Kubernetes
     - mnohdy je nutné zadat i přihlašovací údaje diktované volume pluginem
-    - pokud je potřeba použít volume i z jiného Podu, je nutné duplikovat konfiguraci
+    - pokud je potřeba použít sdílený volume, je nutné duplikovat konfiguraci
 
 Řešením je použíti PersistentVolume a PersistentVolumeClaim - příklady (examples/k8s/pv-pvc)
 
@@ -248,17 +256,17 @@ Příklad (examples/k8s/configmap-secret)
 
 .footer: [15 min] 
 
-- pody mají nestabilní IP i DNS name (=název Podu)
+- pody mají nestabilní IP i DNS name (=název Podu) - změní se mapř. po "restartu" (=smazání podu v deploymentu)
 - Objekt Service představuje elegantní způsob řešení:
 
     - `kubectl create deployment nginx --image=nginx`
     - `kubectl expose deployment nginx --port 8888 --target-port 80`
 
 - ClusterIP - pouze interně v rámci clusteru
-- NodePort - jednoduchý, funkční...ale ty porty...navíc obsadí porty na všech nodech
+- NodePort - jednoduchý, funkční...ale ty porty...navíc obsadí port na všech nodech současně
 - LoadBalancer - nejpohodlnější, ale v cloudu drahý (samostatná IP)
 
-<https://kubernetes.io/docs/concepts/services-networking/service/>
+https://kubernetes.io/docs/concepts/services-networking/service/
 
 ---
 # Ingress a ingress controller
@@ -266,16 +274,17 @@ Příklad (examples/k8s/configmap-secret)
 .footer: [20 min] 
 
 - objekt Ingress je pravidlo pro reverzní proxy deklarované v YAML
-- deklarujeme tedy pravidlo a o ostatní se postará reverzní proxy...a ta je kde?
-- je potřeba nainstalovat *ingress controller* (typicky kontejnerizovaný nginx nebo haproxy)
+- deklarujeme tedy pravidlo a o ostatní se postará reverzní proxy...ale ta je kde?
+- je potřeba nainstalovat *ingress controller* (typicky kontejnerizovaný nginx, haproxy, Traefik, ...)
 - funguje jen pro HTTP
 - jako backend je použita Service typu ClusterIP
 
 Příklad (examples/k8s/ingress)
 
-Závěr: **pro HTTP je idealní vystavit ingress controller jako Service typu LoadBalancer a pro ostatní komunikaci použít buď LoadBalancer (drahé) nebo NodePort (levné, ale v Cloudu komplikované)**
+Závěr: **pro HTTP je idealní vystavit ingress controller jako Service typu LoadBalancer a pro ostatní komunikaci použít buď LoadBalancer (drahé) nebo NodePort (levné, ale v Cloudu komplikované/nepodporované)**
 
-<https://kubernetes.io/docs/concepts/services-networking/ingress/>
+https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/
+https://kubernetes.io/docs/concepts/services-networking/ingress/
 
 ---
 # Přestávka na oběd

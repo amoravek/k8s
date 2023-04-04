@@ -16,6 +16,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<dropwizard.version>2.0.18</dropwizard.version>
+		<!-- fixy vulnerabilit -->
+		<!-- <dropwizard.version>2.1.4</dropwizard.version> -->
 		<mainClass>k8s.sample.KubeSampleApp</mainClass>
 	</properties>
 
@@ -44,7 +46,6 @@
 		<dependency>
 			<groupId>io.dropwizard.metrics</groupId>
 			<artifactId>metrics-core</artifactId>
-			<version>4.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>io.prometheus</groupId>
@@ -59,6 +60,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>k8s-sample-app</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-shade-plugin</artifactId>
@@ -142,8 +144,20 @@
 			<plugin>
 				<groupId>com.google.cloud.tools</groupId>
 				<artifactId>jib-maven-plugin</artifactId>
-				<version>2.7.1</version>
+				<version>3.3.1</version>
 				<configuration>
+					<from>
+						<platforms>
+							<platform>
+								<architecture>amd64</architecture>
+								<os>linux</os>
+							</platform>
+							<platform>
+								<architecture>arm64</architecture>
+								<os>linux</os>
+							</platform>
+						</platforms>
+					</from>
 					<to>
 						<image>harbor.trask.cz/amor/k8s-sample-app</image>
 						<tags>
@@ -153,6 +167,9 @@
 					<container>
 						<creationTime>${maven.build.timestamp}</creationTime>
 						<filesModificationTime>${maven.build.timestamp}</filesModificationTime>
+						<args>
+							<arg>server</arg>
+						</args>
 					</container>
 				</configuration>
 			</plugin>
@@ -181,12 +198,6 @@
 			<activation>
 				<jdk>[11,)</jdk>
 			</activation>
-			<properties>
-				<!-- Workaround for "javadoc: error - The code being documented uses 
-					modules but the packages defined in https://docs.oracle.com/javase/8/docs/api/ 
-					are in the unnamed module." -->
-				<maven.javadoc.skip>true</maven.javadoc.skip>
-			</properties>
 		</profile>
 	</profiles>
 </project>

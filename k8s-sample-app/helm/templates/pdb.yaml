@@ -1,0 +1,11 @@
+{{- if .Values.disruptionBudget.enabled }}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "k8s-sample-app.fullname" . }}
+spec:
+  minAvailable: {{ .Values.disruptionBudget.minAvailable }}
+  selector:
+    matchLabels:
+      {{- include "k8s-sample-app.selectorLabels" . | nindent 6 }}
+{{- end }}

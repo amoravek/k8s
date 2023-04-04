@@ -18,7 +18,8 @@ import k8s.sample.api.OutData;
 @Produces(MediaType.APPLICATION_JSON)
 public class ReadinessResource {
 	
-	private static final long UNREADY_MILLIS = Long.parseLong(System.getenv("UNREADY_MILLIS"));
+	private static final String MILLIS_ENV = System.getenv("UNREADY_MILLIS");
+	private static final long UNREADY_MILLIS = Long.parseLong(MILLIS_ENV != null ? MILLIS_ENV : "60000");
 
 	public ReadinessResource() {
 		System.out.println("UNREADY_MILLIS: " + UNREADY_MILLIS);
