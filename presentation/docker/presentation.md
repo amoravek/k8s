@@ -118,7 +118,7 @@ amoravek@trask.cz<br/>
 - image se nedají měnit, ale může se z nich *dědit*
 - docker image obsahuje vše potřebné pro spuštění aplikace
 - image lze digitálně podepsat
-- součástí image i kompletní souborový systém OS - např. OS CVE lze řešit rebuildem image
+- součástí image je i kompletní souborový systém OS - např. OS CVE lze řešit rebuildem image
 - image se verzují
   <br/><br/>
 
@@ -403,7 +403,7 @@ Zkusme tedy nový build... (také např. <https://github.com/argoproj/argo-cd>)
 
 .footer: [15 min] 
 
-Inspirace: <https://repogit.trask.cz/git/BI_Docker>
+Inspirace: <https://gitlab.trask.cz/BI/automation/docker.git>
 
 Vybrané příkazy:
 
@@ -462,7 +462,7 @@ Vybrané příkazy:
         CMD ["my1.txt"]
 
 ---
-# PID 1, exec vs shell formy
+# PID 1, exec vs. shell formy
 
 .footer: [25 min] 
 
@@ -490,7 +490,7 @@ Pěkně vysvětleno:
     - sh -c
       - /app.sh
 
-vs
+vs.
 
     !bash
     exec ./app.sh
