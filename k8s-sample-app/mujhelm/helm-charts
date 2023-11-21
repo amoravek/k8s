@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Prometheus Community Kubernetes Helm Charts | helm-charts</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="Prometheus Community Kubernetes Helm Charts" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Prometheus community Helm charts" />
+<meta property="og:description" content="Prometheus community Helm charts" />
+<link rel="canonical" href="https://prometheus-community.github.io/helm-charts/" />
+<meta property="og:url" content="https://prometheus-community.github.io/helm-charts/" />
+<meta property="og:site_name" content="helm-charts" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Prometheus Community Kubernetes Helm Charts" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","description":"Prometheus community Helm charts","headline":"Prometheus Community Kubernetes Helm Charts","name":"helm-charts","url":"https://prometheus-community.github.io/helm-charts/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/helm-charts/assets/css/style.css?v=90d5d3925887e22a607a063cfe849f1e0c88bc09">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/helm-charts/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="https://prometheus-community.github.io/helm-charts/">helm-charts</a></h1>
+      
+
+      <h1 id="prometheus-community-kubernetes-helm-charts">Prometheus Community Kubernetes Helm Charts</h1>
+
+<p><a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License" /></a> <img src="https://github.com/prometheus-community/helm-charts/workflows/Release%20Charts/badge.svg?branch=main" alt="Release Charts" /> <a href="https://github.com/prometheus-community/helm-charts/releases"><img src="https://img.shields.io/github/downloads/prometheus-community/helm-charts/total.svg" alt="Releases downloads" /></a></p>
+
+<p>This functionality is in beta and is subject to change. The code is provided as-is with no warranties. Beta features are not subject to the support SLA of official GA features.</p>
+
+<h2 id="usage">Usage</h2>
+
+<p><a href="https://helm.sh">Helm</a> must be installed to use the charts.
+Please refer to Helm’s <a href="https://helm.sh/docs/">documentation</a> to get started.</p>
+
+<p>Once Helm is set up properly, add the repo as follows:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+</span></code></pre></div></div>
+
+<p>You can then run <code class="language-plaintext highlighter-rouge">helm search repo prometheus-community</code> to see the charts.</p>
+
+<h2 id="contributing">Contributing</h2>
+
+<p>The source code of all <a href="https://prometheus.io">Prometheus</a> community <a href="https://helm.sh">Helm</a> charts can be found on Github: <a href="https://github.com/prometheus-community/helm-charts/">https://github.com/prometheus-community/helm-charts/</a></p>
+
+<!-- Keep full URL links to repo files because this README syncs from main to gh-pages.  -->
+<p>We’d love to have you contribute! Please refer to our <a href="https://github.com/prometheus-community/helm-charts/blob/main/CONTRIBUTING.md">contribution guidelines</a> for details.</p>
+
+<h2 id="license">License</h2>
+
+<!-- Keep full URL links to repo files because this README syncs from main to gh-pages.  -->
+<p><a href="https://github.com/prometheus-community/helm-charts/blob/main/LICENSE">Apache 2.0 License</a>.</p>
+
+<h2 id="helm-charts-build-status">Helm charts build status</h2>
+
+<p><img src="https://github.com/prometheus-community/helm-charts/workflows/Release%20Charts/badge.svg?branch=main" alt="Release Charts" /></p>
+
+
+      
+      <div class="footer border-top border-gray-light mt-5 pt-3 text-right text-gray">
+        This site is open source. <a href="https://github.com/prometheus-community/helm-charts/edit/gh-pages/README.md">Improve this page</a>.
+      </div>
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

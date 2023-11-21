@@ -81,7 +81,7 @@
             </aside>
             
             <aside class="page_number">
-              1/42
+              1/43
             </aside>
           </footer>
         </div>
@@ -115,7 +115,7 @@ amoravek@trask.cz<br/>
             </aside>
             
             <aside class="page_number">
-              2/42
+              2/43
             </aside>
           </footer>
         </div>
@@ -148,7 +148,7 @@ amoravek@trask.cz<br/>
             </aside>
             
             <aside class="page_number">
-              3/42
+              3/43
             </aside>
           </footer>
         </div>
@@ -181,7 +181,7 @@ amoravek@trask.cz<br/>
             </aside>
             
             <aside class="page_number">
-              4/42
+              4/43
             </aside>
           </footer>
         </div>
@@ -214,7 +214,7 @@ amoravek@trask.cz<br/>
             </aside>
             
             <aside class="page_number">
-              5/42
+              5/43
             </aside>
           </footer>
         </div>
@@ -247,7 +247,7 @@ amoravek@trask.cz<br/>
             </aside>
             
             <aside class="page_number">
-              6/42
+              6/43
             </aside>
           </footer>
         </div>
@@ -280,7 +280,7 @@ amoravek@trask.cz<br/>
             </aside>
             
             <aside class="page_number">
-              7/42
+              7/43
             </aside>
           </footer>
         </div>
@@ -317,7 +317,7 @@ amoravek@trask.cz<br/>
             </aside>
             
             <aside class="page_number">
-              8/42
+              8/43
             </aside>
           </footer>
         </div>
@@ -352,7 +352,7 @@ amoravek@trask.cz<br/>
             </aside>
             
             <aside class="page_number">
-              9/42
+              9/43
             </aside>
           </footer>
         </div>
@@ -386,7 +386,7 @@ amoravek@trask.cz<br/>
             </aside>
             
             <aside class="page_number">
-              10/42
+              10/43
             </aside>
           </footer>
         </div>
@@ -420,7 +420,7 @@ amoravek@trask.cz<br/>
             </aside>
             
             <aside class="page_number">
-              11/42
+              11/43
             </aside>
           </footer>
         </div>
@@ -451,7 +451,7 @@ amoravek@trask.cz<br/>
             </aside>
             
             <aside class="page_number">
-              12/42
+              12/43
             </aside>
           </footer>
         </div>
@@ -480,7 +480,7 @@ amoravek@trask.cz<br/>
             </aside>
             
             <aside class="page_number">
-              13/42
+              13/43
             </aside>
           </footer>
         </div>
@@ -503,6 +503,7 @@ amoravek@trask.cz<br/>
 <li>ClusterRoleBinding</li>
 </ul>
 <p>Seznam verbs: <code>kubectl api-resources --sort-by name -o wide</code></p>
+<p><code>kubectl api-resources --api-group ""</code></p>
 <p><a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">https://kubernetes.io/docs/reference/access-authn-authz/rbac/</a></p></section>
             
           </div>
@@ -520,7 +521,7 @@ amoravek@trask.cz<br/>
             </aside>
             
             <aside class="page_number">
-              14/42
+              14/43
             </aside>
           </footer>
         </div>
@@ -528,28 +529,31 @@ amoravek@trask.cz<br/>
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-15">
+        <div class="slide has_code slide-15">
           <div class="inner">
             
             <header><h1>Příklad role</h1></header>
             
             
-            <section><p><code>apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  name: pod-reader
-  namespace: amoravek
-rules:
-- apiGroups:
-  - ""
-  resources:
-  - pods
-  - services
-  verbs:
-  - get
-  - list
-  - watch</code>
-<code>kubectl create role pod-reader --resource "pods,service" --verb "get,list,watch"</code></p></section>
+            <section><div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1</span><span class="w"></span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Role</span><span class="w"></span>
+<span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pod-reader</span><span class="w"></span>
+<span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amoravek</span><span class="w"></span>
+<span class="nt">rules</span><span class="p">:</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">apiGroups</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">resources</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pods</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">services</span><span class="w"></span>
+<span class="w">  </span><span class="nt">verbs</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">get</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">list</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">watch</span><span class="w"></span>
+</pre></div>
+
+<p><code>kubectl create role pod-reader --resource "pods,service" --verb "get,list,watch"</code></p>
+<p>kde vzít <code>apiGroups</code>?</p></section>
             
           </div>
           <div class="presenter_notes">
@@ -566,7 +570,7 @@ rules:
             </aside>
             
             <aside class="page_number">
-              15/42
+              15/43
             </aside>
           </footer>
         </div>
@@ -603,7 +607,7 @@ rules:
             </aside>
             
             <aside class="page_number">
-              16/42
+              16/43
             </aside>
           </footer>
         </div>
@@ -640,7 +644,7 @@ Protože <code>certificatesigningrequest</code> není <em>namespaced</em> resour
             </aside>
             
             <aside class="page_number">
-              17/42
+              17/43
             </aside>
           </footer>
         </div>
@@ -674,7 +678,7 @@ Protože <code>certificatesigningrequest</code> není <em>namespaced</em> resour
             </aside>
             
             <aside class="page_number">
-              18/42
+              18/43
             </aside>
           </footer>
         </div>
@@ -705,7 +709,7 @@ Protože <code>certificatesigningrequest</code> není <em>namespaced</em> resour
             </aside>
             
             <aside class="page_number">
-              19/42
+              19/43
             </aside>
           </footer>
         </div>
@@ -739,7 +743,7 @@ Protože <code>certificatesigningrequest</code> není <em>namespaced</em> resour
             </aside>
             
             <aside class="page_number">
-              20/42
+              20/43
             </aside>
           </footer>
         </div>
@@ -777,7 +781,7 @@ Protože <code>certificatesigningrequest</code> není <em>namespaced</em> resour
             </aside>
             
             <aside class="page_number">
-              21/42
+              21/43
             </aside>
           </footer>
         </div>
@@ -811,7 +815,7 @@ Protože <code>certificatesigningrequest</code> není <em>namespaced</em> resour
             </aside>
             
             <aside class="page_number">
-              22/42
+              22/43
             </aside>
           </footer>
         </div>
@@ -849,7 +853,7 @@ Protože <code>certificatesigningrequest</code> není <em>namespaced</em> resour
             </aside>
             
             <aside class="page_number">
-              23/42
+              23/43
             </aside>
           </footer>
         </div>
@@ -883,7 +887,7 @@ Protože <code>certificatesigningrequest</code> není <em>namespaced</em> resour
             </aside>
             
             <aside class="page_number">
-              24/42
+              24/43
             </aside>
           </footer>
         </div>
@@ -937,7 +941,7 @@ Protože <code>certificatesigningrequest</code> není <em>namespaced</em> resour
             </aside>
             
             <aside class="page_number">
-              25/42
+              25/43
             </aside>
           </footer>
         </div>
@@ -975,7 +979,7 @@ Protože <code>certificatesigningrequest</code> není <em>namespaced</em> resour
             </aside>
             
             <aside class="page_number">
-              26/42
+              26/43
             </aside>
           </footer>
         </div>
@@ -1013,7 +1017,7 @@ Protože <code>certificatesigningrequest</code> není <em>namespaced</em> resour
             </aside>
             
             <aside class="page_number">
-              27/42
+              27/43
             </aside>
           </footer>
         </div>
@@ -1063,7 +1067,7 @@ tolerations:
             </aside>
             
             <aside class="page_number">
-              28/42
+              28/43
             </aside>
           </footer>
         </div>
@@ -1096,7 +1100,7 @@ tolerations:
             </aside>
             
             <aside class="page_number">
-              29/42
+              29/43
             </aside>
           </footer>
         </div>
@@ -1107,18 +1111,51 @@ tolerations:
         <div class="slide slide-30">
           <div class="inner">
             
-            <header><h1>High-availability, pod disruption budget (příprava 1)</h1></header>
+            <header><h1>Pod disruption budget</h1></header>
+            
+            
+            <section><ul>
+<li>vysvetlit</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              30/43
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-31">
+          <div class="inner">
+            
+            <header><h1>HA, pod disruption budget (příprava 1)</h1></header>
             
             
             <section><p>1) nejprve vyčistit 2 nody (vysvětlit):</p>
 <pre><code>      kubectl patch nodes worker04 worker05 -p '{"spec":{"taints": null}}'
       kubectl patch nodes worker04 worker05 --type=json -p='[{"op": "remove", "path": "/metadata/labels/demo"}]'
 
-      kubectl taint node worker04 demo=pdb-test:NoExecute
-      kubectl taint node worker05 demo=pdb-test:NoExecute
-      kubectl taint node worker05 demo=pdb-test:NoSchedule
+      kubectl taint node worker04 mytaint=pdb-test:NoExecute
+      kubectl taint node worker05 mytaint=pdb-test:NoExecute
+      kubectl taint node worker05 mytaint=pdb-test:NoSchedule
 </code></pre>
-<p>2) přidat label <code>demo=yes</code> oběma nodům (třeba přes patch)</p>
+<p>2) přidat label <code>demo=yes</code> oběma nodům (třeba přes patch nebo kubectl label ...)</p>
 <pre><code>- `kubectl patch nodes worker04 worker05 --type=json -p='[{"op": "add", "path": "/metadata/labels/demo", "value": "yes"}]'`
 
 - zkontrolovat přes --selector
@@ -1139,7 +1176,7 @@ tolerations:
             </aside>
             
             <aside class="page_number">
-              30/42
+              31/43
             </aside>
           </footer>
         </div>
@@ -1147,10 +1184,10 @@ tolerations:
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-31">
+        <div class="slide slide-32">
           <div class="inner">
             
-            <header><h1>High-availability, pod disruption budget (příprava 2)</h1></header>
+            <header><h1>HA, pod disruption budget (příprava 2)</h1></header>
             
             
             <section><p>3) nodeSelector -&gt; node label demo=yes
@@ -1159,7 +1196,7 @@ tolerations:
     - naškálovat na 2 repliky</p>
 <p>4) dodat toleration do deploymentu:</p>
 <pre><code>      tolerations:
-      - key: "demo"
+      - key: "mytaint"
         operator: "Equal"
         value: "pdb-test"
         effect: "NoExecute"
@@ -1190,7 +1227,7 @@ tolerations:
             </aside>
             
             <aside class="page_number">
-              31/42
+              32/43
             </aside>
           </footer>
         </div>
@@ -1198,10 +1235,10 @@ tolerations:
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-32">
+        <div class="slide slide-33">
           <div class="inner">
             
-            <header><h1>High-availability, pod disruption budget</h1></header>
+            <header><h1>HA, pod disruption budget</h1></header>
             
             
             <section><p><code>kubectl create poddisruptionbudget k8s-sample-app-pdb --selector=app=k8s-sample-app --min-available=2</code></p>
@@ -1229,7 +1266,7 @@ tolerations:
             </aside>
             
             <aside class="page_number">
-              32/42
+              33/43
             </aside>
           </footer>
         </div>
@@ -1237,7 +1274,7 @@ tolerations:
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-33">
+        <div class="slide slide-34">
           <div class="inner">
             
             <header><h1>Horizontal pod autoscaler</h1></header>
@@ -1264,7 +1301,7 @@ tolerations:
             </aside>
             
             <aside class="page_number">
-              33/42
+              34/43
             </aside>
           </footer>
         </div>
@@ -1272,7 +1309,7 @@ tolerations:
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-34">
+        <div class="slide slide-35">
           <div class="inner">
             
             <header><h1>Cordon, drain</h1></header>
@@ -1303,7 +1340,7 @@ tolerations:
             </aside>
             
             <aside class="page_number">
-              34/42
+              35/43
             </aside>
           </footer>
         </div>
@@ -1311,7 +1348,7 @@ tolerations:
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-35">
+        <div class="slide slide-36">
           <div class="inner">
             
             <header><h1>Custom Resource Definition (CRD)</h1></header>
@@ -1332,7 +1369,7 @@ tolerations:
             </aside>
             
             <aside class="page_number">
-              35/42
+              36/43
             </aside>
           </footer>
         </div>
@@ -1340,7 +1377,7 @@ tolerations:
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-36">
+        <div class="slide slide-37">
           <div class="inner">
             
             <header><h1>Headless service</h1></header>
@@ -1366,7 +1403,7 @@ tolerations:
             </aside>
             
             <aside class="page_number">
-              36/42
+              37/43
             </aside>
           </footer>
         </div>
@@ -1374,7 +1411,7 @@ tolerations:
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-37">
+        <div class="slide slide-38">
           <div class="inner">
             
             <header><h1>StatefulSet</h1></header>
@@ -1395,7 +1432,7 @@ tolerations:
             </aside>
             
             <aside class="page_number">
-              37/42
+              38/43
             </aside>
           </footer>
         </div>
@@ -1403,7 +1440,7 @@ tolerations:
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-38">
+        <div class="slide slide-39">
           <div class="inner">
             
             <header><h1>Kubernetes best practices -&gt; Helm Charts</h1></header>
@@ -1424,7 +1461,7 @@ tolerations:
             </aside>
             
             <aside class="page_number">
-              38/42
+              39/43
             </aside>
           </footer>
         </div>
@@ -1432,7 +1469,7 @@ tolerations:
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-39">
+        <div class="slide slide-40">
           <div class="inner">
             
             <header><h1>Autentifikace, uživatelské a servisní účty</h1></header>
@@ -1455,7 +1492,7 @@ tolerations:
             </aside>
             
             <aside class="page_number">
-              39/42
+              40/43
             </aside>
           </footer>
         </div>
@@ -1463,7 +1500,7 @@ tolerations:
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-40">
+        <div class="slide slide-41">
           <div class="inner">
             
             <header><h1>Container registry - autentifikace</h1></header>
@@ -1489,7 +1526,7 @@ tolerations:
             </aside>
             
             <aside class="page_number">
-              40/42
+              41/43
             </aside>
           </footer>
         </div>
@@ -1497,7 +1534,7 @@ tolerations:
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-41">
+        <div class="slide slide-42">
           <div class="inner">
             
             <header><h1>Multiplatformní přístupy (ARM64)</h1></header>
@@ -1518,7 +1555,7 @@ tolerations:
             </aside>
             
             <aside class="page_number">
-              41/42
+              42/43
             </aside>
           </footer>
         </div>
@@ -1526,7 +1563,7 @@ tolerations:
       
       <!-- slide source: presentation.md -->
       <div class="slide-wrapper">
-        <div class="slide slide-42">
+        <div class="slide slide-43">
           <div class="inner">
             
             <header><h1>Diskuse</h1></header>
@@ -1547,7 +1584,7 @@ tolerations:
             </aside>
             
             <aside class="page_number">
-              42/42
+              43/43
             </aside>
           </footer>
         </div>
@@ -1570,7 +1607,7 @@ tolerations:
             
             
             <aside class="page_number">
-              /42
+              /43
             </aside>
           </footer>
         </div>
@@ -1765,80 +1802,86 @@ tolerations:
       
       
       <tr id="toc-row-30">
-        <th><a href="#slide:30">High-availability, pod disruption budget (příprava 1)</a></th>
+        <th><a href="#slide:30">Pod disruption budget</a></th>
         <td><a href="#slide:30">30</a></td>
       </tr>
       
       
       <tr id="toc-row-31">
-        <th><a href="#slide:31">High-availability, pod disruption budget (příprava 2)</a></th>
+        <th><a href="#slide:31">HA, pod disruption budget (příprava 1)</a></th>
         <td><a href="#slide:31">31</a></td>
       </tr>
       
       
       <tr id="toc-row-32">
-        <th><a href="#slide:32">High-availability, pod disruption budget</a></th>
+        <th><a href="#slide:32">HA, pod disruption budget (příprava 2)</a></th>
         <td><a href="#slide:32">32</a></td>
       </tr>
       
       
       <tr id="toc-row-33">
-        <th><a href="#slide:33">Horizontal pod autoscaler</a></th>
+        <th><a href="#slide:33">HA, pod disruption budget</a></th>
         <td><a href="#slide:33">33</a></td>
       </tr>
       
       
       <tr id="toc-row-34">
-        <th><a href="#slide:34">Cordon, drain</a></th>
+        <th><a href="#slide:34">Horizontal pod autoscaler</a></th>
         <td><a href="#slide:34">34</a></td>
       </tr>
       
       
       <tr id="toc-row-35">
-        <th><a href="#slide:35">Custom Resource Definition (CRD)</a></th>
+        <th><a href="#slide:35">Cordon, drain</a></th>
         <td><a href="#slide:35">35</a></td>
       </tr>
       
       
       <tr id="toc-row-36">
-        <th><a href="#slide:36">Headless service</a></th>
+        <th><a href="#slide:36">Custom Resource Definition (CRD)</a></th>
         <td><a href="#slide:36">36</a></td>
       </tr>
       
       
       <tr id="toc-row-37">
-        <th><a href="#slide:37">StatefulSet</a></th>
+        <th><a href="#slide:37">Headless service</a></th>
         <td><a href="#slide:37">37</a></td>
       </tr>
       
       
       <tr id="toc-row-38">
-        <th><a href="#slide:38">Kubernetes best practices -&gt; Helm Charts</a></th>
+        <th><a href="#slide:38">StatefulSet</a></th>
         <td><a href="#slide:38">38</a></td>
       </tr>
       
       
       <tr id="toc-row-39">
-        <th><a href="#slide:39">Autentifikace, uživatelské a servisní účty</a></th>
+        <th><a href="#slide:39">Kubernetes best practices -&gt; Helm Charts</a></th>
         <td><a href="#slide:39">39</a></td>
       </tr>
       
       
       <tr id="toc-row-40">
-        <th><a href="#slide:40">Container registry - autentifikace</a></th>
+        <th><a href="#slide:40">Autentifikace, uživatelské a servisní účty</a></th>
         <td><a href="#slide:40">40</a></td>
       </tr>
       
       
       <tr id="toc-row-41">
-        <th><a href="#slide:41">Multiplatformní přístupy (ARM64)</a></th>
+        <th><a href="#slide:41">Container registry - autentifikace</a></th>
         <td><a href="#slide:41">41</a></td>
       </tr>
       
       
       <tr id="toc-row-42">
-        <th><a href="#slide:42">Diskuse</a></th>
+        <th><a href="#slide:42">Multiplatformní přístupy (ARM64)</a></th>
         <td><a href="#slide:42">42</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-43">
+        <th><a href="#slide:43">Diskuse</a></th>
+        <td><a href="#slide:43">43</a></td>
       </tr>
       
       

@@ -12,7 +12,7 @@ amoravek@trask.cz<br/>
 ---
 # Osnova
 
-1) Taikun
+1) Taikun + vcluster
    
 2) Multi-arch (datascript prezka)
 

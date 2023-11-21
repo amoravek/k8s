@@ -20,3 +20,4 @@ target/
 *.zip
 *.tgz
 *.tar.gz
+*.jar

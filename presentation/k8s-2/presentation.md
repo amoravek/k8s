@@ -103,29 +103,33 @@ Group: `system:serviceaccounts`
 
 Seznam verbs: `kubectl api-resources --sort-by name -o wide`
 
+`kubectl api-resources --api-group ""`
+
 <https://kubernetes.io/docs/reference/access-authn-authz/rbac/>
 
 ---
 # Příklad role
 
-```
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  name: pod-reader
-  namespace: amoravek
-rules:
-- apiGroups:
-  - ""
-  resources:
-  - pods
-  - services
-  verbs:
-  - get
-  - list
-  - watch
-```
+    !yaml
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: Role
+    metadata:
+      name: pod-reader
+      namespace: amoravek
+    rules:
+    - apiGroups:
+      - ""
+      resources:
+      - pods
+      - services
+      verbs:
+      - get
+      - list
+      - watch
+
 `kubectl create role pod-reader --resource "pods,service" --verb "get,list,watch"`
+
+kde vzít `apiGroups`?
 
 ---
 # RBAC - cvičení 1
@@ -288,25 +292,32 @@ jenže co když chceme postupně přidávat více (přes CLI)?
 <https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/>
 
 ---
-# High-availability, pod disruption budget (příprava 1)
+# Pod disruption budget 
+
+- vysvetlit
+
+---
+
+
+# HA, pod disruption budget (příprava 1)
 
   1) nejprve vyčistit 2 nody (vysvětlit):
 
           kubectl patch nodes worker04 worker05 -p '{"spec":{"taints": null}}'
           kubectl patch nodes worker04 worker05 --type=json -p='[{"op": "remove", "path": "/metadata/labels/demo"}]'
 
-          kubectl taint node worker04 demo=pdb-test:NoExecute
-          kubectl taint node worker05 demo=pdb-test:NoExecute
-          kubectl taint node worker05 demo=pdb-test:NoSchedule
+          kubectl taint node worker04 mytaint=pdb-test:NoExecute
+          kubectl taint node worker05 mytaint=pdb-test:NoExecute
+          kubectl taint node worker05 mytaint=pdb-test:NoSchedule
 
-  2) přidat label `demo=yes` oběma nodům (třeba přes patch)
+  2) přidat label `demo=yes` oběma nodům (třeba přes patch nebo kubectl label ...)
 
     - `kubectl patch nodes worker04 worker05 --type=json -p='[{"op": "add", "path": "/metadata/labels/demo", "value": "yes"}]'`
   
     - zkontrolovat přes --selector
 
 ---
-# High-availability, pod disruption budget (příprava 2)
+# HA, pod disruption budget (příprava 2)
 
   3) nodeSelector -> node label demo=yes
     - na oba nody
@@ -316,7 +327,7 @@ jenže co když chceme postupně přidávat více (přes CLI)?
   4) dodat toleration do deploymentu:
 
           tolerations:
-          - key: "demo"
+          - key: "mytaint"
             operator: "Equal"
             value: "pdb-test"
             effect: "NoExecute"
@@ -334,7 +345,7 @@ jenže co když chceme postupně přidávat více (přes CLI)?
           done
 
 ---
-# High-availability, pod disruption budget
+# HA, pod disruption budget
 
   `kubectl create poddisruptionbudget k8s-sample-app-pdb --selector=app=k8s-sample-app --min-available=2`
 

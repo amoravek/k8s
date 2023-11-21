@@ -1,0 +1,9 @@
+replicaCount: 5
+service:
+  type: ClusterIP
+  ports:
+    - port: 88
+      targetPort: http
+      protocol: TCP
+      name: http
+
