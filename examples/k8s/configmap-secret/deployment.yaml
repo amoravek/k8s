@@ -14,48 +14,47 @@ spec:
         app: cm-secret-test
     spec:
       containers:
-      - env:
-          - name: STATIC_ONE
-            value: static-value
-          - name: MYVAR
-            valueFrom:
-              configMapKeyRef:
-                name: config-files
-                key: MYVAR
-          - name: PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: secrets
-                key: PASSWORD                   
-        args:
-        - -c
-        - >-
-          while :; do
-            echo \"Env. variable: $MYVAR\"
-            echo \"Config file 1:\"
-            cat /config/app1.cfg
-            echo \"Config file 2:\"
-            cat /config/app2.cfg
-            echo \"Secret password: $PASSWORD\"
-            echo \"========================================\"
-            sleep 500
-          done
-        command:
-        - sh
-        image: harbor.trask.cz/arm64/ubuntu-netcat
-        imagePullPolicy: IfNotPresent
-        name: ubuntu
-        volumeMounts:
-        - mountPath: /config
-          name: config-volume
+        - env:
+            - name: STATIC_ONE
+              value: static-value
+            - name: MYVAR
+              valueFrom:
+                configMapKeyRef:
+                  name: config-files
+                  key: MYVAR
+            - name: PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: PASSWORD
+          args:
+            - -c
+            - >-
+              while :; do
+                echo \"Env. variable: $MYVAR\"
+                echo \"Config file 1:\"
+                cat /config/app1.cfg
+                echo \"Config file 2:\"
+                cat /config/app2.cfg
+                echo \"Secret password: $PASSWORD\"
+                echo \"========================================\"
+                sleep 500
+              done
+          command:
+            - sh
+          image: harbor.trask.cz/arm64/ubuntu-netcat
+          imagePullPolicy: IfNotPresent
+          name: ubuntu
+          volumeMounts:
+            - mountPath: /config
+              name: config-volume
       terminationGracePeriodSeconds: 5
       volumes:
-      - name: config-volume
-        configMap:
-          name: config-files
-          items:
-          - key: app1.cfg
-            path: app1.cfg
-          - key: app2.cfg
-            path: app2.cfg
-
+        - name: config-volume
+          configMap:
+            name: config-files
+            items:
+              - key: app1.cfg
+                path: app1.cfg
+              - key: app2.cfg
+                path: app2.cfg

@@ -12,7 +12,9 @@ amoravek@trask.cz<br/>
 ---
 # Osnova
 
-1) Taikun + vcluster
+0) OpenShift
+
+1) Kubespray + Vagrant
    
 2) Multi-arch (datascript prezka)
 

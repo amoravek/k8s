@@ -4,7 +4,7 @@ export KUBE_USER=${1,,}
 export KUBE_GROUP=${2,,}
 export KUBE_NS=${3:-$KUBE_USER}
 
-EXPIRATION_SECS=31536000 # 1 year
+EXPIRATION_SECS=31536000 # 1 years
 
 if [[ -z $KUBE_USER || -z $KUBE_GROUP ]]; then
     echo "Usage: $0 <KUBE_USER> <KUBE_GROUP> [<KUBE_NS>]"

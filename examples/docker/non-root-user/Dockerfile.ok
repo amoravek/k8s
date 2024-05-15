@@ -1,4 +1,10 @@
 FROM alpine
 
-USER 1001
+WORKDIR /tmp
+
+RUN touch xxx
+
+USER 1000
+
+RUN touch yyy
 

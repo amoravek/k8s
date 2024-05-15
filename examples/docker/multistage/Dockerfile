@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM openjdk:11
 
 RUN apt-get update \
     && apt-get install -y maven git
@@ -11,6 +11,8 @@ RUN git clone https://github.com/amoravek/k8s.git \
     && mvn clean package
 
 WORKDIR k8s/k8s-sample-app/target
+
+RUN touch xxx
 
 ENTRYPOINT ["java", "-jar", "k8s-sample-app.jar"]
 CMD ["server"]
