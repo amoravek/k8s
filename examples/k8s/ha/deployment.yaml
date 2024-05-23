@@ -22,6 +22,9 @@ spec:
       containers:
       - image: harbor.trask.cz/amor/k8s-sample-app:1.0-SNAPSHOT
         imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: http
         env:
         - name: UNREADY_MILLIS
           value: '60000'

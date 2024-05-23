@@ -4,6 +4,8 @@ services:
     restart: on-failure
     ports:
       - "8080:8080"
+    environment:
+      - aaa=bbb
     networks:
       # po odkomentovani bude fungovat (kontejner bude zarazen do stejne site jako frontend
       - frontend

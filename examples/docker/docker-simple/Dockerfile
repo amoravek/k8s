@@ -1,3 +1,3 @@
 FROM nginx:alpine
-VOLUME /data
+VOLUME /data2
 COPY . /usr/share/nginx/html

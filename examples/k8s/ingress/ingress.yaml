@@ -15,9 +15,9 @@ spec:
       paths:
       - backend:
           service:
-            name: nginx
+            name: k8s-sample-app
             port:
-              number: 80
+              number: 8123
         path: /nginx(/|$)(.*)
         pathType: Prefix
 
