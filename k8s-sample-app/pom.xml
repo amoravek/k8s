@@ -165,6 +165,12 @@
 						</tags>
 					</to>
 					<extraDirectories>
+						<permissions>
+							<permission>
+								<file>/scripts/start.sh</file>
+								<mode>755</mode>
+							</permission>
+						  </permissions>						
 						<paths>
 							<path>
 								<from>${project.basedir}</from>
@@ -174,15 +180,25 @@
 									<include>config.yaml</include>
 								</includes>
 							</path>
+							<path>
+								<from>${project.basedir}</from>
+								<into>/</into>
+								<includes>
+									<include>scripts/start.sh</include>
+								</includes>
+							</path>
 						</paths>
 					</extraDirectories>
 					<container>
 						<creationTime>${maven.build.timestamp}</creationTime>
 						<filesModificationTime>${maven.build.timestamp}</filesModificationTime>
-						<args>
+						<entrypoint>
+							<exec>/scripts/start.sh</exec>
+						</entrypoint>
+						<!-- <args>
 							<arg>server</arg>
-						</args>
-						<jvmFlags>-javaagent:/agent/jmx_prometheus_javaagent-0.19.0.jar=12345:/agent/config.yaml</jvmFlags>
+						</args> -->
+						<!-- <jvmFlags>-javaagent:/agent/jmx_prometheus_javaagent-0.19.0.jar=12345:/agent/config.yaml</jvmFlags> -->
 					</container>
 				</configuration>
 			</plugin>

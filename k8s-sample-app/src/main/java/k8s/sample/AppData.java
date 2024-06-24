@@ -16,6 +16,7 @@ public final class AppData {
 	
 	private static final String SECRET_DATA_FILE_DEFAULT = "/vault/secrets/secret-data.txt";
 	private static final String SECRET_DATA_FILE = System.getenv("SECRET_DATA_FILE") != null ? System.getenv("SECRET_DATA_FILE") : SECRET_DATA_FILE_DEFAULT;
+	private static final String SECRETS_FROM_ENV = System.getenv("DEMO_USER") + ":" + System.getenv("DEMO_PASSWORD");
 
 	private static final String readFileContents(String fileName) throws IOException {
 		File f = new File(fileName);
@@ -39,7 +40,7 @@ public final class AppData {
 			throw new RuntimeException(e);
 		}
 		
-		return SECRET_DATA_FILE + ": '" + fileContents + "', alive: " + alive.toString() + ", ready: " + ready.toString();
+		return "From ENV: " + SECRETS_FROM_ENV + ", from file: " + SECRET_DATA_FILE + ": '" + fileContents + "', alive: " + alive.toString() + ", ready: " + ready.toString();
 	}
 
 }
