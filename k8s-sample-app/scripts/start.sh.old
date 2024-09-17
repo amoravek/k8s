@@ -9,6 +9,7 @@ fi
 
 # Start the application
 exec java \
+-javaagent:/agent/jmx_prometheus_javaagent-0.19.0.jar=12345:/agent/config.yaml \
 -cp \
 "/app/resources:/app/classes:/app/libs/*" \
 "k8s.sample.KubeSampleApp" \

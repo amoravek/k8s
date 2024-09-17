@@ -23,7 +23,15 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
-podAnnotations: {}
+podAnnotations:
+  vault.hashicorp.com/agent-inject: 'true'
+  vault.hashicorp.com/role: 'internal-app'
+  vault.hashicorp.com/agent-inject-secret-secret-data.txt: 'internal/data/database/config'
+  vault.hashicorp.com/agent-inject-template-secret-data.txt: |
+    {{- with secret "internal/data/database/config" -}}
+    username: {{ .Data.data.username }}
+    password: {{ .Data.data.password }}
+    {{- end -}}
 
 podSecurityContext: {}
   # fsGroup: 2000
