@@ -43,6 +43,13 @@ spec:
             scheme: HTTP
           initialDelaySeconds: 30
           periodSeconds: 5
+        startupProbe:
+          httpGet:
+            path: /alive
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 10          
         lifecycle:
           preStop:
             exec:

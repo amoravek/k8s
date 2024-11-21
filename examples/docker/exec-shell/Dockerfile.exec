@@ -1,6 +1,4 @@
 FROM openjdk:11
 RUN apt update
 COPY app.jar /
-COPY app.jar /yyy
 ENTRYPOINT ["java", "-jar", "/app.jar", "server"]
-
