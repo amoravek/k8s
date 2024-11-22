@@ -11,7 +11,7 @@ spec:
     repoURL: https://github.com/amoravek/k8s.git
     targetRevision: HEAD
   destination:
-    namespace: argocd
+    # namespace: argocd
     server: https://kubernetes.default.svc
   project: default
   syncPolicy:
