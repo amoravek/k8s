@@ -4,7 +4,6 @@ metadata:
   finalizers:
   - resources-finalizer.argocd.argoproj.io
   name: apps
-  namespace: argocd
 spec:
   source:
     helm:
@@ -12,7 +11,7 @@ spec:
     repoURL: https://github.com/amoravek/k8s.git
     targetRevision: HEAD
   destination:
-    # namespace: skoleni
+    namespace: argocd
     name: in-cluster
   project: default
   syncPolicy:
