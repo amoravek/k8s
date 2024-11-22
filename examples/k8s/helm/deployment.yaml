@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: k8s-sample-app
+  name: k8s-sample-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-sample-app
+  template:
+    metadata:
+      labels:
+        app: k8s-sample-app
+    spec:
+      containers:
+      - env:
+        - name: UNREADY_MILLIS
+          value: "60000"
+        image: harbor.trask.cz/amor/k8s-sample-app:1.0-SNAPSHOT
+        imagePullPolicy: Always
+        lifecycle:
+          preStop:
+            exec:
+              command:
+              - /bin/bash
+              - -c
+              - sleep 5
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /alive
+            port: 8080
+            scheme: HTTP
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: k8s-sample-app
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /ready
+            port: 8080
+            scheme: HTTP
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: 750m
+            memory: 256Mi
+          requests:
+            cpu: 500m
+            memory: 128Mi
+        startupProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /alive
+            port: 8080
+            scheme: HTTP
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

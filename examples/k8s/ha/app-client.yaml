@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: app-client
+  name: app-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-client
+  template:
+    metadata:
+      labels:
+        app: app-client
+    spec:
+      containers:
+      - image: harbor.trask.cz/dockerhub-proxy/library/nginx
+        command:
+        - /bin/sh
+        - -c
+        args:
+        - |
+          while true; do
+            echo 'Testing ...';
+            curl -v http://k8s-sample-app:8080/alive;
+            sleep 5;
+          done
+        imagePullPolicy: Always
+        name: nginx
+        resources: {}
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
