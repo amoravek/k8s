@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ default "k8s-sample-app" .Values.fullnameOverride }}
+  name: {{ default "k8s-sample-app" .Values.fullnameOverride }}
+spec:
+  replicas: {{ default "2" .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ default "k8s-sample-app" .Values.fullnameOverride }}
+  template:
+    metadata:
+      labels:
+        app: {{ default "k8s-sample-app" .Values.fullnameOverride }}
+    spec:
+      containers:
+      - env:
+        - name: UNREADY_MILLIS
+          value: "60000"
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        lifecycle:
+          preStop:
+            exec:
+              command:
+              - /bin/bash
+              - -c
+              - sleep 5
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /alive
+            port: 8080
+            scheme: HTTP
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: {{ default "k8s-sample-app" .Values.fullnameOverride }}
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /ready
+            port: 8080
+            scheme: HTTP
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: 750m
+            memory: 256Mi
+          requests:
+            cpu: 500m
+            memory: 128Mi
+        startupProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /alive
+            port: 8080
+            scheme: HTTP
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

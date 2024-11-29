@@ -1,0 +1,27 @@
+{{- if .Values.app2 }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  name: app2
+spec:
+  source:
+    helm:
+      values: |
+        fullnameOverride: app2
+        image:
+          repository: harbor.trask.cz/bi-repo/k8s-sample-app
+          tag: 1.0-SNAPSHOT
+    path: k8s-sample-app/helm
+    repoURL: https://github.com/amoravek/k8s.git
+    targetRevision: HEAD
+  destination:
+    namespace: skoleni
+    server: https://kubernetes.default.svc
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+{{- end }}

@@ -1,7 +1,8 @@
 helm upgrade --install \
 argocd \
-argo/argo-cd \
+argo-cd \
 --create-namespace \
 --namespace argocd \
 --set dex.enabled=false \
---set server.service.type=LoadBalancer
+--set server.service.type=LoadBalancer \
+--repo https://argoproj.github.io/argo-helm

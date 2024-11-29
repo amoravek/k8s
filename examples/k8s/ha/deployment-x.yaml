@@ -50,6 +50,7 @@ metadata:
 spec:
   ports:
   - port: 80
+    name: http
     protocol: TCP
     targetPort: 8080
   selector:

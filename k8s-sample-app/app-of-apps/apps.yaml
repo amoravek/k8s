@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  name: apps
+spec:
+  source:
+    helm:
+    path: k8s-sample-app/app-of-apps/apps
+    repoURL: https://github.com/amoravek/k8s.git
+    targetRevision: HEAD
+  destination:
+    namespace: argocd
+    name: in-cluster
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+

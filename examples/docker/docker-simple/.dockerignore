@@ -1,4 +1,4 @@
 build.sh
+run.sh
 Dockerfile*
 .dockerignore
-

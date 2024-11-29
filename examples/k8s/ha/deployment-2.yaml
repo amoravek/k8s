@@ -2,13 +2,13 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: k8s-sample-app
-  name: k8s-sample-app
+    app: k8s-sample-app-2
+  name: k8s-sample-app-2
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: k8s-sample-app
+      app: k8s-sample-app-2
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -17,10 +17,10 @@ spec:
   template:
     metadata:
       labels:
-        app: k8s-sample-app
+        app: k8s-sample-app-2
     spec:
       containers:
-      - image: harbor.trask.cz/amor/k8s-sample-app:1.0-SNAPSHOT
+      - image: harbor.trask.cz/amor/k8s-sample-app-2:1.0-SNAPSHOT
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -28,7 +28,7 @@ spec:
         env:
         - name: UNREADY_MILLIS
           value: '60000'
-        name: k8s-sample-app
+        name: k8s-sample-app-2
         livenessProbe:
           httpGet:
             path: /alive
