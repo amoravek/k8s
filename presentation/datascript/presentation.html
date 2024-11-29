@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2010 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+  Original slides: Marcin Wichary (mwichary@google.com)
+  Modifications: Ernest Delgado (ernestd@google.com)
+                 Alex Russell (slightlyoff@chromium.org)
+
+  landslide modifications: Adam Zapletal (adamzap@gmail.com)
+                           Nicolas Perriault (nperriault@gmail.com)
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>CI/CD: end-to-end řešení pro on-premise aplikace</title>
+    <!-- Styles -->
+    
+    <link rel="stylesheet" href="file:///usr/lib/python3/dist-packages/darkslide/themes/default/css/base.css">
+    <link rel="stylesheet" media="print" href="file:///usr/lib/python3/dist-packages/darkslide/themes/default/css/print.css">
+    <link rel="stylesheet" media="screen, projection" href="file:///usr/lib/python3/dist-packages/darkslide/themes/default/css/screen.css">
+    <link rel="stylesheet" media="all" href="file:///usr/lib/python3/dist-packages/darkslide/themes/default/css/theme.css">
+    
+    
+    <!-- /Styles -->
+    <!-- Javascripts -->
+    
+    <script type="text/javascript" src="file:///usr/lib/python3/dist-packages/darkslide/themes/default/js/slides.js"></script>
+    
+    
+    <!-- /Javascripts -->
+</head>
+<body>
+  <div id="blank"></div>
+  <div class="presentation">
+    <div id="current_presenter_notes">
+      <div id="presenter_note"></div>
+    </div>
+    <div class="slides">
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-1">
+          <div class="inner">
+            
+            <header><h1>CI/CD: end-to-end řešení pro on-premise aplikace</h1></header>
+            
+            
+            <section><h1></h1>
+<h1></h1>
+<p style="text-align: center;">Adam Morávek<br>amoravek@edgeclusters.com<br>+420 604 538 070</p>
+
+<p><img alt="edgeclusters-logo" src="file:///home/amoravek/myprojects/datascript/git/datascript/morning-talks/edgeclusters-logo.png" />
+<p style="text-align: center;">edgeclusters.com</p></p>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>amo-datascript?</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+              CI/CD: end-to-end řešení pro on-premise aplikace
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              1/15
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-2">
+          <div class="inner">
+            
+            <header><h1>EdgeClusters.com</h1></header>
+            
+            
+            <section><p><img src="file:///home/amoravek/myprojects/datascript/git/datascript/morning-talks/cluster.jpg" alt="cluster" width="500"/></p>
+<ul>
+<li>Vytváření DevOps stacků na míru</li>
+<li>Konzultace</li>
+<li>Vývoj edge HW (arm)</li>
+</ul>
+<h1></h1>
+<h1></h1>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              CI/CD: end-to-end řešení pro on-premise aplikace
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              2/15
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-3">
+          <div class="inner">
+            
+            <header><h1>Příklad vzdělávacího projektu</h1></header>
+            
+            
+            <section><p>DevOps stack pro malý vývojový tým, maximum automatizace</p>
+<ul>
+<li>HA Kubernetes</li>
+<li>"produkční" zabezpečení</li>
+<li>GitHub Actions, vlastní Nexus, Harbor, Keycloak</li>
+<li>kódy i infrastrukutra v Git</li>
+<li>multi-cluster - dynamicky vytvářené clustery (Taikun)</li>
+<li>multi-arch (amd64 + arm64)</li>
+</ul>
+<h1></h1>
+<h1></h1>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              CI/CD: end-to-end řešení pro on-premise aplikace
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              3/15
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-4">
+          <div class="inner">
+            
+            <header><h1>Cluster pro demo</h1></header>
+            
+            
+            <section><h1></h1>
+<h1></h1>
+<table border="0px">
+    <tr>
+        <td colspan="2"><img src="file:///home/amoravek/myprojects/datascript/git/datascript/morning-talks/taikun-arch.webp" alt="taikun-arch" width="800"/></td>
+    </tr>    
+</table>
+
+<p align="center"><b>https://taikun.cloud</b></p>
+
+<h1></h1>
+<h1></h1>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              CI/CD: end-to-end řešení pro on-premise aplikace
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              4/15
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-5">
+          <div class="inner">
+            
+            <header><h1>Zamyšlení</h1></header>
+            
+            
+            <section><h1></h1>
+<p align="center">(mindmapa)</p>
+
+<h1></h1>
+<h1></h1></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              CI/CD: end-to-end řešení pro on-premise aplikace
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              5/15
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-6">
+          <div class="inner">
+            
+            <header><h1>Demo - architektura</h1></header>
+            
+            
+            <section><h1></h1>
+<p align="center">(demo-architektura.drawio)</p>
+
+<h1></h1>
+<h1></h1>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              CI/CD: end-to-end řešení pro on-premise aplikace
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              6/15
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-7">
+          <div class="inner">
+            
+            <header><h1>GitHub Actions</h1></header>
+            
+            
+            <section><ul>
+<li>GitHub Actions (...)</li>
+<li>obvyklé věci lze vyřešit jednoduše (Actions pro "mainstream")</li>
+<li>s detaily je to horší:<ul>
+<li>"obvyklé" CI funkce ponechány na zpracování v Actions nebo shellu (např. téměř chybějící String functions, pokročilejší podmínky, apod.)</li>
+<li>testování (act?)</li>
+</ul>
+</li>
+<li>nutno dobře zvážit pricing plan<ul>
+<li>např. protected branches až v úrovni Team ($40-48 / user / rok)</li>
+</ul>
+</li>
+<li>pro public repa hodně funkcí zadarmo<ul>
+<li>protected branches</li>
+<li>workflow templates</li>
+</ul>
+</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              CI/CD: end-to-end řešení pro on-premise aplikace
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              7/15
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-8">
+          <div class="inner">
+            
+            <header><h1>Multi-cluster</h1></header>
+            
+            
+            <section><ul>
+<li>multi-cluster deployment řešen pomocí ArgoCD (Declarative GitOps CD for Kubernetes ...)</li>
+<li>odlišné konfigurace:<ul>
+<li>ingress objekty (host)</li>
+<li>cert-manager issuers</li>
+<li>verze instalovaných aplikací (infra, business)</li>
+<li>storage (výhoda default storage class)</li>
+<li>...</li>
+</ul>
+</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              CI/CD: end-to-end řešení pro on-premise aplikace
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/15
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-9">
+          <div class="inner">
+            
+            <header><h1>Multi-arch I.</h1></header>
+            
+            
+            <section><ul>
+<li>
+<p>x86_64 / amd64 stále dominuje, ale objevuje se ARM (a jiné)</p>
+<ul>
+<li>Amazon Graviton2</li>
+<li>...ale i třeba RPI4 a mnohé další SBC, které postupně sílí</li>
+</ul>
+</li>
+<li>
+<p>výhody ARM</p>
+<ul>
+<li>nižší spotřeba</li>
+<li>lépe se chladí</li>
+<li>od telefonů, hobby HW až po datacentra</li>
+<li>v cloudu levnější a výkonnější</li>
+</ul>
+</li>
+<li>
+<p>hlavní nevýhody z pohledu běhu SW</p>
+<ul>
+<li>nekompatibilní s x86</li>
+<li>nutná podpora výrobců SW</li>
+</ul>
+</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              CI/CD: end-to-end řešení pro on-premise aplikace
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/15
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-10">
+          <div class="inner">
+            
+            <header><h1>Multi-arch II.</h1></header>
+            
+            
+            <section><ul>
+<li>
+<p>typický problém: Exec format error</p>
+<ul>
+<li>nekompatibilní image / base image</li>
+<li>nekompatibilní aplikace v kontejneru</li>
+<li>nekompatibilní = obsahje kód zkompilovaný pro jinou platformu (zde amd64)</li>
+</ul>
+</li>
+<li>
+<p>elegantní řešení - multi-arch image</p>
+<ul>
+<li>obsahuje data pro více platforem</li>
+<li>správné vrstvy se zvolí na základě metadat od klienta (platform)</li>
+<li>viz OCI Image Index Specification</li>
+<li>ukázka v registry</li>
+</ul>
+</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              CI/CD: end-to-end řešení pro on-premise aplikace
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              10/15
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-11">
+          <div class="inner">
+            
+            <header><h1>Multi-arch III.</h1></header>
+            
+            
+            <section><ul>
+<li>s GitHub Actions je situace extrémně snadná (ukázka)</li>
+</ul>
+<h1></h1>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              CI/CD: end-to-end řešení pro on-premise aplikace
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              11/15
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-12">
+          <div class="inner">
+            
+            <header><h1>Ukázka</h1></header>
+            
+            
+            <section><p align="center">multi-cluster multi-arch deployment</p>
+
+<h1></h1>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              CI/CD: end-to-end řešení pro on-premise aplikace
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              12/15
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-13">
+          <div class="inner">
+            
+            <header><h1>Závěr</h1></header>
+            
+            
+            <section><h1></h1>
+<ul>
+<li>moderní DevOps stacky se velmi složitě instalují i spravují (spousta komponent)</li>
+<li>ArgoCD - užitečný nástroj pro zmírnění komplexit; GitOps jednoduše</li>
+<li>GitHub Actions - škoda, že jen cloud; rafinovaný pricing; velmi jednoduché buildy včetně cache a multi-arch</li>
+</ul>
+<h1></h1>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              CI/CD: end-to-end řešení pro on-premise aplikace
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              13/15
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-14">
+          <div class="inner">
+            
+            <header><h1>Návazný kurz</h1></header>
+            
+            
+            <section><h1></h1>
+<ul>
+<li>
+<p>velká část témat zahrnuta do připravovaného kurzu <a href="https://www.datascript.cz/kurzy/open-source/cicd-end-to-end-reseni-pro-on-premise-aplikace">CI/CD: end-to-end řešení pro on-premise aplikace</a></p>
+</li>
+<li>
+<p>31.3. - 1.4. 2022</p>
+</li>
+<li>
+<p>kurz je garantovaný</p>
+</li>
+</ul>
+<p><img alt="kurz-qr" src="file:///home/amoravek/myprojects/datascript/git/datascript/morning-talks/kurz-qr.png" /></p>
+
+<h1></h1></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              CI/CD: end-to-end řešení pro on-premise aplikace
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              14/15
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: presentation.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_footer slide-15">
+          <div class="inner">
+            
+            <header><h1>Dotazy / diskuse</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+              CI/CD: end-to-end řešení pro on-premise aplikace
+            
+            
+            <aside class="source">
+              Source: <a href="presentation.md">presentation.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              15/15
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="toc" class="sidebar hidden">
+    <h2>Table of Contents</h2>
+    <table>
+      <caption>Table of Contents</caption>
+
+<!-- macro for generating subsection of TOC -->
+
+<!-- end of macro -->
+
+      <!-- generating sections of TOC -->
+      
+      <tr id="toc-row-1">
+        <th><a href="#slide:1">CI/CD: end-to-end řešení pro on-premise aplikace</a></th>
+        <td><a href="#slide:1">1</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-2">
+        <th><a href="#slide:2">EdgeClusters.com</a></th>
+        <td><a href="#slide:2">2</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-3">
+        <th><a href="#slide:3">Příklad vzdělávacího projektu</a></th>
+        <td><a href="#slide:3">3</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-4">
+        <th><a href="#slide:4">Cluster pro demo</a></th>
+        <td><a href="#slide:4">4</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-5">
+        <th><a href="#slide:5">Zamyšlení</a></th>
+        <td><a href="#slide:5">5</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-6">
+        <th><a href="#slide:6">Demo - architektura</a></th>
+        <td><a href="#slide:6">6</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-7">
+        <th><a href="#slide:7">GitHub Actions</a></th>
+        <td><a href="#slide:7">7</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-8">
+        <th><a href="#slide:8">Multi-cluster</a></th>
+        <td><a href="#slide:8">8</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-9">
+        <th><a href="#slide:9">Multi-arch I.</a></th>
+        <td><a href="#slide:9">9</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-10">
+        <th><a href="#slide:10">Multi-arch II.</a></th>
+        <td><a href="#slide:10">10</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-11">
+        <th><a href="#slide:11">Multi-arch III.</a></th>
+        <td><a href="#slide:11">11</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-12">
+        <th><a href="#slide:12">Ukázka</a></th>
+        <td><a href="#slide:12">12</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-13">
+        <th><a href="#slide:13">Závěr</a></th>
+        <td><a href="#slide:13">13</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-14">
+        <th><a href="#slide:14">Návazný kurz</a></th>
+        <td><a href="#slide:14">14</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-15">
+        <th><a href="#slide:15">Dotazy / diskuse</a></th>
+        <td><a href="#slide:15">15</a></td>
+      </tr>
+      
+      
+    </table>
+  </div>
+  
+  <div id="help" class="sidebar hidden">
+    <h2>Help</h2>
+    <table>
+      <caption>Help</caption>
+      <tr>
+        <th>Table of Contents</th>
+        <td>t</td>
+      </tr>
+      <tr>
+        <th>Exposé</th>
+        <td>ESC</td>
+      </tr>
+      <tr>
+        <th>Presenter View</th>
+        <td>p</td>
+      </tr>
+      <tr>
+        <th>Source Files</th>
+        <td>s</td>
+      </tr>
+      <tr>
+        <th>Slide Numbers</th>
+        <td>n</td>
+      </tr>
+      <tr>
+        <th>Toggle screen blanking</th>
+        <td>b</td>
+      </tr>
+      <tr>
+        <th>Show/hide next slide</th>
+        <td>c</td>
+      </tr>
+      <tr>
+        <th>Notes</th>
+        <td>2</td>
+      </tr>
+      <tr>
+        <th>Help</th>
+        <td>h</td>
+      </tr>
+    </table>
+    <br>
+    <strong>Generated with Darkslide 5.1.0</strong>
+  </div>
+  <script>main()</script>
+</body>
+</html>
