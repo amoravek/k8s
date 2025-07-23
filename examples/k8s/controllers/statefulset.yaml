@@ -30,7 +30,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
       - name: nginx
-        image: harbor.trask.cz/dockerhub-proxy/nginxinc/nginx-unprivileged
+        image: nginx
         ports:
           - name: backend-http
             containerPort: 80
@@ -38,7 +38,7 @@ spec:
         - name: www
           mountPath: /usr/share/nginx/html
       - name: redis
-        image: harbor.trask.cz/dockerhub-proxy/library/redis
+        image: nginx
         ports:
           - name: redis
             containerPort: 6379

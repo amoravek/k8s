@@ -36,11 +36,6 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
-        name: k8s-sample-app
-        ports:
-        - containerPort: 8080
-          name: http
-          protocol: TCP
         readinessProbe:
           failureThreshold: 3
           httpGet:
@@ -50,6 +45,20 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
+        startupProbe:
+          failureThreshold: 30
+          httpGet:
+            path: /alive
+            port: 8080
+            scheme: HTTP
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1          
+        name: k8s-sample-app
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
         resources:
           limits:
             cpu: 750m

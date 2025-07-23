@@ -6,6 +6,8 @@ metadata:
   name: k8s-sample-app
 spec:
   replicas: 1
+  # imagePullSecrets:
+  #   - name: harbor-bi-gitlab
   selector:
     matchLabels:
       app: k8s-sample-app
@@ -42,11 +44,14 @@ spec:
             scheme: HTTP
           periodSeconds: 5
         startupProbe:
+          failureThreshold: 30
           httpGet:
             path: /alive
             port: 8080
             scheme: HTTP
-          periodSeconds: 5         
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
         lifecycle:
           preStop:
             exec:
