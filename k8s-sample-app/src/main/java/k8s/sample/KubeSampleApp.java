@@ -9,6 +9,9 @@ import k8s.sample.resources.MainResource;
 import k8s.sample.resources.ReadinessResource;
 
 public class KubeSampleApp extends Application<HelloWorldConfiguration> {
+	private static final String STARTUP_DELAY_ENV = System.getenv("STARTUP_DELAY");
+	private static final long STARTUP_DELAY = Long.parseLong(STARTUP_DELAY_ENV != null ? STARTUP_DELAY_ENV : "0");
+
 	public static void main(String[] args) throws Exception {
 		new KubeSampleApp().run(args);
 	}
@@ -35,6 +38,12 @@ public class KubeSampleApp extends Application<HelloWorldConfiguration> {
 
 		final AppHealthCheck healthCheck = new AppHealthCheck();
 		environment.healthChecks().register("k8s-sample-app-hc", healthCheck);
+
+		try {
+			System.out.println("Applying startup delay: " + STARTUP_DELAY + " ms");
+			Thread.sleep(STARTUP_DELAY);
+		} catch (InterruptedException e) {
+		}
 	}
 
 }

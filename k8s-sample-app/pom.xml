@@ -7,7 +7,7 @@
 
 	<groupId>k8s</groupId>
 	<artifactId>k8s-sample-app</artifactId>
-	<version>1.0</version>
+	<version>1.1</version>
 	<packaging>jar</packaging>
 
 	<name>k8s-sample-app</name>
@@ -144,7 +144,7 @@
 			<plugin>
 				<groupId>com.google.cloud.tools</groupId>
 				<artifactId>jib-maven-plugin</artifactId>
-				<version>3.4.0</version>
+				<version>3.4.6</version>
 				<configuration>
 					<from>
 						<platforms>
